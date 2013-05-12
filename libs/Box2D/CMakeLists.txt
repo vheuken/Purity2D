@@ -120,8 +120,6 @@ set(BOX2D_General_HDRS
 	Box2D.h
 )
 
-include_directories(../)
-
 add_library(Box2D STATIC
 	${BOX2D_General_HDRS}
 	${BOX2D_Joints_SRCS}
