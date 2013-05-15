@@ -18,9 +18,3 @@ set(SFML_LIBS_PATH "${CMAKE_SOURCE_DIR}/libs/SFML-2.0/lib/Release")
 
 add_subdirectory(libs PRE_BUILD)
 add_subdirectory(src)
-
-add_dependencies(${PROJECT_NAME} 
-    ${SFML_LIBS_PATH}/sfml-main.lib
-    ${SFML_LIBS_PATH}/sfml-system-s.lib
-    ${SFML_LIBS_PATH}/sfml-graphics-s.lib
-    ${SFML_LIBS_PATH}/sfml-window-s.lib)
