@@ -1,23 +1,24 @@
 #include <iostream>
 #include <Box2D/Box2D.h>
+#include <SFML/Window.hpp>
 
 int main()
 {
-	b2Vec2 gravity;
-	gravity.Set(0, -5);
-	b2World * world = new b2World(gravity);
-    b2BodyDef bodyDef;
-	b2Body* dynamicBody;
+	// SFML link testing...
+	sf::Window window(sf::VideoMode(800, 600), "My window");
 
-	bodyDef.bullet = true;
-	bodyDef.linearVelocity = gravity;
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+    }
 
-	dynamicBody = world->CreateBody(&bodyDef);
-
-	std::cout << dynamicBody->GetLinearVelocity().x;
-	std::cout << " ";
-	std::cout << dynamicBody->GetLinearVelocity().y;
-	std::cout << std::endl;
 
 	return 0;
 }
