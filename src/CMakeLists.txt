@@ -13,7 +13,6 @@ target_link_libraries(
 	${PROJECT_NAME}
 
 	Box2D
-    sfml-main
     sfml-system
     sfml-graphics
     sfml-window
