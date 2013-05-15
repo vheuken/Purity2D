@@ -13,8 +13,5 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/SFML-2.0/include/
 )
 
-set(SFML_LIBS_PATH "${CMAKE_SOURCE_DIR}/libs/SFML-2.0/lib/Release")
-
-
 add_subdirectory(libs PRE_BUILD)
 add_subdirectory(src)
