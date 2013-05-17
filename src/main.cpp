@@ -4,6 +4,7 @@
 
 int main()
 {
+	std::cout << "Testing SFML..." << std::endl;
 	// SFML link testing...
 	sf::Window window(sf::VideoMode(800, 600), "My window");
 
