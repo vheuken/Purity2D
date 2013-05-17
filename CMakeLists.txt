@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(PROJECT_NAME "Oathseeker Engine")
+set(PROJECT_NAME "Purity Engine")
 
 project(${PROJECT_NAME})
 
