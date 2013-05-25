@@ -64,8 +64,7 @@ SET( SOURCE_FILES
 	 "${TARGET_SOURCE_DIR}/ltm.c"
 	 "${TARGET_SOURCE_DIR}/lundump.c"
 	 "${TARGET_SOURCE_DIR}/lvm.c"
-	 "${TARGET_SOURCE_DIR}/lzio.c"
-     "${TARGET_SOURCE_DIR}/wmain.c"     
+	 "${TARGET_SOURCE_DIR}/lzio.c"  
      )
 
 
