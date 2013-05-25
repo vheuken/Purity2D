@@ -2,6 +2,12 @@
 #include <Box2D/Box2D.h>
 #include <SFML/Window.hpp>
 #include <lua.hpp>
+#include <luabind/luabind.hpp>
+
+void sayhi()
+{
+	std::cout << "YO YO YO" << std::endl;
+}
 
 int main()
 {
@@ -10,7 +16,8 @@ int main()
 
 	std::cout << "Testing SFML Window..." << std::endl;
 	
-	// SFML link testing...
+	// SFML link testing..
+	
 	sf::Window window(sf::VideoMode(800, 600), "My window");
 
     while (window.isOpen())
@@ -24,9 +31,14 @@ int main()
                 window.close();
         }
     }
-
+	
 	/* initialize Lua */
 	L = luaL_newstate();
+
+	luabind::module(L)
+	[
+		luabind::def("sayHI", &sayhi)
+	];
 
 	/* load Lua base libraries */
 	luaL_openlibs(L);
