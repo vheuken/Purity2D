@@ -1,9 +1,13 @@
 #include <iostream>
 #include <Box2D/Box2D.h>
 #include <SFML/Window.hpp>
+#include <lua.hpp>
 
 int main()
 {
+	
+	lua_State* L;
+
 	std::cout << "Testing SFML Window..." << std::endl;
 	
 	// SFML link testing...
@@ -21,6 +25,21 @@ int main()
         }
     }
 
+	/* initialize Lua */
+	L = luaL_newstate();
+
+	/* load Lua base libraries */
+	luaL_openlibs(L);
+
+	/* run the script */
+	luaL_dofile(L, "test.lua");
+
+	/* cleanup Lua */
+	lua_close(L);
+
+	/* pause */
+	printf( "Press enter to exit..." );
+	getchar();
 
 	return 0;
 }

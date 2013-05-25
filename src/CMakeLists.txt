@@ -17,4 +17,5 @@ target_link_libraries(
     sfml-system
     sfml-graphics
     sfml-window
+    lua
 )
