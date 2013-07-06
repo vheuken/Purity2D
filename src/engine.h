@@ -4,13 +4,13 @@
 namespace Purity
 {
 
-class Engine
-{
-public:
-    void initialize();
-    void run();
-    void cleanup();
-};
+    class Engine
+    {
+    public:
+        void initialize();
+        void run();
+        void cleanup();
+    };
 
 }
 

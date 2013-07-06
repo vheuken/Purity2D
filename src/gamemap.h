@@ -6,6 +6,7 @@
 
 namespace Purity
 {
+
     class GameMap : public sf::Drawable
     {
     public:
@@ -14,6 +15,7 @@ namespace Purity
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     };
+
 }
 
 #endif // GAME_MAP_H
