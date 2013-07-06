@@ -1,7 +1,10 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include <memory>
 #include <SFML/Graphics.hpp>
+
+#include "gamemap.h"
 
 namespace Purity
 {
@@ -12,6 +15,8 @@ public:
     Scene();
 
 private:
+    std::unique_ptr<GameMap> mMap;
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

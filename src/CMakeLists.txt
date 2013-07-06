@@ -7,17 +7,21 @@ set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 #set(SFML_LIBS_PATH "${PROJECT_SOURCE_DIR}/libs/SFML-2.0/lib/Release")
 link_directories("${CMAKE_SOURCE_DIR}/PRE_BUILD/SFML-2.0/lib")
 
-FIND_PACKAGE( Boost REQUIRED )
+set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_MULTITHREADED ON)
+FIND_PACKAGE( Boost COMPONENTS filesystem system REQUIRED)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 set( HEADER_FILES
 	engine.h
 	scene.h
+	gamemap.h
 )
 
 set( SOURCE_FILES
 	 engine.cpp
 	 scene.cpp
+	 gamemap.cpp
 
 	 main.cpp
 )
@@ -37,5 +41,6 @@ target_link_libraries(
     sfml-window
     lua
     luabind
-	${Boost_LIBRARIES}
+	${Boost_SYSTEM_LIBRARY}
+	${Boost_FILESYSTEM_LIBRARY}
 )
