@@ -24,6 +24,8 @@ set( luabind
 
 
 # Build ===============================================================================================================
+FIND_PACKAGE( Boost REQUIRED )
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 add_library( "${PROJECT_NAME}" STATIC ${luabind} )
 if( UNIX )
     target_link_libraries( "${PROJECT_NAME}" dl )
