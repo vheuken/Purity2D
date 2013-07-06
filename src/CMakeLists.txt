@@ -10,6 +10,14 @@ link_directories("${CMAKE_SOURCE_DIR}/PRE_BUILD/SFML-2.0/lib")
 FIND_PACKAGE( Boost REQUIRED )
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
+set( HEADER_FILES
+	engine.hpp
+)
+
+set( SOURCE_FILES
+	 engine.cpp
+)
+
 add_executable(${PROJECT_NAME} main.cpp)
 
 
