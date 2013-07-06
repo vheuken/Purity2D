@@ -11,14 +11,19 @@ FIND_PACKAGE( Boost REQUIRED )
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 set( HEADER_FILES
-	engine.hpp
+	engine.h
 )
 
 set( SOURCE_FILES
 	 engine.cpp
+
+	 main.cpp
 )
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable( ${PROJECT_NAME} 
+				${HEADER_FILES}
+				${SOURCE_FILES}
+)
 
 
 target_link_libraries(
