@@ -12,10 +12,12 @@ INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 set( HEADER_FILES
 	engine.h
+	scene.h
 )
 
 set( SOURCE_FILES
 	 engine.cpp
+	 scene.cpp
 
 	 main.cpp
 )
