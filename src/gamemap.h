@@ -1,8 +1,14 @@
 #ifndef GAME_MAP_H
 #define GAME_MAP_H
 
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include <boost/filesystem.hpp>
+
+namespace Tmx
+{
+    class Map;
+}
 
 namespace Purity
 {
@@ -13,6 +19,7 @@ namespace Purity
         GameMap(const boost::filesystem::path& path);
 
     private:
+        std::unique_ptr<Tmx::Map> mTmxMap;
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     };
 

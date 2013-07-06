@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "gamemap.h"
 
 Purity::Scene::Scene()
 {

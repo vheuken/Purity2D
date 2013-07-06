@@ -4,11 +4,10 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-#include "gamemap.h"
-
 namespace Purity
 {
-
+    class GameMap;
+    
     class Scene : public sf::Drawable
     {
     public:

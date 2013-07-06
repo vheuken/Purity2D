@@ -41,6 +41,7 @@ target_link_libraries(
     sfml-window
     lua
     luabind
+	TMX-Parser
 	${Boost_SYSTEM_LIBRARY}
 	${Boost_FILESYSTEM_LIBRARY}
 )

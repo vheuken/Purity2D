@@ -18,8 +18,7 @@ set ( HEADER_FILES
 	 TmxTileset.h
 	 TmxUtil.h
 	 
-	 tinyxml/tinystr.h
-	 tinyxml/tinyxml.h
+	 base64/base64.h
 )
 
 set ( SOURCE_FILES
@@ -37,9 +36,20 @@ set ( SOURCE_FILES
 	 TmxTileset.cpp
 	 TmxUtil.cpp
 	 
-	 tinyxml/tinystr.cpp
-	 tinyxml/tinyxml.cpp
-	 tinyxml/tinyxmlerror.cpp
+	 base64/base64.cpp
+	 
 )
 
-add_library( "${PROJECT_NAME}" STATIC ${HEADER_FILES} ${SOURCE_FILES} )
+file (GLOB zlib_src
+	"zlib/*.h" "zlib/*.c"
+)
+
+file (GLOB tinyxml_src
+	"tinyxml/*.cpp" "tinyxml/*.h"
+)
+
+add_library( "${PROJECT_NAME}" STATIC 
+${HEADER_FILES} ${SOURCE_FILES} 
+${zlib_src}
+${tinyxml_src}
+)
