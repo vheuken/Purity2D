@@ -4,6 +4,9 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <boost/filesystem.hpp>
+#include <TmxParser/Tmx.h>
+
+#include "spritesheet.h"
 
 namespace Tmx
 {
