@@ -2,6 +2,7 @@
 #define SCENE_H
 
 #include <memory>
+#include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
 
 namespace Purity

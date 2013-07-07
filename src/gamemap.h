@@ -8,15 +8,8 @@
 
 #include "spritesheet.h"
 
-namespace Tmx
-{
-    class Map;
-}
-
 namespace Purity
 {
-    class SpriteSheet;
-
     class GameMap : public sf::Drawable
     {
     public:
