@@ -12,6 +12,7 @@ namespace Tmx
 
 namespace Purity
 {
+    class SpriteSheet;
 
     class GameMap : public sf::Drawable
     {
@@ -20,7 +21,12 @@ namespace Purity
 
     private:
         std::unique_ptr<Tmx::Map> mTmxMap;
+        std::map<std::string, std::unique_ptr<SpriteSheet> > mTilesetMap;
+
+        sf::Sprite getTile(int x, int y, int layerNum) const;
+
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        void drawTiles(sf::RenderTarget& target, sf::RenderStates states) const;
     };
 
 }

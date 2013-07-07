@@ -16,13 +16,15 @@ set( HEADER_FILES
 	engine.h
 	scene.h
 	gamemap.h
+	spritesheet.h
 )
 
 set( SOURCE_FILES
 	 engine.cpp
 	 scene.cpp
 	 gamemap.cpp
-
+	 spritesheet.cpp
+	 
 	 main.cpp
 )
 
