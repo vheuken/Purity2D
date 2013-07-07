@@ -4,6 +4,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "gamemap.h"
+#include "renderer.h"
 
 namespace Purity
 {
@@ -16,7 +17,12 @@ namespace Purity
         void cleanup();
 
     private:
-        std::unique_ptr<GameMap > mMap;
+        std::unique_ptr<sf::RenderWindow> mWindow;
+        std::unique_ptr<Renderer> mRenderer;
+        std::unique_ptr<GameMap> mMap;
+
+        void initializeWindow();
+        void initializeRenderer();
     };
 
 }
