@@ -2,8 +2,6 @@ language: cpp
 compiler:
   - gcc
 before_script:
-  # Custom GCC 4.7 installation
-  # required because default travis version isn't fully C++11 compatible
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get -qq update
   - sudo apt-get -qq install g++-4.7
