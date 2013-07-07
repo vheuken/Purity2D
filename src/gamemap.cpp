@@ -2,15 +2,40 @@
 
 
 Purity::GameMap::GameMap(const boost::filesystem::path& path)
+    : mFilePath(path)
 {
+    processTilesetsFromTMXMap();
+}
 
+void Purity::GameMap::processTilesetsFromTMXMap()
+{
+    SpriteSheet spriteSheet;
+    std::string tilesetFileName;
+    sf::Texture * texture;
+    const Tmx::Tileset * tileset;
+
+    for (int i = 0; i < mTmxMap->GetNumTilesets(); i++)
+    {
+        tileset = mTmxMap->GetTileset(i);
+
+        tilesetFileName = (mFilePath.string() + tileset->GetImage()->GetSource());
+
+        // HACKY! Please review!
+        //texture = textureManager.getTexture(tilesetFileName);
+        texture = new sf::Texture();
+        texture->loadFromFile(tilesetFileName);
+
+        spriteSheet = SpriteSheet(*texture);
+
+        mTilesetMap[tilesetFileName] = spriteSheet;
+    }
 }
 
 sf::Sprite Purity::GameMap::getTile(int x, int y, int layerNum) const
 {
         Tmx::MapTile tile;
         const Tmx::Tileset* tileset;
-        SpriteSheet* spriteSheet;
+        SpriteSheet spriteSheet;
         sf::Sprite tileSprite;
         int tilePositionX;
         int tilePositionY;
@@ -27,12 +52,12 @@ sf::Sprite Purity::GameMap::getTile(int x, int y, int layerNum) const
 
         imagePath = tileset->GetImage()->GetSource();
 
-        spriteSheet = mTilesetMap.at(imagePath).get();
+        spriteSheet = mTilesetMap.at(imagePath);
 
-        tileSprite = spriteSheet->getTile(tile.id);
+        tileSprite = spriteSheet.getTile(tile.id);
 
-        tilePositionX = x * spriteSheet->getTileWidth();
-        tilePositionY = y * spriteSheet->getTileHeight();
+        tilePositionX = x * spriteSheet.getTileWidth();
+        tilePositionY = y * spriteSheet.getTileHeight();
 
         tileSprite.setPosition(tilePositionX, tilePositionY);
 

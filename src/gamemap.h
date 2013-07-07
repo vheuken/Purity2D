@@ -16,10 +16,14 @@ namespace Purity
         GameMap(const boost::filesystem::path& path);
 
     private:
+        const boost::filesystem::path mFilePath;
         std::unique_ptr<Tmx::Map> mTmxMap;
-        std::map<std::string, std::unique_ptr<SpriteSheet> > mTilesetMap;
+        std::map<std::string, SpriteSheet> mTilesetMap;
+
+        void processTilesetsFromTMXMap();
 
         sf::Sprite getTile(int x, int y, int layerNum) const;
+
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
         void drawTiles(sf::RenderTarget& target, sf::RenderStates states) const;

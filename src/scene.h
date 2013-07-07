@@ -12,7 +12,7 @@ namespace Purity
     class Scene : public sf::Drawable
     {
     public:
-        Scene();
+        Scene(const boost::filesystem::path& sceneDir);
 
     private:
         std::unique_ptr<GameMap> mMap;
