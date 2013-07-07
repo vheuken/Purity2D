@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
+if(UNIX)
+	set(CMAKE_CXX_FLAGS "-std=c++0x")
+endif()
+
 set(PROJECT_NAME "Purity Engine")
 
 project(${PROJECT_NAME})
