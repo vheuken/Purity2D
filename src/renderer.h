@@ -1,9 +1,8 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <memory>
 #include <SFML/Graphics.hpp>
-#include<iostream>
+
 namespace Purity
 {
     class Renderer
