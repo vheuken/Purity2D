@@ -1,12 +1,15 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include <string>
 #include <memory>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
 
 namespace Purity
 {
+    const std::string DEFAULT_MAP_FILENAME = "map.tmx";
+
     class GameMap;
     
     class Scene : public sf::Drawable

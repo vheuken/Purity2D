@@ -3,7 +3,7 @@
 void Purity::Engine::initialize()
 {
     std::cout << "Initializing some stuff..." << std::endl;
-    mMap = std::unique_ptr<GameMap>(new GameMap("test.tmx"));
+    mMap = std::unique_ptr<Scene>(new Scene("test_scene/"));
 
     initializeWindow();
     initializeRenderer();
@@ -23,7 +23,7 @@ void Purity::Engine::run()
                 mWindow->close();
             }
         }
-
+        
         mRenderer->update(*mMap);
     }
 

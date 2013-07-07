@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "gamemap.h"
+#include "scene.h"
 #include "renderer.h"
 
 namespace Purity
@@ -19,7 +19,7 @@ namespace Purity
     private:
         std::unique_ptr<sf::RenderWindow> mWindow;
         std::unique_ptr<Renderer> mRenderer;
-        std::unique_ptr<GameMap> mMap;
+        std::unique_ptr<Scene> mMap;
 
         void initializeWindow();
         void initializeRenderer();

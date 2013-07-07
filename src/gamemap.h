@@ -13,10 +13,11 @@ namespace Purity
     class GameMap : public sf::Drawable
     {
     public:
-        GameMap(const boost::filesystem::path& path);
+        GameMap(const boost::filesystem::path& path, const boost::filesystem::path& sceneDir);
 
     private:
         const boost::filesystem::path mFilePath;
+        const boost::filesystem::path mSceneDir;
         std::unique_ptr<Tmx::Map> mTmxMap;
         std::map<std::string, SpriteSheet> mTilesetMap;
 
