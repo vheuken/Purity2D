@@ -6,4 +6,4 @@ before_script:
   - sudo apt-get install libboost-all-dev
   - cmake .
 script: 
-  - make
+  - make -j4
