@@ -1,9 +1,5 @@
 project(${PROJECT_NAME})
 
-if(UNIX)
-	set(CMAKE_CXX_FLAGS "-std=c++0x")
-endif()
-
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 
 #add_definitions(-DSFML_STATIC)
