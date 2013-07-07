@@ -4,6 +4,10 @@
 Purity::GameMap::GameMap(const boost::filesystem::path& path)
     : mFilePath(path)
 {
+    mTmxMap = std::unique_ptr<Tmx::Map>(new Tmx::Map());
+    
+    mTmxMap->ParseFile(path.string());
+
     processTilesetsFromTMXMap();
 }
 
@@ -18,16 +22,17 @@ void Purity::GameMap::processTilesetsFromTMXMap()
     {
         tileset = mTmxMap->GetTileset(i);
 
-        tilesetFileName = (mFilePath.string() + tileset->GetImage()->GetSource());
-
+        tilesetFileName = (tileset->GetImage()->GetSource());
+        
         // HACKY! Please review!
         //texture = textureManager.getTexture(tilesetFileName);
         texture = new sf::Texture();
         texture->loadFromFile(tilesetFileName);
 
         spriteSheet = SpriteSheet(*texture);
-
+        
         mTilesetMap[tilesetFileName] = spriteSheet;
+
     }
 }
 

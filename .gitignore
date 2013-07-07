@@ -181,3 +181,6 @@ install_manifest.txt
 PRE_BUILD/
 CMakeScripts/
 *.xcodeproj/
+
+*.dir/
+Win32/
