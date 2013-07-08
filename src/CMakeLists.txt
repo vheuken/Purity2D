@@ -22,6 +22,7 @@ set( HEADER_FILES
 	gamemap.h
 	spritesheet.h
 	renderer.h
+	scenemanager.h
 )
 
 set( SOURCE_FILES
@@ -30,6 +31,7 @@ set( SOURCE_FILES
 	 gamemap.cpp
 	 spritesheet.cpp
 	 renderer.cpp
+	 scenemanager.cpp
 	 
 	 main.cpp
 )
