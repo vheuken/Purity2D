@@ -3,10 +3,10 @@
 void Purity::Engine::initialize()
 {
     std::cout << "Initializing some stuff..." << std::endl;
-    mMap = std::unique_ptr<Scene>(new Scene("test_scene/"));
 
     initializeWindow();
     initializeRenderer();
+    initializeSceneManager();
 }
 
 void Purity::Engine::run()
@@ -24,7 +24,7 @@ void Purity::Engine::run()
             }
         }
         
-        mRenderer->update(*mMap);
+        mRenderer->update(*mSceneManager->getCurrentScene());
     }
 
 }
@@ -44,4 +44,9 @@ void Purity::Engine::initializeWindow()
 void Purity::Engine::initializeRenderer()
 {
     mRenderer = std::unique_ptr<Renderer>(new Renderer(mWindow.get()));
+}
+
+void Purity::Engine::initializeSceneManager()
+{
+    mSceneManager = std::unique_ptr<SceneManager>(new SceneManager());
 }
