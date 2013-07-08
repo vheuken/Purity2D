@@ -1,6 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "scenemanager.h"
