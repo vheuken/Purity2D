@@ -6,12 +6,12 @@
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "gamemap.h"
+
 namespace Purity
 {
     const std::string DEFAULT_MAP_FILENAME = "map.tmx";
 
-    class GameMap;
-    
     class Scene : public sf::Drawable
     {
     public:
