@@ -184,3 +184,6 @@ CMakeScripts/
 
 *.dir/
 Win32/
+
+# vim swp files
+*.swp
