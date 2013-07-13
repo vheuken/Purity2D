@@ -33,7 +33,7 @@ set( SOURCE_FILES
 	 spritesheet.cpp
 	 renderer.cpp
 	 scenemanager.cpp
-	 #physicssystem.cpp
+	 physicssystem.cpp
 	 
 	 main.cpp
 )
