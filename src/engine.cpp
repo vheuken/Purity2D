@@ -20,7 +20,7 @@ void Purity::Engine::run()
         currentScene = mSceneManager->getCurrentScene();
 
         mRenderer->update(*currentScene);
-        mPhysicsSystem->update(*currentScene);
+        mPhysicsSystem->update(currentScene);
 
         sf::Event event;
         while (mWindow->pollEvent(event))

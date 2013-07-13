@@ -4,13 +4,19 @@ Purity::PhysicsSystem::PhysicsSystem()
 {
     mWorld = std::unique_ptr<b2World>(new b2World(GRAVITY));
 
+    mCurrentScene = nullptr;
     mLastTime = 0;
     mFrameTimeMilleseconds = 0;
     mFrameTimer.restart().asMicroseconds();
 }
 
-void Purity::PhysicsSystem::update(const Purity::Scene& scene) 
+void Purity::PhysicsSystem::update(const Purity::Scene* scene) 
 {
+    if (scene != mCurrentScene)
+    {
+        mCurrentScene = scene;
+    }
+
     step();
 }
 
