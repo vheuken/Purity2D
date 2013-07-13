@@ -9,13 +9,30 @@ Purity::Object::Object(float x, float y)
 void Purity::Object::setX(float x)
 {
     this->mPositionX = x;
+    b2Vec2 pos;
+    pos.Set(x, getY());
+
+    mHitboxBody->SetTransform(pos, mHitboxBody->GetAngle());
 }
 
 void Purity::Object::setY(float y)
 {
     this->mPositionY = y;
+    b2Vec2 pos;
+    pos.Set(getX(), y);
+
+    mHitboxBody->SetTransform(pos, mHitboxBody->GetAngle());
 }
 
+float Purity::Object::getX() const
+{
+    return mPositionX;
+}
+
+float Purity::Object::getY() const
+{
+    return mPositionY;
+}
 
 void Purity::Object::createBody(b2World* world)
 {
