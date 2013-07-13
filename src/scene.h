@@ -2,6 +2,7 @@
 #define SCENE_H
 
 #include <string>
+#include <vector>
 #include <memory>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
@@ -11,6 +12,7 @@
 
 namespace Purity
 {
+    const float32 PIXELS_PER_METER = 30.0f;
     const std::string DEFAULT_MAP_FILENAME = "map.tmx";
 
     class Scene : public sf::Drawable
@@ -24,6 +26,9 @@ namespace Purity
         std::unique_ptr<Tmx::Map> mTmxMap;
         std::unique_ptr<GameMap> mMap;
 
+        std::vector<b2Body *> mTileBodyList;
+
+        void initializeTiles(b2World * world);
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     };
 
