@@ -10,7 +10,6 @@ namespace Purity
     public:
         PhysicsSystem();
 
-    private:
         void update(const Scene& scene) const;
     };
 }
