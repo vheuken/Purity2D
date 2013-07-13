@@ -10,6 +10,8 @@ namespace Purity
     class Object : public sf::Drawable
     {
     public:
+        Object(float x, float y);
+
         virtual void createBody(b2World* world);
         void setName(std::string name);
         std::string getName() const;
@@ -19,17 +21,17 @@ namespace Purity
         float getY() const;
 
     protected:
-        b2BodyDef hitboxBodyDef;
-        b2Body* hitboxBody;     
+        b2BodyDef mHitboxBodyDef;
+        b2Body* mHitboxBody;     
         
         // visual representation of hitbox
-        sf::RectangleShape visibleHitbox;
+        sf::RectangleShape mHitboxShape;
 
     private:
-        int positionX;
-        int positionY;
+        float mPositionX;
+        float mPositionY;
 
-        std::string name;
+        std::string mName;
 
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     };
