@@ -5,7 +5,7 @@
 #include <memory>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
-
+#include <TmxParser/Tmx.h>
 #include "gamemap.h"
 
 namespace Purity
@@ -18,6 +18,7 @@ namespace Purity
         Scene(const boost::filesystem::path& sceneDir);
 
     private:
+        std::unique_ptr<Tmx::Map> mTmxMap;
         std::unique_ptr<GameMap> mMap;
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

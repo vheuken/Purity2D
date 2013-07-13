@@ -1,12 +1,10 @@
 #include "gamemap.h"
 
 
-Purity::GameMap::GameMap(const boost::filesystem::path& path, const boost::filesystem::path& sceneDir)
-    : mFilePath(path), mSceneDir(sceneDir)
+Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir)
+    : mSceneDir(sceneDir)
 {
-    mTmxMap = std::unique_ptr<Tmx::Map>(new Tmx::Map());
-    
-    mTmxMap->ParseFile(path.string());
+    mTmxMap = tmxMap;
 
     processTilesetsFromTMXMap();
 }
