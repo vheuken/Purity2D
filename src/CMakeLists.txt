@@ -24,6 +24,7 @@ set( HEADER_FILES
 	renderer.h
 	scenemanager.h
 	physicssystem.h
+	object.h
 )
 
 set( SOURCE_FILES
@@ -34,6 +35,7 @@ set( SOURCE_FILES
 	 renderer.cpp
 	 scenemanager.cpp
 	 physicssystem.cpp
+	 object.cpp
 	 
 	 main.cpp
 )
