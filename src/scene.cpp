@@ -19,6 +19,7 @@ void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 void Purity::Scene::initializePhysics(b2World * world)
 {
     initializeTiles(world);
+    initializeObjects(world);
 }
 
 void Purity::Scene::initializeTiles(b2World * world)
@@ -100,6 +101,36 @@ void Purity::Scene::initializeTiles(b2World * world)
                     }
                 }
             }
+        }
+    }
+}
+
+void Purity::Scene::initializeObjects(b2World* world)
+{
+    int numOfGroups;
+    numOfGroups = mTmxMap->GetNumObjectGroups();
+
+    for (int groupNum = 0; groupNum < numOfGroups; groupNum++)
+    {
+        const Tmx::ObjectGroup* currentGroup;
+        int numOfObjectsInGroup;
+
+        currentGroup = mTmxMap->GetObjectGroup(groupNum);
+        numOfObjectsInGroup = currentGroup->GetNumObjects();
+
+        for (int objectNum = 0; objectNum < numOfObjectsInGroup; objectNum++)
+        {
+            float objectPosX, objectPosY;
+            const Tmx::Object* currentObject;
+         
+            currentObject = currentGroup->GetObject(objectNum);
+
+            objectPosX = currentObject->GetX() / PIXELS_PER_METER;
+            objectPosY = currentObject->GetY() / PIXELS_PER_METER;
+            
+            Object object(objectPosX, objectPosY, world);
+            
+            mObjectList.push_back(object);
         }
     }
 }

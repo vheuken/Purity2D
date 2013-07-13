@@ -10,7 +10,7 @@ namespace Purity
     class Object : public sf::Drawable
     {
     public:
-        Object(float x, float y);
+        Object(float x, float y, b2World* world);
 
         virtual void createBody(b2World* world);
         void setName(std::string name);

@@ -1,7 +1,8 @@
 #include "object.h"
 
-Purity::Object::Object(float x, float y)
+Purity::Object::Object(float x, float y, b2World* world)
 {
+    createBody(world);
     setX(x);
     setY(y);
 }
