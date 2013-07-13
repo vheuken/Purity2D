@@ -15,5 +15,5 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/libs/luabind/
 )
 
-add_subdirectory(libs PRE_BUILD)
+add_subdirectory(extlibs PRE_BUILD)
 add_subdirectory(src)
