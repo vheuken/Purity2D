@@ -7,16 +7,18 @@ void Purity::Engine::initialize()
     initializeWindow();
     initializeRenderer();
     initializeSceneManager();
+    initializePhysicsSystem();
 }
 
 void Purity::Engine::run()
 {
+    const Scene* currentScene;
     std::cout << "Engine is starting! =D" << std::endl;
 
     while (mWindow->isOpen())
     {
-        const Scene* currentScene;
-        
+        currentScene = mSceneManager->getCurrentScene();
+
         mRenderer->update(*currentScene);
         mPhysicsSystem->update(*currentScene);
 
