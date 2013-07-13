@@ -14,6 +14,11 @@ Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
 void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(*mMap, states);
+
+    for (int i = 0; i < mObjectList.size(); i++)
+    {
+        target.draw(mObjectList.at(i));
+    }
 }
 
 void Purity::Scene::initializePhysics(b2World * world)
@@ -137,4 +142,8 @@ void Purity::Scene::initializeObjects(b2World* world)
 
 void Purity::Scene::updatePhysics()
 {
+    for (int i = 0; i < mObjectList.size(); i++)
+    {
+        mObjectList.at(i).update();
+    }
 }

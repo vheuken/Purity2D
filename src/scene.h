@@ -13,7 +13,6 @@
 
 namespace Purity
 {
-    const float32 PIXELS_PER_METER = 30.0f;
     const std::string DEFAULT_MAP_FILENAME = "map.tmx";
 
     class Scene : public sf::Drawable

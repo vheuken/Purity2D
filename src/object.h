@@ -7,6 +7,18 @@
 
 namespace Purity
 {
+    const float32 PIXELS_PER_METER = 30.0f;
+    const float32 DEFAULT_HITBOX_WIDTH_METERS = 0.5;
+    const float32 DEFAULT_HITBOX_HEIGHT_METERS = 1.5;
+
+    const int DEFAULT_HITBOX_WIDTH_PIXELS  = PIXELS_PER_METER * DEFAULT_HITBOX_WIDTH_METERS; 
+    const int DEFAULT_HITBOX_HEIGHT_PIXELS = PIXELS_PER_METER * DEFAULT_HITBOX_HEIGHT_METERS;
+
+
+    const float DEFAULT_HITBOX_OUTLINE_THICKNESS = 2.0;
+    const sf::Color DEFAULT_HITBOX_OUTLINE_COLOR = sf::Color::Yellow;
+    const sf::Color DEFAULT_HITBOX_FILL_COLOR = sf::Color::Transparent;
+
     class Object : public sf::Drawable
     {
     public:
@@ -20,6 +32,8 @@ namespace Purity
         float getX() const;
         float getY() const;
 
+        void update();
+
     protected:
         b2BodyDef mHitboxBodyDef;
         b2Body* mHitboxBody;     
@@ -32,6 +46,8 @@ namespace Purity
         float mPositionY;
 
         std::string mName;
+
+        void initializeHitboxShape();
 
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     };

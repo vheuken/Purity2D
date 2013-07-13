@@ -18,7 +18,6 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
         
         mCurrentScene->initializePhysics(mWorld.get());
     }
-
     step();
     mCurrentScene->updatePhysics();
 }
