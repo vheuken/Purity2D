@@ -15,6 +15,11 @@ void Purity::Engine::run()
 
     while (mWindow->isOpen())
     {
+        const Scene* currentScene;
+        
+        mRenderer->update(*currentScene);
+        mPhysicsSystem->update(*currentScene);
+
         sf::Event event;
         while (mWindow->pollEvent(event))
         {
@@ -23,8 +28,6 @@ void Purity::Engine::run()
                 mWindow->close();
             }
         }
-        
-        mRenderer->update(*mSceneManager->getCurrentScene());
     }
 
 }
