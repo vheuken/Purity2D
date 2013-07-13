@@ -21,6 +21,7 @@ namespace Purity
         Scene(const boost::filesystem::path& sceneDir);
 
         void initializePhysics(b2World * world);
+        void updatePhysics();
 
     private:
         std::unique_ptr<Tmx::Map> mTmxMap;

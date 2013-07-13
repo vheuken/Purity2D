@@ -20,6 +20,7 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
     }
 
     step();
+    mCurrentScene->updatePhysics();
 }
 
 void Purity::PhysicsSystem::step()

@@ -103,3 +103,7 @@ void Purity::Scene::initializeTiles(b2World * world)
         }
     }
 }
+
+void Purity::Scene::updatePhysics()
+{
+}
