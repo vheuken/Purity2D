@@ -8,7 +8,7 @@ Purity::SceneManager::SceneManager()
     mCurrentScene = mScene.get();
 }
 
-const Purity::Scene* Purity::SceneManager::getCurrentScene() const
+Purity::Scene* Purity::SceneManager::getCurrentScene() const
 {
     return mCurrentScene;
 }

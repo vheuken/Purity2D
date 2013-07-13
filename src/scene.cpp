@@ -15,3 +15,8 @@ void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 {
     target.draw(*mMap, states);
 }
+
+void Purity::Scene::initializePhysics(b2World * world)
+{
+
+}

@@ -15,7 +15,7 @@ namespace Purity
     {
     public:
         SceneManager();
-        const Scene* getCurrentScene() const;
+        Scene* getCurrentScene() const;
 
     private:
         std::unique_ptr<Scene> mScene;

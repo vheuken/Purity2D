@@ -19,14 +19,14 @@ namespace Purity
     public:
         PhysicsSystem();
 
-        void update(const Scene* scene);
+        void update(Scene* scene);
 
     private:
         sf::Clock mFrameTimer;
         unsigned int mLastTime;
         unsigned int mFrameTimeMilleseconds;
         std::unique_ptr<b2World> mWorld;
-        const Scene* mCurrentScene;
+        Scene* mCurrentScene;
 
         void step();
     };

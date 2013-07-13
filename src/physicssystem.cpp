@@ -10,11 +10,13 @@ Purity::PhysicsSystem::PhysicsSystem()
     mFrameTimer.restart().asMicroseconds();
 }
 
-void Purity::PhysicsSystem::update(const Purity::Scene* scene) 
+void Purity::PhysicsSystem::update(Purity::Scene* scene) 
 {
     if (scene != mCurrentScene)
     {
         mCurrentScene = scene;
+        
+        mCurrentScene->initializePhysics(mWorld.get());
     }
 
     step();

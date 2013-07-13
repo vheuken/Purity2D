@@ -12,7 +12,7 @@ void Purity::Engine::initialize()
 
 void Purity::Engine::run()
 {
-    const Scene* currentScene;
+    Scene* currentScene;
     std::cout << "Engine is starting! =D" << std::endl;
 
     while (mWindow->isOpen())
