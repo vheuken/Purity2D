@@ -50,3 +50,8 @@ void Purity::Engine::initializeSceneManager()
 {
     mSceneManager = std::unique_ptr<SceneManager>(new SceneManager());
 }
+
+void Purity::Engine::initializePhysicsSystem()
+{
+    mPhysicsSystem = std::unique_ptr<PhysicsSystem>(new PhysicsSystem());
+}

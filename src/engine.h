@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "scenemanager.h"
 #include "renderer.h"
+#include "physicssystem.h"
 
 namespace Purity
 {
@@ -21,10 +22,12 @@ namespace Purity
         std::unique_ptr<sf::RenderWindow> mWindow;
         std::unique_ptr<Renderer> mRenderer;
         std::unique_ptr<SceneManager> mSceneManager;
+        std::unique_ptr<PhysicsSystem> mPhysicsSystem;
 
         void initializeWindow();
         void initializeRenderer();
         void initializeSceneManager();
+        void initializePhysicsSystem();
     };
 
 }
