@@ -23,6 +23,7 @@ set( HEADER_FILES
 	spritesheet.h
 	renderer.h
 	scenemanager.h
+	physicssystem.h
 )
 
 set( SOURCE_FILES
@@ -32,6 +33,7 @@ set( SOURCE_FILES
 	 spritesheet.cpp
 	 renderer.cpp
 	 scenemanager.cpp
+	 #physicssystem.cpp
 	 
 	 main.cpp
 )
