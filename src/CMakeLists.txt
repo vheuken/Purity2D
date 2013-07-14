@@ -25,6 +25,7 @@ set( HEADER_FILES
 	scenemanager.h
 	physicssystem.h
 	inputmanager.h
+	luamanager.h
 	object.h
 	movableobject.h
 )
@@ -38,6 +39,7 @@ set( SOURCE_FILES
 	 scenemanager.cpp
 	 physicssystem.cpp
 	 inputmanager.cpp
+	 luamanager.cpp
 	 object.cpp
 	 movableobject.cpp
 	 
