@@ -10,7 +10,7 @@ namespace Purity
     public:
         Renderer(sf::RenderWindow* window);
 
-        void update(const sf::Drawable& drawable);
+        void update(const sf::Drawable* drawable);
 
     private:
         sf::RenderWindow* mWindow;

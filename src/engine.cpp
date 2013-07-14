@@ -20,7 +20,7 @@ void Purity::Engine::run()
     {
         currentScene = mSceneManager->getCurrentScene();
 
-        mRenderer->update(*currentScene);
+        mRenderer->update(currentScene);
         mPhysicsSystem->update(currentScene);
         mInputManager->update(currentScene);
     }
