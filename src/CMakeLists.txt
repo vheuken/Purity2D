@@ -25,6 +25,7 @@ set( HEADER_FILES
 	scenemanager.h
 	physicssystem.h
 	object.h
+	movableobject.h
 )
 
 set( SOURCE_FILES
@@ -36,6 +37,7 @@ set( SOURCE_FILES
 	 scenemanager.cpp
 	 physicssystem.cpp
 	 object.cpp
+	 movableobject.cpp
 	 
 	 main.cpp
 )
