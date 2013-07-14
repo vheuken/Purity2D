@@ -8,12 +8,13 @@ void Purity::Engine::initialize()
     initializeRenderer();
     initializeSceneManager();
     initializePhysicsSystem();
+    initializeInputManager();
 }
 
 void Purity::Engine::run()
 {
-    Scene* currentScene;
     std::cout << "Engine is starting! =D" << std::endl;
+    Scene* currentScene;
 
     while (mWindow->isOpen())
     {
@@ -21,15 +22,7 @@ void Purity::Engine::run()
 
         mRenderer->update(*currentScene);
         mPhysicsSystem->update(currentScene);
-
-        sf::Event event;
-        while (mWindow->pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                mWindow->close();
-            }
-        }
+        mInputManager->update(currentScene);
     }
 
 }
@@ -59,4 +52,9 @@ void Purity::Engine::initializeSceneManager()
 void Purity::Engine::initializePhysicsSystem()
 {
     mPhysicsSystem = std::unique_ptr<PhysicsSystem>(new PhysicsSystem());
+}
+
+void Purity::Engine::initializeInputManager()
+{
+    mInputManager = std::unique_ptr<InputManager>(new InputManager(mWindow.get()));
 }

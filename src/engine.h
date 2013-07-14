@@ -7,6 +7,7 @@
 #include "scenemanager.h"
 #include "renderer.h"
 #include "physicssystem.h"
+#include "inputmanager.h"
 
 namespace Purity
 {
@@ -23,11 +24,13 @@ namespace Purity
         std::unique_ptr<Renderer> mRenderer;
         std::unique_ptr<SceneManager> mSceneManager;
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;
+        std::unique_ptr<InputManager> mInputManager;
 
         void initializeWindow();
         void initializeRenderer();
         void initializeSceneManager();
         void initializePhysicsSystem();
+        void initializeInputManager();
     };
 
 }
