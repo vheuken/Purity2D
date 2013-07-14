@@ -2,6 +2,8 @@
 #define INPUT_MANAGER_H
 
 #include <SFML/Graphics.hpp>
+#include <luabind/luabind.hpp>
+#include "luamanager.h"
 #include "scene.h"
 
 namespace Purity
