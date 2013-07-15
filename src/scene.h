@@ -14,6 +14,8 @@
 namespace Purity
 {
     const std::string DEFAULT_MAP_FILENAME = "map.tmx";
+    const std::string DEFAULT_EVENT_HANDLER_FILENAME = "eventHandler.lua";
+    const std::string DEFAULT_EVENT_HANDLER_FUNCTION_NAME = "eventHandler";
 
     class Scene : public sf::Drawable
     {
@@ -23,12 +25,17 @@ namespace Purity
         void initializePhysics(b2World * world);
         void updatePhysics();
 
+        std::string getLuaEventHandlerPath() const;
+        std::string getLuaEventHandlerFunctionName() const;
+
     private:
         std::unique_ptr<Tmx::Map> mTmxMap;
         std::unique_ptr<GameMap> mMap;
 
         std::vector<Object> mObjectList;
         std::vector<b2Body *> mTileBodyList;
+
+        boost::filesystem::path mLuaEventHandlerFile;
 
         void initializeTiles(b2World* world);
         void initializeObjects(b2World* world);

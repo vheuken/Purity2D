@@ -17,6 +17,7 @@ namespace Purity
 
     private:
         sf::RenderWindow* mWindow;
+        Scene* mCurrentScene;
     };
 }
 
