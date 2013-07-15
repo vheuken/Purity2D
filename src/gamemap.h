@@ -15,7 +15,7 @@ namespace Purity
     public:
         GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir);
 
-	private:
+    private:
         const boost::filesystem::path mSceneDir;
         const Tmx::Map * mTmxMap;
         std::map<std::string, SpriteSheet> mTilesetMap;

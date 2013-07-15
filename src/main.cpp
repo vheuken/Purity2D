@@ -2,7 +2,7 @@
 
 int main()
 {
-	Purity::Engine engine;
+    Purity::Engine engine;
 
     engine.initialize();
 
@@ -10,5 +10,5 @@ int main()
 
     engine.cleanup();
 
-	return 0;
+    return 0;
 }

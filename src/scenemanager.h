@@ -10,7 +10,7 @@ namespace Purity
 {
     const std::string DEFAULT_SCENE_DIR = "scenes/";
     const std::string DEFAULT_STARTING_SCENE = "init";
-	
+    
     class SceneManager
     {
     public:
