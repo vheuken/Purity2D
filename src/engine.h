@@ -27,7 +27,7 @@ namespace Purity
         std::unique_ptr<SceneManager> mSceneManager;
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;
         std::unique_ptr<InputManager> mInputManager;
-	std::unique_ptr<std::queue<sf::Event>> mInputQueue;
+	    std::unique_ptr<std::queue<sf::Event>> mInputQueue;
 
         void initializeWindow();
         void initializeRenderer();

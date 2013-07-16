@@ -10,7 +10,7 @@ void Purity::Engine::initialize()
     #ifdef __gnu_linux__
     XInitThreads();
     #endif
-    
+   
     mInputQueue = std::unique_ptr<std::queue<sf::Event>>(new std::queue<sf::Event>);		
     
     initializeWindow();
@@ -23,7 +23,7 @@ void Purity::Engine::initialize()
 void Purity::Engine::run()
 {
     std::cout << "Engine is starting! =D" << std::endl;
-    Scene* currentScene;
+    Scene* currentScene = nullptr;
 
     while (mWindow->isOpen())
     {
