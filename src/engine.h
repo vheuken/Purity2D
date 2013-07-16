@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include "scenemanager.h"
 #include "renderer.h"
 #include "physicssystem.h"

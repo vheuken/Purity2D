@@ -1,8 +1,15 @@
 #include "engine.h"
+#ifdef __gnu_linux__
+#include <X11/Xlib.h>
+#endif
 
 void Purity::Engine::initialize()
 {
     std::cout << "Initializing some stuff..." << std::endl;
+
+    #ifdef __gnu_linux__
+    XInitThreads();
+    #endif
 
     initializeWindow();
     initializeRenderer();
@@ -18,13 +25,18 @@ void Purity::Engine::run()
 
     while (mWindow->isOpen())
     {
-        currentScene = mSceneManager->getCurrentScene();
+        if (currentScene != mSceneManager->getCurrentScene())
+        {
+            currentScene = mSceneManager->getCurrentScene();
+            mRenderer->update(currentScene);
+        }
 
-        mRenderer->update(currentScene);
-        mPhysicsSystem->update(currentScene);
-        mInputManager->update(currentScene);
+        mPhysicsSystem->update(mSceneManager->getCurrentScene());
+        mInputManager->update(mSceneManager->getCurrentScene());
     }
 
+    // solves crash on exit on Windows
+    mRenderer->update(nullptr);
 }
 
 void Purity::Engine::cleanup()
@@ -37,6 +49,8 @@ void Purity::Engine::initializeWindow()
     sf::VideoMode videoMode(800, 600);
 
     mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D"));
+
+    mWindow->setActive(false);
 }
 
 void Purity::Engine::initializeRenderer()
