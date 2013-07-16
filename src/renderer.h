@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <iostream>
+#include <sstream>
 #include <thread>
 #include <mutex>
 #include <SFML/Graphics.hpp>
@@ -12,7 +13,7 @@ namespace Purity
     class Renderer
     {
     public:
-        Renderer(sf::RenderWindow* window);
+        Renderer(sf::RenderWindow* window, bool debugMode);
         ~Renderer();
 
         void update(Scene* scene);
@@ -22,8 +23,13 @@ namespace Purity
         Scene* mCurrentScene;
         std::mutex mCurrentSceneMutex;
         std::thread mRenderThread;
+        bool mDebugMode;
 
         void run();
+        void drawDebugInfo();
+        void initializeDebugInfo();
+        int calculateFPS();
+        sf::Font mDebugFont;
     };
 }
 
