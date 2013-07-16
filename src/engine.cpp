@@ -1,8 +1,15 @@
 #include "engine.h"
+#ifdef __gnu_linux__
+#include <X11/Xlib.h>
+#endif
 
 void Purity::Engine::initialize()
 {
     std::cout << "Initializing some stuff..." << std::endl;
+
+    #ifdef __gnu_linux__
+    XInitThreads();
+    #endif
 
     initializeWindow();
     initializeRenderer();
