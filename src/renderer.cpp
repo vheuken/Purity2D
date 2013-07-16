@@ -28,7 +28,6 @@ void Purity::Renderer::run()
 {
     while (mWindow->isOpen())
     {
-        sf::sleep(sf::seconds(1));
         mCurrentSceneMutex.lock();
 
         if (mCurrentScene)
