@@ -13,6 +13,7 @@ namespace Purity
     {
     public:
         Renderer(sf::RenderWindow* window);
+        ~Renderer();
 
         void update(Scene* scene);
 

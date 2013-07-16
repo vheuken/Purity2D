@@ -5,7 +5,11 @@ Purity::Renderer::Renderer(sf::RenderWindow* window)
       mWindow(window),
       mRenderThread(&Renderer::run, this)
 {
-    mRenderThread.detach();
+}
+
+Purity::Renderer::~Renderer()
+{
+    mRenderThread.join();
 }
 
 void Purity::Renderer::update(Scene* scene)
@@ -24,6 +28,7 @@ void Purity::Renderer::run()
 {
     while (mWindow->isOpen())
     {
+        sf::sleep(sf::seconds(1));
         mCurrentSceneMutex.lock();
 
         if (mCurrentScene)

@@ -35,6 +35,8 @@ void Purity::Engine::run()
         mInputManager->update(mSceneManager->getCurrentScene());
     }
 
+    // solves crash on exit on Windows
+    mRenderer->update(nullptr);
 }
 
 void Purity::Engine::cleanup()
