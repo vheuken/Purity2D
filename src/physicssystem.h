@@ -1,10 +1,13 @@
 #ifndef PHYSICS_SYSTEM_H
 #define PHYSICS_SYSTEM_H
 
+#include <queue>
 #include <memory>
 #include <SFML/System.hpp>
 #include <Box2D/Box2D.h>
+#include <luabind/luabind.hpp>
 #include "scene.h"
+#include "luamanager.h"
 
 namespace Purity
 {
@@ -17,7 +20,7 @@ namespace Purity
     class PhysicsSystem
     {
     public:
-        PhysicsSystem();
+        PhysicsSystem(std::queue<sf::Event>* inputQueue);
 
         void update(Scene* scene);
 
@@ -27,8 +30,10 @@ namespace Purity
         unsigned int mFrameTimeMilleseconds;
         std::unique_ptr<b2World> mWorld;
         Scene* mCurrentScene;
+	std::queue<sf::Event>* mInputQueue;
 
-        void step();
+	void step();
+	void handleInput();
     };
 }
 
