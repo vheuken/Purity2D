@@ -2,6 +2,7 @@
 #define ENGINE_H
 
 #include <iostream>
+#include <queue>
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -26,6 +27,7 @@ namespace Purity
         std::unique_ptr<SceneManager> mSceneManager;
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;
         std::unique_ptr<InputManager> mInputManager;
+	std::unique_ptr<std::queue<sf::Event>> mInputQueue;
 
         void initializeWindow();
         void initializeRenderer();

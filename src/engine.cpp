@@ -10,7 +10,9 @@ void Purity::Engine::initialize()
     #ifdef __gnu_linux__
     XInitThreads();
     #endif
-
+    
+    mInputQueue = std::unique_ptr<std::queue<sf::Event>>(new std::queue<sf::Event>);		
+    
     initializeWindow();
     initializeRenderer();
     initializeSceneManager();
@@ -70,5 +72,5 @@ void Purity::Engine::initializePhysicsSystem()
 
 void Purity::Engine::initializeInputManager()
 {
-    mInputManager = std::unique_ptr<InputManager>(new InputManager(mWindow.get()));
+    mInputManager = std::unique_ptr<InputManager>(new InputManager(mWindow.get(), mInputQueue.get()));
 }

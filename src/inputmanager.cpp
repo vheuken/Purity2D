@@ -1,9 +1,10 @@
 #include "inputmanager.h"
 
-Purity::InputManager::InputManager(sf::RenderWindow* window)
+Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue)
 {
     mWindow = window;
     mCurrentScene = nullptr;
+    mInputQueue = inputQueue;
 }
 
 void Purity::InputManager::update(Scene* scene)
@@ -14,15 +15,10 @@ void Purity::InputManager::update(Scene* scene)
     }
 
     sf::Event event;
-    std::string luaEventHandlerFile = mCurrentScene->getLuaEventHandlerPath();
-    std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
-    lua_State* luaState = LuaManager::getManager()->getState();
 
     while (mWindow->pollEvent(event))
     {
-        luaL_dofile(luaState, luaEventHandlerFile.c_str());
-        luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);
-
+	mInputQueue->push(event);
         if (event.type == sf::Event::Closed)
         {
             mWindow->close();
