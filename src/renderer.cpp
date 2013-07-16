@@ -1,13 +1,38 @@
 #include "renderer.h"
 
 Purity::Renderer::Renderer(sf::RenderWindow* window)
+    : mCurrentScene(nullptr), 
+      mWindow(window),
+      mRenderThread(&Renderer::run, this)
 {
-    mWindow = window;
+    mRenderThread.detach();
 }
 
-void Purity::Renderer::update(const sf::Drawable* drawable)
+void Purity::Renderer::update(Scene* scene)
 {
-    mWindow->clear();
-    mWindow->draw(*drawable);
-    mWindow->display();
+    mCurrentSceneMutex.lock();
+
+    if (scene != mCurrentScene)
+    {
+        mCurrentScene = scene;
+    }
+
+    mCurrentSceneMutex.unlock();
+}
+
+void Purity::Renderer::run()
+{
+    while (mWindow->isOpen())
+    {
+        mCurrentSceneMutex.lock();
+
+        if (mCurrentScene)
+        {
+            mWindow->clear();
+            mWindow->draw(*mCurrentScene);
+            mWindow->display();
+        }
+
+        mCurrentSceneMutex.unlock();
+    }
 }

@@ -18,11 +18,14 @@ void Purity::Engine::run()
 
     while (mWindow->isOpen())
     {
-        currentScene = mSceneManager->getCurrentScene();
+        if (currentScene != mSceneManager->getCurrentScene())
+        {
+            currentScene = mSceneManager->getCurrentScene();
+            mRenderer->update(currentScene);
+        }
 
-        mRenderer->update(currentScene);
-        mPhysicsSystem->update(currentScene);
-        mInputManager->update(currentScene);
+        mPhysicsSystem->update(mSceneManager->getCurrentScene());
+        mInputManager->update(mSceneManager->getCurrentScene());
     }
 
 }
@@ -37,6 +40,8 @@ void Purity::Engine::initializeWindow()
     sf::VideoMode videoMode(800, 600);
 
     mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D"));
+
+    mWindow->setActive(false);
 }
 
 void Purity::Engine::initializeRenderer()
