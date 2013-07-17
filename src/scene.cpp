@@ -15,8 +15,12 @@ Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
 
 void Purity::Scene::initializePhysics(b2World * world)
 {
+    mMutex.lock();
+
     initializeTiles(world);
     initializeObjects(world);
+
+    mMutex.unlock();
 }
 
 std::string Purity::Scene::getLuaEventHandlerPath() const
