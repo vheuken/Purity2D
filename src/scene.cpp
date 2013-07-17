@@ -2,6 +2,8 @@
 
 Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
 {
+    mDrawMutex.lock();
+
     boost::filesystem::path mapFilePath(sceneDir.string() + DEFAULT_MAP_FILENAME);
 
     mLuaEventHandlerFile = sceneDir.string() + DEFAULT_EVENT_HANDLER_FILENAME;
@@ -11,15 +13,21 @@ Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
     mTmxMap->ParseFile(mapFilePath.string());
 
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), sceneDir));
+
+    mDrawMutex.unlock();
 }
 
 void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(*mMap, states);
-
-    for (int i = 0; i < mObjectList.size(); i++)
+    if (mDrawMutex.try_lock())
     {
-        target.draw(mObjectList.at(i));
+        mDrawMutex.unlock();
+        target.draw(*mMap, states);
+
+        for (int i = 0; i < mObjectList.size(); i++)
+        {
+            target.draw(mObjectList.at(i));
+        }
     }
 }
 
