@@ -1,12 +1,9 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
-#include <mutex>
-#include <condition_variable>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
 #include <TmxParser/Tmx.h>
@@ -39,9 +36,6 @@ namespace Purity
         std::vector<b2Body *> mTileBodyList;
 
         boost::filesystem::path mLuaEventHandlerFile;
-
-        mutable std::condition_variable mDrawCondition;
-        mutable std::mutex mDrawMutex;
 
         void initializeTiles(b2World* world);
         void initializeObjects(b2World* world);
