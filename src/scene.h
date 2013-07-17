@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <mutex>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
 #include <TmxParser/Tmx.h>
@@ -36,6 +37,8 @@ namespace Purity
         std::vector<b2Body *> mTileBodyList;
 
         boost::filesystem::path mLuaEventHandlerFile;
+
+        mutable std::mutex mMutex;
 
         void initializeTiles(b2World* world);
         void initializeObjects(b2World* world);

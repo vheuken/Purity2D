@@ -13,16 +13,6 @@ Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), sceneDir));
 }
 
-void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    target.draw(*mMap, states);
-
-    for (int i = 0; i < mObjectList.size(); i++)
-    {
-        target.draw(mObjectList.at(i));
-    }
-}
-
 void Purity::Scene::initializePhysics(b2World * world)
 {
     initializeTiles(world);
@@ -154,8 +144,31 @@ void Purity::Scene::initializeObjects(b2World* world)
 
 void Purity::Scene::updatePhysics()
 {
+    std::vector<Object> objectListCopy = mObjectList;
+
+    for (int i = 0; i < objectListCopy.size(); i++)
+    {
+        objectListCopy.at(i).update();
+    }
+    
+    mMutex.lock();
+
+    mObjectList = objectListCopy;
+
+    mMutex.unlock();
+}
+
+void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    mMutex.lock();
+
+    target.draw(*mMap, states);
+
     for (int i = 0; i < mObjectList.size(); i++)
     {
-        mObjectList.at(i).update();
+        target.draw(mObjectList.at(i));
     }
+
+    mMutex.unlock();
+
 }
