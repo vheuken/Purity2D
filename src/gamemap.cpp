@@ -22,7 +22,6 @@ void Purity::GameMap::processTilesetsFromTMXMap()
 
         tilesetFileName = (tileset->GetImage()->GetSource());
         
-        // HACKY! Please review!
         texture = textureManager.getTexture(mSceneDir.string() + tilesetFileName);
 
         spriteSheet = SpriteSheet(*texture);
