@@ -28,6 +28,7 @@ set( HEADER_FILES
     luamanager.h
     object.h
     movableobject.h
+    texturemanager.h
 )
 
 set( SOURCE_FILES
@@ -42,6 +43,7 @@ set( SOURCE_FILES
      luamanager.cpp
      object.cpp
      movableobject.cpp
+     texturemanager.cpp
      
      main.cpp
 )
