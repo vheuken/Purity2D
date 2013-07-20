@@ -32,8 +32,8 @@ namespace Purity
         Scene* mCurrentScene;
 	    std::queue<sf::Event>* mInputQueue;
 
-	void step();
-	void handleInput();
+	    void step();
+	    void handleInput();
     };
 }
 
