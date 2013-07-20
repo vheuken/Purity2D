@@ -35,7 +35,7 @@ void Purity::PhysicsSystem::step()
     
     while (acumulator >= (TIME_STEP * 1000))
     {
-	handleInput();
+	    handleInput();
 
         mWorld->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 
