@@ -30,7 +30,7 @@ namespace Purity
         unsigned int mFrameTimeMilleseconds;
         std::unique_ptr<b2World> mWorld;
         Scene* mCurrentScene;
-	std::queue<sf::Event>* mInputQueue;
+	    std::queue<sf::Event>* mInputQueue;
 
 	void step();
 	void handleInput();
