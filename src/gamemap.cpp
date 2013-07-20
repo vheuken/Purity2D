@@ -13,7 +13,7 @@ void Purity::GameMap::processTilesetsFromTMXMap()
 {
     SpriteSheet spriteSheet;
     std::string tilesetFileName;
-    sf::Texture * texture;
+    const sf::Texture * texture;
     const Tmx::Tileset * tileset;
 
     for (int i = 0; i < mTmxMap->GetNumTilesets(); i++)
@@ -23,10 +23,7 @@ void Purity::GameMap::processTilesetsFromTMXMap()
         tilesetFileName = (tileset->GetImage()->GetSource());
         
         // HACKY! Please review!
-        //texture = textureManager.getTexture(tilesetFileName);
-        texture = new sf::Texture();
-
-        texture->loadFromFile(mSceneDir.string() + tilesetFileName);
+        texture = textureManager.getTexture(mSceneDir.string() + tilesetFileName);
 
         spriteSheet = SpriteSheet(*texture);
         

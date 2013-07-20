@@ -7,6 +7,7 @@
 #include <TmxParser/Tmx.h>
 
 #include "spritesheet.h"
+#include "texturemanager.h"
 
 namespace Purity
 {
@@ -19,6 +20,8 @@ namespace Purity
         const boost::filesystem::path mSceneDir;
         const Tmx::Map * mTmxMap;
         std::map<std::string, SpriteSheet> mTilesetMap;
+        
+        TextureManager textureManager;
 
         void processTilesetsFromTMXMap();
 
