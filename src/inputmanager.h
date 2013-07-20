@@ -18,8 +18,8 @@ namespace Purity
 
     private:
         sf::RenderWindow* mWindow;
-	Scene* mCurrentScene;
-	std::queue<sf::Event>* mInputQueue;	
+	    Scene* mCurrentScene;
+	    std::queue<sf::Event>* mInputQueue;	
     };
 }
 

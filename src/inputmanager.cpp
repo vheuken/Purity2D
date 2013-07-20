@@ -18,7 +18,7 @@ void Purity::InputManager::update(Scene* scene)
 
     while (mWindow->pollEvent(event))
     {
-	mInputQueue->push(event);
+	    mInputQueue->push(event);
         if (event.type == sf::Event::Closed)
         {
             mWindow->close();
