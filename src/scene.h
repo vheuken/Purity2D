@@ -10,8 +10,7 @@
 #include <TmxParser/Tmx.h>
 #include <Box2D/Box2D.h>
 #include "gamemap.h"
-#include "object.h"
-#include "movableobject.h"
+#include "objectmanager.h"
 
 namespace Purity
 {
@@ -33,6 +32,7 @@ namespace Purity
     private:
         std::unique_ptr<Tmx::Map> mTmxMap;
         std::unique_ptr<GameMap> mMap;
+        std::unique_ptr<ObjectManager> mObjectManager;
 
         std::vector<Object> mObjectList;
         std::vector<b2Body *> mTileBodyList;

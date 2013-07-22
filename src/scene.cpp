@@ -11,6 +11,8 @@ Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
     mTmxMap->ParseFile(mapFilePath.string());
 
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), sceneDir));
+
+    mObjectManager = std::unique_ptr<ObjectManager>(new ObjectManager(mTmxMap.get()));
 }
 
 void Purity::Scene::initializePhysics(b2World * world)

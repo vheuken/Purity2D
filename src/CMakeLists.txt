@@ -29,6 +29,7 @@ set( HEADER_FILES
     object.h
     movableobject.h
     texturemanager.h
+	objectmanager.h
 )
 
 set( SOURCE_FILES
@@ -44,6 +45,7 @@ set( SOURCE_FILES
      object.cpp
      movableobject.cpp
      texturemanager.cpp
+	 objectmanager.cpp
      
      main.cpp
 )
