@@ -11,6 +11,7 @@
 #include <Box2D/Box2D.h>
 #include "gamemap.h"
 #include "object.h"
+#include "movableobject.h"
 
 namespace Purity
 {
