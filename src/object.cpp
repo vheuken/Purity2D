@@ -1,11 +1,17 @@
 #include "object.h"
 
-Purity::Object::Object(float x, float y, b2World* world)
+Purity::Object::Object(const Tmx::Object* object, b2World* world)
 {
+    float x = object->GetX() / PIXELS_PER_METER;
+    float y = object->GetY() / PIXELS_PER_METER;
+    float width = object->GetWidth();
+    float height = object->GetHeight();
+
     mHitboxBodyDef.type = b2_dynamicBody;
 
     createBody(world);
     setPosition(x, y);
+    setSize(width, height);
 }
 
 void Purity::Object::setPosition(float x, float y)

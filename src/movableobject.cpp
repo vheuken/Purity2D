@@ -1,7 +1,7 @@
 #include "movableobject.h"
 
-Purity::MovableObject::MovableObject(float x, float y, b2World* world)
-    : Object(x, y, world)
+Purity::MovableObject::MovableObject(const Tmx::Object* object, b2World* world)
+    : Object(object, world)
 {
 
 }

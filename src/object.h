@@ -4,6 +4,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
+#include <TmxParser/Tmx.h>
 
 namespace Purity
 {
@@ -22,7 +23,7 @@ namespace Purity
     class Object : public sf::Drawable
     {
     public:
-        Object(float x, float y, b2World* world);
+        Object(const Tmx::Object* object, b2World* world);
 
         virtual void createBody(b2World* world);
         void setName(std::string name);

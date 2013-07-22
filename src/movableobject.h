@@ -8,7 +8,7 @@ namespace Purity
     class MovableObject : public Object
     {
     public:
-        MovableObject(float x, float y, b2World* world);
+        MovableObject(const Tmx::Object* object, b2World* world);
 
         void applyLinearImpulse(float x, float y);
         void setLinearVelocity(float x, float y);

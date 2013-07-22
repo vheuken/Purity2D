@@ -131,28 +131,19 @@ void Purity::Scene::initializeObjects(b2World* world)
 
         for (int objectNum = 0; objectNum < numOfObjectsInGroup; objectNum++)
         {
-            float objectPosX, objectPosY;
-            float objectWidth, objectHeight;
             const Tmx::Object* currentObject;
 
             currentObject = currentGroup->GetObject(objectNum);
 
-            objectPosX = currentObject->GetX() / PIXELS_PER_METER;
-            objectPosY = currentObject->GetY() / PIXELS_PER_METER;
-
-            objectWidth = currentObject->GetWidth();
-            objectHeight = currentObject->GetHeight();
-
             if (currentObject->GetType() == "Movable")
             {
-                MovableObject object(objectPosX, objectPosY, world);
-                object.setSize(objectWidth, objectHeight);
+                MovableObject object(currentObject, world);
                 mObjectList.push_back(object);
+                
             }
             else
             {
-                Object object(objectPosX, objectPosY, world);
-                object.setSize(objectWidth, objectHeight);
+                Object object(currentObject, world);
                 mObjectList.push_back(object);
             }
             
