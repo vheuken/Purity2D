@@ -6,6 +6,8 @@ Purity::Object::Object(const Tmx::Object* object, b2World* world)
     float y = object->GetY() / PIXELS_PER_METER;
     float width = object->GetWidth();
     float height = object->GetHeight();
+    
+    mName = object->GetName();
 
     mHitboxBodyDef.type = b2_dynamicBody;
 
@@ -32,6 +34,11 @@ float Purity::Object::getX() const
 float Purity::Object::getY() const
 {
     return mPositionY;
+}
+
+std::string Purity::Object::getName() const
+{
+    return mName;
 }
 
 void Purity::Object::setSize(float width, float height)

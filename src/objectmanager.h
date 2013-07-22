@@ -14,6 +14,8 @@ namespace Purity
     public:
         ObjectManager(const Tmx::Map* tmxMap, b2World* world);
 
+        const Object* getObjectByName(const std::string& objectName);
+
         void updatePhysics();
 
     private:

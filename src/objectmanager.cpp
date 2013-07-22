@@ -8,6 +8,20 @@ Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
     initializeObjects();
 }
 
+const Purity::Object* Purity::ObjectManager::getObjectByName(const std::string& objectName)
+{
+
+    for (int i = 0; i < mObjectList.size(); i++)
+    {
+        if (mObjectList.at(i).getName() == objectName)
+        {
+            return &mObjectList.at(i);
+        }
+    }
+
+    return nullptr;
+}
+
 void Purity::ObjectManager::initializeObjects()
 {
     int numOfGroups = mTmxMap->GetNumObjectGroups();
