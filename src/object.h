@@ -27,8 +27,10 @@ namespace Purity
         virtual void createBody(b2World* world);
         void setName(std::string name);
         std::string getName() const;
-        void setX(float x);
-        void setY(float y);
+
+        void setPosition(float x, float y);
+        void setSize(float width, float height);
+        
         float getX() const;
         float getY() const;
 
@@ -44,6 +46,8 @@ namespace Purity
     private:
         float mPositionX;
         float mPositionY;
+        float mWidthPixels;
+        float mHeightPixels;
 
         std::string mName;
 
