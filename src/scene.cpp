@@ -142,7 +142,7 @@ void Purity::Scene::initializeObjects(b2World* world)
 
             objectWidth = currentObject->GetWidth();
             objectHeight = currentObject->GetHeight();
-            std::cout << objectWidth << std::endl;
+
             Object object(objectPosX, objectPosY, world);
 
             object.setSize(objectWidth, objectHeight);

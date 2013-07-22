@@ -66,7 +66,6 @@ void Purity::Object::createBody(b2World* world)
 
 void Purity::Object::initializeHitboxShape()
 {
-    mHitboxShape.setPosition(100, 100);
     sf::Vector2f hitboxSize(mWidthPixels, mHeightPixels);
     mHitboxShape.setSize(hitboxSize);
     mHitboxShape.setOutlineColor(DEFAULT_HITBOX_OUTLINE_COLOR);
