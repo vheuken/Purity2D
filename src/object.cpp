@@ -4,8 +4,6 @@ Purity::Object::Object(float x, float y, b2World* world)
 {
     mHitboxBodyDef.type = b2_dynamicBody;
 
-    //mHitboxBodyDef.position.Set(14, 3);
-
     createBody(world);
     setPosition(x, y);
 }
