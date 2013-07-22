@@ -11,8 +11,6 @@ Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
     mTmxMap->ParseFile(mapFilePath.string());
 
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), sceneDir));
-
-    mObjectManager = std::unique_ptr<ObjectManager>(new ObjectManager(mTmxMap.get()));
 }
 
 void Purity::Scene::initializePhysics(b2World * world)
@@ -20,7 +18,7 @@ void Purity::Scene::initializePhysics(b2World * world)
     mMutex.lock();
 
     initializeTiles(world);
-    initializeObjects(world);
+    mObjectManager = std::unique_ptr<ObjectManager>(new ObjectManager(mTmxMap.get(), world));
 
     mMutex.unlock();
 }
@@ -120,52 +118,14 @@ void Purity::Scene::initializeTiles(b2World * world)
 
 void Purity::Scene::initializeObjects(b2World* world)
 {
-    int numOfGroups = mTmxMap->GetNumObjectGroups();
-   
-
-    for (int groupNum = 0; groupNum < numOfGroups; groupNum++)
-    {
-        const Tmx::ObjectGroup* currentGroup;
-        int numOfObjectsInGroup;
-
-        currentGroup = mTmxMap->GetObjectGroup(groupNum);
-        numOfObjectsInGroup = currentGroup->GetNumObjects();
-
-        for (int objectNum = 0; objectNum < numOfObjectsInGroup; objectNum++)
-        {
-            const Tmx::Object* currentObject;
-
-            currentObject = currentGroup->GetObject(objectNum);
-
-            if (currentObject->GetType() == "Movable")
-            {
-                MovableObject object(currentObject, world);
-                mObjectList.push_back(object);
-                
-            }
-            else
-            {
-                Object object(currentObject, world);
-                mObjectList.push_back(object);
-            }
-            
-        }
-    }
 
 }
 
 void Purity::Scene::updatePhysics()
-{
-    std::vector<Object> objectListCopy = mObjectList;
-
-    for (int i = 0; i < objectListCopy.size(); i++)
-    {
-        objectListCopy.at(i).update();
-    }
-    
+{    
     mMutex.lock();
 
-    mObjectList = objectListCopy;
+    mObjectManager->updatePhysics();
 
     mMutex.unlock();
 }
@@ -176,10 +136,7 @@ void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 
     target.draw(*mMap, states);
 
-    for (int i = 0; i < mObjectList.size(); i++)
-    {
-        target.draw(mObjectList.at(i));
-    }
+    target.draw(*mObjectManager, states);
 
     mMutex.unlock();
 
