@@ -34,7 +34,7 @@ float Purity::MovableObject::getLinearVelocityX() const
 
 luabind::scope Purity::MovableObject::luaBindings()
 {
-    return luabind::class_<MovableObject>("MovableObject")
+    return luabind::class_<MovableObject, Object>("MovableObject")
         .def("applyLinearImpulse", &MovableObject::applyLinearImpulse)
         .def("setLinearVelocity",  &MovableObject::setLinearVelocity)
         .def("getLinearVelocityX", &MovableObject::getLinearVelocityX)

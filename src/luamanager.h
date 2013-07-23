@@ -6,6 +6,7 @@
 #include <luabind/luabind.hpp>
 #include <SFML/Graphics.hpp>
 #include "movableobject.h"
+#include "objectmanager.h"
 
 namespace Purity
 {

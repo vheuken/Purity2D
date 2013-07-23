@@ -72,3 +72,10 @@ void Purity::ObjectManager::draw(sf::RenderTarget& target, sf::RenderStates stat
         target.draw(mObjectList.at(i));
     }
 }
+
+luabind::scope Purity::ObjectManager::luaBindings()
+{
+    return luabind::class_<ObjectManager>("ObjectManager")
+        .def("getObjectByName", &ObjectManager::getObjectByName)
+    ;
+}

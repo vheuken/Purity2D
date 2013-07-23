@@ -90,3 +90,10 @@ void Purity::Object::draw(sf::RenderTarget &target, sf::RenderStates states) con
 {
     target.draw(mHitboxShape);
 }
+
+luabind::scope Purity::Object::luaBindings()
+{
+    return luabind::class_<Object>("Object")
+        .def("getName", &Object::getName)
+    ;
+}

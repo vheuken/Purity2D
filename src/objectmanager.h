@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include <TmxParser/Tmx.h>
+#include <luabind/luabind.hpp>
 #include "object.h"
 #include "movableobject.h"
 
@@ -17,6 +18,8 @@ namespace Purity
         const Object* getObjectByName(const std::string& objectName);
 
         void updatePhysics();
+
+        static luabind::scope luaBindings();
 
     private:
         const Tmx::Map* mTmxMap;

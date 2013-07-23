@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include <TmxParser/Tmx.h>
+#include <luabind/luabind.hpp>
 
 namespace Purity
 {
@@ -36,6 +37,8 @@ namespace Purity
         float getY() const;
 
         void update();
+
+        static luabind::scope luaBindings();
 
     protected:
         b2BodyDef mHitboxBodyDef;

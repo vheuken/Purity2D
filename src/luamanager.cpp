@@ -29,6 +29,8 @@ void Purity::LuaManager::initializeBindings()
 {
     luabind::open(mLuaState);
     luabind::module(mLuaState) [
+        ObjectManager::luaBindings(),
+        Object::luaBindings(),
         MovableObject::luaBindings()
     ];
     
