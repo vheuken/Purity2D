@@ -32,3 +32,12 @@ float Purity::MovableObject::getLinearVelocityX() const
     return mHitboxBody->GetLinearVelocity().x;
 }
 
+luabind::scope Purity::MovableObject::luaBindings()
+{
+    return luabind::class_<MovableObject>("MovableObject")
+        .def("applyLinearImpulse", &MovableObject::applyLinearImpulse)
+        .def("setLinearVelocity",  &MovableObject::setLinearVelocity)
+        .def("getLinearVelocityX", &MovableObject::getLinearVelocityX)
+        .def("getLinearVelocityY", &MovableObject::getLinearVelocityY)
+    ;
+}

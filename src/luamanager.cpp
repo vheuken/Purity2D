@@ -6,7 +6,7 @@ Purity::LuaManager::LuaManager()
 
     luaL_openlibs(mLuaState);
 
-    initializeSFMLBindings();
+    initializeBindings();
 }
 
 Purity::LuaManager::~LuaManager()
@@ -23,6 +23,16 @@ Purity::LuaManager* Purity::LuaManager::getManager()
 lua_State* Purity::LuaManager::getState()
 {
     return mLuaState;
+}
+
+void Purity::LuaManager::initializeBindings()
+{
+    luabind::open(mLuaState);
+    luabind::module(mLuaState) [
+        MovableObject::luaBindings()
+    ];
+    
+    initializeSFMLBindings();
 }
 
 void Purity::LuaManager::initializeSFMLBindings()

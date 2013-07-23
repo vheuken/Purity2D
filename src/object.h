@@ -35,8 +35,6 @@ namespace Purity
         float getX() const;
         float getY() const;
 
-        std::string getName() const;
-
         void update();
 
     protected:

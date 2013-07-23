@@ -5,6 +5,7 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include <SFML/Graphics.hpp>
+#include "movableobject.h"
 
 namespace Purity
 {
@@ -16,12 +17,13 @@ namespace Purity
 
         lua_State* getState();
 
-        void initializeSFMLBindings();
-
     private:
         LuaManager();
 
         lua_State* mLuaState;
+
+        void initializeBindings();
+        void initializeSFMLBindings();
     };
 }
 
