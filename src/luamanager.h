@@ -16,6 +16,8 @@ namespace Purity
 
         lua_State* getState();
 
+        void initializeSFMLBindings();
+
     private:
         LuaManager();
 

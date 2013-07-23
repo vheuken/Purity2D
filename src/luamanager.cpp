@@ -5,8 +5,28 @@ Purity::LuaManager::LuaManager()
     mLuaState = luaL_newstate();
 
     luaL_openlibs(mLuaState);
-    
-    // HACKY
+
+    initializeSFMLBindings();
+}
+
+Purity::LuaManager::~LuaManager()
+{
+    lua_close(mLuaState);
+}
+
+Purity::LuaManager* Purity::LuaManager::getManager()
+{
+    static LuaManager manager;
+    return &manager;
+}
+
+lua_State* Purity::LuaManager::getState()
+{
+    return mLuaState;
+}
+
+void Purity::LuaManager::initializeSFMLBindings()
+{    
     luabind::open(mLuaState);
     luabind::module(mLuaState)
     [
@@ -146,20 +166,4 @@ Purity::LuaManager::LuaManager()
                 .def_readonly("Shift", &sf::Event::KeyEvent::shift)
 
     ];
-}
-
-Purity::LuaManager::~LuaManager()
-{
-    lua_close(mLuaState);
-}
-
-Purity::LuaManager* Purity::LuaManager::getManager()
-{
-    static LuaManager manager;
-    return &manager;
-}
-
-lua_State* Purity::LuaManager::getState()
-{
-    return mLuaState;
 }
