@@ -6,6 +6,8 @@ Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
     mWorld = world;
 
     initializeObjects();
+
+    luabind::globals(LuaManager::getManager()->getState())["GObjectManager"] = this;
 }
 
 const Purity::Object* Purity::ObjectManager::getObjectByName(const std::string& objectName)
@@ -16,6 +18,20 @@ const Purity::Object* Purity::ObjectManager::getObjectByName(const std::string& 
         if (mObjectList.at(i).getName() == objectName)
         {
             return &mObjectList.at(i);
+        }
+    }
+
+    return nullptr;
+}
+
+Purity::MovableObject* Purity::ObjectManager::getMovableObjectByName(const std::string& objectName)
+{
+
+    for (int i = 0; i < mMovableObjectList.size(); i++)
+    {
+        if (mMovableObjectList.at(i).getName() == objectName)
+        {
+            return &mMovableObjectList.at(i);
         }
     }
 
@@ -44,7 +60,7 @@ void Purity::ObjectManager::initializeObjects()
             if (currentObject->GetType() == "Movable")
             {
                 MovableObject object(currentObject, mWorld);
-                mObjectList.push_back(object);
+                mMovableObjectList.push_back(object);
                 
             }
             else
@@ -63,6 +79,10 @@ void Purity::ObjectManager::updatePhysics()
     {
         mObjectList.at(i).update();
     }
+    for (int i = 0; i < mMovableObjectList.size(); i++)
+    {
+        mMovableObjectList.at(i).update();
+    }
 }
 
 void Purity::ObjectManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -71,11 +91,16 @@ void Purity::ObjectManager::draw(sf::RenderTarget& target, sf::RenderStates stat
     {
         target.draw(mObjectList.at(i));
     }
+    for (int i = 0; i < mMovableObjectList.size(); i++)
+    {
+        target.draw(mMovableObjectList.at(i));
+    }
 }
 
 luabind::scope Purity::ObjectManager::luaBindings()
 {
     return luabind::class_<ObjectManager>("ObjectManager")
         .def("getObjectByName", &ObjectManager::getObjectByName)
+        .def("getMovableObjectByName", &ObjectManager::getMovableObjectByName)
     ;
 }
