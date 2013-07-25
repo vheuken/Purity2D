@@ -3,7 +3,7 @@
 Purity::MovableObject::MovableObject(const Tmx::Object* object, b2World* world)
     : Object(object, world)
 {
-
+    mHitboxBody->SetType(b2_dynamicBody);
 }
 
 

@@ -9,8 +9,6 @@ Purity::Object::Object(const Tmx::Object* object, b2World* world)
     
     mName = object->GetName();
 
-    mHitboxBodyDef.type = b2_dynamicBody;
-
     createBody(world);
     setPosition(x, y);
     setSize(width, height);
@@ -26,6 +24,7 @@ void Purity::Object::setPosition(float x, float y)
 
     mHitboxBody->SetTransform(pos, mHitboxBody->GetAngle());
 }
+
 float Purity::Object::getX() const
 {
     return mPositionX;
