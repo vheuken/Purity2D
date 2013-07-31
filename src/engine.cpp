@@ -3,7 +3,7 @@
 #include <X11/Xlib.h>
 #endif
 
-void Purity::Engine::initialize(bool debugMode)
+void Purity::Engine::initialize()
 {
     std::cout << "Initializing some stuff..." << std::endl;
 
@@ -11,8 +11,6 @@ void Purity::Engine::initialize(bool debugMode)
     XInitThreads();
     #endif
    
-    mDebugMode = debugMode;
-
     mInputQueue = std::unique_ptr<std::queue<sf::Event>>(new std::queue<sf::Event>);		
     
     initializeWindow();
@@ -59,7 +57,7 @@ void Purity::Engine::initializeWindow()
 
 void Purity::Engine::initializeRenderer()
 {
-    mRenderer = std::unique_ptr<Renderer>(new Renderer(mWindow.get(), mDebugMode));
+    mRenderer = std::unique_ptr<Renderer>(new Renderer(mWindow.get()));
 }
 
 void Purity::Engine::initializeSceneManager()

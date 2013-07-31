@@ -13,12 +13,10 @@
 
 namespace Purity
 {
-    const bool DEFAULT_DEBUG_MODE = true;
-
     class Engine
     {
     public:
-        void initialize(bool debugMode = DEFAULT_DEBUG_MODE);
+        void initialize();
         void run();
         void cleanup();
 
@@ -29,8 +27,6 @@ namespace Purity
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;
         std::unique_ptr<InputManager> mInputManager;
 	    std::unique_ptr<std::queue<sf::Event>> mInputQueue;
-
-        bool mDebugMode;
 
         void initializeWindow();
         void initializeRenderer();

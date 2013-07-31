@@ -13,7 +13,7 @@ namespace Purity
     class Renderer
     {
     public:
-        Renderer(sf::RenderWindow* window, bool debugMode);
+        Renderer(sf::RenderWindow* window);
         ~Renderer();
 
         void update(Scene* scene);
@@ -23,13 +23,8 @@ namespace Purity
         Scene* mCurrentScene;
         std::mutex mCurrentSceneMutex;
         std::thread mRenderThread;
-        bool mDebugMode;
 
         void run();
-        void drawDebugInfo();
-        void initializeDebugInfo();
-        int calculateFPS();
-        sf::Font mDebugFont;
     };
 }
 
