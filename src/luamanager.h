@@ -1,7 +1,7 @@
 #ifndef LUA_MANAGER_H
 #define LUA_MANAGER_H
 
-#include <memory>
+#include <string>
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include <SFML/Graphics.hpp>
@@ -17,6 +17,8 @@ namespace Purity
         static LuaManager* getManager();
 
         lua_State* getState();
+
+        void doFile(const std::string& luaFileName);
 
     private:
         LuaManager();

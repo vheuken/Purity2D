@@ -25,6 +25,11 @@ lua_State* Purity::LuaManager::getState()
     return mLuaState;
 }
 
+void Purity::LuaManager::doFile(const std::string& luaFileName)
+{
+    luaL_dofile(mLuaState, luaFileName.c_str());
+}
+
 void Purity::LuaManager::initializeBindings()
 {
     luabind::open(mLuaState);

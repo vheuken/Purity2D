@@ -45,16 +45,18 @@ void Purity::PhysicsSystem::step()
 
 void Purity::PhysicsSystem::handleInput()
 {
-    std::string luaEventHandlerFile = mCurrentScene->getLuaEventHandlerPath();
+    std::string luaEventHandlerFileName = mCurrentScene->getLuaEventHandlerPath();
     std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
-    lua_State* luaState = LuaManager::getManager()->getState();
+    LuaManager* luaManager = LuaManager::getManager();
+    lua_State* luaState = luaManager->getState();
     
     while (!mInputQueue->empty())
     {
 	    sf::Event event = mInputQueue->front();
 	    mInputQueue->pop();
 	
-	    luaL_dofile(luaState, luaEventHandlerFile.c_str());
+	    luaManager->doFile(luaEventHandlerFileName);
+
 	    luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);
     }
 }
