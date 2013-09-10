@@ -18,6 +18,8 @@ void Purity::Engine::initialize()
     initializeSceneManager();
     initializePhysicsSystem();
     initializeInputManager();
+
+    luabind::globals(LuaManager::getManager()->getState())["GPurityEngine"] = this;
 }
 
 void Purity::Engine::run()
@@ -73,4 +75,22 @@ void Purity::Engine::initializePhysicsSystem()
 void Purity::Engine::initializeInputManager()
 {
     mInputManager = std::unique_ptr<InputManager>(new InputManager(mWindow.get(), mInputQueue.get()));
+}
+
+sf::View Purity::Engine::getView()
+{
+    return mWindow->getView();
+}
+
+void Purity::Engine::setView(const sf::View & view)
+{
+    mWindow->setView(view);
+}
+
+luabind::scope Purity::Engine::luaBindings()
+{
+    return luabind::class_<Engine>("Engine")
+        .def("getView", &Engine::getView)
+        .def("setView", &Engine::setView)
+    ;
 }

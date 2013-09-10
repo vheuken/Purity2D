@@ -1,4 +1,5 @@
 #include "luamanager.h"
+#include "engine.h"
 
 Purity::LuaManager::LuaManager()
 {
@@ -33,13 +34,16 @@ void Purity::LuaManager::doFile(const std::string& luaFileName)
 void Purity::LuaManager::initializeBindings()
 {
     luabind::open(mLuaState);
+
+    initializeSFMLBindings();
+
     luabind::module(mLuaState) [
         ObjectManager::luaBindings(),
         Object::luaBindings(),
-        MovableObject::luaBindings()
+        MovableObject::luaBindings(),
+        Engine::luaBindings()
     ];
     
-    initializeSFMLBindings();
 }
 
 void Purity::LuaManager::initializeSFMLBindings()
@@ -180,7 +184,14 @@ void Purity::LuaManager::initializeSFMLBindings()
                 .def_readonly("Code", &sf::Event::KeyEvent::code)
                 .def_readonly("Alt", &sf::Event::KeyEvent::alt)
                 .def_readonly("Control", &sf::Event::KeyEvent::control)
-                .def_readonly("Shift", &sf::Event::KeyEvent::shift)
+                .def_readonly("Shift", &sf::Event::KeyEvent::shift),
+
+            luabind::class_<sf::View>("View")
+                .def(luabind::constructor<>())
+                .def("Reset", &sf::View::reset)
+                .def("Zoom", &sf::View::zoom)
+                .def("Rotate", &sf::View::rotate)
+                .def("Move", (void (sf::View::*)(float, float))&sf::View::move)
 
     ];
 }

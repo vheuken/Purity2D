@@ -6,6 +6,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <luabind/luabind.hpp>
 #include "scenemanager.h"
 #include "renderer.h"
 #include "physicssystem.h"
@@ -19,6 +20,11 @@ namespace Purity
         void initialize();
         void run();
         void cleanup();
+
+        sf::View getView();
+        void setView(const sf::View & view);
+
+        static luabind::scope luaBindings();
 
     private:
         std::unique_ptr<sf::RenderWindow> mWindow;
