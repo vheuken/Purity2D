@@ -13,11 +13,11 @@ Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
 const Purity::Object* Purity::ObjectManager::getObjectByName(const std::string& objectName)
 {
 
-    for (int i = 0; i < mObjectList.size(); i++)
+    for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
     {
-        if (mObjectList.at(i).getName() == objectName)
+        if (it->getName() == objectName)
         {
-            return &mObjectList.at(i);
+            return &*it;
         }
     }
 
@@ -27,11 +27,11 @@ const Purity::Object* Purity::ObjectManager::getObjectByName(const std::string& 
 Purity::MovableObject* Purity::ObjectManager::getMovableObjectByName(const std::string& objectName)
 {
 
-    for (int i = 0; i < mMovableObjectList.size(); i++)
+    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
     {
-        if (mMovableObjectList.at(i).getName() == objectName)
+        if (it->getName() == objectName)
         {
-            return &mMovableObjectList.at(i);
+            return &*it;
         }
     }
 
@@ -75,25 +75,25 @@ void Purity::ObjectManager::initializeObjects()
 
 void Purity::ObjectManager::updatePhysics()
 {
-    for (int i = 0; i < mObjectList.size(); i++)
+    for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
     {
-        mObjectList.at(i).update();
+        it->update();
     }
-    for (int i = 0; i < mMovableObjectList.size(); i++)
+    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
     {
-        mMovableObjectList.at(i).update();
+        it->update();
     }
 }
 
 void Purity::ObjectManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (int i = 0; i < mObjectList.size(); i++)
+    for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
     {
-        target.draw(mObjectList.at(i));
+        target.draw(*it);
     }
-    for (int i = 0; i < mMovableObjectList.size(); i++)
+    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
     {
-        target.draw(mMovableObjectList.at(i));
+        target.draw(*it);
     }
 }
 
