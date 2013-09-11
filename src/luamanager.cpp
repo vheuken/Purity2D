@@ -192,6 +192,13 @@ void Purity::LuaManager::initializeSFMLBindings()
                 .def("Zoom", &sf::View::zoom)
                 .def("Rotate", &sf::View::rotate)
                 .def("Move", (void (sf::View::*)(float, float))&sf::View::move)
+                .def("GetCenter", &sf::View::getCenter)
+                .def("GetSize", &sf::View::getSize),
+
+            luabind::class_<sf::Vector2f>("Vector2f")
+                .def(luabind::constructor<float, float>())
+                .def_readwrite("x", &sf::Vector2f::x)
+                .def_readwrite("y", &sf::Vector2f::y)
 
     ];
 }

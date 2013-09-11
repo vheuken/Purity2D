@@ -63,12 +63,12 @@ void Purity::Object::setSize(float width, float height)
 
 void Purity::Object::update()
 {
-    float posX, posY;
+    //float posX, posY;
 
-    posX = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mHitboxShape.getSize().x/2);
-    posY = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHitboxShape.getSize().y/2);
+    mPositionX = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mHitboxShape.getSize().x/2);
+    mPositionY = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHitboxShape.getSize().y/2);
 
-    mHitboxShape.setPosition(posX, posY);
+    mHitboxShape.setPosition(mPositionX, mPositionY);
 }
 
 void Purity::Object::createBody(b2World* world)

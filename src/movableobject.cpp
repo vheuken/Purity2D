@@ -39,5 +39,7 @@ luabind::scope Purity::MovableObject::luaBindings()
         .def("setLinearVelocity",  &MovableObject::setLinearVelocity)
         .def("getLinearVelocityX", &MovableObject::getLinearVelocityX)
         .def("getLinearVelocityY", &MovableObject::getLinearVelocityY)
+        .def("getX", &Object::getX)
+        .def("getY", &Object::getY)
     ;
 }
