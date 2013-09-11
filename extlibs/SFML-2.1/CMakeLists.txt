@@ -11,8 +11,7 @@ endmacro()
 
 # set a default build type if none was provided
 # this has to be done before the project() instruction!
-#sfml_set_option(CMAKE_BUILD_TYPE Release STRING "Choose the type of build (Debug or Release)")
-set(CMAKE_BUILD_TYPE Release)
+sfml_set_option(CMAKE_BUILD_TYPE Release STRING "Choose the type of build (Debug or Release)")
 
 # project name
 project(SFML)
@@ -22,23 +21,20 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake)
 
 # setup version numbers
 set(VERSION_MAJOR 2)
-set(VERSION_MINOR 0)
+set(VERSION_MINOR 1)
 set(VERSION_PATCH 0)
 
 # add the SFML header path
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # add an option for choosing the build type (shared or static)
-#sfml_set_option(BUILD_SHARED_LIBS FALSE BOOL "TRUE to build SFML as shared libraries, FALSE to build it as static libraries")
-set(BUILD_SHARED_LIBS TRUE)
+sfml_set_option(BUILD_SHARED_LIBS TRUE BOOL "TRUE to build SFML as shared libraries, FALSE to build it as static libraries")
 
 # add an option for building the examples
-#sfml_set_option(SFML_BUILD_EXAMPLES FALSE BOOL "TRUE to build the SFML examples, FALSE to ignore them")
-set(SFML_BUILD_EXAMPLES FALSE)
+sfml_set_option(SFML_BUILD_EXAMPLES FALSE BOOL "TRUE to build the SFML examples, FALSE to ignore them")
 
 # add an option for building the API documentation
-#sfml_set_option(SFML_BUILD_DOC FALSE BOOL "TRUE to generate the API documentation, FALSE to ignore it")
-set(SFML_BUILD_DOC FALSE)
+sfml_set_option(SFML_BUILD_DOC FALSE BOOL "TRUE to generate the API documentation, FALSE to ignore it")
 
 # Mac OS X specific options
 if(MACOSX)
@@ -64,9 +60,8 @@ endif()
 
 # define an option for choosing between static and dynamic C runtime (Windows only)
 if(WINDOWS)
-    #sfml_set_option(SFML_USE_STATIC_STD_LIBS FALSE BOOL "TRUE to statically link to the standard libraries, FALSE to use them as DLLs")
-    set(SFML_USE_STATIC_STD_LIBS FALSE)
-    
+    sfml_set_option(SFML_USE_STATIC_STD_LIBS FALSE BOOL "TRUE to statically link to the standard libraries, FALSE to use them as DLLs")
+
     # the following combination of flags is not valid
     if (BUILD_SHARED_LIBS AND SFML_USE_STATIC_STD_LIBS)
         message(FATAL_ERROR "BUILD_SHARED_LIBS and SFML_USE_STATIC_STD_LIBS cannot be used together")
@@ -110,8 +105,7 @@ endif()
 
 if(LINUX)
     if(BUILD_SHARED_LIBS)
-        #sfml_set_option(SFML_INSTALL_PKGCONFIG_FILES TRUE BOOL "TRUE to automatically install pkg-config files so other projects can find SFML")
-        set(SFML_INSTALL_PKGCONFIG_FILES FALSE)
+        sfml_set_option(SFML_INSTALL_PKGCONFIG_FILES TRUE BOOL "TRUE to automatically install pkg-config files so other projects can find SFML")
         if(SFML_INSTALL_PKGCONFIG_FILES)
             foreach(sfml_module IN ITEMS all system window graphics audio network)
                 CONFIGURE_FILE(
