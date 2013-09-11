@@ -26,6 +26,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/GLCheck.hpp>
 #include <SFML/System/InputStream.hpp>
 #include <SFML/System/Err.hpp>
 #include <ft2build.h>
@@ -193,6 +194,9 @@ bool Font::loadFromStream(InputStream& stream)
         return false;
     }
     m_library = library;
+
+    // Make sure that the stream's reading position is at the beginning
+    stream.seek(0);
 
     // Prepare a wrapper for our stream, that we'll pass to FreeType callbacks
     FT_StreamRec* rec = new FT_StreamRec;
@@ -477,6 +481,10 @@ Glyph Font::loadGlyph(Uint32 codePoint, unsigned int characterSize, bool bold) c
     // Delete the FT glyph
     FT_Done_Glyph(glyphDesc);
 
+    // Force an OpenGL flush, so that the font's texture will appear updated
+    // in all contexts immediately (solves problems in multi-threaded apps)
+    glCheck(glFlush());
+
     // Done :)
     return glyph;
 }
@@ -572,7 +580,7 @@ bool Font::setCurrentSize(unsigned int characterSize) const
 
 ////////////////////////////////////////////////////////////
 Font::Page::Page() :
-nextRow(2)
+nextRow(3)
 {
     // Make sure that the texture is initialized by default
     sf::Image image;

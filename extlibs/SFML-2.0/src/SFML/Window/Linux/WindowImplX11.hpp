@@ -61,9 +61,10 @@ public :
     /// \param mode  Video mode to use
     /// \param title Title of the window
     /// \param style Window style (resizable, fixed, or fullscren)
+    /// \param settings Additional settings for the underlying OpenGL context
     ///
     ////////////////////////////////////////////////////////////
-    WindowImplX11(VideoMode mode, const String& title, unsigned long style);
+    WindowImplX11(VideoMode mode, const String& title, unsigned long style, const ContextSettings& settings);
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor
@@ -212,17 +213,17 @@ private :
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    ::Window   m_window;              ///< X11 structure defining our window
-    ::Display* m_display;             ///< Pointer to the display
-    int        m_screen;              ///< Screen identifier
-    XIM        m_inputMethod;         ///< Input method linked to the X display
-    XIC        m_inputContext;        ///< Input context used to get unicode input in our window
-    bool       m_isExternal;          ///< Tell whether the window has been created externally or by SFML
-    Atom       m_atomClose;           ///< Atom used to identify the close event
-    int        m_oldVideoMode;        ///< Video mode in use before we switch to fullscreen
-    Cursor     m_hiddenCursor;        ///< As X11 doesn't provide cursor hidding, we must create a transparent one
-    bool       m_keyRepeat;           ///< Is the KeyRepeat feature enabled ?
-    XEvent     m_lastKeyReleaseEvent; ///< Last key release event we received (needed for discarding repeated key events)
+    ::Window   m_window;       ///< X11 structure defining our window
+    ::Display* m_display;      ///< Pointer to the display
+    int        m_screen;       ///< Screen identifier
+    XIM        m_inputMethod;  ///< Input method linked to the X display
+    XIC        m_inputContext; ///< Input context used to get unicode input in our window
+    bool       m_isExternal;   ///< Tell whether the window has been created externally or by SFML
+    Atom       m_atomClose;    ///< Atom used to identify the close event
+    int        m_oldVideoMode; ///< Video mode in use before we switch to fullscreen
+    Cursor     m_hiddenCursor; ///< As X11 doesn't provide cursor hidding, we must create a transparent one
+    bool       m_keyRepeat;    ///< Is the KeyRepeat feature enabled ?
+    Vector2i   m_previousSize; ///< Previous size of the window, to find if a ConfigureNotify event is a resize event (could be a move event only)
 };
 
 } // namespace priv
