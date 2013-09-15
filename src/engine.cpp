@@ -32,11 +32,11 @@ void Purity::Engine::run()
         if (currentScene != mSceneManager->getCurrentScene())
         {
             currentScene = mSceneManager->getCurrentScene();
-            mRenderer->update(currentScene);
+			mRenderer->update(currentScene);
         }
 
-        mPhysicsSystem->update(mSceneManager->getCurrentScene());
-        mInputManager->update(mSceneManager->getCurrentScene());
+        mPhysicsSystem->update(currentScene);
+        mInputManager->update(currentScene);
     }
 
     // solves crash on exit on Windows
