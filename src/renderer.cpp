@@ -14,29 +14,29 @@ Purity::Renderer::~Renderer()
 
 void Purity::Renderer::update(Scene* scene)
 {
-    mCurrentSceneMutex.lock();
-
     if (scene != mCurrentScene)
     {
-        mCurrentScene = scene;
-    }
+        mCurrentSceneMutex.lock();
 
-    mCurrentSceneMutex.unlock();
+        mCurrentScene = scene;
+
+        mCurrentSceneMutex.unlock();
+    }
 }
 
 void Purity::Renderer::run()
 {
     while (mWindow->isOpen())
     {
-        mCurrentSceneMutex.lock();
-
         if (mCurrentScene)
         {
+            mCurrentSceneMutex.lock();
+
             mWindow->clear();
             mWindow->draw(*mCurrentScene);
             mWindow->display();
-        }
 
-        mCurrentSceneMutex.unlock();
+            mCurrentSceneMutex.unlock();
+        }
     }
 }
