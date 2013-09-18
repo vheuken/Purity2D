@@ -36,6 +36,7 @@ void Purity::PhysicsSystem::step()
     while (acumulator >= (TIME_STEP * 1000))
     {
 	    handleInput();
+		runUpdateScripts();
 
         mWorld->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 
@@ -59,4 +60,12 @@ void Purity::PhysicsSystem::handleInput()
 
 	    luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);
     }
+}
+
+void Purity::PhysicsSystem::runUpdateScripts()
+{
+    LuaManager* luaManager = LuaManager::getManager();
+	std::string physicsUpdateScript = mCurrentScene->getLuaPhysicsUpdatePath();
+
+	luaManager->doFile(physicsUpdateScript);
 }

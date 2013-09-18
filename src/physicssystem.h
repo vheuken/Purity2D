@@ -1,6 +1,7 @@
 #ifndef PHYSICS_SYSTEM_H
 #define PHYSICS_SYSTEM_H
 
+#include <string>
 #include <queue>
 #include <memory>
 #include <SFML/System.hpp>
@@ -34,6 +35,7 @@ namespace Purity
 
 	    void step();
 	    void handleInput();
+		void runUpdateScripts();
     };
 }
 
