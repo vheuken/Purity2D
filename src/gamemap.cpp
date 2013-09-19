@@ -56,8 +56,8 @@ sf::Sprite Purity::GameMap::getTile(int x, int y, int layerNum) const
 
         tileSprite = spriteSheet.getTile(tile.id);
 
-        tilePositionX = x * spriteSheet.getTileWidth();
-        tilePositionY = y * spriteSheet.getTileHeight();
+        tilePositionX = (float)(x * spriteSheet.getTileWidth());
+        tilePositionY = (float)(y * spriteSheet.getTileHeight());
 
         tileSprite.setPosition(tilePositionX, tilePositionY);
         
