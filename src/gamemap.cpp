@@ -37,8 +37,8 @@ sf::Sprite Purity::GameMap::getTile(int x, int y, int layerNum) const
         const Tmx::Tileset* tileset;
         SpriteSheet spriteSheet;
         sf::Sprite tileSprite;
-        int tilePositionX;
-        int tilePositionY;
+        float tilePositionX;
+        float tilePositionY;
         std::string imagePath;
 
         tile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
@@ -76,11 +76,11 @@ void Purity::GameMap::drawTiles(sf::RenderTarget& target, sf::RenderStates state
     sf::View view = target.getView();
     int layerCount = mTmxMap->GetNumLayers();
 
-    int tileResolutionX = view.getSize().x / mTmxMap->GetTileWidth();
-    int tileResolutionY = view.getSize().y / mTmxMap->GetTileHeight();
+    int tileResolutionX = (int)view.getSize().x / mTmxMap->GetTileWidth();
+    int tileResolutionY = (int)view.getSize().y / mTmxMap->GetTileHeight();
 
-    int startingTileX = (view.getCenter().x - view.getSize().x/2) / mTmxMap->GetTileWidth();
-    int startingTileY = (view.getCenter().y - view.getSize().y/2) / mTmxMap->GetTileHeight();
+    int startingTileX = (int)(view.getCenter().x - view.getSize().x/2) / mTmxMap->GetTileWidth();
+    int startingTileY = (int)(view.getCenter().y - view.getSize().y/2) / mTmxMap->GetTileHeight();
 
     int endTileX = startingTileX + tileResolutionX;
     int endTileY = startingTileY + tileResolutionY;
