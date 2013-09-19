@@ -4,8 +4,8 @@ Purity::Object::Object(const Tmx::Object* object, b2World* world)
 {
     float x = object->GetX() / PIXELS_PER_METER;
     float y = object->GetY() / PIXELS_PER_METER;
-    float width = object->GetWidth();
-    float height = object->GetHeight();
+    float width = (float)object->GetWidth();
+    float height = (float)object->GetHeight();
     
     mName = object->GetName();
 
