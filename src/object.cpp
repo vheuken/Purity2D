@@ -1,5 +1,10 @@
 #include "object.h"
 
+
+Purity::Object::Object()
+{
+}
+
 Purity::Object::Object(const Tmx::Object* object, b2World* world)
 {
     float x = object->GetX() / PIXELS_PER_METER;

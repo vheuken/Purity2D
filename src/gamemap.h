@@ -8,6 +8,7 @@
 
 #include "spritesheet.h"
 #include "texturemanager.h"
+#include "tile.h"
 
 namespace Purity
 {

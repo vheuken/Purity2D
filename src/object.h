@@ -24,6 +24,7 @@ namespace Purity
     class Object : public sf::Drawable
     {
     public:
+        Object();
         Object(const Tmx::Object* object, b2World* world);
 
         virtual void createBody(b2World* world);
