@@ -146,5 +146,4 @@ void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     target.draw(*mObjectManager, states);
 
     mMutex.unlock();
-
 }

@@ -1,6 +1,7 @@
 #ifndef GAME_MAP_H
 #define GAME_MAP_H
 
+#include <vector>
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <boost/filesystem.hpp>
@@ -21,12 +22,14 @@ namespace Purity
         const boost::filesystem::path mSceneDir;
         const Tmx::Map * mTmxMap;
         std::map<std::string, SpriteSheet> mTilesetMap;
-        
-        TextureManager textureManager;
+        std::vector<std::unique_ptr<Tile> > mTileList;
+
+        TextureManager mTextureManager;
 
         void processTilesetsFromTMXMap();
+        void processTiles();
 
-        sf::Sprite getTile(int x, int y, int layerNum) const;
+        sf::Sprite getTileSprite(int x, int y, int layerNum) const;
 
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

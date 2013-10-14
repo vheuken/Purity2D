@@ -10,7 +10,7 @@ namespace Purity
     class Tile : public Object
     {
     public:
-        Tile(const Tmx::Tile* tile, b2World* world);
+        Tile(const Tmx::MapTile& tile, const sf::Sprite& tileSprite);
 
     private:
         sf::Sprite mTileSprite;

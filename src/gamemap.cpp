@@ -7,6 +7,39 @@ Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& 
     mTmxMap = tmxMap;
 
     processTilesetsFromTMXMap();
+    processTiles();
+}
+
+void Purity::GameMap::processTiles()
+{
+    int layerCount = mTmxMap->GetNumLayers();
+
+    for (int layerNum = 0; layerNum < layerCount; layerNum++)
+    {
+        sf::Sprite tileSprite;
+        Tmx::MapTile tmxTile;
+
+
+        int mapHeight = mTmxMap->GetHeight();
+        int mapWidth = mTmxMap->GetWidth();
+
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                tmxTile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
+
+                if (tmxTile.id != 0)
+                {
+                    tileSprite = getTileSprite(x, y, layerNum);
+                
+                    mTileList.push_back(std::unique_ptr<Tile>(new Tile(tmxTile, tileSprite)));
+
+                }
+            }
+        }
+    }
+    
 }
 
 void Purity::GameMap::processTilesetsFromTMXMap()
@@ -22,16 +55,15 @@ void Purity::GameMap::processTilesetsFromTMXMap()
 
         tilesetFileName = (tileset->GetImage()->GetSource());
         
-        texture = textureManager.getTexture(mSceneDir.string() + tilesetFileName);
+        texture = mTextureManager.getTexture(mSceneDir.string() + tilesetFileName);
 
         spriteSheet = SpriteSheet(*texture);
         
         mTilesetMap[mSceneDir.string() + tilesetFileName] = spriteSheet;
-
     }
 }
 
-sf::Sprite Purity::GameMap::getTile(int x, int y, int layerNum) const
+sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
 {
         Tmx::MapTile tile;
         const Tmx::Tileset* tileset;
@@ -91,7 +123,7 @@ void Purity::GameMap::drawTiles(sf::RenderTarget& target, sf::RenderStates state
         {
             for (int x = startingTileX; x < endTileX; x++)
             {
-                tile = getTile(x, y, layerNum);
+                tile = getTileSprite(x, y, layerNum);
                 target.draw(tile);
             }
         }

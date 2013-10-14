@@ -1,7 +1,8 @@
 #include "tile.h"
 
-Purity::Tile::Tile(const Tmx::Tile* tile, b2World* world)
+Purity::Tile::Tile(const Tmx::MapTile& tile, const sf::Sprite& tileSprite)
 {
+    mTileSprite = tileSprite;
 
 }
 
