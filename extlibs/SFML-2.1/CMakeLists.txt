@@ -27,8 +27,11 @@ set(VERSION_PATCH 0)
 # add the SFML header path
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+# do NOT build shared libs
+set(BUILD_SHARED_LIBS FALSE)
+
 # add an option for choosing the build type (shared or static)
-sfml_set_option(BUILD_SHARED_LIBS TRUE BOOL "TRUE to build SFML as shared libraries, FALSE to build it as static libraries")
+#sfml_set_option(BUILD_SHARED_LIBS TRUE BOOL "TRUE to build SFML as shared libraries, FALSE to build it as static libraries")
 
 # add an option for building the examples
 sfml_set_option(SFML_BUILD_EXAMPLES FALSE BOOL "TRUE to build the SFML examples, FALSE to ignore them")
