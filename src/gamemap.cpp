@@ -34,7 +34,6 @@ void Purity::GameMap::processTiles()
                     tileSprite = getTileSprite(x, y, layerNum);
                 
                     mTileList.push_back(std::unique_ptr<Tile>(new Tile(tmxTile, tileSprite)));
-
                 }
             }
         }
