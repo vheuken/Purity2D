@@ -8,5 +8,7 @@ Purity::Tile::Tile(const Tmx::MapTile& tile, const sf::Sprite& tileSprite)
 
 void Purity::Tile::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+    sf::View view = target.getView();
+
     target.draw(mTileSprite);
 }

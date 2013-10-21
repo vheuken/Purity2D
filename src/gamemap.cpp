@@ -64,41 +64,43 @@ void Purity::GameMap::processTilesetsFromTMXMap()
 
 sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
 {
-        Tmx::MapTile tile;
-        const Tmx::Tileset* tileset;
-        SpriteSheet spriteSheet;
-        sf::Sprite tileSprite;
-        float tilePositionX;
-        float tilePositionY;
-        std::string imagePath;
+    Tmx::MapTile tile;
+    const Tmx::Tileset* tileset;
+    SpriteSheet spriteSheet;
+    sf::Sprite tileSprite;
+    float tilePositionX;
+    float tilePositionY;
+    std::string imagePath;
 
-        tile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
+    tile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
         
-        if (tile.id == 0)
-        {
-                return tileSprite;
-        }
-
-        tileset = mTmxMap->GetTileset(tile.tilesetId);
-        
-        imagePath = (mSceneDir.string() + tileset->GetImage()->GetSource());
-
-        spriteSheet = mTilesetMap.at(imagePath);
-
-        tileSprite = spriteSheet.getTile(tile.id);
-
-        tilePositionX = (float)(x * spriteSheet.getTileWidth());
-        tilePositionY = (float)(y * spriteSheet.getTileHeight());
-
-        tileSprite.setPosition(tilePositionX, tilePositionY);
-        
+    if (tile.id == 0)
+    {
         return tileSprite;
+    }
 
+    tileset = mTmxMap->GetTileset(tile.tilesetId);
+        
+    imagePath = (mSceneDir.string() + tileset->GetImage()->GetSource());
+    
+    spriteSheet = mTilesetMap.at(imagePath);
+    
+    tileSprite = spriteSheet.getTile(tile.id);
+    
+    tilePositionX = (float)(x * spriteSheet.getTileWidth());
+    tilePositionY = (float)(y * spriteSheet.getTileHeight());
+    
+    tileSprite.setPosition(tilePositionX, tilePositionY);
+
+    return tileSprite;
 }
 
 void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    drawTiles(target, states);
+    for (int i = 0; i < mTileList.size(); i++)
+    {
+        target.draw(*mTileList.at(i));
+    }
 }
 
 void Purity::GameMap::drawTiles(sf::RenderTarget& target, sf::RenderStates states) const
