@@ -97,9 +97,9 @@ sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
 
 void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (int i = 0; i < mTileList.size(); i++)
+    for (auto it = mTileList.begin(); it != mTileList.end(); it++)
     {
-        target.draw(*mTileList.at(i));
+        target.draw(*it->get());
     }
 }
 
