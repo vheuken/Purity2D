@@ -21,6 +21,8 @@ namespace Purity
 
         void createBody(b2World* world);
 
+        bool isInView(const sf::View& view) const;
+
         void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     };
 }

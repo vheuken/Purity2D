@@ -55,6 +55,24 @@ void Purity::Tile::createBody(b2World* world)
 void Purity::Tile::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     sf::View view = target.getView();
+    
+    if ( isInView(view) )
+    {
+        target.draw(mTileSprite);
+    }
+}
 
-    target.draw(mTileSprite);
+bool Purity::Tile::isInView(const sf::View& view) const
+{
+    sf::Vector2f viewPos, viewSize;
+
+    viewPos = view.getCenter();
+    viewSize = view.getSize();
+    viewPos.x -= view.getSize().x/2;
+    viewPos.y -= view.getSize().y/2;
+
+    sf::FloatRect viewRect(viewPos, viewSize);
+    sf::FloatRect tileBounds = mTileSprite.getGlobalBounds();
+
+    return viewRect.intersects(tileBounds);
 }
