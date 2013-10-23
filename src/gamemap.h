@@ -18,6 +18,8 @@ namespace Purity
     public:
         GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir);
 
+        void initializeTilePhysics(b2World * world);
+
     private:
         const boost::filesystem::path mSceneDir;
         const Tmx::Map * mTmxMap;

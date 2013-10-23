@@ -1,4 +1,5 @@
 #include "objectmanager.h"
+#include <iostream>
 
 Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
 {
@@ -42,7 +43,6 @@ void Purity::ObjectManager::initializeObjects()
 {
     int numOfGroups = mTmxMap->GetNumObjectGroups();
    
-
     for (int groupNum = 0; groupNum < numOfGroups; groupNum++)
     {
         const Tmx::ObjectGroup* currentGroup;
@@ -56,17 +56,17 @@ void Purity::ObjectManager::initializeObjects()
             const Tmx::Object* currentObject;
 
             currentObject = currentGroup->GetObject(objectNum);
-
+            
             if (currentObject->GetType() == "Movable")
             {
                 MovableObject object(currentObject, mWorld);
                 mMovableObjectList.push_back(object);
-                
             }
             else
             {
                 Object object(currentObject, mWorld);
                 mObjectList.push_back(object);
+
             }
             
         }

@@ -37,7 +37,7 @@ namespace Purity
         float getX() const;
         float getY() const;
 
-        void update();
+        virtual void update();
 
         static luabind::scope luaBindings();
 

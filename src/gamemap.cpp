@@ -10,35 +10,48 @@ Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& 
     processTiles();
 }
 
+void Purity::GameMap::initializeTilePhysics(b2World * world)
+{
+    for (auto it = mTileList.begin(); it != mTileList.end(); it++)
+    {
+        it->get()->initializePhysics(world);
+    }
+}
+
 void Purity::GameMap::processTiles()
 {
     int layerCount = mTmxMap->GetNumLayers();
 
     for (int layerNum = 0; layerNum < layerCount; layerNum++)
     {
-        sf::Sprite tileSprite;
-        Tmx::MapTile tmxTile;
-
-
-        int mapHeight = mTmxMap->GetHeight();
-        int mapWidth = mTmxMap->GetWidth();
-
-        for (int y = 0; y < mapHeight; y++)
+        if (mTmxMap->GetLayer(layerNum)->GetProperties().GetNumericProperty("Collidable"))
         {
-            for (int x = 0; x < mapWidth; x++)
-            {
-                tmxTile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
+            sf::Sprite tileSprite;
+            Tmx::MapTile tmxTile;
 
-                if (tmxTile.id != 0)
+
+            int mapHeight = mTmxMap->GetHeight();
+            int mapWidth = mTmxMap->GetWidth();
+
+            for (int y = 0; y < mapHeight; y++)
+            {
+                for (int x = 0; x < mapWidth; x++)
                 {
-                    tileSprite = getTileSprite(x, y, layerNum);
-                
-                    mTileList.push_back(std::unique_ptr<Tile>(new Tile(tmxTile, tileSprite)));
+                    tmxTile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
+
+                    if (tmxTile.id != 0)
+                    {
+                        int tileWidth = mTmxMap->GetTileWidth();
+                        int tileHeight = mTmxMap->GetTileHeight();
+
+                        tileSprite = getTileSprite(x, y, layerNum);
+                    
+                        mTileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileSprite)));
+                    }
                 }
             }
         }
     }
-    
 }
 
 void Purity::GameMap::processTilesetsFromTMXMap()

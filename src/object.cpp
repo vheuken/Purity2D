@@ -1,6 +1,5 @@
 #include "object.h"
 
-
 Purity::Object::Object()
 {
 }
@@ -68,8 +67,6 @@ void Purity::Object::setSize(float width, float height)
 
 void Purity::Object::update()
 {
-    //float posX, posY;
-
     mPositionX = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mHitboxShape.getSize().x/2);
     mPositionY = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHitboxShape.getSize().y/2);
 

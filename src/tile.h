@@ -10,10 +10,18 @@ namespace Purity
     class Tile : public Object
     {
     public:
-        Tile(const Tmx::MapTile& tile, const sf::Sprite& tileSprite);
+        Tile(int x, int y, int width, int height, const sf::Sprite& tileSprite);
+
+        void initializePhysics(b2World * world);
 
     private:
         sf::Sprite mTileSprite;
+        int mTilePosX, mTilePosY;
+        int mTileWidth, mTileHeight;
+
+        void createBody(b2World* world);
+
+        void update();
 
         void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     };
