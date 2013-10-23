@@ -52,11 +52,6 @@ void Purity::Tile::createBody(b2World* world)
     mHitboxBody->SetUserData(new std::string("Tile"));
 }
 
-void Purity::Tile::update()
-{
-
-}
-
 void Purity::Tile::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     sf::View view = target.getView();
