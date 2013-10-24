@@ -26,29 +26,33 @@ void Purity::GameMap::processTiles()
     {
         if (mTmxMap->GetLayer(layerNum)->GetProperties().GetNumericProperty("Collidable"))
         {
-            sf::Sprite tileSprite;
-            Tmx::MapTile tmxTile;
+            addTilesToList(mPhysicsTileList, layerNum);
+        }
+    }
+}
 
+void Purity::GameMap::addTilesToList(std::vector<std::unique_ptr<Tile> >& tileList, int layerNum)
+{
+    sf::Sprite tileSprite;
+    Tmx::MapTile tmxTile;
 
-            int mapHeight = mTmxMap->GetHeight();
-            int mapWidth = mTmxMap->GetWidth();
+    int mapHeight = mTmxMap->GetHeight();
+    int mapWidth = mTmxMap->GetWidth();
 
-            for (int y = 0; y < mapHeight; y++)
+    for (int y = 0; y < mapHeight; y++)
+    {
+        for (int x = 0; x < mapWidth; x++)
+        {
+            tmxTile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
+
+            if (tmxTile.id != 0)
             {
-                for (int x = 0; x < mapWidth; x++)
-                {
-                    tmxTile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
+                int tileWidth = mTmxMap->GetTileWidth();
+                int tileHeight = mTmxMap->GetTileHeight();
 
-                    if (tmxTile.id != 0)
-                    {
-                        int tileWidth = mTmxMap->GetTileWidth();
-                        int tileHeight = mTmxMap->GetTileHeight();
+                tileSprite = getTileSprite(x, y, layerNum);
 
-                        tileSprite = getTileSprite(x, y, layerNum);
-                    
-                        mPhysicsTileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileSprite)));
-                    }
-                }
+                tileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileSprite)));
             }
         }
     }

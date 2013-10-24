@@ -30,6 +30,7 @@ namespace Purity
 
         void processTilesetsFromTMXMap();
         void processTiles();
+        void addTilesToList(std::vector<std::unique_ptr<Tile> >& tileList, int layerNum);
 
         sf::Sprite getTileSprite(int x, int y, int layerNum) const;
 
