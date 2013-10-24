@@ -12,7 +12,7 @@ Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& 
 
 void Purity::GameMap::initializeTilePhysics(b2World * world)
 {
-    for (auto it = mTileList.begin(); it != mTileList.end(); it++)
+    for (auto it = mPhysicsTileList.begin(); it != mPhysicsTileList.end(); it++)
     {
         it->get()->initializePhysics(world);
     }
@@ -46,7 +46,7 @@ void Purity::GameMap::processTiles()
 
                         tileSprite = getTileSprite(x, y, layerNum);
                     
-                        mTileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileSprite)));
+                        mPhysicsTileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileSprite)));
                     }
                 }
             }
@@ -110,7 +110,7 @@ sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
 
 void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (auto it = mTileList.begin(); it != mTileList.end(); it++)
+    for (auto it = mPhysicsTileList.begin(); it != mPhysicsTileList.end(); it++)
     {
         target.draw(*it->get());
     }
