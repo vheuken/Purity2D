@@ -25,6 +25,7 @@ namespace Purity
         const Tmx::Map * mTmxMap;
         std::map<std::string, SpriteSheet> mTilesetMap;
         std::vector<std::unique_ptr<Tile> > mPhysicsTileList;
+        std::vector<std::unique_ptr<Tile> > mStaticTileList;
 
         TextureManager mTextureManager;
 

@@ -28,6 +28,10 @@ void Purity::GameMap::processTiles()
         {
             addTilesToList(mPhysicsTileList, layerNum);
         }
+        else
+        {
+            addTilesToList(mStaticTileList, layerNum);
+        }
     }
 }
 
@@ -114,6 +118,11 @@ sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
 
 void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    for (auto it = mStaticTileList.begin(); it != mStaticTileList.end(); it++)
+    {
+        target.draw(*it->get());
+    }
+
     for (auto it = mPhysicsTileList.begin(); it != mPhysicsTileList.end(); it++)
     {
         target.draw(*it->get());
