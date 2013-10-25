@@ -37,7 +37,6 @@ namespace Purity
 
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-        void drawTiles(sf::RenderTarget& target, sf::RenderStates states) const;
     };
 
 }

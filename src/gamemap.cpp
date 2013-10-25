@@ -128,31 +128,3 @@ void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) co
         target.draw(*it->get());
     }
 }
-
-void Purity::GameMap::drawTiles(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    sf::Sprite tile;
-    sf::View view = target.getView();
-    int layerCount = mTmxMap->GetNumLayers();
-
-    int tileResolutionX = (int)view.getSize().x / mTmxMap->GetTileWidth();
-    int tileResolutionY = (int)view.getSize().y / mTmxMap->GetTileHeight();
-
-    int startingTileX = (int)(view.getCenter().x - view.getSize().x/2) / mTmxMap->GetTileWidth();
-    int startingTileY = (int)(view.getCenter().y - view.getSize().y/2) / mTmxMap->GetTileHeight();
-
-    int endTileX = startingTileX + tileResolutionX;
-    int endTileY = startingTileY + tileResolutionY;
-    
-    for (int layerNum = 0; layerNum < layerCount; layerNum++)
-    {
-        for (int y = startingTileY; y < endTileY; y++)
-        {
-            for (int x = startingTileX; x < endTileX; x++)
-            {
-                tile = getTileSprite(x, y, layerNum);
-                target.draw(tile);
-            }
-        }
-    }
-}
