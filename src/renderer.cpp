@@ -26,8 +26,14 @@ void Purity::Renderer::update(Scene* scene)
 
 void Purity::Renderer::run()
 {
+    float fps, currentTime;
+    sf::Clock timer;
+    float lastTime = 0;
+
     while (mWindow->isOpen())
     {
+        currentTime = timer.restart().asSeconds();
+
         if (mCurrentScene)
         {
             mCurrentSceneMutex.lock();
@@ -38,5 +44,9 @@ void Purity::Renderer::run()
 
             mCurrentSceneMutex.unlock();
         }
+
+        fps = 1.f / (currentTime);
+        lastTime = currentTime;
+        std::cout << "FPS: " << fps << std::endl;
     }
 }
