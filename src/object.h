@@ -47,12 +47,12 @@ namespace Purity
         
         // visual representation of hitbox
         sf::RectangleShape mHitboxShape;
-
-    private:
         float mPositionX;
         float mPositionY;
         float mWidthPixels;
         float mHeightPixels;
+    private:
+
 
         std::string mName;
 

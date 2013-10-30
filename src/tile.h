@@ -16,8 +16,6 @@ namespace Purity
 
     private:
         sf::Sprite mTileSprite;
-        int mTilePosX, mTilePosY;
-        int mTileWidth, mTileHeight;
 
         void createBody(b2World* world);
 

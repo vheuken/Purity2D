@@ -3,10 +3,10 @@
 Purity::Tile::Tile(int x, int y, int width, int height, const sf::Sprite& tileSprite)
 {
     mTileSprite = tileSprite;
-    mTilePosX = x;
-    mTilePosY = y;
-    mTileWidth = width;
-    mTileHeight = height;
+    mPositionX = x;
+    mPositionY = y;
+    mWidthPixels = width;
+    mHeightPixels = height;
 }
 
 void Purity::Tile::initializePhysics(b2World * world)
@@ -20,21 +20,21 @@ void Purity::Tile::createBody(b2World* world)
     b2BodyDef collisionTileBodyDef;
     b2EdgeShape collisionTileBox;
 
-    posX = mTilePosX * mTileWidth  / PIXELS_PER_METER;
-    posY = mTilePosY * mTileHeight / PIXELS_PER_METER;
+    posX = mPositionX * mWidthPixels  / PIXELS_PER_METER;
+    posY = mPositionY * mHeightPixels / PIXELS_PER_METER;
 
     // convert SFML coordinates to Box2D compatible coordinates
-    posX += mTileWidth  / PIXELS_PER_METER / 2;
-    posY += mTileHeight / PIXELS_PER_METER / 2;
+    posX += mWidthPixels  / PIXELS_PER_METER / 2;
+    posY += mHeightPixels / PIXELS_PER_METER / 2;
 
     collisionTileBodyDef.position.Set(posX, posY);
 
     mHitboxBody = world->CreateBody(&collisionTileBodyDef);
     
-    b2Vec2 lowerLeft = b2Vec2(0 - (mTileWidth/PIXELS_PER_METER/2), 0 - (mTileHeight/PIXELS_PER_METER/2));
-    b2Vec2 lowerRight = b2Vec2(mTileWidth/PIXELS_PER_METER/2, 0 - (mTileHeight/PIXELS_PER_METER/2));
-    b2Vec2 upperRight = b2Vec2(mTileWidth/PIXELS_PER_METER/2, mTileHeight/PIXELS_PER_METER/2);
-    b2Vec2 upperLeft = b2Vec2(0 - (mTileWidth/PIXELS_PER_METER/2), mTileHeight/PIXELS_PER_METER/2);
+    b2Vec2 lowerLeft = b2Vec2(0 - (mWidthPixels/PIXELS_PER_METER/2), 0 - (mHeightPixels/PIXELS_PER_METER/2));
+    b2Vec2 lowerRight = b2Vec2(mWidthPixels/PIXELS_PER_METER/2, 0 - (mHeightPixels/PIXELS_PER_METER/2));
+    b2Vec2 upperRight = b2Vec2(mWidthPixels/PIXELS_PER_METER/2, mHeightPixels/PIXELS_PER_METER/2);
+    b2Vec2 upperLeft = b2Vec2(0 - (mWidthPixels/PIXELS_PER_METER/2), mHeightPixels/PIXELS_PER_METER/2);
 
     collisionTileBox.Set(lowerLeft, lowerRight);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
