@@ -1,5 +1,6 @@
 #include "objectmanager.h"
 
+#include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
 #include "luamanager.h"
 

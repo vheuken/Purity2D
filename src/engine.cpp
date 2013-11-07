@@ -1,5 +1,6 @@
 #include "engine.h"
 
+#include <luabind/luabind.hpp>
 #include "luamanager.h"
 
 #ifdef __gnu_linux__

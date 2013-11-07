@@ -6,11 +6,15 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include <luabind/luabind.hpp>
 #include "scenemanager.h"
 #include "renderer.h"
 #include "physicssystem.h"
 #include "inputmanager.h"
+
+namespace luabind
+{
+    struct scope;
+}
 
 namespace Purity
 {

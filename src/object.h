@@ -4,7 +4,11 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
-#include <luabind/luabind.hpp>
+
+namespace luabind
+{
+    struct scope;
+}
 
 namespace Tmx
 {   

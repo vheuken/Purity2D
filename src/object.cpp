@@ -1,5 +1,6 @@
 #include "object.h"
 
+#include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
 
 Purity::Object::Object()

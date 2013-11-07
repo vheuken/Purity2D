@@ -2,11 +2,15 @@
 #define OBJECT_MANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include <luabind/luabind.hpp>
 #include "object.h"
 #include "movableobject.h"
 
 class b2World;
+
+namespace luabind
+{
+    struct scope;
+}
 
 namespace Tmx
 {

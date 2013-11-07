@@ -1,5 +1,7 @@
 #include "movableobject.h"
 
+#include <luabind/luabind.hpp>
+
 Purity::MovableObject::MovableObject(const Tmx::Object* object, b2World* world)
     : Object(object, world)
 {
