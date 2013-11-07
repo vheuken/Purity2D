@@ -1,5 +1,7 @@
 #include "renderer.h"
 
+#include <iostream>
+#include <sstream>
 #include <SFML/Graphics.hpp>
 #include "scene.h"
 

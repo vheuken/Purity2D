@@ -1,11 +1,10 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include <iostream>
 #include <queue>
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include "scenemanager.h"
 #include "renderer.h"
 #include "physicssystem.h"

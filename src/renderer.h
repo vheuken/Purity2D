@@ -1,8 +1,6 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <iostream>
-#include <sstream>
 #include <thread>
 #include <mutex>
 
