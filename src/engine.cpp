@@ -1,4 +1,6 @@
+#include "luamanager.h"
 #include "engine.h"
+
 #ifdef __gnu_linux__
 #include <X11/Xlib.h>
 #endif

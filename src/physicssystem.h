@@ -1,14 +1,12 @@
 #ifndef PHYSICS_SYSTEM_H
 #define PHYSICS_SYSTEM_H
 
-#include <string>
 #include <queue>
 #include <memory>
 #include <SFML/System.hpp>
 #include <Box2D/Box2D.h>
-#include <luabind/luabind.hpp>
-#include "scene.h"
-#include "luamanager.h"
+
+class Purity::Scene;
 
 namespace Purity
 {

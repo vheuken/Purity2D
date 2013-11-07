@@ -1,5 +1,10 @@
-#include "luamanager.h"
+#include <SFML/Graphics.hpp>
+#include <lua.hpp>
+#include <luabind/luabind.hpp>
+#include "movableobject.h"
+#include "objectmanager.h"
 #include "engine.h"
+#include "luamanager.h"
 
 Purity::LuaManager::LuaManager()
 {

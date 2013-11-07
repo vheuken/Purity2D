@@ -2,11 +2,8 @@
 #define LUA_MANAGER_H
 
 #include <string>
-#include <lua.hpp>
-#include <luabind/luabind.hpp>
-#include <SFML/Graphics.hpp>
-#include "movableobject.h"
-#include "objectmanager.h"
+
+struct lua_State;
 
 namespace Purity
 {

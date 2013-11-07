@@ -1,5 +1,5 @@
+#include "luamanager.h"
 #include "objectmanager.h"
-#include <iostream>
 
 Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
 {

@@ -7,10 +7,12 @@
 #include <mutex>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
-#include <TmxParser/Tmx.h>
-#include <Box2D/Box2D.h>
+#include <TmxParser/TmxMap.h>
 #include "gamemap.h"
 #include "objectmanager.h"
+
+class b2World;
+class b2Body;
 
 namespace Purity
 {

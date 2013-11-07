@@ -1,3 +1,7 @@
+#include <string>
+#include <luabind/luabind.hpp>
+#include "luamanager.h"
+#include "scene.h"
 #include "physicssystem.h"
 
 Purity::PhysicsSystem::PhysicsSystem(std::queue<sf::Event>* inputQueue)

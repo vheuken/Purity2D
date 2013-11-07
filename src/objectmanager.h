@@ -5,7 +5,6 @@
 #include <Box2D/Box2D.h>
 #include <TmxParser/Tmx.h>
 #include <luabind/luabind.hpp>
-#include "luamanager.h"
 #include "object.h"
 #include "movableobject.h"
 

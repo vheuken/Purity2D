@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+#include "scene.h"
 #include "renderer.h"
 
 Purity::Renderer::Renderer(sf::RenderWindow* window)

@@ -5,8 +5,9 @@
 #include <sstream>
 #include <thread>
 #include <mutex>
-#include <SFML/Graphics.hpp>
-#include "scene.h"
+
+class sf::RenderWindow;
+class Purity::Scene;
 
 namespace Purity
 {

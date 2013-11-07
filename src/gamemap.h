@@ -5,11 +5,12 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <boost/filesystem.hpp>
-#include <TmxParser/Tmx.h>
 
 #include "spritesheet.h"
 #include "texturemanager.h"
 #include "tile.h"
+
+class Tmx::Map;
 
 namespace Purity
 {
