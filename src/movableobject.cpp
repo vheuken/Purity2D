@@ -13,7 +13,7 @@ void Purity::MovableObject::applyLinearImpulse(float x, float y)
 {
     b2Vec2 force;
     force.Set(x, y);
-    mHitboxBody->ApplyLinearImpulse(force, b2Vec2(0,0)); 
+    mHitboxBody->ApplyLinearImpulse(force, b2Vec2(0,0), false); 
 }
 
 void Purity::MovableObject::setLinearVelocity(float x, float y)
