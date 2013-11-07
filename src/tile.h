@@ -1,8 +1,6 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include <TmxParser/TmxTile.h>
-
 #include "object.h"
 
 namespace Purity
