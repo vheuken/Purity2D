@@ -25,6 +25,7 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+PRE_BUILD/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
