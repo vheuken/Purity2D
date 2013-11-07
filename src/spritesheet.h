@@ -1,9 +1,9 @@
 #ifndef SPRITESHEET_H
 #define SPRITESHEET_H
 
-#include <SFML/Graphics.hpp>
 #include <map>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 namespace Purity
 {

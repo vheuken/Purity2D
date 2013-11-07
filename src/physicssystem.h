@@ -3,13 +3,13 @@
 
 #include <queue>
 #include <memory>
-#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <Box2D/Box2D.h>
-
-class Purity::Scene;
 
 namespace Purity
 {
+    class Scene;
+
     const float32 TIME_STEP = 1.0f / 120.0f;
     const int32 VELOCITY_ITERATIONS = 6;
     const int32 POSITION_ITERATIONS = 2;
