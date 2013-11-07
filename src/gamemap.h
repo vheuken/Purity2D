@@ -10,7 +10,7 @@
 #include "texturemanager.h"
 #include "tile.h"
 
-class Tmx::Map;
+//class Tmx::Map;
 
 namespace Purity
 {

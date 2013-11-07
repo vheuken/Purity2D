@@ -1,3 +1,4 @@
+#include <TmxParser/Tmx.h>
 #include "luamanager.h"
 #include "objectmanager.h"
 

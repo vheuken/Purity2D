@@ -4,8 +4,12 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
-#include <TmxParser/Tmx.h>
 #include <luabind/luabind.hpp>
+
+namespace Tmx
+{   
+    class Object;
+}
 
 namespace Purity
 {

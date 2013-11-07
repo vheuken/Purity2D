@@ -1,3 +1,4 @@
+#include <TmxParser/Tmx.h>
 #include "object.h"
 
 Purity::Object::Object()
