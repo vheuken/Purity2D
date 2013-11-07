@@ -1,6 +1,6 @@
-#include <TmxParser/Tmx.h>
 #include "gamemap.h"
 
+#include <TmxParser/Tmx.h>
 
 Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir)
     : mSceneDir(sceneDir)

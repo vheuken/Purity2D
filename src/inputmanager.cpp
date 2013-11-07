@@ -1,8 +1,9 @@
-#include <queue>
-#include <luabind/luabind.hpp>
-#include "luamanager.h"
-#include "scene.h"
 #include "inputmanager.h"
+
+#include <queue>
+#include <SFML/Graphics.hpp>
+
+#include "luamanager.h"
 
 Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue)
 {

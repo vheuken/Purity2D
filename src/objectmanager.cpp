@@ -1,6 +1,7 @@
+#include "objectmanager.h"
+
 #include <TmxParser/Tmx.h>
 #include "luamanager.h"
-#include "objectmanager.h"
 
 Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
 {

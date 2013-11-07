@@ -6,11 +6,15 @@
 #include <thread>
 #include <mutex>
 
-class sf::RenderWindow;
-class Purity::Scene;
+namespace sf
+{
+    class RenderWindow;
+}
 
 namespace Purity
 {
+    class Scene;
+
     class Renderer
     {
     public:

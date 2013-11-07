@@ -12,6 +12,11 @@
 
 class b2World;
 
+namespace Tmx
+{
+    class Map;
+}
+
 namespace Purity
 {
     class GameMap : public sf::Drawable

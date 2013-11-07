@@ -2,13 +2,17 @@
 #define INPUT_MANAGER_H
 
 #include <queue>
-#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 
-class sf::RenderWindow;
-class Purity::Scene;
+namespace sf
+{
+    class RenderWindow;
+}
 
 namespace Purity
 {
+    class Scene;
+
     class InputManager
     {
     public:
