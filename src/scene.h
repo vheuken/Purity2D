@@ -7,7 +7,7 @@
 #include <mutex>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
-#include <TmxParser/Tmx.h>
+#include <TmxParser/TmxMap.h>
 #include "gamemap.h"
 #include "objectmanager.h"
 
