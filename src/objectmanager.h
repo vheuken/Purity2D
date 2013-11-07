@@ -2,11 +2,16 @@
 #define OBJECT_MANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
-#include <TmxParser/Tmx.h>
 #include <luabind/luabind.hpp>
 #include "object.h"
 #include "movableobject.h"
+
+class b2World;
+
+namespace Tmx
+{
+    class Map;
+}
 
 namespace Purity
 {
