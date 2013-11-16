@@ -59,9 +59,8 @@ namespace Purity
         float mPositionY;
         float mWidthPixels;
         float mHeightPixels;
+
     private:
-
-
         std::string mName;
 
         void initializeHitboxShape();
