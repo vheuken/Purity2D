@@ -14,7 +14,7 @@ Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
     luabind::globals(LuaManager::getManager()->getState())["GObjectManager"] = this;
 }
 
-const Purity::Object* Purity::ObjectManager::getObjectByName(const std::string& objectName)
+const Purity::Entity* Purity::ObjectManager::getObjectByName(const std::string& objectName)
 {
 
     for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
@@ -28,7 +28,7 @@ const Purity::Object* Purity::ObjectManager::getObjectByName(const std::string& 
     return nullptr;
 }
 
-Purity::MovableObject* Purity::ObjectManager::getMovableObjectByName(const std::string& objectName)
+Purity::MovableEntity* Purity::ObjectManager::getMovableObjectByName(const std::string& objectName)
 {
 
     for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
@@ -62,13 +62,13 @@ void Purity::ObjectManager::initializeObjects()
             
             if (currentObject->GetType() == "Movable")
             {
-                MovableObject object(currentObject, mWorld);
+                MovableEntity object(currentObject, mWorld);
                 mMovableObjectList.push_back(object);
             }
             else
             {
-                Object object(currentObject, mWorld);
-                mObjectList.push_back(object);
+                Entity entity(currentObject, mWorld);
+                mObjectList.push_back(entity);
 
             }
             

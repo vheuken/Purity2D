@@ -10,10 +10,10 @@ namespace luabind
 
 namespace Purity
 {
-    class MovableObject : public Object
+    class MovableEntity : public Entity
     {
     public:
-        MovableObject(const Tmx::Object* object, b2World* world);
+        MovableEntity(const Tmx::Object* object, b2World* world);
 
         void applyLinearImpulse(float x, float y);
         void setLinearVelocity(float x, float y);

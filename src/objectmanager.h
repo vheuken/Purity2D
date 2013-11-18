@@ -24,8 +24,8 @@ namespace Purity
     public:
         ObjectManager(const Tmx::Map* tmxMap, b2World* world);
 
-        const Object* getObjectByName(const std::string& objectName);
-        MovableObject* getMovableObjectByName(const std::string& objectName);
+        const Entity* getObjectByName(const std::string& objectName);
+        MovableEntity* getMovableObjectByName(const std::string& objectName);
         void updatePhysics();
 
         static luabind::scope luaBindings();
@@ -33,8 +33,8 @@ namespace Purity
     private:
         const Tmx::Map* mTmxMap;
         b2World* mWorld;
-        std::vector<Object> mObjectList;
-        std::vector<MovableObject> mMovableObjectList;
+        std::vector<Entity> mObjectList;
+        std::vector<MovableEntity> mMovableObjectList;
 
         void initializeObjects();
 

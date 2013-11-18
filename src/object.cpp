@@ -3,11 +3,11 @@
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
 
-Purity::Object::Object()
+Purity::Entity::Entity()
 {
 }
 
-Purity::Object::Object(const Tmx::Object* object, b2World* world)
+Purity::Entity::Entity(const Tmx::Object* object, b2World* world)
 {
     float x = object->GetX() / PIXELS_PER_METER;
     float y = object->GetY() / PIXELS_PER_METER;
@@ -21,7 +21,7 @@ Purity::Object::Object(const Tmx::Object* object, b2World* world)
     setSize(width, height);
 }
 
-void Purity::Object::setPosition(float x, float y)
+void Purity::Entity::setPosition(float x, float y)
 {
     this->mPositionX = x;
     this->mPositionY = y;
@@ -32,22 +32,22 @@ void Purity::Object::setPosition(float x, float y)
     mHitboxBody->SetTransform(pos, mHitboxBody->GetAngle());
 }
 
-float Purity::Object::getX() const
+float Purity::Entity::getX() const
 {
     return mPositionX;
 }
 
-float Purity::Object::getY() const
+float Purity::Entity::getY() const
 {
     return mPositionY;
 }
 
-std::string Purity::Object::getName() const
+std::string Purity::Entity::getName() const
 {
     return mName;
 }
 
-void Purity::Object::setSize(float width, float height)
+void Purity::Entity::setSize(float width, float height)
 {
     mWidthPixels = width;
     mHeightPixels = height;
@@ -68,7 +68,7 @@ void Purity::Object::setSize(float width, float height)
     initializeHitboxShape();
 }
 
-void Purity::Object::update()
+void Purity::Entity::update()
 {
     mPositionX = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mHitboxShape.getSize().x/2);
     mPositionY = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHitboxShape.getSize().y/2);
@@ -76,12 +76,12 @@ void Purity::Object::update()
     mHitboxShape.setPosition(mPositionX, mPositionY);
 }
 
-void Purity::Object::createBody(b2World* world)
+void Purity::Entity::createBody(b2World* world)
 {
     mHitboxBody = world->CreateBody(&mHitboxBodyDef);
 }
 
-void Purity::Object::initializeHitboxShape()
+void Purity::Entity::initializeHitboxShape()
 {
     sf::Vector2f hitboxSize(mWidthPixels, mHeightPixels);
     mHitboxShape.setSize(hitboxSize);
@@ -90,14 +90,14 @@ void Purity::Object::initializeHitboxShape()
     mHitboxShape.setFillColor(DEFAULT_HITBOX_FILL_COLOR);
 }
 
-void Purity::Object::draw(sf::RenderTarget &target, sf::RenderStates states) const
+void Purity::Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(mHitboxShape);
 }
 
-luabind::scope Purity::Object::luaBindings()
+luabind::scope Purity::Entity::luaBindings()
 {
-    return luabind::class_<Object>("Object")
-        .def("getName", &Object::getName)
+    return luabind::class_<Entity>("Object")
+        .def("getName", &Entity::getName)
     ;
 }

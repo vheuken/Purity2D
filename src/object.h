@@ -29,11 +29,11 @@ namespace Purity
     const sf::Color DEFAULT_HITBOX_OUTLINE_COLOR = sf::Color::Yellow;
     const sf::Color DEFAULT_HITBOX_FILL_COLOR = sf::Color::Transparent;
 
-    class Object : public sf::Drawable
+    class Entity : public sf::Drawable
     {
     public:
-        Object();
-        Object(const Tmx::Object* object, b2World* world);
+        Entity();
+        Entity(const Tmx::Object* object, b2World* world);
 
         virtual void createBody(b2World* world);
         void setName(std::string name);

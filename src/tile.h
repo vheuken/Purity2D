@@ -5,7 +5,7 @@
 
 namespace Purity
 {
-    class Tile : public Object
+    class Tile : public Entity
     {
     public:
         Tile(int x, int y, int width, int height, const sf::Sprite& tileSprite);
