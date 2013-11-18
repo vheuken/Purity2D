@@ -52,9 +52,8 @@ namespace Purity
     protected:
         b2BodyDef mHitboxBodyDef;
         b2Body* mHitboxBody;     
-        
-        // visual representation of hitbox
-        sf::RectangleShape mHitboxShape;
+
+        sf::VertexArray mVertexArray;
 
         float mWidthPixels;
         float mHeightPixels;

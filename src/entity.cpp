@@ -68,12 +68,10 @@ void Purity::Entity::setSize(float width, float height)
 
 void Purity::Entity::update()
 {
-    float x = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mHitboxShape.getSize().x/2);
-    float y = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHitboxShape.getSize().y/2);
+    float x = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mWidthPixels/2);
+    float y = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHeightPixels/2);
 
     setPosition(x, y);
-
-    mHitboxShape.setPosition(x, y);
 }
 
 void Purity::Entity::createBody(b2World* world)
@@ -83,16 +81,19 @@ void Purity::Entity::createBody(b2World* world)
 
 void Purity::Entity::initializeHitboxShape()
 {
-    sf::Vector2f hitboxSize(mWidthPixels, mHeightPixels);
-    mHitboxShape.setSize(hitboxSize);
-    mHitboxShape.setOutlineColor(DEFAULT_HITBOX_OUTLINE_COLOR);
-    mHitboxShape.setOutlineThickness(DEFAULT_HITBOX_OUTLINE_THICKNESS);
-    mHitboxShape.setFillColor(DEFAULT_HITBOX_FILL_COLOR);
+    mVertexArray.setPrimitiveType(sf::Quads);
+
+    mVertexArray.append(sf::Vector2f(0, 0));
+    mVertexArray.append(sf::Vector2f(mWidthPixels, 0));
+    mVertexArray.append(sf::Vector2f(mWidthPixels, mHeightPixels));
+    mVertexArray.append(sf::Vector2f(0, mHeightPixels));
 }
 
 void Purity::Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    target.draw(mHitboxShape);
+    states.transform *= getTransform();
+
+    target.draw(mVertexArray, states);
 }
 
 luabind::scope Purity::Entity::luaBindings()
