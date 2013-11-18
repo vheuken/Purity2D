@@ -4,7 +4,7 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include "entity.h"
-#include "movableobject.h"
+#include "movableentity.h"
 #include "objectmanager.h"
 #include "engine.h"
 

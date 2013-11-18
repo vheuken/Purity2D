@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "entity.h"
-#include "movableobject.h"
+#include "movableentity.h"
 
 class b2World;
 

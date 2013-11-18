@@ -27,7 +27,7 @@ set( HEADER_FILES
     inputmanager.h
     luamanager.h
     entity.h
-    movableobject.h
+    movableentity.h
     texturemanager.h
 	objectmanager.h
     tile.h
@@ -44,7 +44,7 @@ set( SOURCE_FILES
      inputmanager.cpp
      luamanager.cpp
      entity.cpp
-     movableobject.cpp
+     movableentity.cpp
      texturemanager.cpp
 	 objectmanager.cpp
      tile.cpp

@@ -1,5 +1,5 @@
-#ifndef MOVABLE_OBJECT_H
-#define MOVABLE_OBJECT_H
+#ifndef MOVABLE_ENTITY_H
+#define MOVABLE_ENTITY_H
 
 #include "entity.h"
 
@@ -24,4 +24,4 @@ namespace Purity
     };
 }
 
-#endif // MOVABLE_OBJECT_H
+#endif // MOVABLE_ENTITY_H

@@ -1,4 +1,4 @@
-#include "movableobject.h"
+#include "movableentity.h"
 
 #include <luabind/luabind.hpp>
 
