@@ -18,14 +18,12 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world)
 
     createBody(world);
     setPosition(x, y);
+    setBodyPosition(x, y);
     setSize(width, height);
 }
 
-void Purity::Entity::setPosition(float x, float y)
+void Purity::Entity::setBodyPosition(float x, float y)
 {
-    this->mPositionX = x;
-    this->mPositionY = y;
-
     b2Vec2 pos;
     pos.Set(x, y);
 
@@ -34,12 +32,12 @@ void Purity::Entity::setPosition(float x, float y)
 
 float Purity::Entity::getX() const
 {
-    return mPositionX;
+    return getPosition().x;
 }
 
 float Purity::Entity::getY() const
 {
-    return mPositionY;
+    return getPosition().y;
 }
 
 std::string Purity::Entity::getName() const
@@ -70,10 +68,12 @@ void Purity::Entity::setSize(float width, float height)
 
 void Purity::Entity::update()
 {
-    mPositionX = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mHitboxShape.getSize().x/2);
-    mPositionY = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHitboxShape.getSize().y/2);
+    float x = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mHitboxShape.getSize().x/2);
+    float y = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHitboxShape.getSize().y/2);
 
-    mHitboxShape.setPosition(mPositionX, mPositionY);
+    setPosition(x, y);
+
+    mHitboxShape.setPosition(x, y);
 }
 
 void Purity::Entity::createBody(b2World* world)

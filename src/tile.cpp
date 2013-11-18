@@ -3,8 +3,9 @@
 Purity::Tile::Tile(int x, int y, int width, int height, const sf::Sprite& tileSprite)
 {
     mTileSprite = tileSprite;
-    mPositionX = x;
-    mPositionY = y;
+    
+    setPosition(x, y);
+
     mWidthPixels = width;
     mHeightPixels = height;
 }
@@ -20,8 +21,8 @@ void Purity::Tile::createBody(b2World* world)
     b2BodyDef collisionTileBodyDef;
     b2EdgeShape collisionTileBox;
 
-    posX = mPositionX * mWidthPixels  / PIXELS_PER_METER;
-    posY = mPositionY * mHeightPixels / PIXELS_PER_METER;
+    posX = getPosition().x * mWidthPixels  / PIXELS_PER_METER;
+    posY = getPosition().y * mHeightPixels / PIXELS_PER_METER;
 
     // convert SFML coordinates to Box2D compatible coordinates
     posX += mWidthPixels  / PIXELS_PER_METER / 2;

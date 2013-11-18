@@ -29,7 +29,7 @@ namespace Purity
     const sf::Color DEFAULT_HITBOX_OUTLINE_COLOR = sf::Color::Yellow;
     const sf::Color DEFAULT_HITBOX_FILL_COLOR = sf::Color::Transparent;
 
-    class Entity : public sf::Drawable
+    class Entity : public sf::Drawable, public sf::Transformable
     {
     public:
         Entity();
@@ -39,7 +39,7 @@ namespace Purity
         void setName(std::string name);
         std::string getName() const;
 
-        void setPosition(float x, float y);
+        void setBodyPosition(float x, float y);
         void setSize(float width, float height);
         
         float getX() const;
@@ -55,8 +55,7 @@ namespace Purity
         
         // visual representation of hitbox
         sf::RectangleShape mHitboxShape;
-        float mPositionX;
-        float mPositionY;
+
         float mWidthPixels;
         float mHeightPixels;
 
