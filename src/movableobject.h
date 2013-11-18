@@ -1,7 +1,7 @@
 #ifndef MOVABLE_OBJECT_H
 #define MOVABLE_OBJECT_H
 
-#include "object.h"
+#include "entity.h"
 
 namespace luabind
 {

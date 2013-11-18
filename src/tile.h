@@ -1,7 +1,7 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include "object.h"
+#include "entity.h"
 
 namespace Purity
 {

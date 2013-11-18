@@ -1,4 +1,4 @@
-#include "object.h"
+#include "entity.h"
 
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>

@@ -1,5 +1,5 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include <string>
 #include <SFML/Graphics.hpp>
@@ -70,4 +70,4 @@ namespace Purity
 
 }
 
-#endif // OBJECT_H
+#endif // ENTITY_H

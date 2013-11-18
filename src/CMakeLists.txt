@@ -26,7 +26,7 @@ set( HEADER_FILES
     physicssystem.h
     inputmanager.h
     luamanager.h
-    object.h
+    entity.h
     movableobject.h
     texturemanager.h
 	objectmanager.h
@@ -43,7 +43,7 @@ set( SOURCE_FILES
      physicssystem.cpp
      inputmanager.cpp
      luamanager.cpp
-     object.cpp
+     entity.cpp
      movableobject.cpp
      texturemanager.cpp
 	 objectmanager.cpp

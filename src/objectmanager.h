@@ -2,7 +2,7 @@
 #define OBJECT_MANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include "object.h"
+#include "entity.h"
 #include "movableobject.h"
 
 class b2World;
