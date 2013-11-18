@@ -38,7 +38,7 @@ void Purity::GameMap::processTiles()
 
 void Purity::GameMap::addTilesToList(std::vector<std::unique_ptr<Tile> >& tileList, int layerNum)
 {
-    sf::Sprite tileSprite;
+    const sf::Texture * tileTexture;
     Tmx::MapTile tmxTile;
 
     int mapHeight = mTmxMap->GetHeight();
@@ -55,9 +55,9 @@ void Purity::GameMap::addTilesToList(std::vector<std::unique_ptr<Tile> >& tileLi
                 int tileWidth = mTmxMap->GetTileWidth();
                 int tileHeight = mTmxMap->GetTileHeight();
 
-                tileSprite = getTileSprite(x, y, layerNum);
+                tileTexture = mTextureManager.getTexture(mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
 
-                tileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileSprite)));
+                tileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileTexture)));
             }
         }
     }

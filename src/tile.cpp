@@ -1,18 +1,31 @@
 #include "tile.h"
 
-Purity::Tile::Tile(int x, int y, int width, int height, const sf::Sprite& tileSprite)
+Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * texture)
 {
-    mTileSprite = tileSprite;
-    
-    setPosition(x, y);
+    mTexture = texture;
 
     mWidthPixels = width;
     mHeightPixels = height;
+
+    setPosition(x*width, y*height);
+
+    mVertexArray.setPrimitiveType(sf::Quads);
+
+    mVertexArray.append(sf::Vector2f(getPosition().x, getPosition().y));
+    mVertexArray.append(sf::Vector2f(getPosition().x + mWidthPixels, getPosition().y));
+    mVertexArray.append(sf::Vector2f(getPosition().x + mWidthPixels, getPosition().y + mHeightPixels));
+    mVertexArray.append(sf::Vector2f(getPosition().x, getPosition().y + mHeightPixels));
+
+    mVertexArray[0].color = sf::Color::Red;
+    mVertexArray[1].color = sf::Color::Red;
+    mVertexArray[2].color = sf::Color::Red;
+    mVertexArray[3].color = sf::Color::Red;
 }
 
 void Purity::Tile::initializePhysics(b2World * world)
 {
     createBody(world);
+    setSize(mWidthPixels, mHeightPixels);
 }
 
 void Purity::Tile::createBody(b2World* world)
@@ -21,8 +34,8 @@ void Purity::Tile::createBody(b2World* world)
     b2BodyDef collisionTileBodyDef;
     b2EdgeShape collisionTileBox;
 
-    posX = getPosition().x * mWidthPixels  / PIXELS_PER_METER;
-    posY = getPosition().y * mHeightPixels / PIXELS_PER_METER;
+    posX = getPosition().x   / PIXELS_PER_METER;
+    posY = getPosition().y / PIXELS_PER_METER;
 
     // convert SFML coordinates to Box2D compatible coordinates
     posX += mWidthPixels  / PIXELS_PER_METER / 2;
@@ -51,29 +64,4 @@ void Purity::Tile::createBody(b2World* world)
     
 
     mHitboxBody->SetUserData(new std::string("Tile"));
-}
-
-void Purity::Tile::draw(sf::RenderTarget &target, sf::RenderStates states) const
-{
-    sf::View view = target.getView();
-    
-    if ( isInView(view) )
-    {
-        target.draw(mTileSprite);
-    }
-}
-
-bool Purity::Tile::isInView(const sf::View& view) const
-{
-    sf::Vector2f viewPos, viewSize;
-
-    viewPos = view.getCenter();
-    viewSize = view.getSize();
-    viewPos.x -= view.getSize().x/2;
-    viewPos.y -= view.getSize().y/2;
-
-    sf::FloatRect viewRect(viewPos, viewSize);
-    sf::FloatRect tileBounds = mTileSprite.getGlobalBounds();
-
-    return viewRect.intersects(tileBounds);
 }

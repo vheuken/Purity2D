@@ -54,6 +54,7 @@ namespace Purity
         b2Body* mHitboxBody;     
 
         sf::VertexArray mVertexArray;
+        const sf::Texture * mTexture;
 
         float mWidthPixels;
         float mHeightPixels;
@@ -62,6 +63,8 @@ namespace Purity
         std::string mName;
 
         void initializeHitboxShape();
+
+        bool isInView(const sf::View& view) const;
 
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     };

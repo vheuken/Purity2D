@@ -89,11 +89,33 @@ void Purity::Entity::initializeHitboxShape()
     mVertexArray.append(sf::Vector2f(0, mHeightPixels));
 }
 
+bool Purity::Entity::isInView(const sf::View& view) const
+{
+    sf::Vector2f viewPos, viewSize;
+
+    viewPos = view.getCenter();
+    viewSize = view.getSize();
+    viewPos.x -= view.getSize().x/2;
+    viewPos.y -= view.getSize().y/2;
+
+    sf::FloatRect viewRect(viewPos, viewSize);
+
+    return viewRect.contains( getPosition() );
+}
+
 void Purity::Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    states.transform *= getTransform();
+    if ( isInView(target.getView()) )
+    {
+        states.transform *= getTransform();
 
-    target.draw(mVertexArray, states);
+        if (mTexture)
+        {
+            //states.texture = mTexture;
+        }
+
+        target.draw(mVertexArray, states);
+    }
 }
 
 luabind::scope Purity::Entity::luaBindings()
