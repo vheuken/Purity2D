@@ -4,6 +4,7 @@ set(PROJECT_NAME "Purity Engine")
 
 project(${PROJECT_NAME})
 
+set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
 # include directories
 set(LIBS_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extlibs")
