@@ -8,7 +8,7 @@ Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * text
     mHeightPixels = height;
 
     setPosition(x*width, y*height);
-
+    /*
     mVertexArray.setPrimitiveType(sf::Quads);
 
     mVertexArray.append(sf::Vector2f(getPosition().x, getPosition().y));
@@ -19,13 +19,15 @@ Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * text
     mVertexArray[0].color = sf::Color::Red;
     mVertexArray[1].color = sf::Color::Red;
     mVertexArray[2].color = sf::Color::Red;
-    mVertexArray[3].color = sf::Color::Red;
+    mVertexArray[3].color = sf::Color::Red;*/
 }
 
 void Purity::Tile::initializePhysics(b2World * world)
 {
     createBody(world);
-    setSize(mWidthPixels, mHeightPixels);
+    //setSize(mWidthPixels, mHeightPixels)
+
+    initializeHitboxShape();
 }
 
 void Purity::Tile::createBody(b2World* world)

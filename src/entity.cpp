@@ -105,7 +105,7 @@ bool Purity::Entity::isInView(const sf::View& view) const
 
 void Purity::Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    if ( isInView(target.getView()) )
+    if ( isInView( target.getView()) )
     {
         states.transform *= getTransform();
 

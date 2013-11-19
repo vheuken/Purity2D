@@ -58,11 +58,11 @@ namespace Purity
 
         float mWidthPixels;
         float mHeightPixels;
+        
+        void initializeHitboxShape();
 
     private:
         std::string mName;
-
-        void initializeHitboxShape();
 
         bool isInView(const sf::View& view) const;
 
