@@ -15,7 +15,10 @@ void Purity::GameMap::initializeTilePhysics(b2World * world)
 {
     for (auto it = mPhysicsTileList.begin(); it != mPhysicsTileList.end(); it++)
     {
-        it->get()->initializePhysics(world);
+        for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++)
+        {
+            it2->second->initializePhysics(world);
+        }
     }
 }
 
@@ -36,7 +39,7 @@ void Purity::GameMap::processTiles()
     }
 }
 
-void Purity::GameMap::addTilesToList(std::vector<std::unique_ptr<Tile> >& tileList, int layerNum)
+void Purity::GameMap::addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile> > >& tileList, int layerNum)
 {
     const sf::Texture * tileTexture;
     Tmx::MapTile tmxTile;
@@ -46,20 +49,27 @@ void Purity::GameMap::addTilesToList(std::vector<std::unique_ptr<Tile> >& tileLi
 
     for (int y = 0; y < mapHeight; y++)
     {
+        std::map<int, std::unique_ptr<Tile>> col;
         for (int x = 0; x < mapWidth; x++)
         {
             tmxTile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
 
             if (tmxTile.id != 0)
             {
+                //std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileTexture))
+                
+
                 int tileWidth = mTmxMap->GetTileWidth();
                 int tileHeight = mTmxMap->GetTileHeight();
 
                 tileTexture = mTextureManager.getTexture(mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
+                
+                std::unique_ptr<Tile> p(new Tile(x, y, tileWidth, tileHeight, tileTexture));
 
-                tileList.push_back(std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileTexture)));
+                col[x] = (std::move(p));
             }
         }
+        tileList[y] = (std::move(col));
     }
 }
 
@@ -117,15 +127,61 @@ sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
     return tileSprite;
 }
 
-void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
+std::vector<std::pair<int, int> > Purity::GameMap::getListOfTilesToDraw(const sf::View& view) const
 {
-    for (auto it = mStaticTileList.begin(); it != mStaticTileList.end(); it++)
+    std::vector<std::pair<int, int> > listOfTilesToDraw;
+
+    int tileWidth  = mTmxMap->GetTileWidth();
+    int tileHeight = mTmxMap->GetTileHeight();
+
+    sf::Vector2f halfSize(view.getSize().x/2, view.getSize().y/2);
+
+    sf::Vector2f topLeftCorner = view.getCenter() - halfSize;
+    sf::Vector2f bottomRightCorner = view.getCenter() + halfSize;
+
+    for (int x = topLeftCorner.x; x < bottomRightCorner.x; x += tileWidth)
     {
-        target.draw(*it->get());
+        for (int y = topLeftCorner.y; y < bottomRightCorner.y; y += tileHeight)
+        {
+            std::pair<int, int> tile(x/tileWidth, y/tileWidth);
+
+            listOfTilesToDraw.push_back(tile);
+        }
     }
 
-    for (auto it = mPhysicsTileList.begin(); it != mPhysicsTileList.end(); it++)
+    return listOfTilesToDraw;
+}
+
+void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    const sf::View view = target.getView();
+
+    std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(view);
+    
+    
+    for (auto it = listOfTilesToDraw.begin(); it != listOfTilesToDraw.end(); it++)
     {
-        target.draw(*it->get());
+        auto list = mPhysicsTileList.find(it->second);
+
+        if( list != mPhysicsTileList.end() )
+        {
+            auto list2 = list->second.find(it->first);
+            if (list2 != list->second.end() )
+            {
+                target.draw(*list2->second);
+            }
+        }
+        
+        auto listS = mStaticTileList.find(it->second);
+
+        if( listS != mStaticTileList.end() )
+        {
+            auto list2 = listS->second.find(it->first);
+            if (list2 != listS->second.end() )
+            {
+                target.draw(*list2->second);
+            }
+        }
+
     }
 }
