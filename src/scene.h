@@ -38,8 +38,6 @@ namespace Purity
         std::unique_ptr<GameMap> mMap;
         std::unique_ptr<ObjectManager> mObjectManager;
 
-        std::vector<b2Body *> mTileBodyList;
-
         boost::filesystem::path mLuaEventHandlerFile;
 		boost::filesystem::path mLuaPhysicsUpdateFile;
 
