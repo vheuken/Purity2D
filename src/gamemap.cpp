@@ -56,9 +56,6 @@ void Purity::GameMap::addTilesToList(std::map<int, std::map<int, std::unique_ptr
 
             if (tmxTile.id != 0)
             {
-                //std::unique_ptr<Tile>(new Tile(x, y, tileWidth, tileHeight, tileTexture))
-                
-
                 int tileWidth = mTmxMap->GetTileWidth();
                 int tileHeight = mTmxMap->GetTileHeight();
 

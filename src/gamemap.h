@@ -30,8 +30,7 @@ namespace Purity
         const boost::filesystem::path mSceneDir;
         const Tmx::Map * mTmxMap;
         std::map<std::string, SpriteSheet> mTilesetMap;
-        //std::vector<std::unique_ptr<Tile> > mPhysicsTileList;
-        //std::vector<std::unique_ptr<Tile> > mStaticTileList;
+
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mPhysicsTileList;
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mStaticTileList;
 
