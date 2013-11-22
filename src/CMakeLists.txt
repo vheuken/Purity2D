@@ -31,6 +31,7 @@ set( HEADER_FILES
     texturemanager.h
 	objectmanager.h
     tile.h
+    layer.h
 )
 
 set( SOURCE_FILES
@@ -48,6 +49,7 @@ set( SOURCE_FILES
      texturemanager.cpp
 	 objectmanager.cpp
      tile.cpp
+     layer.cpp
      
      main.cpp
 )
