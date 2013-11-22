@@ -124,61 +124,10 @@ sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
     return tileSprite;
 }
 
-std::vector<std::pair<int, int> > Purity::GameMap::getListOfTilesToDraw(const sf::View& view) const
-{
-    std::vector<std::pair<int, int> > listOfTilesToDraw;
-
-    int tileWidth  = mTmxMap->GetTileWidth();
-    int tileHeight = mTmxMap->GetTileHeight();
-
-    sf::Vector2f halfSize(view.getSize().x/2, view.getSize().y/2);
-
-    sf::Vector2f topLeftCorner = view.getCenter() - halfSize;
-    sf::Vector2f bottomRightCorner = view.getCenter() + halfSize;
-
-    for (int x = topLeftCorner.x; x < bottomRightCorner.x; x += tileWidth)
-    {
-        for (int y = topLeftCorner.y; y < bottomRightCorner.y; y += tileHeight)
-        {
-            std::pair<int, int> tile(x/tileWidth, y/tileWidth);
-
-            listOfTilesToDraw.push_back(tile);
-        }
-    }
-
-    return listOfTilesToDraw;
-}
-
 void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    const sf::View view = target.getView();
-
-    std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(view);
-    
-    
-    for (auto it = listOfTilesToDraw.begin(); it != listOfTilesToDraw.end(); it++)
+    for (auto it = mLayersList.begin(); it != mLayersList.end(); it++)
     {
-        auto list = mPhysicsTileList.find(it->second);
-
-        if( list != mPhysicsTileList.end() )
-        {
-            auto list2 = list->second.find(it->first);
-            if (list2 != list->second.end() )
-            {
-                target.draw(*list2->second);
-            }
-        }
-        
-        auto listS = mStaticTileList.find(it->second);
-
-        if( listS != mStaticTileList.end() )
-        {
-            auto list2 = listS->second.find(it->first);
-            if (list2 != listS->second.end() )
-            {
-                target.draw(*list2->second);
-            }
-        }
-
+        target.draw(*it);
     }
 }

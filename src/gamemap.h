@@ -9,6 +9,7 @@
 #include "spritesheet.h"
 #include "texturemanager.h"
 #include "tile.h"
+#include "layer.h"
 
 class b2World;
 
@@ -34,6 +35,8 @@ namespace Purity
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mPhysicsTileList;
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mStaticTileList;
 
+        std::vector<Layer> mLayersList;
+
         TextureManager mTextureManager;
 
         void processTilesetsFromTMXMap();
@@ -41,8 +44,6 @@ namespace Purity
         void addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile> > >& tileList, int layerNum);
 
         sf::Sprite getTileSprite(int x, int y, int layerNum) const;
-
-        std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     };
