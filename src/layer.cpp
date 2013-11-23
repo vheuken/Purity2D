@@ -2,6 +2,11 @@
 
 #include <TmxParser/Tmx.h>
 
+Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer)
+    : mTmxMap(tmxMap), mTmxLayer(tmxLayer)
+{
+}
+
 const Purity::Tile * Purity::Layer::getTile(int x, int y) const
 {
     auto row = mTiles.find(y);
@@ -31,9 +36,9 @@ std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::
     sf::Vector2f topLeftCorner = view.getCenter() - halfSize;
     sf::Vector2f bottomRightCorner = view.getCenter() + halfSize;
 
-    for (int x = topLeftCorner.x; x < bottomRightCorner.x; x += tileWidth)
+    for (int x = (int)topLeftCorner.x; x < bottomRightCorner.x; x += tileWidth)
     {
-        for (int y = topLeftCorner.y; y < bottomRightCorner.y; y += tileHeight)
+        for (int y = (int)topLeftCorner.y; y < bottomRightCorner.y; y += tileHeight)
         {
             std::pair<int, int> tile(x/tileWidth, y/tileWidth);
 
@@ -52,6 +57,9 @@ void Purity::Layer::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     {
         const Tile * tile = getTile(it->first, it->second);
 
-        target.draw(*tile);
+        if (tile != nullptr)
+        {
+            target.draw(*tile);
+        }
     }
 }

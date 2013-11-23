@@ -3,12 +3,10 @@
 #include <TmxParser/Tmx.h>
 
 Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir)
-    : mSceneDir(sceneDir)
+    : mSceneDir(sceneDir), mTmxMap(tmxMap)
 {
-    mTmxMap = tmxMap;
-
     processTilesetsFromTMXMap();
-    processTiles();
+    processLayers();
 }
 
 void Purity::GameMap::initializeTilePhysics(b2World * world)
@@ -22,20 +20,15 @@ void Purity::GameMap::initializeTilePhysics(b2World * world)
     }
 }
 
-void Purity::GameMap::processTiles()
-{
-    int layerCount = mTmxMap->GetNumLayers();
+void Purity::GameMap::processLayers()
+{   
+    const std::vector<Tmx::Layer *, std::allocator<Tmx::Layer *> > tmxLayers = mTmxMap->GetLayers();
 
-    for (int layerNum = 0; layerNum < layerCount; layerNum++)
+    for (auto it = tmxLayers.begin(); it != tmxLayers.end(); it++)
     {
-        if (mTmxMap->GetLayer(layerNum)->GetProperties().GetNumericProperty("Collidable"))
-        {
-            addTilesToList(mPhysicsTileList, layerNum);
-        }
-        else
-        {
-            addTilesToList(mStaticTileList, layerNum);
-        }
+        std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it));
+        
+        mLayersList.push_back(std::move(layer));
     }
 }
 
@@ -128,6 +121,6 @@ void Purity::GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) co
 {
     for (auto it = mLayersList.begin(); it != mLayersList.end(); it++)
     {
-        target.draw(*it);
+        target.draw(*it->get());
     }
 }

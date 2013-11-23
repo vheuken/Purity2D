@@ -1,6 +1,7 @@
 #ifndef LAYER_H
 #define LAYER_H
 
+#include <map>
 #include <unordered_map>
 #include <memory>
 #include <SFML/Graphics.hpp>
@@ -10,6 +11,7 @@
 namespace Tmx
 {
     class Map;
+    class Layer;
 }
 
 namespace Purity
@@ -17,13 +19,15 @@ namespace Purity
     class Layer : public sf::Drawable
     {
     public:
-        const Tile * getTile(int x, int y) const;
+        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer);
 
     private:
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mTiles;
 
         const Tmx::Map * mTmxMap;
+        const Tmx::Layer * mTmxLayer;
 
+        const Tile * getTile(int x, int y) const;
         std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

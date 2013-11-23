@@ -35,12 +35,12 @@ namespace Purity
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mPhysicsTileList;
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mStaticTileList;
 
-        std::vector<Layer> mLayersList;
+        std::vector<std::unique_ptr<Layer> > mLayersList;
 
         TextureManager mTextureManager;
 
         void processTilesetsFromTMXMap();
-        void processTiles();
+        void processLayers();
         void addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile> > >& tileList, int layerNum);
 
         sf::Sprite getTileSprite(int x, int y, int layerNum) const;
