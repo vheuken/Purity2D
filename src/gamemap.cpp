@@ -3,7 +3,7 @@
 #include <TmxParser/Tmx.h>
 
 Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir)
-    : mSceneDir(sceneDir), mTmxMap(tmxMap)
+    : mSceneDir(sceneDir), mTmxMap(tmxMap), mTextureManager(new TextureManager())
 {
     processTilesetsFromTMXMap();
     processLayers();
@@ -26,40 +26,9 @@ void Purity::GameMap::processLayers()
 
     for (auto it = tmxLayers.begin(); it != tmxLayers.end(); it++)
     {
-        std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it));
+        std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it, mTextureManager.get()));
         
         mLayersList.push_back(std::move(layer));
-    }
-}
-
-void Purity::GameMap::addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile> > >& tileList, int layerNum)
-{
-    const sf::Texture * tileTexture;
-    Tmx::MapTile tmxTile;
-
-    int mapHeight = mTmxMap->GetHeight();
-    int mapWidth = mTmxMap->GetWidth();
-
-    for (int y = 0; y < mapHeight; y++)
-    {
-        std::map<int, std::unique_ptr<Tile>> col;
-        for (int x = 0; x < mapWidth; x++)
-        {
-            tmxTile = mTmxMap->GetLayer(layerNum)->GetTile(x, y);
-
-            if (tmxTile.id != 0)
-            {
-                int tileWidth = mTmxMap->GetTileWidth();
-                int tileHeight = mTmxMap->GetTileHeight();
-
-                tileTexture = mTextureManager.getTexture(mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
-                
-                std::unique_ptr<Tile> p(new Tile(x, y, tileWidth, tileHeight, tileTexture));
-
-                col[x] = (std::move(p));
-            }
-        }
-        tileList[y] = (std::move(col));
     }
 }
 
@@ -76,7 +45,7 @@ void Purity::GameMap::processTilesetsFromTMXMap()
 
         tilesetFileName = (tileset->GetImage()->GetSource());
         
-        texture = mTextureManager.getTexture(mSceneDir.string() + tilesetFileName);
+        texture = mTextureManager->getTexture(mSceneDir.string() + tilesetFileName);
 
         spriteSheet = SpriteSheet(*texture);
         

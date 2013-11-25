@@ -37,7 +37,7 @@ namespace Purity
 
         std::vector<std::unique_ptr<Layer> > mLayersList;
 
-        TextureManager mTextureManager;
+        std::unique_ptr<TextureManager> mTextureManager;
 
         void processTilesetsFromTMXMap();
         void processLayers();

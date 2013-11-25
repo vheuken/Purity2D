@@ -2,9 +2,43 @@
 
 #include <TmxParser/Tmx.h>
 
-Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer)
-    : mTmxMap(tmxMap), mTmxLayer(tmxLayer)
+#include "texturemanager.h"
+
+Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  TextureManager * textureManager )
+    : mTmxMap(tmxMap), mTmxLayer(tmxLayer), mTextureManager(textureManager)
 {
+    processTiles();
+}
+
+void Purity::Layer::processTiles()
+{
+    const sf::Texture * tileTexture;
+    Tmx::MapTile tmxTile;
+
+    int layerHeight = mTmxLayer->GetHeight();
+    int layerWidth = mTmxLayer->GetWidth();
+    int tileWidth = mTmxMap->GetTileWidth();
+    int tileHeight = mTmxMap->GetTileHeight();
+
+    for (int y = 0; y < layerHeight; y++)
+    {
+        std::map<int, std::unique_ptr<Tile>> col;
+
+        for (int x = 0; x < layerWidth; x++)
+        {
+            tmxTile = mTmxLayer->GetTile(x, y);
+            
+            if (tmxTile.id != 0)
+            {
+                tileTexture = mTextureManager->getTexture(mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
+                
+                std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, tileTexture));
+
+                col[x] = std::move(tile);
+            }
+        }
+        mTiles[y] = std::move(col);
+    }
 }
 
 const Purity::Tile * Purity::Layer::getTile(int x, int y) const
@@ -51,7 +85,7 @@ std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::
 
 void Purity::Layer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    auto listOfTilesToDraw = getListOfTilesToDraw(target.getView());
+    std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(target.getView());
 
     for (auto it = listOfTilesToDraw.begin(); it != listOfTilesToDraw.end(); it++)
     {

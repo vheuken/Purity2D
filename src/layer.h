@@ -16,16 +16,26 @@ namespace Tmx
 
 namespace Purity
 {
+
+}
+
+namespace Purity
+{
+    class TextureManager;
+
     class Layer : public sf::Drawable
     {
     public:
-        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer);
+        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager);
 
     private:
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mTiles;
 
         const Tmx::Map * mTmxMap;
         const Tmx::Layer * mTmxLayer;
+        TextureManager * mTextureManager;
+
+        void processTiles();
 
         const Tile * getTile(int x, int y) const;
         std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
