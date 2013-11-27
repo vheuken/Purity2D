@@ -41,6 +41,20 @@ void Purity::Layer::processTiles()
     }
 }
 
+void Purity::Layer::initializePhysics(b2World * world)
+{
+    if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
+    {
+        for (auto row = mTiles.begin(); row != mTiles.end(); row++)
+        {
+            for (auto col = row->second.begin(); col != row->second.end(); col++)
+            {
+                col->second.get()->initializePhysics(world);
+            }
+        }
+    }
+}
+
 const Purity::Tile * Purity::Layer::getTile(int x, int y) const
 {
     auto row = mTiles.find(y);

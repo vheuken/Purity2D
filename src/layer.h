@@ -8,15 +8,12 @@
 
 #include "tile.h"
 
+class b2World;
+
 namespace Tmx
 {
     class Map;
     class Layer;
-}
-
-namespace Purity
-{
-
 }
 
 namespace Purity
@@ -27,6 +24,8 @@ namespace Purity
     {
     public:
         Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager);
+
+        void initializePhysics(b2World * world);
 
     private:
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mTiles;

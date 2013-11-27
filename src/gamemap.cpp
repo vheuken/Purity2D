@@ -11,12 +11,9 @@ Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& 
 
 void Purity::GameMap::initializeTilePhysics(b2World * world)
 {
-    for (auto it = mPhysicsTileList.begin(); it != mPhysicsTileList.end(); it++)
+    for (auto it = mLayersList.begin(); it != mLayersList.end(); it++)
     {
-        for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++)
-        {
-            it2->second->initializePhysics(world);
-        }
+        it->get()->initializePhysics(world);
     }
 }
 
