@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 
-#include "scene.h"
+#include "../scene.h"
 
 namespace Purity
 {

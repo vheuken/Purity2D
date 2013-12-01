@@ -17,33 +17,28 @@ FIND_PACKAGE( Boost COMPONENTS filesystem system REQUIRED)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 set( HEADER_FILES
-    engine.h
     scene.h
     gamemap.h
     spritesheet.h
-    renderer.h
-    scenemanager.h
-    physicssystem.h
-    inputmanager.h
-    luamanager.h
     entity.h
     movableentity.h
     texturemanager.h
 	objectmanager.h
     tile.h
     layer.h
+
+    engine/engine.h
+    engine/renderer.h
+    engine/scenemanager.h
+    engine/physicssystem.h
+    engine/inputmanager.h
+    engine/luamanager.h
 )
 
 set( SOURCE_FILES
-     engine.cpp
      scene.cpp
      gamemap.cpp
      spritesheet.cpp
-     renderer.cpp
-     scenemanager.cpp
-     physicssystem.cpp
-     inputmanager.cpp
-     luamanager.cpp
      entity.cpp
      movableentity.cpp
      texturemanager.cpp
@@ -51,7 +46,13 @@ set( SOURCE_FILES
      tile.cpp
      layer.cpp
      
-     main.cpp
+     engine/engine.cpp
+     engine/renderer.cpp
+     engine/scenemanager.cpp
+     engine/physicssystem.cpp
+     engine/inputmanager.cpp
+     engine/luamanager.cpp     
+     engine/main.cpp
 )
 
 add_executable( ${PROJECT_NAME} 

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
-#include "scene.h"
+#include "../scene.h"
 
 Purity::Renderer::Renderer(sf::RenderWindow* window)
     : mCurrentScene(nullptr), 

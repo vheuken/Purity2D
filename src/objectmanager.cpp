@@ -2,7 +2,7 @@
 
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
-#include "luamanager.h"
+#include "engine/luamanager.h"
 
 Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
 {
