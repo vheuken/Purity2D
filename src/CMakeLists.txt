@@ -16,17 +16,9 @@ set(Boost_USE_MULTITHREADED ON)
 FIND_PACKAGE( Boost COMPONENTS filesystem system REQUIRED)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
-set( HEADER_FILES
-    framework/scene.h
-    framework/gamemap.h
-    framework/spritesheet.h
-    framework/entity.h
-    framework/movableentity.h
-    framework/texturemanager.h
-	framework/objectmanager.h
-    framework/tile.h
-    framework/layer.h
+add_subdirectory(framework)
 
+set( HEADER_FILES
     engine/engine.h
     engine/renderer.h
     engine/scenemanager.h
@@ -35,17 +27,7 @@ set( HEADER_FILES
     engine/luamanager.h
 )
 
-set( SOURCE_FILES
-     framework/scene.cpp
-     framework/gamemap.cpp
-     framework/spritesheet.cpp
-     framework/entity.cpp
-     framework/movableentity.cpp
-     framework/texturemanager.cpp
-	 framework/objectmanager.cpp
-     framework/tile.cpp
-     framework/layer.cpp
-     
+set( SOURCE_FILES     
      engine/engine.cpp
      engine/renderer.cpp
      engine/scenemanager.cpp
@@ -63,7 +45,9 @@ add_executable( ${PROJECT_NAME}
 
 target_link_libraries(
     ${PROJECT_NAME}
-
+	
+	Purity-Framework
+	
     Box2D
     sfml-system
     sfml-graphics
