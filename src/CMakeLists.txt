@@ -17,15 +17,15 @@ FIND_PACKAGE( Boost COMPONENTS filesystem system REQUIRED)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 set( HEADER_FILES
-    scene.h
-    gamemap.h
-    spritesheet.h
-    entity.h
-    movableentity.h
-    texturemanager.h
-	objectmanager.h
-    tile.h
-    layer.h
+    framework/scene.h
+    framework/gamemap.h
+    framework/spritesheet.h
+    framework/entity.h
+    framework/movableentity.h
+    framework/texturemanager.h
+	framework/objectmanager.h
+    framework/tile.h
+    framework/layer.h
 
     engine/engine.h
     engine/renderer.h
@@ -36,15 +36,15 @@ set( HEADER_FILES
 )
 
 set( SOURCE_FILES
-     scene.cpp
-     gamemap.cpp
-     spritesheet.cpp
-     entity.cpp
-     movableentity.cpp
-     texturemanager.cpp
-	 objectmanager.cpp
-     tile.cpp
-     layer.cpp
+     framework/scene.cpp
+     framework/gamemap.cpp
+     framework/spritesheet.cpp
+     framework/entity.cpp
+     framework/movableentity.cpp
+     framework/texturemanager.cpp
+	 framework/objectmanager.cpp
+     framework/tile.cpp
+     framework/layer.cpp
      
      engine/engine.cpp
      engine/renderer.cpp

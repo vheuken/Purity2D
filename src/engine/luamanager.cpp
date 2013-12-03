@@ -3,9 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
-#include "../entity.h"
-#include "../movableentity.h"
-#include "../objectmanager.h"
+#include "../framework/entity.h"
+#include "../framework/movableentity.h"
+#include "../framework/objectmanager.h"
 #include "engine.h"
 
 Purity::LuaManager::LuaManager()
