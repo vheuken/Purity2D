@@ -17,44 +17,4 @@ FIND_PACKAGE( Boost COMPONENTS filesystem system REQUIRED)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 add_subdirectory(framework)
-
-set( HEADER_FILES
-    engine/engine.h
-    engine/renderer.h
-    engine/scenemanager.h
-    engine/physicssystem.h
-    engine/inputmanager.h
-    engine/luamanager.h
-)
-
-set( SOURCE_FILES     
-     engine/engine.cpp
-     engine/renderer.cpp
-     engine/scenemanager.cpp
-     engine/physicssystem.cpp
-     engine/inputmanager.cpp
-     engine/luamanager.cpp     
-     engine/main.cpp
-)
-
-add_executable( ${PROJECT_NAME} 
-                ${HEADER_FILES}
-                ${SOURCE_FILES}
-)
-
-
-target_link_libraries(
-    ${PROJECT_NAME}
-	
-	Purity-Framework
-	
-    Box2D
-    sfml-system
-    sfml-graphics
-    sfml-window
-    lua
-    luabind
-    TMX-Parser
-    ${Boost_SYSTEM_LIBRARY}
-    ${Boost_FILESYSTEM_LIBRARY}
-)
+add_subdirectory(engine)
