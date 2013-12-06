@@ -3,8 +3,6 @@
 #include <queue>
 #include <SFML/Graphics.hpp>
 
-#include "luamanager.h"
-
 Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue)
 {
     mWindow = window;
