@@ -52,6 +52,6 @@ void Purity::Renderer::run()
 
         fps = 1.f / (currentTime);
         lastTime = currentTime;
-        std::cout << "FPS: " << fps << std::endl;
+        //std::cout << "FPS: " << fps << std::endl;
     }
 }

@@ -4,6 +4,7 @@
 #include <map>
 #include <unordered_map>
 #include <memory>
+#include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "tile.h"
@@ -23,7 +24,7 @@ namespace Purity
     class Layer : public sf::Drawable
     {
     public:
-        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager);
+        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager, boost::filesystem::path sceneDir);
 
         void initializePhysics(b2World * world);
 
@@ -33,6 +34,7 @@ namespace Purity
         const Tmx::Map * mTmxMap;
         const Tmx::Layer * mTmxLayer;
         TextureManager * mTextureManager;
+        boost::filesystem::path mSceneDir;
 
         void processTiles();
 

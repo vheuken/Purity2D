@@ -4,8 +4,8 @@
 
 #include "texturemanager.h"
 
-Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  TextureManager * textureManager )
-    : mTmxMap(tmxMap), mTmxLayer(tmxLayer), mTextureManager(textureManager)
+Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  TextureManager * textureManager, boost::filesystem::path sceneDir )
+: mTmxMap(tmxMap), mTmxLayer(tmxLayer), mTextureManager(textureManager), mSceneDir(sceneDir)
 {
     processTiles();
 }
@@ -30,9 +30,9 @@ void Purity::Layer::processTiles()
             
             if (tmxTile.id != 0)
             {
-                tileTexture = mTextureManager->getTexture(mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
+                tileTexture = mTextureManager->getTexture(mSceneDir.string() + mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
                 
-                std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, tileTexture));
+                std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id));
 
                 col[x] = std::move(tile);
             }
@@ -50,6 +50,16 @@ void Purity::Layer::initializePhysics(b2World * world)
             for (auto col = row->second.begin(); col != row->second.end(); col++)
             {
                 col->second.get()->initializePhysics(world);
+            }
+        }
+    }
+    else
+    {
+        for (auto row = mTiles.begin(); row != mTiles.end(); row++)
+        {
+            for (auto col = row->second.begin(); col != row->second.end(); col++)
+            {
+                col->second.get()->initializeStatic();
             }
         }
     }

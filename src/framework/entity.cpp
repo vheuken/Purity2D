@@ -9,6 +9,7 @@ Purity::Entity::Entity()
 
 Purity::Entity::Entity(const Tmx::Object* object, b2World* world)
 {
+    mTexture = nullptr;
     float x = object->GetX() / PIXELS_PER_METER;
     float y = object->GetY() / PIXELS_PER_METER;
     float width = (float)object->GetWidth();
@@ -111,7 +112,7 @@ void Purity::Entity::draw(sf::RenderTarget &target, sf::RenderStates states) con
 
         if (mTexture)
         {
-            //states.texture = mTexture;
+            states.texture = mTexture;
         }
 
         target.draw(mVertexArray, states);

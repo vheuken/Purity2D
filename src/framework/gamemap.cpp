@@ -5,7 +5,7 @@
 Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir)
     : mSceneDir(sceneDir), mTmxMap(tmxMap), mTextureManager(new TextureManager())
 {
-    processTilesetsFromTMXMap();
+    //processTilesetsFromTMXMap();
     processLayers();
 }
 
@@ -23,7 +23,7 @@ void Purity::GameMap::processLayers()
 
     for (auto it = tmxLayers.begin(); it != tmxLayers.end(); it++)
     {
-        std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it, mTextureManager.get()));
+        std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it, mTextureManager.get(), mSceneDir));
         
         mLayersList.push_back(std::move(layer));
     }

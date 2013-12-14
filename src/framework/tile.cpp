@@ -1,6 +1,7 @@
 #include "tile.h"
 
-Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * texture)
+Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * texture, int id)
+: mId(id)
 {
     mTexture = texture;
 
@@ -8,6 +9,8 @@ Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * text
     mHeightPixels = height;
 
     setPosition(x*width, y*height);
+
+
     /*
     mVertexArray.setPrimitiveType(sf::Quads);
 
@@ -27,6 +30,11 @@ void Purity::Tile::initializePhysics(b2World * world)
     createBody(world);
     //setSize(mWidthPixels, mHeightPixels)
 
+    initializeHitboxShape();
+}
+
+void Purity::Tile::initializeStatic()
+{
     initializeHitboxShape();
 }
 
@@ -65,5 +73,5 @@ void Purity::Tile::createBody(b2World* world)
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
     
 
-    mHitboxBody->SetUserData(new std::string("Tile"));
+    //mHitboxBody->SetUserData(new std::string("Tile"));
 }

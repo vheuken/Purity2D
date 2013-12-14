@@ -8,11 +8,14 @@ namespace Purity
     class Tile : public Entity
     {
     public:
-        Tile(int x, int y, int width, int height, const sf::Texture * texture);
+        Tile(int x, int y, int width, int height, const sf::Texture * texture, int id);
 
         void initializePhysics(b2World * world);
+        void initializeStatic();
 
     private:
+        const int mId;
+
         void createBody(b2World* world);
     };
 }
