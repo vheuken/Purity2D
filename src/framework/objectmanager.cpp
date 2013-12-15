@@ -41,7 +41,7 @@ Purity::MovableEntity* Purity::ObjectManager::getMovableObjectByName(const std::
 
     return nullptr;
 }
-#include <iostream>
+
 void Purity::ObjectManager::initializeObjects()
 {
     int numOfGroups = mTmxMap->GetNumObjectGroups();
@@ -64,7 +64,6 @@ void Purity::ObjectManager::initializeObjects()
             {
                 if (currentObject->GetProperties().GetSize() > 0)
                 {
-                    std::cout << "WOOOW\n\n";
                     std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
                     const sf::Texture * t = mTextureManager.getTexture("scenes/init/" + p);
                     MovableEntity object(currentObject, mWorld, t);

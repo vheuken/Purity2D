@@ -69,20 +69,12 @@ void Purity::Entity::setSize(float width, float height)
     initializeHitboxShape();
 }
 
-#include <iostream>
-
 void Purity::Entity::initializeTextureCoords()
 {
     mVertexArray[0].texCoords = sf::Vector2f(0, 0);
     mVertexArray[1].texCoords = sf::Vector2f(mWidthPixels, 0);
     mVertexArray[2].texCoords = sf::Vector2f(mWidthPixels, mHeightPixels);
     mVertexArray[3].texCoords = sf::Vector2f(0, mHeightPixels);
-    std::cout << "YOYOYOYOYOO\n\n";
-
-    if (mTexture != nullptr)
-    {
-        std::cout << "HI MADDD";
-    }
 }
 
 void Purity::Entity::update()
