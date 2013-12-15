@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "movableentity.h"
+#include "texturemanager.h"
 
 class b2World;
 
@@ -35,6 +36,8 @@ namespace Purity
         b2World* mWorld;
         std::vector<Entity> mObjectList;
         std::vector<MovableEntity> mMovableObjectList;
+
+        TextureManager mTextureManager;
 
         void initializeObjects();
 

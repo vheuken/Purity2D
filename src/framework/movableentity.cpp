@@ -2,8 +2,8 @@
 
 #include <luabind/luabind.hpp>
 
-Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world)
-    : Entity(object, world)
+Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world, const sf::Texture * texture)
+    : Entity(object, world, texture)
 {
     mHitboxBody->SetType(b2_dynamicBody);
 }

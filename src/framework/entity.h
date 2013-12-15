@@ -33,7 +33,7 @@ namespace Purity
     {
     public:
         Entity();
-        Entity(const Tmx::Object* object, b2World* world);
+        Entity(const Tmx::Object* object, b2World* world, const sf::Texture * texture);
 
         virtual void createBody(b2World* world);
         void setName(std::string name);
@@ -63,6 +63,8 @@ namespace Purity
 
     private:
         std::string mName;
+
+        void initializeTextureCoords();
 
         bool isInView(const sf::View& view) const;
 

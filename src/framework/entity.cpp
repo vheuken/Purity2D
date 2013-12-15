@@ -7,9 +7,9 @@ Purity::Entity::Entity()
 {
 }
 
-Purity::Entity::Entity(const Tmx::Object* object, b2World* world)
+Purity::Entity::Entity(const Tmx::Object* object, b2World* world, const sf::Texture * texture)
 {
-    mTexture = nullptr;
+    mTexture = texture;
     float x = object->GetX() / PIXELS_PER_METER;
     float y = object->GetY() / PIXELS_PER_METER;
     float width = (float)object->GetWidth();
@@ -21,6 +21,8 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world)
     setPosition(x, y);
     setBodyPosition(x, y);
     setSize(width, height);
+
+    initializeTextureCoords();
 }
 
 void Purity::Entity::setBodyPosition(float x, float y)
@@ -65,6 +67,22 @@ void Purity::Entity::setSize(float width, float height)
     mHitboxBody->SetUserData( this );
     
     initializeHitboxShape();
+}
+
+#include <iostream>
+
+void Purity::Entity::initializeTextureCoords()
+{
+    mVertexArray[0].texCoords = sf::Vector2f(0, 0);
+    mVertexArray[1].texCoords = sf::Vector2f(mWidthPixels, 0);
+    mVertexArray[2].texCoords = sf::Vector2f(mWidthPixels, mHeightPixels);
+    mVertexArray[3].texCoords = sf::Vector2f(0, mHeightPixels);
+    std::cout << "YOYOYOYOYOO\n\n";
+
+    if (mTexture != nullptr)
+    {
+        std::cout << "HI MADDD";
+    }
 }
 
 void Purity::Entity::update()
