@@ -38,6 +38,11 @@ void Purity::LuaManager::doFile(const std::string& luaFileName)
     luaL_dofile(mLuaState, luaFileName.c_str());
 }
 
+void Purity::LuaManager::loadFile(const std::string& luaFileName)
+{
+    luaL_loadfile(mLuaState, luaFileName.c_str());
+}
+
 void Purity::LuaManager::initializeBindings()
 {
     luabind::open(mLuaState);

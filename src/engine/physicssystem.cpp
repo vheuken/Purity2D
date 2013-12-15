@@ -21,10 +21,22 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
 {
     if (scene != mCurrentScene)
     {
+        LuaManager* luaManager = LuaManager::getManager();
+
         mCurrentScene = scene;
         
         mCurrentScene->initializePhysics(mWorld.get());
+
+        std::string luaEventHandlerFileName = mCurrentScene->getLuaEventHandlerPath();
+        std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
+
+        luaManager->doFile(luaEventHandlerFileName);
+
+        std::string physicsUpdateScript = mCurrentScene->getLuaPhysicsUpdatePath();
+
+        luaManager->doFile(physicsUpdateScript);
     }
+
     step();
     mCurrentScene->updatePhysics();
 }
@@ -60,8 +72,6 @@ void Purity::PhysicsSystem::handleInput()
     {
 	    sf::Event event = mInputQueue->front();
 	    mInputQueue->pop();
-	
-	    luaManager->doFile(luaEventHandlerFileName);
 
 	    luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);
     }
@@ -70,7 +80,6 @@ void Purity::PhysicsSystem::handleInput()
 void Purity::PhysicsSystem::runUpdateScripts()
 {
     LuaManager* luaManager = LuaManager::getManager();
-	std::string physicsUpdateScript = mCurrentScene->getLuaPhysicsUpdatePath();
 
-	luaManager->doFile(physicsUpdateScript);
+    luabind::call_function<void>(luaManager->getState(), "onPhysicsUpdate");
 }

@@ -16,7 +16,7 @@ namespace Purity
         lua_State* getState();
 
         void doFile(const std::string& luaFileName);
-
+        void loadFile(const std::string& luaFileName);
     private:
         LuaManager();
 
