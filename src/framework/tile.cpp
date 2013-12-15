@@ -1,7 +1,7 @@
 #include "tile.h"
 
 Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * texture, int id)
-: mId(id)
+: mTileId(id)
 {
     mTexture = texture;
 
@@ -9,20 +9,14 @@ Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * text
     mHeightPixels = height;
 
     setPosition(x*width, y*height);
+}
 
-
-    /*
-    mVertexArray.setPrimitiveType(sf::Quads);
-
-    mVertexArray.append(sf::Vector2f(getPosition().x, getPosition().y));
-    mVertexArray.append(sf::Vector2f(getPosition().x + mWidthPixels, getPosition().y));
-    mVertexArray.append(sf::Vector2f(getPosition().x + mWidthPixels, getPosition().y + mHeightPixels));
-    mVertexArray.append(sf::Vector2f(getPosition().x, getPosition().y + mHeightPixels));
-
-    mVertexArray[0].color = sf::Color::Red;
-    mVertexArray[1].color = sf::Color::Red;
-    mVertexArray[2].color = sf::Color::Red;
-    mVertexArray[3].color = sf::Color::Red;*/
+void Purity::Tile::setTextureSubrect()
+{
+    mVertexArray[0].texCoords = sf::Vector2f(mTileId*mWidthPixels, mTileId*mHeightPixels);
+    mVertexArray[1].texCoords = sf::Vector2f(mTileId*mWidthPixels + mWidthPixels, mTileId*mHeightPixels);
+    mVertexArray[2].texCoords = sf::Vector2f(mTileId*mWidthPixels + mWidthPixels, mTileId*mHeightPixels + mHeightPixels);
+    mVertexArray[3].texCoords = sf::Vector2f(mTileId*mWidthPixels, mTileId*mHeightPixels + mHeightPixels);
 }
 
 void Purity::Tile::initializePhysics(b2World * world)
@@ -31,11 +25,13 @@ void Purity::Tile::initializePhysics(b2World * world)
     //setSize(mWidthPixels, mHeightPixels)
 
     initializeHitboxShape();
+    setTextureSubrect();
 }
 
 void Purity::Tile::initializeStatic()
 {
     initializeHitboxShape();
+    setTextureSubrect();
 }
 
 void Purity::Tile::createBody(b2World* world)

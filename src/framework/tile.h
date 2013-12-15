@@ -14,7 +14,9 @@ namespace Purity
         void initializeStatic();
 
     private:
-        const int mId;
+        const int mTileId;
+
+        void setTextureSubrect();
 
         void createBody(b2World* world);
     };
