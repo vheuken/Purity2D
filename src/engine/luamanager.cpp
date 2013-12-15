@@ -205,7 +205,8 @@ void Purity::LuaManager::initializeSFMLBindings()
                 .def("Rotate", &sf::View::rotate)
                 .def("Move", (void (sf::View::*)(float, float))&sf::View::move)
                 .def("GetCenter", &sf::View::getCenter)
-                .def("GetSize", &sf::View::getSize),
+                .def("GetSize", &sf::View::getSize)
+                .def("SetCenter", (void (sf::View::*)(float, float))&sf::View::setCenter),
 
             luabind::class_<sf::Vector2f>("Vector2f")
                 .def(luabind::constructor<float, float>())
