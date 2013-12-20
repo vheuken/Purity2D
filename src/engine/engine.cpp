@@ -23,6 +23,7 @@ void Purity::Engine::initialize()
     initializeSceneManager();
     initializePhysicsSystem();
     initializeInputManager();
+    initializeNetworkManager();
 
     luabind::globals(LuaManager::getManager()->getState())["GPurityEngine"] = this;
 }
@@ -38,10 +39,10 @@ void Purity::Engine::run()
         {
             currentScene = mSceneManager->getCurrentScene();
         }
-
         
+        mNetworkManager->update();
+        mInputManager->update();
         mPhysicsSystem->update(currentScene);
-        mInputManager->update(currentScene);
         mRenderer->update(currentScene);
     }
 
@@ -81,6 +82,11 @@ void Purity::Engine::initializePhysicsSystem()
 void Purity::Engine::initializeInputManager()
 {
     mInputManager = std::unique_ptr<InputManager>(new InputManager(mWindow.get(), mInputQueue.get()));
+}
+
+void Purity::Engine::initializeNetworkManager()
+{
+    mNetworkManager = std::unique_ptr<NetworkManager>(new NetworkManager());
 }
 
 sf::View Purity::Engine::getView()

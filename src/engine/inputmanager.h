@@ -11,8 +11,6 @@ namespace sf
 
 namespace Purity
 {
-    class Scene;
-
     class InputManager
     {
     public:
