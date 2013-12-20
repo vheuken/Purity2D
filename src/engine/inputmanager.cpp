@@ -6,17 +6,11 @@
 Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue)
 {
     mWindow = window;
-    mCurrentScene = nullptr;
     mInputQueue = inputQueue;
 }
 
-void Purity::InputManager::update(Scene* scene)
+void Purity::InputManager::update()
 {
-    if (mCurrentScene != scene)
-    {
-        mCurrentScene = scene;
-    }
-
     sf::Event event;
 
     while (mWindow->pollEvent(event))

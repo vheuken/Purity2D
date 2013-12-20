@@ -18,11 +18,10 @@ namespace Purity
     public:
         InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue);
 
-        void update(Scene* scene);
+        void update();
 
     private:
         sf::RenderWindow* mWindow;
-	    Scene* mCurrentScene;
 	    std::queue<sf::Event>* mInputQueue;	
     };
 }
