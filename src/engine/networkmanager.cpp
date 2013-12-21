@@ -14,7 +14,7 @@ void Purity::NetworkManager::update()
 
 void Purity::NetworkManager::send(std::string recipient)
 {
-    char data[100] = "55555";
+    char data[100] = "5555555555555555555555";
     sf::IpAddress r = recipient;
     socket.send(data, 100, recipient, port);
 }
@@ -26,7 +26,7 @@ void Purity::NetworkManager::receive(std::string sender)
     sf::IpAddress s = sender;
     socket.receive(data, 100, r, s, port);
 
-    std::cout << "Received " << r << " bytes: " << data;
+    std::cout << "Received " << r << " bytes: ";
 }
 
 std::string Purity::NetworkManager::getLocalAddress()
