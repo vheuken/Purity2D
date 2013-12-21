@@ -4,6 +4,7 @@
 
 Purity::NetworkManager::NetworkManager() : port(54000)
 {
+    socket.setBlocking(true);
     luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
 }
 
@@ -26,7 +27,7 @@ void Purity::NetworkManager::receive(std::string sender)
     sf::IpAddress s = sender;
     socket.receive(data, 100, r, s, port);
 
-    std::cout << "Received " << r << " bytes: ";
+    std::cout << "Received " << r << " bytes\n";
 }
 
 std::string Purity::NetworkManager::getLocalAddress()
