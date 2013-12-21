@@ -10,13 +10,20 @@ Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * text
 
     setPosition(x*width, y*height);
 }
-
+#include <iostream>
 void Purity::Tile::setTextureSubrect()
 {
-    mVertexArray[0].texCoords = sf::Vector2f(mTileId*mWidthPixels, mTileId*mHeightPixels);
-    mVertexArray[1].texCoords = sf::Vector2f(mTileId*mWidthPixels + mWidthPixels, mTileId*mHeightPixels);
-    mVertexArray[2].texCoords = sf::Vector2f(mTileId*mWidthPixels + mWidthPixels, mTileId*mHeightPixels + mHeightPixels);
-    mVertexArray[3].texCoords = sf::Vector2f(mTileId*mWidthPixels, mTileId*mHeightPixels + mHeightPixels);
+    int id = mTileId;
+    int numOfRows = mTexture->getSize().x / mWidthPixels;
+    int numOfCols = mTexture->getSize().y / mHeightPixels;
+
+    int left = (id % numOfCols) * mWidthPixels;
+    int top = (id / numOfCols) * mHeightPixels;
+
+    mVertexArray[0].texCoords = sf::Vector2f(left, top);
+    mVertexArray[1].texCoords = sf::Vector2f(left + mWidthPixels, top);
+    mVertexArray[2].texCoords = sf::Vector2f(left + mWidthPixels, top + mHeightPixels);
+    mVertexArray[3].texCoords = sf::Vector2f(left, top + mHeightPixels);
 }
 
 void Purity::Tile::initializePhysics(b2World * world)
