@@ -51,9 +51,10 @@ void Purity::LuaManager::initializeBindings()
 
     luabind::module(mLuaState) [
         ObjectManager::luaBindings(),
-        Entity::luaBindings(),
-        MovableEntity::luaBindings(),
-        Engine::luaBindings()
+            Entity::luaBindings(),
+            MovableEntity::luaBindings(),
+            Engine::luaBindings(),
+            NetworkManager::luaBindings()
     ];
     
 }
