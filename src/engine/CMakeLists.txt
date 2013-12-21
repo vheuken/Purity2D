@@ -7,6 +7,7 @@ set( HEADER_FILES
     physicssystem.h
     inputmanager.h
     luamanager.h
+    networkmanager.h
 )
 
 set( SOURCE_FILES     
@@ -15,7 +16,9 @@ set( SOURCE_FILES
      scenemanager.cpp
      physicssystem.cpp
      inputmanager.cpp
-     luamanager.cpp     
+     luamanager.cpp 
+     networkmanager.cpp
+
      main.cpp
 )
 
