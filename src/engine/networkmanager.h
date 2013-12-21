@@ -17,7 +17,14 @@ namespace Purity
 
         void update();
 
+        void send(std::string recipient);
+        void receive(std::string sender);
+
         static luabind::scope luaBindings();
+
+    private:
+        sf::UdpSocket socket;
+        unsigned short port;
     };
 }
 
