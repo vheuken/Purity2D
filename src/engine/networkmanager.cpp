@@ -2,9 +2,10 @@
 #include "luamanager.h"
 #include <iostream>
 
-Purity::NetworkManager::NetworkManager() : port(54000)
+Purity::NetworkManager::NetworkManager() : mPort(54000)
 {
-    socket.bind(port);
+    mSocket.bind(mPort);
+    mSocket.setBlocking(false);
     luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
 }
 
@@ -17,9 +18,9 @@ void Purity::NetworkManager::send(std::string recipient)
 {
     char data[100] = "5555555555555555555555";
     sf::IpAddress r = recipient;
-    if (socket.send(data, 100, recipient, port) != sf::Socket::Done)
+    if (mSocket.send(data, 100, recipient, mPort) != sf::Socket::Done)
     {
-        std::cout << "ERROR!\n";
+        std::cerr << "Error sending!" << std::endl;
     }
 }
 
@@ -28,9 +29,9 @@ void Purity::NetworkManager::receive(std::string sender)
     char data[100];
     std::size_t r;
     sf::IpAddress s = sender;
-    socket.receive(data, 100, r, s, port);
+    mSocket.receive(data, 100, r, s, mPort);
 
-    std::cout << "Received " << r << " bytes\n";
+    std::cout << "Received " << r << " bytes from " << sender << std::endl;
 }
 
 std::string Purity::NetworkManager::getLocalAddress()

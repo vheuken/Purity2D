@@ -23,8 +23,8 @@ namespace Purity
         static luabind::scope luaBindings();
 
     private:
-        sf::UdpSocket socket;
-        unsigned short port;
+        sf::UdpSocket mSocket;
+        unsigned short mPort;
     };
 }
 
