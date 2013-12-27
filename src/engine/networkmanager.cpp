@@ -2,9 +2,8 @@
 #include "luamanager.h"
 #include <iostream>
 
-Purity::NetworkManager::NetworkManager() : mPort(54000)
+Purity::NetworkManager::NetworkManager()
 {
-    mSocket.bind(mPort);
     mSocket.setBlocking(false);
     luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
 }
@@ -12,6 +11,12 @@ Purity::NetworkManager::NetworkManager() : mPort(54000)
 void Purity::NetworkManager::update()
 {
 
+}
+
+void Purity::NetworkManager::setPort(unsigned short port)
+{
+    mPort = port;
+    mSocket.bind(mPort);
 }
 
 void Purity::NetworkManager::send(std::string recipient)
@@ -49,6 +54,7 @@ luabind::scope Purity::NetworkManager::luaBindings()
     return luabind::class_<NetworkManager>("NetworkManager")
         .def("getLocalAddress", &NetworkManager::getLocalAddress)
         .def("getPublicAddress", &NetworkManager::getPublicAddress)
+        .def("setPort", &NetworkManager::setPort)
         .def("send", &NetworkManager::send)
         .def("receive", &NetworkManager::receive)
         ;

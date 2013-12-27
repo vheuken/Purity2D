@@ -17,6 +17,8 @@ namespace Purity
 
         void update();
 
+        void setPort(unsigned short port);
+
         void send(std::string recipient);
         void receive(std::string sender);
 
