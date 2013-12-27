@@ -19,24 +19,30 @@ void Purity::NetworkManager::setPort(unsigned short port)
     mSocket.bind(mPort);
 }
 
-void Purity::NetworkManager::send(std::string recipient)
+void Purity::NetworkManager::sendAction(std::string recipient, std::string objectName, std::string action)
 {
-    char data[100] = "5555555555555555555555";
+    sf::Packet packet;
     sf::IpAddress r = recipient;
-    if (mSocket.send(data, 100, recipient, mPort) != sf::Socket::Done)
+
+    packet << objectName << action;
+
+    if (mSocket.send(packet, r, mPort) != sf::Socket::Done)
     {
         std::cerr << "Error sending!" << std::endl;
     }
 }
 
-void Purity::NetworkManager::receive(std::string sender)
+void Purity::NetworkManager::receiveAction(std::string sender)
 {
-    char data[100];
-    std::size_t r;
+    sf::Packet packet;
     sf::IpAddress s = sender;
-    mSocket.receive(data, 100, r, s, mPort);
+    std::string objectName, action;
 
-    std::cout << "Received " << r << " bytes from " << sender << std::endl;
+    mSocket.receive(packet, s, mPort);
+
+    packet >> objectName >> action;
+
+    std::cout << "Object " << objectName << " is performing " << action << std::endl;
 }
 
 std::string Purity::NetworkManager::getLocalAddress()
@@ -55,7 +61,7 @@ luabind::scope Purity::NetworkManager::luaBindings()
         .def("getLocalAddress", &NetworkManager::getLocalAddress)
         .def("getPublicAddress", &NetworkManager::getPublicAddress)
         .def("setPort", &NetworkManager::setPort)
-        .def("send", &NetworkManager::send)
-        .def("receive", &NetworkManager::receive)
+        .def("sendAction", &NetworkManager::sendAction)
+        .def("receiveAction", &NetworkManager::receiveAction)
         ;
 }

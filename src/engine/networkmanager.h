@@ -19,8 +19,8 @@ namespace Purity
 
         void setPort(unsigned short port);
 
-        void send(std::string recipient);
-        void receive(std::string sender);
+        void sendAction(std::string recipient, std::string objectName, std::string action);
+        void receiveAction(std::string sender);
 
         static luabind::scope luaBindings();
 
