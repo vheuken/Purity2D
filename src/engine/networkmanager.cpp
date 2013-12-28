@@ -123,6 +123,8 @@ void Purity::NetworkManager::receiveDataFromServer()
     char data[100];
     size_t received;
     mSocket.receive(data, 100, received, mServerAddress, mPort);
+
+    std::cout << "Received " << received << " bytes from " << mServerAddress <<  std::endl;
 }
 
 luabind::scope Purity::NetworkManager::luaBindings()
