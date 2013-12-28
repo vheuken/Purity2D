@@ -111,11 +111,11 @@ void Purity::NetworkManager::addClient(const sf::IpAddress& clientAddress)
 
 void Purity::NetworkManager::sendDataToClients()
 {
-    char data[100] = "555";
-
+    sf::Packet p;
+    p << "5555555";
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
-        if (mSocket.send(data, 100, *it, mPort) != sf::Socket::Done)
+        if (mSocket.send(p, *it, mPort) != sf::Socket::Done)
         {
             std::cout << "ERROR\n";
         }
@@ -125,9 +125,9 @@ void Purity::NetworkManager::sendDataToClients()
 
 void Purity::NetworkManager::receiveDataFromServer()
 {
-    char data[100];
+    sf::Packet p;
     size_t received;
-    mSocket.receive(data, 100, received, mServerAddress, mPort);
+    mSocket.receive(p, mServerAddress, mPort);
 
     std::cout << "Received " << received << " bytes from " << mServerAddress <<  std::endl;
 }
