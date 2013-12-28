@@ -13,7 +13,7 @@ void Purity::NetworkManager::update()
 {
     if (isServer())
     {
-        listenForConnections();
+        listenForNewConnections();
         sendDataToClients();
     }
     else
@@ -80,6 +80,7 @@ void Purity::NetworkManager::connectToServer(std::string serverAddressStr)
     {
         std::cout << "Connected to " << mServerAddress << std::endl;
     }
+    socket.disconnect();
 }
 
 std::string Purity::NetworkManager::getLocalAddress()
@@ -92,7 +93,7 @@ std::string Purity::NetworkManager::getPublicAddress()
     return sf::IpAddress::getPublicAddress().toString();
 }
 
-void Purity::NetworkManager::listenForConnections()
+void Purity::NetworkManager::listenForNewConnections()
 {
     sf::TcpSocket client;
 
@@ -111,10 +112,14 @@ void Purity::NetworkManager::addClient(const sf::IpAddress& clientAddress)
 void Purity::NetworkManager::sendDataToClients()
 {
     char data[100] = "555";
-    size_t s = 100;
+
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
-        mSocket.send(data, s, *it, mPort);
+        if (mSocket.send(data, 100, *it, mPort) != sf::Socket::Done)
+        {
+            std::cout << "ERROR\n";
+        }
+        
     }
 }
 

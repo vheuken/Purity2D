@@ -39,7 +39,7 @@ namespace Purity
         unsigned short mPort;
         bool server;
 
-        void listenForConnections();
+        void listenForNewConnections();
         void addClient(const sf::IpAddress& clientAddress);
         void sendDataToClients();
         void receiveDataFromServer();
