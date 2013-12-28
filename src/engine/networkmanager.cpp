@@ -2,7 +2,7 @@
 #include "luamanager.h"
 #include <iostream>
 
-Purity::NetworkManager::NetworkManager() : isServer(false)
+Purity::NetworkManager::NetworkManager() : server(false)
 {
     mSocket.setBlocking(false);
     mListener.setBlocking(false);
@@ -11,9 +11,14 @@ Purity::NetworkManager::NetworkManager() : isServer(false)
 
 void Purity::NetworkManager::update()
 {
-    if (isServer)
+    if (isServer())
     {
         listenForConnections();
+        sendDataToClients();
+    }
+    else
+    {
+        receiveDataFromServer();
     }
 }
 
@@ -39,7 +44,12 @@ void Purity::NetworkManager::sendAction(std::string recipient, std::string objec
 
 void Purity::NetworkManager::setServer(bool isServer)
 {
-    this->isServer = isServer;
+    this->server = isServer;
+}
+
+bool Purity::NetworkManager::isServer() const
+{
+    return server;
 }
 
 void Purity::NetworkManager::receiveAction(std::string sender)
@@ -68,9 +78,9 @@ void Purity::NetworkManager::connectToServer(std::string serverAddress)
     else if (status == sf::Socket::Done)
     {
         std::cout << "Connected to " << serverAddress << std::endl;
+        this->mServerAddress = serverAddress;
     }
 }
-
 
 std::string Purity::NetworkManager::getLocalAddress()
 {
@@ -89,7 +99,30 @@ void Purity::NetworkManager::listenForConnections()
     if (mListener.accept(client) == sf::Socket::Done)
     {
         std::cout << "New connection received from: " << client.getRemoteAddress() << std::endl;
+        addClient(client.getRemoteAddress());
     }
+}
+
+void Purity::NetworkManager::addClient(sf::IpAddress& clientAddress)
+{
+    mClientAddressList.push_back(clientAddress);
+}
+
+void Purity::NetworkManager::sendDataToClients()
+{
+    char data[100] = "555";
+    size_t s = 100;
+    for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
+    {
+        mSocket.send(data, s, *it, mPort);
+    }
+}
+
+void Purity::NetworkManager::receiveDataFromServer()
+{
+    char data[100];
+    size_t received;
+    mSocket.receive(data, 100, received, mServerAddress, mPort);
 }
 
 luabind::scope Purity::NetworkManager::luaBindings()
