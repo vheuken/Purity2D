@@ -101,6 +101,7 @@ void Purity::NetworkManager::listenForNewConnections()
     {
         std::cout << "New connection received from: " << client.getRemoteAddress() << std::endl;
         addClient(client.getRemoteAddress());
+        client.disconnect();
     }
 }
 
@@ -115,11 +116,7 @@ void Purity::NetworkManager::sendDataToClients()
     p << "555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555";
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
-        if (mSocket.send(p, *it, mPort) != sf::Socket::Done)
-        {
-            std::cout << "ERROR\n";
-        }
-        
+        mSocket.send(p, *it, mPort);
     }
 }
 
@@ -127,8 +124,7 @@ void Purity::NetworkManager::receiveDataFromServer()
 {
     sf::Packet p;
     mSocket.receive(p, mServerAddress, mPort);
-
-    std::cout << "Received " << p.getDataSize() << " bytes from " << mServerAddress <<  std::endl;
+    std::cout << p.getDataSize() << std::endl;
 }
 
 luabind::scope Purity::NetworkManager::luaBindings()
