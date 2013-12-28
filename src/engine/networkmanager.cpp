@@ -70,7 +70,7 @@ void Purity::NetworkManager::receiveAction(sf::IpAddress& client)
     NetworkAction action;
 
     mSocket.receive(packet, client, mPort);
-
+    
     if (packet >> action)
     {
         std::cout << "Object " << action.objectName << " is performing " << action.actionName << std::endl;
@@ -122,26 +122,18 @@ void Purity::NetworkManager::addClient(const sf::IpAddress& clientAddress)
 
 void Purity::NetworkManager::sendDataToClients()
 {
-    sf::Packet p;
-    p << "555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555";
-    for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
-    {
-        mSocket.send(p, *it, mPort);
-    }
+
 }
 
 void Purity::NetworkManager::receiveDataFromServer()
 {
-    sf::Packet p;
-    mSocket.receive(p, mServerAddress, mPort);
-    std::cout << p.getDataSize() << std::endl;
 }
 
 void Purity::NetworkManager::receiveActionsFromClients()
 {
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
-        
+        receiveAction(*it);
     }
 }
 
