@@ -26,7 +26,7 @@ void Purity::NetworkManager::setPort(unsigned short port)
 {
     mPort = port;
     mSocket.bind(mPort);
-    mListener.listen(5775);
+    mListener.listen(mPort);
 }
 
 void Purity::NetworkManager::sendAction(std::string recipient, std::string objectName, std::string action)
@@ -71,7 +71,7 @@ void Purity::NetworkManager::connectToServer(std::string serverAddressStr)
     sf::TcpSocket socket;
     sf::IpAddress serverAddress(serverAddressStr);
     this->mServerAddress = serverAddress;
-    sf::Socket::Status status = socket.connect(mServerAddress, 5775);
+    sf::Socket::Status status = socket.connect(mServerAddress, mPort);
     if (status != sf::Socket::Done)
     {
         std::cerr << "Connection to " << mServerAddress << " failed!" << std::endl;
@@ -112,7 +112,7 @@ void Purity::NetworkManager::addClient(const sf::IpAddress& clientAddress)
 void Purity::NetworkManager::sendDataToClients()
 {
     sf::Packet p;
-    p << "6666666666666666666666666666666666666666666";
+    p << "555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555";
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
         if (mSocket.send(p, *it, mPort) != sf::Socket::Done)
