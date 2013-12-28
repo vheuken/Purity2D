@@ -8,6 +8,7 @@ set( HEADER_FILES
     inputmanager.h
     luamanager.h
     networkmanager.h
+    networkaction.h
 )
 
 set( SOURCE_FILES     
@@ -18,7 +19,8 @@ set( SOURCE_FILES
      inputmanager.cpp
      luamanager.cpp 
      networkmanager.cpp
-
+     networkaction.cpp 
+     
      main.cpp
 )
 

@@ -14,10 +14,12 @@ void Purity::NetworkManager::update()
     if (isServer())
     {
         listenForNewConnections();
+        receiveActionsFromClients();
         sendDataToClients();
     }
     else
     {
+        sendActionsToServer();
         receiveDataFromServer();
     }
 }
@@ -29,16 +31,26 @@ void Purity::NetworkManager::setPort(unsigned short port)
     mListener.listen(mPort);
 }
 
-void Purity::NetworkManager::sendAction(std::string recipient, std::string objectName, std::string action)
+void Purity::NetworkManager::sendAction(std::string objectName, std::string actionName)
 {
-    sf::Packet packet;
-    sf::IpAddress r = recipient;
+    NetworkAction action;
+    action.objectName = objectName;
+    action.actionName = actionName;
 
-    packet << objectName << action;
+    actionQueue.push(action);
+}
 
-    if (mSocket.send(packet, r, mPort) != sf::Socket::Done)
+void Purity::NetworkManager::sendActionsToServer()
+{
+    while (actionQueue.empty() == false)
     {
-        std::cerr << "Error sending!" << std::endl;
+        sf::Packet packet;
+
+        packet << actionQueue.front();
+
+        actionQueue.pop();
+
+        mSocket.send(packet, mServerAddress, mPort);
     }
 }
 
@@ -52,17 +64,16 @@ bool Purity::NetworkManager::isServer() const
     return server;
 }
 
-void Purity::NetworkManager::receiveAction(std::string sender)
+void Purity::NetworkManager::receiveAction(sf::IpAddress& client)
 {
     sf::Packet packet;
-    sf::IpAddress s = sender;
-    std::string objectName, action;
+    NetworkAction action;
 
-    mSocket.receive(packet, s, mPort);
+    mSocket.receive(packet, client, mPort);
 
-    if (packet >> objectName >> action)
+    if (packet >> action)
     {
-        std::cout << "Object " << objectName << " is performing " << action << std::endl;
+        std::cout << "Object " << action.objectName << " is performing " << action.actionName << std::endl;
     }
 }
 
@@ -101,7 +112,6 @@ void Purity::NetworkManager::listenForNewConnections()
     {
         std::cout << "New connection received from: " << client.getRemoteAddress() << std::endl;
         addClient(client.getRemoteAddress());
-        client.disconnect();
     }
 }
 
@@ -125,6 +135,14 @@ void Purity::NetworkManager::receiveDataFromServer()
     sf::Packet p;
     mSocket.receive(p, mServerAddress, mPort);
     std::cout << p.getDataSize() << std::endl;
+}
+
+void Purity::NetworkManager::receiveActionsFromClients()
+{
+    for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
+    {
+        
+    }
 }
 
 luabind::scope Purity::NetworkManager::luaBindings()

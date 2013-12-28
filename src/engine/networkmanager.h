@@ -5,6 +5,9 @@
 #include <luabind/luabind.hpp>
 #include <string>
 #include <vector>
+#include <queue>
+
+#include "networkaction.h"
 
 namespace Purity
 {
@@ -20,8 +23,8 @@ namespace Purity
 
         void setPort(unsigned short port);
 
-        void sendAction(std::string recipient, std::string objectName, std::string action);
-        void receiveAction(std::string sender);
+        void sendAction(std::string objectName, std::string actionName);
+        void receiveAction(sf::IpAddress& client);
 
         void connectToServer(std::string serverAddress);
 
@@ -39,10 +42,14 @@ namespace Purity
         unsigned short mPort;
         bool server;
 
+        std::queue<NetworkAction> actionQueue;
+
         void listenForNewConnections();
         void addClient(const sf::IpAddress& clientAddress);
         void sendDataToClients();
         void receiveDataFromServer();
+        void sendActionsToServer();
+        void receiveActionsFromClients();
     };
 }
 
