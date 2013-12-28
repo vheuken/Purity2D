@@ -70,15 +70,15 @@ void Purity::NetworkManager::connectToServer(std::string serverAddressStr)
 {
     sf::TcpSocket socket;
     sf::IpAddress serverAddress(serverAddressStr);
-    this->mServerAddress = s;
-    sf::Socket::Status status = socket.connect(serverAddress, mPort);
+    this->mServerAddress = serverAddress;
+    sf::Socket::Status status = socket.connect(mServerAddress, mPort);
     if (status != sf::Socket::Done)
     {
-        std::cerr << "Connection to " << serverAddress << " failed!" << std::endl;
+        std::cerr << "Connection to " << mServerAddress << " failed!" << std::endl;
     }
     else if (status == sf::Socket::Done)
     {
-        std::cout << "Connected to " << serverAddress << std::endl;
+        std::cout << "Connected to " << mServerAddress << std::endl;
     }
 }
 
