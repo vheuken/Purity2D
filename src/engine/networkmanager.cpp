@@ -126,10 +126,9 @@ void Purity::NetworkManager::sendDataToClients()
 void Purity::NetworkManager::receiveDataFromServer()
 {
     sf::Packet p;
-    size_t received;
     mSocket.receive(p, mServerAddress, mPort);
 
-    std::cout << "Received " << received << " bytes from " << mServerAddress <<  std::endl;
+    std::cout << "Received " << p.getDataSize() << " bytes from " << mServerAddress <<  std::endl;
 }
 
 luabind::scope Purity::NetworkManager::luaBindings()
