@@ -40,7 +40,7 @@ namespace Purity
         bool server;
 
         void listenForConnections();
-        void addClient(sf::IpAddress& clientAddress);
+        void addClient(const sf::IpAddress& clientAddress);
         void sendDataToClients();
         void receiveDataFromServer();
     };

@@ -103,7 +103,7 @@ void Purity::NetworkManager::listenForConnections()
     }
 }
 
-void Purity::NetworkManager::addClient(sf::IpAddress& clientAddress)
+void Purity::NetworkManager::addClient(const sf::IpAddress& clientAddress)
 {
     mClientAddressList.push_back(clientAddress);
 }
