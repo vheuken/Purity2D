@@ -25,7 +25,7 @@ void Purity::NetworkManager::update()
 void Purity::NetworkManager::setPort(unsigned short port)
 {
     mPort = port;
-    mSocket.bind(mPort);
+    mSocket.bind(mPort+1);
     mListener.listen(mPort);
 }
 
@@ -112,7 +112,7 @@ void Purity::NetworkManager::addClient(const sf::IpAddress& clientAddress)
 void Purity::NetworkManager::sendDataToClients()
 {
     sf::Packet p;
-    p << "5555555";
+    p << "555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555";
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
         if (mSocket.send(p, *it, mPort) != sf::Socket::Done)
