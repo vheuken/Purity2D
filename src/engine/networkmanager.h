@@ -22,11 +22,17 @@ namespace Purity
         void sendAction(std::string recipient, std::string objectName, std::string action);
         void receiveAction(std::string sender);
 
+        void connectToServer(std::string serverAddress);
+
         static luabind::scope luaBindings();
 
     private:
         sf::UdpSocket mSocket;
+        sf::TcpListener mListener;
+
         unsigned short mPort;
+
+        void listenForConnections();
     };
 }
 

@@ -5,18 +5,20 @@
 Purity::NetworkManager::NetworkManager()
 {
     mSocket.setBlocking(false);
+    mListener.setBlocking(false);
     luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
 }
 
 void Purity::NetworkManager::update()
 {
-
+    listenForConnections();
 }
 
 void Purity::NetworkManager::setPort(unsigned short port)
 {
     mPort = port;
     mSocket.bind(mPort);
+    mListener.listen(mPort);
 }
 
 void Purity::NetworkManager::sendAction(std::string recipient, std::string objectName, std::string action)
@@ -40,10 +42,23 @@ void Purity::NetworkManager::receiveAction(std::string sender)
 
     mSocket.receive(packet, s, mPort);
 
-    packet >> objectName >> action;
-
-    std::cout << "Object " << objectName << " is performing " << action << std::endl;
+    if (packet >> objectName >> action)
+    {
+        std::cout << "Object " << objectName << " is performing " << action << std::endl;
+    }
 }
+
+void Purity::NetworkManager::connectToServer(std::string serverAddress)
+{
+    sf::TcpSocket socket;
+    sf::Socket::Status status = socket.connect(serverAddress, mPort);
+
+    if (status != sf::Socket::Done)
+    {
+        std::cerr << "Connection to " << serverAddress << " failed!" << std::endl;
+    }
+}
+
 
 std::string Purity::NetworkManager::getLocalAddress()
 {
@@ -55,6 +70,16 @@ std::string Purity::NetworkManager::getPublicAddress()
     return sf::IpAddress::getPublicAddress().toString();
 }
 
+void Purity::NetworkManager::listenForConnections()
+{
+    sf::TcpSocket client;
+
+    if (mListener.accept(client) == sf::Socket::Done)
+    {
+        std::cout << "New connection received from: " << client.getRemoteAddress() << std::endl;
+    }
+}
+
 luabind::scope Purity::NetworkManager::luaBindings()
 {
     return luabind::class_<NetworkManager>("NetworkManager")
@@ -63,5 +88,6 @@ luabind::scope Purity::NetworkManager::luaBindings()
         .def("setPort", &NetworkManager::setPort)
         .def("sendAction", &NetworkManager::sendAction)
         .def("receiveAction", &NetworkManager::receiveAction)
+        .def("connectToServer", &NetworkManager::connectToServer)
         ;
 }
