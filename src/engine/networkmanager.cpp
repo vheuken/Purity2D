@@ -66,11 +66,12 @@ void Purity::NetworkManager::receiveAction(std::string sender)
     }
 }
 
-void Purity::NetworkManager::connectToServer(std::string serverAddress)
+void Purity::NetworkManager::connectToServer(std::string serverAddressStr)
 {
     sf::TcpSocket socket;
+    sf::IpAddress serverAddress(serverAddressStr);
+    this->mServerAddress = s;
     sf::Socket::Status status = socket.connect(serverAddress, mPort);
-    this->mServerAddress = serverAddress;
     if (status != sf::Socket::Done)
     {
         std::cerr << "Connection to " << serverAddress << " failed!" << std::endl;
