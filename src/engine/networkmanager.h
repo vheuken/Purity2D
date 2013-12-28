@@ -24,6 +24,8 @@ namespace Purity
 
         void connectToServer(std::string serverAddress);
 
+        void setServer(bool isServer);
+
         static luabind::scope luaBindings();
 
     private:
@@ -31,6 +33,7 @@ namespace Purity
         sf::TcpListener mListener;
 
         unsigned short mPort;
+        bool isServer;
 
         void listenForConnections();
     };

@@ -2,7 +2,7 @@
 #include "luamanager.h"
 #include <iostream>
 
-Purity::NetworkManager::NetworkManager()
+Purity::NetworkManager::NetworkManager() : isServer(false)
 {
     mSocket.setBlocking(false);
     mListener.setBlocking(false);
@@ -11,7 +11,10 @@ Purity::NetworkManager::NetworkManager()
 
 void Purity::NetworkManager::update()
 {
-    listenForConnections();
+    if (isServer)
+    {
+        listenForConnections();
+    }
 }
 
 void Purity::NetworkManager::setPort(unsigned short port)
@@ -32,6 +35,11 @@ void Purity::NetworkManager::sendAction(std::string recipient, std::string objec
     {
         std::cerr << "Error sending!" << std::endl;
     }
+}
+
+void Purity::NetworkManager::setServer(bool isServer)
+{
+    this->isServer = isServer;
 }
 
 void Purity::NetworkManager::receiveAction(std::string sender)
@@ -93,5 +101,6 @@ luabind::scope Purity::NetworkManager::luaBindings()
         .def("sendAction", &NetworkManager::sendAction)
         .def("receiveAction", &NetworkManager::receiveAction)
         .def("connectToServer", &NetworkManager::connectToServer)
+        .def("setServer", &NetworkManager::setServer)
         ;
 }
