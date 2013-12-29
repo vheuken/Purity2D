@@ -2,7 +2,8 @@
 #include "luamanager.h"
 #include <iostream>
 
-Purity::NetworkManager::NetworkManager() : server(false)
+Purity::NetworkManager::NetworkManager(std::queue<NetworkAction> * serverActionQueue) 
+: mServer(false), mServerActionQueue(serverActionQueue)
 {
     mSocket.setBlocking(false);
     mListener.setBlocking(false);
@@ -37,18 +38,18 @@ void Purity::NetworkManager::sendAction(std::string objectName, std::string acti
     action.objectName = objectName;
     action.actionName = actionName;
 
-    actionQueue.push(action);
+    mClientActionQueue.push(action);
 }
 
 void Purity::NetworkManager::sendActionsToServer()
 {
-    while (actionQueue.empty() == false)
+    while (mClientActionQueue.empty() == false)
     {
         sf::Packet packet;
 
-        packet << actionQueue.front();
+        packet << mClientActionQueue.front();
 
-        actionQueue.pop();
+        mClientActionQueue.pop();
 
         mSocket.send(packet, mServerAddress, mPort);
     }
@@ -56,12 +57,12 @@ void Purity::NetworkManager::sendActionsToServer()
 
 void Purity::NetworkManager::setServer(bool isServer)
 {
-    this->server = isServer;
+    this->mServer = isServer;
 }
 
 bool Purity::NetworkManager::isServer() const
 {
-    return server;
+    return mServer;
 }
 
 void Purity::NetworkManager::receiveAction(sf::IpAddress& client)
@@ -73,6 +74,7 @@ void Purity::NetworkManager::receiveAction(sf::IpAddress& client)
     
     if (packet >> action)
     {
+        mServerActionQueue->push(action);
         std::cout << "Object " << action.objectName << " is performing " << action.actionName << std::endl;
     }
 }

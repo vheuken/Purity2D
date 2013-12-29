@@ -16,8 +16,8 @@ void Purity::Engine::initialize()
     XInitThreads();
     #endif
    
-    mInputQueue = std::unique_ptr<std::queue<sf::Event>>(new std::queue<sf::Event>);		
-    
+    mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);		
+    mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
     initializeWindow();
     initializeRenderer();
     initializeSceneManager();
@@ -86,7 +86,7 @@ void Purity::Engine::initializeInputManager()
 
 void Purity::Engine::initializeNetworkManager()
 {
-    mNetworkManager = std::unique_ptr<NetworkManager>(new NetworkManager());
+    mNetworkManager = std::unique_ptr<NetworkManager>(new NetworkManager(mServerActionQueue.get()));
 }
 
 sf::View Purity::Engine::getView()

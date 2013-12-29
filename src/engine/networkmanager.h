@@ -14,7 +14,7 @@ namespace Purity
     class NetworkManager
     {
     public:
-        NetworkManager();
+        NetworkManager(std::queue<NetworkAction> * serverActionQueue);
 
         std::string getLocalAddress();
         std::string getPublicAddress();
@@ -40,9 +40,10 @@ namespace Purity
         std::vector<sf::IpAddress> mClientAddressList;
 
         unsigned short mPort;
-        bool server;
+        bool mServer;
 
-        std::queue<NetworkAction> actionQueue;
+        std::queue<NetworkAction>* mServerActionQueue;
+        std::queue<NetworkAction>  mClientActionQueue;
 
         void listenForNewConnections();
         void addClient(const sf::IpAddress& clientAddress);

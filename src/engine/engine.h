@@ -38,8 +38,8 @@ namespace Purity
         std::unique_ptr<InputManager> mInputManager;
         std::unique_ptr<NetworkManager> mNetworkManager;
 
-	    std::unique_ptr<std::queue<sf::Event>> mInputQueue;
-
+	    std::unique_ptr<std::queue<sf::Event> > mInputQueue;
+        std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
         void initializeWindow();
         void initializeRenderer();
         void initializeSceneManager();
