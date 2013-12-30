@@ -76,7 +76,7 @@ void Purity::Engine::initializeSceneManager()
 
 void Purity::Engine::initializePhysicsSystem()
 {
-    mPhysicsSystem = std::unique_ptr<PhysicsSystem>(new PhysicsSystem(mInputQueue.get()));
+    mPhysicsSystem = std::unique_ptr<PhysicsSystem>(new PhysicsSystem(mInputQueue.get(), mServerActionQueue.get()));
 }
 
 void Purity::Engine::initializeInputManager()

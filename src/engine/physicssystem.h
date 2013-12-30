@@ -5,6 +5,7 @@
 #include <memory>
 #include <SFML/Window.hpp>
 #include <Box2D/Box2D.h>
+#include "networkaction.h"
 
 namespace Purity
 {
@@ -19,7 +20,7 @@ namespace Purity
     class PhysicsSystem
     {
     public:
-        PhysicsSystem(std::queue<sf::Event>* inputQueue);
+        PhysicsSystem(std::queue<sf::Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue);
 
         void update(Scene* scene);
 
@@ -30,9 +31,11 @@ namespace Purity
         std::unique_ptr<b2World> mWorld;
         Scene* mCurrentScene;
 	    std::queue<sf::Event>* mInputQueue;
+        std::queue<NetworkAction>* mServerActionQueue; 
 
 	    void step();
 	    void handleInput();
+        void handleServerActions();
 		void runUpdateScripts();
     };
 }
