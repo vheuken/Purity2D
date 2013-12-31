@@ -20,12 +20,15 @@ void Purity::Engine::initialize(CommandLineArguments commandLineArguments)
 
     mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);		
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
-
-    initializeWindow();
-    initializeRenderer();
+    
+    if (mCommandLineArguments.headless == false)
+    {
+        initializeWindow();
+        initializeRenderer();
+        initializeInputManager();
+    }
     initializeSceneManager();
     initializePhysicsSystem();
-    initializeInputManager();
     initializeNetworkManager();
 
     luabind::globals(LuaManager::getManager()->getState())["GPurityEngine"] = this;
@@ -36,7 +39,7 @@ void Purity::Engine::run()
     std::cout << "Engine is starting! =D" << std::endl;
     Scene* currentScene = nullptr;
 
-    while (mWindow->isOpen())
+    while (mCommandLineArguments.headless || mWindow->isOpen())
     {
         if (currentScene != mSceneManager->getCurrentScene())
         {
@@ -44,13 +47,20 @@ void Purity::Engine::run()
         }
         
         mNetworkManager->update();
-        mInputManager->update();
         mPhysicsSystem->update(currentScene);    
-        mRenderer->update(currentScene);
+        
+        if (mCommandLineArguments.headless == false)
+        {
+            mInputManager->update();
+            mRenderer->update(currentScene);
+        }
     }
 
     // solves crash on exit on Windows
-    mRenderer->update(nullptr);
+    if (mCommandLineArguments.headless == false)
+    {
+        mRenderer->update(nullptr);
+    }
 }
 
 void Purity::Engine::cleanup()
