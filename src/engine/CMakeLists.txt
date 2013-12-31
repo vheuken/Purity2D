@@ -7,7 +7,7 @@ set( HEADER_FILES
     physicssystem.h
     inputmanager.h
     luamanager.h
-    networkmanager.h
+    networksystem.h
     networkaction.h
     commandlinearguments.h
     abstractsystem.h
@@ -20,7 +20,7 @@ set( SOURCE_FILES
      physicssystem.cpp
      inputmanager.cpp
      luamanager.cpp 
-     networkmanager.cpp
+     networksystem.cpp
      networkaction.cpp 
      commandlinearguments.cpp
 

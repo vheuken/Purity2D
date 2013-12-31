@@ -1,5 +1,5 @@
-#ifndef NETWORK_MANAGER_H
-#define NETWORK_MANAGER_H
+#ifndef NETWORK_SYSTEM_H
+#define NETWORK_SYSTEM_H
 
 #include <SFML/Network.hpp>
 #include <luabind/luabind.hpp>
@@ -7,19 +7,20 @@
 #include <vector>
 #include <queue>
 
+#include "abstractsystem.h"
 #include "networkaction.h"
 
 namespace Purity
 {
-    class NetworkManager
+    class NetworkSystem : public AbstractSystem
     {
     public:
-        NetworkManager(std::queue<NetworkAction> * serverActionQueue);
+        NetworkSystem(std::queue<NetworkAction> * serverActionQueue);
 
         std::string getLocalAddress();
         std::string getPublicAddress();
 
-        void update();
+        void update(Scene* scene);
 
         void setPort(unsigned short port);
 
@@ -54,4 +55,4 @@ namespace Purity
     };
 }
 
-#endif // NETWORK_MANAGER_H
+#endif // NETWORK_SYSTEM_H

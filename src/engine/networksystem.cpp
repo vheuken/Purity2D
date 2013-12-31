@@ -1,8 +1,8 @@
-#include "networkmanager.h"
+#include "networksystem.h"
 #include "luamanager.h"
 #include <iostream>
 
-Purity::NetworkManager::NetworkManager(std::queue<NetworkAction> * serverActionQueue) 
+Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue) 
 : mServer(false), mServerActionQueue(serverActionQueue)
 {
     mSocket.setBlocking(false);
@@ -10,7 +10,7 @@ Purity::NetworkManager::NetworkManager(std::queue<NetworkAction> * serverActionQ
     luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
 }
 
-void Purity::NetworkManager::update()
+void Purity::NetworkSystem::update(Scene* scene)
 {
     if (isServer())
     {
@@ -25,14 +25,14 @@ void Purity::NetworkManager::update()
     }
 }
 
-void Purity::NetworkManager::setPort(unsigned short port)
+void Purity::NetworkSystem::setPort(unsigned short port)
 {
     mPort = port;
     mSocket.bind(mPort);
     mListener.listen(mPort);
 }
 
-void Purity::NetworkManager::sendAction(std::string objectName, std::string actionName)
+void Purity::NetworkSystem::sendAction(std::string objectName, std::string actionName)
 {
     NetworkAction action;
     action.objectName = objectName;
@@ -41,7 +41,7 @@ void Purity::NetworkManager::sendAction(std::string objectName, std::string acti
     mClientActionQueue.push(action);
 }
 
-void Purity::NetworkManager::sendActionsToServer()
+void Purity::NetworkSystem::sendActionsToServer()
 {
     while (mClientActionQueue.empty() == false)
     {
@@ -55,17 +55,17 @@ void Purity::NetworkManager::sendActionsToServer()
     }
 }
 
-void Purity::NetworkManager::setServer(bool isServer)
+void Purity::NetworkSystem::setServer(bool isServer)
 {
     this->mServer = isServer;
 }
 
-bool Purity::NetworkManager::isServer() const
+bool Purity::NetworkSystem::isServer() const
 {
     return mServer;
 }
 
-void Purity::NetworkManager::receiveAction(sf::IpAddress& client)
+void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
 {
     sf::Packet packet;
     NetworkAction action;
@@ -79,7 +79,7 @@ void Purity::NetworkManager::receiveAction(sf::IpAddress& client)
     }
 }
 
-void Purity::NetworkManager::connectToServer(std::string serverAddressStr)
+void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
 {
     sf::TcpSocket socket;
     sf::IpAddress serverAddress(serverAddressStr);
@@ -96,17 +96,17 @@ void Purity::NetworkManager::connectToServer(std::string serverAddressStr)
     socket.disconnect();
 }
 
-std::string Purity::NetworkManager::getLocalAddress()
+std::string Purity::NetworkSystem::getLocalAddress()
 {
     return sf::IpAddress::getLocalAddress().toString();
 }
 
-std::string Purity::NetworkManager::getPublicAddress()
+std::string Purity::NetworkSystem::getPublicAddress()
 {
     return sf::IpAddress::getPublicAddress().toString();
 }
 
-void Purity::NetworkManager::listenForNewConnections()
+void Purity::NetworkSystem::listenForNewConnections()
 {
     sf::TcpSocket client;
 
@@ -117,21 +117,21 @@ void Purity::NetworkManager::listenForNewConnections()
     }
 }
 
-void Purity::NetworkManager::addClient(const sf::IpAddress& clientAddress)
+void Purity::NetworkSystem::addClient(const sf::IpAddress& clientAddress)
 {
     mClientAddressList.push_back(clientAddress);
 }
 
-void Purity::NetworkManager::sendDataToClients()
+void Purity::NetworkSystem::sendDataToClients()
 {
 
 }
 
-void Purity::NetworkManager::receiveDataFromServer()
+void Purity::NetworkSystem::receiveDataFromServer()
 {
 }
 
-void Purity::NetworkManager::receiveActionsFromClients()
+void Purity::NetworkSystem::receiveActionsFromClients()
 {
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
@@ -139,15 +139,15 @@ void Purity::NetworkManager::receiveActionsFromClients()
     }
 }
 
-luabind::scope Purity::NetworkManager::luaBindings()
+luabind::scope Purity::NetworkSystem::luaBindings()
 {
-    return luabind::class_<NetworkManager>("NetworkManager")
-        .def("getLocalAddress", &NetworkManager::getLocalAddress)
-        .def("getPublicAddress", &NetworkManager::getPublicAddress)
-        .def("setPort", &NetworkManager::setPort)
-        .def("sendAction", &NetworkManager::sendAction)
-        .def("receiveAction", &NetworkManager::receiveAction)
-        .def("connectToServer", &NetworkManager::connectToServer)
-        .def("setServer", &NetworkManager::setServer)
+    return luabind::class_<NetworkSystem>("NetworkSystem")
+        .def("getLocalAddress", &NetworkSystem::getLocalAddress)
+        .def("getPublicAddress", &NetworkSystem::getPublicAddress)
+        .def("setPort", &NetworkSystem::setPort)
+        .def("sendAction", &NetworkSystem::sendAction)
+        .def("receiveAction", &NetworkSystem::receiveAction)
+        .def("connectToServer", &NetworkSystem::connectToServer)
+        .def("setServer", &NetworkSystem::setServer)
         ;
 }

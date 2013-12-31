@@ -9,7 +9,7 @@
 #include "renderer.h"
 #include "physicssystem.h"
 #include "inputmanager.h"
-#include "networkmanager.h"
+#include "networksystem.h"
 #include "commandlinearguments.h"
 
 namespace luabind
@@ -37,7 +37,7 @@ namespace Purity
         std::unique_ptr<SceneManager> mSceneManager;
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;
         std::unique_ptr<InputManager> mInputManager;
-        std::unique_ptr<NetworkManager> mNetworkManager;
+        std::unique_ptr<NetworkSystem> mNetworkSystem;
 
 	    std::unique_ptr<std::queue<sf::Event> > mInputQueue;
         std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
@@ -49,7 +49,7 @@ namespace Purity
         void initializeSceneManager();
         void initializePhysicsSystem();
         void initializeInputManager();
-        void initializeNetworkManager();
+        void initializeNetworkSystem();
     };
 
 }
