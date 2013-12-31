@@ -42,7 +42,7 @@ namespace Purity
 	    std::unique_ptr<std::queue<sf::Event> > mInputQueue;
         std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
         
-        CommandLineArguments mCommandLineArguments;
+        CommandLineArguments mProgramOptions;
 
         void initializeWindow();
         void initializeRenderer();

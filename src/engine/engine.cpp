@@ -16,12 +16,12 @@ void Purity::Engine::initialize(CommandLineArguments commandLineArguments)
     XInitThreads();
     #endif
    
-    mCommandLineArguments = commandLineArguments;
+    mProgramOptions = commandLineArguments;
 
     mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);		
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
     
-    if (mCommandLineArguments.headless == false)
+    if (mProgramOptions.headless == false)
     {
         initializeWindow();
         initializeRenderer();
@@ -39,7 +39,7 @@ void Purity::Engine::run()
     std::cout << "Engine is starting! =D" << std::endl;
     Scene* currentScene = nullptr;
 
-    while (mCommandLineArguments.headless || mWindow->isOpen())
+    while (mProgramOptions.headless || mWindow->isOpen())
     {
         if (currentScene != mSceneManager->getCurrentScene())
         {
@@ -49,7 +49,7 @@ void Purity::Engine::run()
         mNetworkManager->update();
         mPhysicsSystem->update(currentScene);    
         
-        if (mCommandLineArguments.headless == false)
+        if (mProgramOptions.headless == false)
         {
             mInputManager->update();
             mRenderer->update(currentScene);
@@ -57,7 +57,7 @@ void Purity::Engine::run()
     }
 
     // solves crash on exit on Windows
-    if (mCommandLineArguments.headless == false)
+    if (mProgramOptions.headless == false)
     {
         mRenderer->update(nullptr);
     }
