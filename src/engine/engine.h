@@ -10,6 +10,7 @@
 #include "physicssystem.h"
 #include "inputmanager.h"
 #include "networkmanager.h"
+#include "commandlinearguments.h"
 
 namespace luabind
 {
@@ -21,7 +22,7 @@ namespace Purity
     class Engine
     {
     public:
-        void initialize();
+        void initialize(CommandLineArguments commandLineArguments);
         void run();
         void cleanup();
 
@@ -40,6 +41,9 @@ namespace Purity
 
 	    std::unique_ptr<std::queue<sf::Event> > mInputQueue;
         std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
+        
+        CommandLineArguments mCommandLineArguments;
+
         void initializeWindow();
         void initializeRenderer();
         void initializeSceneManager();

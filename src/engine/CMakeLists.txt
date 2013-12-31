@@ -9,6 +9,7 @@ set( HEADER_FILES
     luamanager.h
     networkmanager.h
     networkaction.h
+    commandlinearguments.h
 )
 
 set( SOURCE_FILES     
@@ -20,7 +21,8 @@ set( SOURCE_FILES
      luamanager.cpp 
      networkmanager.cpp
      networkaction.cpp 
-     
+     commandlinearguments.cpp
+
      main.cpp
 )
 
