@@ -10,6 +10,7 @@ set( HEADER_FILES
     networkmanager.h
     networkaction.h
     commandlinearguments.h
+    abstractsystem.h
 )
 
 set( SOURCE_FILES     
