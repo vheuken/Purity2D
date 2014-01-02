@@ -3,11 +3,11 @@
 
 int main(int argc, char* argv[])
 {
-    Purity::CommandLineArguments arguments(argc, argv);
+    const Purity::CommandLineArguments arguments(argc, argv);
     
-    Purity::Engine engine;
+    Purity::Engine engine(arguments);
 
-    engine.initialize(arguments);
+    engine.initialize();
 
     engine.run();
 

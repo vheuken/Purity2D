@@ -8,7 +8,12 @@
 #include <X11/Xlib.h>
 #endif
 
-void Purity::Engine::initialize(CommandLineArguments commandLineArguments)
+Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
+    : mProgramOptions(commandLineArguments)
+{
+}
+
+void Purity::Engine::initialize()
 {
     std::cout << "Initializing some stuff..." << std::endl;
 
@@ -16,8 +21,6 @@ void Purity::Engine::initialize(CommandLineArguments commandLineArguments)
     XInitThreads();
     #endif
    
-    mProgramOptions = commandLineArguments;
-
     mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);		
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
     

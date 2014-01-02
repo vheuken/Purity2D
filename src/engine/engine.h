@@ -22,7 +22,9 @@ namespace Purity
     class Engine
     {
     public:
-        void initialize(CommandLineArguments commandLineArguments);
+        Engine(const CommandLineArguments& commandLineArguments);
+
+        void initialize();
         void run();
         void cleanup();
 
@@ -42,7 +44,7 @@ namespace Purity
 	    std::unique_ptr<std::queue<sf::Event> > mInputQueue;
         std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
         
-        CommandLineArguments mProgramOptions;
+        const CommandLineArguments mProgramOptions;
 
         void initializeWindow();
         void initializeRenderSystem();
