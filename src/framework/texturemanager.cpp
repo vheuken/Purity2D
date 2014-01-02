@@ -1,17 +1,24 @@
 #include "texturemanager.h"
 
+bool Purity::TextureManager::sIsEnabled = true;
+
 Purity::TextureManager::TextureManager()
 {
 }
 
 const sf::Texture* Purity::TextureManager::getTexture(const boost::filesystem::path& texturePath)
 {
-    if (!isTextureUsed(texturePath))
+    if (sIsEnabled == true)
     {
-        addTexture(texturePath);
+        if (!isTextureUsed(texturePath))
+        {
+            addTexture(texturePath);
+        }
+
+        return textureMap[texturePath].get();
     }
 
-    return textureMap[texturePath].get();
+    return nullptr;
 }
 
 bool Purity::TextureManager::isTextureUsed(const boost::filesystem::path& texturePath) const

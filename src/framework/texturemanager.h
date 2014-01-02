@@ -13,6 +13,7 @@ namespace Purity
     public:
         TextureManager();
         const sf::Texture* getTexture(const boost::filesystem::path& texturePath);
+        static bool sIsEnabled;
 
     private:
         std::map<boost::filesystem::path, std::unique_ptr<sf::Texture>> textureMap;

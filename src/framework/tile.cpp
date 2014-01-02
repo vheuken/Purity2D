@@ -13,17 +13,20 @@ Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * text
 #include <iostream>
 void Purity::Tile::setTextureSubrect()
 {
-    int id = mTileId;
-    int numOfRows = mTexture->getSize().x / mWidthPixels;
-    int numOfCols = mTexture->getSize().y / mHeightPixels;
+    if (mTexture != nullptr)
+    {
+        int id = mTileId;
+        int numOfRows = mTexture->getSize().x / mWidthPixels;
+        int numOfCols = mTexture->getSize().y / mHeightPixels;
+    
+        int left = (id % numOfCols) * mWidthPixels;
+        int top = (id / numOfCols) * mHeightPixels;
 
-    int left = (id % numOfCols) * mWidthPixels;
-    int top = (id / numOfCols) * mHeightPixels;
-
-    mVertexArray[0].texCoords = sf::Vector2f(left, top);
-    mVertexArray[1].texCoords = sf::Vector2f(left + mWidthPixels, top);
-    mVertexArray[2].texCoords = sf::Vector2f(left + mWidthPixels, top + mHeightPixels);
-    mVertexArray[3].texCoords = sf::Vector2f(left, top + mHeightPixels);
+        mVertexArray[0].texCoords = sf::Vector2f(left, top);
+        mVertexArray[1].texCoords = sf::Vector2f(left + mWidthPixels, top);
+        mVertexArray[2].texCoords = sf::Vector2f(left + mWidthPixels, top + mHeightPixels);
+        mVertexArray[3].texCoords = sf::Vector2f(left, top + mHeightPixels);
+    }
 }
 
 void Purity::Tile::initializePhysics(b2World * world)

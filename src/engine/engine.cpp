@@ -3,6 +3,7 @@
 #include <iostream>
 #include <luabind/luabind.hpp>
 #include "luamanager.h"
+#include "../framework/texturemanager.h"
 
 #ifdef __gnu_linux__
 #include <X11/Xlib.h>
@@ -29,6 +30,10 @@ void Purity::Engine::initialize()
         initializeWindow();
         initializeRenderSystem();
         initializeInputManager();
+    }
+    else
+    {
+        TextureManager::sIsEnabled = false;
     }
     initializeSceneManager();
     initializePhysicsSystem();
