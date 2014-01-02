@@ -20,7 +20,7 @@ namespace Purity
 
     private:
         sf::RenderWindow* mWindow;
-	    std::queue<sf::Event>* mInputQueue;	
+        std::queue<sf::Event>* mInputQueue;	
     };
 }
 
