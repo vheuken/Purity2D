@@ -2,7 +2,7 @@ set(ENGINE_PROJECT_NAME "Purity-Engine")
 
 set( HEADER_FILES
     engine.h
-    renderer.h
+    rendersystem.h
     scenemanager.h
     physicssystem.h
     inputmanager.h
@@ -15,7 +15,7 @@ set( HEADER_FILES
 
 set( SOURCE_FILES     
      engine.cpp
-     renderer.cpp
+     rendersystem.cpp
      scenemanager.cpp
      physicssystem.cpp
      inputmanager.cpp
@@ -23,6 +23,7 @@ set( SOURCE_FILES
      networksystem.cpp
      networkaction.cpp 
      commandlinearguments.cpp
+     abstractsystem.cpp
 
      main.cpp
 )

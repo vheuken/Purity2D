@@ -8,6 +8,8 @@ namespace Purity
     class AbstractSystem
     {
     public:
+        AbstractSystem();
+
         virtual void update(Scene* scene) = 0;
     
     protected:

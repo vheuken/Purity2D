@@ -1,23 +1,23 @@
-#include "renderer.h"
+#include "rendersystem.h"
 
 #include <iostream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include "../framework/scene.h"
 
-Purity::Renderer::Renderer(sf::RenderWindow* window)
-    : mCurrentScene(nullptr), 
+Purity::RenderSystem::RenderSystem(sf::RenderWindow* window)
+    : AbstractSystem(),
       mWindow(window),
-      mRenderThread(&Renderer::run, this)
+      mRenderThread(&RenderSystem::run, this)
 {
 }
 
-Purity::Renderer::~Renderer()
+Purity::RenderSystem::~RenderSystem()
 {
     mRenderThread.join();
 }
 
-void Purity::Renderer::update(Scene* scene)
+void Purity::RenderSystem::update(Scene* scene)
 {
     if (scene != mCurrentScene)
     {
@@ -29,7 +29,7 @@ void Purity::Renderer::update(Scene* scene)
     }
 }
 
-void Purity::Renderer::run()
+void Purity::RenderSystem::run()
 {
     float fps, currentTime;
     sf::Clock timer;

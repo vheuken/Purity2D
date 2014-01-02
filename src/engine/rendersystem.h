@@ -1,8 +1,10 @@
-#ifndef RENDERER_H
-#define RENDERER_H
+#ifndef RENDER_SYSTEM_H
+#define RENDER_SYSTEM_H
 
 #include <thread>
 #include <mutex>
+
+#include "abstractsystem.h"
 
 namespace sf
 {
@@ -11,19 +13,17 @@ namespace sf
 
 namespace Purity
 {
-    class Scene;
-
-    class Renderer
+    class RenderSystem : public AbstractSystem
     {
     public:
-        Renderer(sf::RenderWindow* window);
-        ~Renderer();
+        RenderSystem(sf::RenderWindow* window);
+        ~RenderSystem();
 
         void update(Scene* scene);
 
     private:
         sf::RenderWindow* mWindow;
-        Scene* mCurrentScene;
+        
         std::mutex mCurrentSceneMutex;
         std::thread mRenderThread;
 
@@ -31,4 +31,4 @@ namespace Purity
     };
 }
 
-#endif // RENDERER_H
+#endif // RENDER_SYSTEM_H

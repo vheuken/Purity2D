@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "scenemanager.h"
-#include "renderer.h"
+#include "rendersystem.h"
 #include "physicssystem.h"
 #include "inputmanager.h"
 #include "networksystem.h"
@@ -33,7 +33,7 @@ namespace Purity
 
     private:
         std::unique_ptr<sf::RenderWindow> mWindow;
-        std::unique_ptr<Renderer> mRenderer;
+        std::unique_ptr<RenderSystem> mRenderSystem;
         std::unique_ptr<SceneManager> mSceneManager;
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;
         std::unique_ptr<InputManager> mInputManager;
@@ -45,7 +45,7 @@ namespace Purity
         CommandLineArguments mProgramOptions;
 
         void initializeWindow();
-        void initializeRenderer();
+        void initializeRenderSystem();
         void initializeSceneManager();
         void initializePhysicsSystem();
         void initializeInputManager();

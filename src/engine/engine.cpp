@@ -24,7 +24,7 @@ void Purity::Engine::initialize(CommandLineArguments commandLineArguments)
     if (mProgramOptions.headless == false)
     {
         initializeWindow();
-        initializeRenderer();
+        initializeRenderSystem();
         initializeInputManager();
     }
     initializeSceneManager();
@@ -52,14 +52,14 @@ void Purity::Engine::run()
         if (mProgramOptions.headless == false)
         {
             mInputManager->update();
-            mRenderer->update(currentScene);
+            mRenderSystem->update(currentScene);
         }
     }
 
     // solves crash on exit on Windows
     if (mProgramOptions.headless == false)
     {
-        mRenderer->update(nullptr);
+        mRenderSystem->update(nullptr);
     }
 }
 
@@ -77,9 +77,9 @@ void Purity::Engine::initializeWindow()
     mWindow->setActive(false);
 }
 
-void Purity::Engine::initializeRenderer()
+void Purity::Engine::initializeRenderSystem()
 {
-    mRenderer = std::unique_ptr<Renderer>(new Renderer(mWindow.get()));
+    mRenderSystem = std::unique_ptr<RenderSystem>(new RenderSystem(mWindow.get()));
 }
 
 void Purity::Engine::initializeSceneManager()
