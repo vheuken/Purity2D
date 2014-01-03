@@ -124,11 +124,28 @@ void Purity::NetworkSystem::addClient(const sf::IpAddress& clientAddress)
 
 void Purity::NetworkSystem::sendDataToClients()
 {
-
+    sf::Packet packet;
+    
+    packet << "Data from server!";
+    
+    for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
+    {
+        mSocket.send(packet, *it, mPort);
+    }
 }
 
 void Purity::NetworkSystem::receiveDataFromServer()
 {
+    sf::Packet packet;
+    
+    mSocket.receive(packet, mServerAddress, mPort);
+
+    std::string data;
+
+    if (packet >> data)
+    {
+        std::cout << data << std::endl;
+    }
 }
 
 void Purity::NetworkSystem::receiveActionsFromClients()
