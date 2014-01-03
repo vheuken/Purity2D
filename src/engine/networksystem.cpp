@@ -15,8 +15,8 @@ void Purity::NetworkSystem::update(Scene* scene)
     if (isServer())
     {
         listenForNewConnections();
-        receiveActionsFromClients();
         sendDataToClients();
+        receiveActionsFromClients();
     }
     else
     {
