@@ -9,9 +9,10 @@ set( FRAMEWORK_HEADER_FILES
     entity.h
     movableentity.h
     texturemanager.h
-	objectmanager.h
+    objectmanager.h
     tile.h
     layer.h
+    entitystate.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
@@ -21,13 +22,13 @@ set( FRAMEWORK_SOURCE_FILES
      entity.cpp
      movableentity.cpp
      texturemanager.cpp
-	 objectmanager.cpp
+     objectmanager.cpp
      tile.cpp
      layer.cpp
-
+     entitystate.cpp
 )
 
 add_library( ${FRAMEWORK_PROJECT_NAME} STATIC
-			 ${FRAMEWORK_HEADER_FILES}
-			 ${FRAMEWORK_SOURCE_FILES}
+             ${FRAMEWORK_HEADER_FILES}
+             ${FRAMEWORK_SOURCE_FILES}
 )
