@@ -75,7 +75,6 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
     if (mSocket.receive(packet, client, mPort) != sf::Socket::Done)
     {
         client = backup;
-        std::cerr << "receiveAction from " << client << " failed!" << std::endl;
     }
     
     if (packet >> action)
@@ -93,13 +92,14 @@ void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
     sf::Socket::Status status = socket.connect(mServerAddress, mPort);
     if (status != sf::Socket::Done)
     {
-        std::cerr << "Connection to " << mServerAddress << " failed!" << std::endl;
     }
     else if (status == sf::Socket::Done)
     {
         std::cout << "Connected to " << mServerAddress << std::endl;
     }
-    socket.disconnect();
+
+    sf::Packet emptyPacket;
+    mSocket.send(emptyPacket, mServerAddress, mPort);
 }
 
 std::string Purity::NetworkSystem::getLocalAddress()
@@ -121,8 +121,9 @@ void Purity::NetworkSystem::listenForNewConnections()
         std::cout << "New connection received from: " << client.getRemoteAddress() << std::endl;
         addClient(client.getRemoteAddress());
     }
-
-    client.disconnect();
+    
+    sf::Packet emptyPacket;
+    mSocket.send(emptyPacket, client.getRemoteAddress(), mPort);
 }
 
 void Purity::NetworkSystem::addClient(const sf::IpAddress& clientAddress)
