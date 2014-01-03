@@ -125,14 +125,14 @@ void Purity::NetworkSystem::addClient(const sf::IpAddress& clientAddress)
 void Purity::NetworkSystem::sendDataToClients()
 {
     sf::Packet packet;
-    
-    packet << "Data from server!";
+    std::string data = "some data for clients";
+    packet << data;
     
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
         if (mSocket.send(packet, *it, mPort) != sf::Socket::Done)
         {
-            std::cerr << "Error sending data to clients!" << std::endl;
+            std::cerr << "Error sending data to !" << *it << std::endl;
         }
     }
 }
