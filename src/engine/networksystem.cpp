@@ -70,7 +70,13 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
     sf::Packet packet;
     NetworkAction action;
 
-    mSocket.receive(packet, client, mPort);
+    sf::IpAddress backup = client;
+
+    if (mSocket.receive(packet, client, mPort) != sf::Socket::Done)
+    {
+        client = backup;
+        std::cerr << "receiveAction from " << client << " failed!" << std::endl;
+    }
     
     if (packet >> action)
     {
