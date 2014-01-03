@@ -130,7 +130,10 @@ void Purity::NetworkSystem::sendDataToClients()
     
     for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
     {
-        mSocket.send(packet, *it, mPort);
+        if (mSocket.send(packet, *it, mPort) != sf::Socket::Done)
+        {
+            std::cerr << "Error sending data to clients!" << std::endl;
+        }
     }
 }
 
