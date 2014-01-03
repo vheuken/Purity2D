@@ -97,6 +97,8 @@ void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
     {
         std::cout << "Connected to " << mServerAddress << std::endl;
     }
+    
+    socket.disconnect();
 
     sf::Packet emptyPacket;
     mSocket.send(emptyPacket, mServerAddress, mPort);
@@ -121,7 +123,7 @@ void Purity::NetworkSystem::listenForNewConnections()
         std::cout << "New connection received from: " << client.getRemoteAddress() << std::endl;
         addClient(client.getRemoteAddress());
     }
-    
+    client.disconnect(); 
     sf::Packet emptyPacket;
     mSocket.send(emptyPacket, client.getRemoteAddress(), mPort);
 }
@@ -150,8 +152,9 @@ void Purity::NetworkSystem::receiveDataFromServer()
 {
     sf::Packet packet;
     
-    mSocket.receive(packet, mServerAddress, mPort);
-
+    sf::IpAddress s = mServerAddress;
+    mSocket.receive(packet, s, mPort);
+    
     std::string data;
 
     if (packet >> data)
