@@ -121,6 +121,8 @@ void Purity::NetworkSystem::listenForNewConnections()
         std::cout << "New connection received from: " << client.getRemoteAddress() << std::endl;
         addClient(client.getRemoteAddress());
     }
+
+    client.disconnect();
 }
 
 void Purity::NetworkSystem::addClient(const sf::IpAddress& clientAddress)
