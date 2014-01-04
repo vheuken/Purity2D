@@ -10,6 +10,7 @@
 #include <TmxParser/TmxMap.h>
 #include "gamemap.h"
 #include "objectmanager.h"
+#include "entitystate.h"
 
 class b2World;
 class b2Body;
@@ -28,6 +29,8 @@ namespace Purity
 
         void initializePhysics(b2World * world);
         void updatePhysics();
+
+        std::vector<EntityState> getEntityStates() const;
 
         std::string getLuaEventHandlerPath() const;
         std::string getLuaEventHandlerFunctionName() const;

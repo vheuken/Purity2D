@@ -24,6 +24,11 @@ void Purity::Scene::initializePhysics(b2World * world)
     mMutex.unlock();
 }
 
+std::vector<Purity::EntityState> Purity::Scene::getEntityStates() const
+{
+    mObjectManager->getEntityStates();
+}
+
 std::string Purity::Scene::getLuaEventHandlerPath() const
 {
     return mLuaEventHandlerFile.string();

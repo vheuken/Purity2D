@@ -42,6 +42,20 @@ Purity::MovableEntity* Purity::ObjectManager::getMovableObjectByName(const std::
     return nullptr;
 }
 
+std::vector<Purity::EntityState> Purity::ObjectManager::getEntityStates() const
+{
+    std::vector<EntityState> states;
+
+    states.reserve(mMovableObjectList.size());
+
+    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); ++it)
+    {
+        states.push_back(it->getState());
+    }
+
+    return states;
+}
+
 void Purity::ObjectManager::initializeObjects()
 {
     int numOfGroups = mTmxMap->GetNumObjectGroups();

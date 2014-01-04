@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "movableentity.h"
 #include "texturemanager.h"
+#include "entitystate.h"
 
 class b2World;
 
@@ -28,6 +29,8 @@ namespace Purity
         const Entity* getObjectByName(const std::string& objectName);
         MovableEntity* getMovableObjectByName(const std::string& objectName);
         void updatePhysics();
+
+        std::vector<EntityState> getEntityStates() const;
 
         static luabind::scope luaBindings();
 

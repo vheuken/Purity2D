@@ -47,6 +47,8 @@ namespace Purity
         float getX() const;
         float getY() const;
 
+        EntityState getState() const;
+
         virtual void update();
 
         static luabind::scope luaBindings();
@@ -60,7 +62,7 @@ namespace Purity
 
         float mWidthPixels;
         float mHeightPixels;
-        
+
         void initializeHitboxShape();
 
     private:

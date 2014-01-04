@@ -77,6 +77,11 @@ void Purity::Entity::initializeTextureCoords()
     mVertexArray[3].texCoords = sf::Vector2f(0, mHeightPixels);
 }
 
+Purity::EntityState Purity::Entity::getState() const
+{
+    return mState;
+}
+
 void Purity::Entity::update()
 {
     float x = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mWidthPixels/2);
