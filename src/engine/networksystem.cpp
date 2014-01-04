@@ -77,7 +77,6 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
 
     sf::IpAddress c = client;
 
-    std::cout << "Attempting to receive actions from client...\n";
     if (mSocket.receive(packet, c, mPort) != sf::Socket::Done)
     {
         std::cout << "Error receiving actions!";
@@ -85,8 +84,8 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
 
     if (packet >> action)
     {
-        mServerActionQueue->push(action);
         std::cout << "Object " << action.objectName << " is performing " << action.actionName << std::endl;
+        mServerActionQueue->push(action);
     }
 }
 
