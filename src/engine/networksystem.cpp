@@ -77,8 +77,11 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
 
     sf::IpAddress c = client;
 
-    mSocket.receive(packet, c, mPort);
-    
+    if (mSocket.receive(packet, c, mPort) != sf::Socket::Done)
+    {
+        std::cout << "Error receiving actions!";
+    }
+
     if (packet >> action)
     {
         mServerActionQueue->push(action);
@@ -155,10 +158,6 @@ void Purity::NetworkSystem::sendDataToClients()
             }
         }
     }
-    else
-    {
-
-    }
 }
 
 void Purity::NetworkSystem::receiveDataFromServer()
@@ -171,7 +170,7 @@ void Purity::NetworkSystem::receiveDataFromServer()
 
     if (packet >> state)
     {
-        std::cout << "Received state of size: " << sizeof(state) << std::endl;
+        //mStateQueue.push(state);
     }
 }
 

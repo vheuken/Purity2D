@@ -46,6 +46,7 @@ namespace Purity
 
         std::queue<NetworkAction>* mServerActionQueue;
         std::queue<NetworkAction>  mClientActionQueue;
+        std::queue<EntityState> mStateQueue;
 
         void listenForNewConnections();
         void addClient(const sf::IpAddress& clientAddress);
