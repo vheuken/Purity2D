@@ -6,7 +6,7 @@
 unsigned int Purity::Entity::sNumOfEntities = 0;
 
 Purity::Entity::Entity()
-    : mId(++sNumOfEntities)
+    : mId(++sNumOfEntities), mState(mId)
 {
 }
 
