@@ -140,17 +140,20 @@ void Purity::NetworkSystem::addClient(const sf::IpAddress& clientAddress)
 
 void Purity::NetworkSystem::sendDataToClients()
 {
-    std::vector<EntityState> listOfStates = mCurrentScene->getEntityStates();
-
-    sf::Packet packet;
-
-    for (auto client = mClientAddressList.begin(); client != mClientAddressList.end(); ++client)
+    if (mCurrentScene)
     {
-        for (auto state = listOfStates.begin(); state != listOfStates.end(); ++state)
-        {
-            packet << *state;
+        std::vector<EntityState> listOfStates = mCurrentScene->getEntityStates();
 
-            mSocket.send(packet, *client, mPort);
+        sf::Packet packet;
+
+        for (auto client = mClientAddressList.begin(); client != mClientAddressList.end(); ++client)
+        {
+            for (auto state = listOfStates.begin(); state != listOfStates.end(); ++state)
+            {
+                packet << *state;
+
+                mSocket.send(packet, *client, mPort);
+            }
         }
     }
 }
