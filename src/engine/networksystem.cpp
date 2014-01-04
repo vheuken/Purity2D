@@ -75,12 +75,9 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
     sf::Packet packet;
     NetworkAction action;
 
-    sf::IpAddress backup = client;
+    sf::IpAddress c = client;
 
-    if (mSocket.receive(packet, client, mPort) != sf::Socket::Done)
-    {
-        client = backup;
-    }
+    mSocket.receive(packet, c, mPort);
     
     if (packet >> action)
     {
@@ -157,6 +154,10 @@ void Purity::NetworkSystem::sendDataToClients()
                 packet.clear();
             }
         }
+    }
+    else
+    {
+
     }
 }
 
