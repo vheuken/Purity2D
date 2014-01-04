@@ -17,20 +17,20 @@ void Purity::EntityState::update(const b2Body *body)
 
 sf::Packet& Purity::operator <<(sf::Packet& packet, const Purity::EntityState& state)
 {
-    packet << state.entityId << state.position << state.angle;
+    return packet << state.entityId << state.position << state.angle;
 }
 
 sf::Packet& Purity::operator >>(sf::Packet& packet, Purity::EntityState& state)
 {
-    packet >> state.entityId >> state.position >> state.angle;
+    return packet >> state.entityId >> state.position >> state.angle;
 }
 
 sf::Packet& Purity::operator <<(sf::Packet& packet, const b2Vec2& vector)
 {
-    packet << vector.x << vector.y;
+    return packet << vector.x << vector.y;
 }
 
 sf::Packet& Purity::operator >>(sf::Packet& packet, b2Vec2& vector)
 {
-    packet >> vector.x >> vector.y;
+    return packet >> vector.x >> vector.y;
 }
