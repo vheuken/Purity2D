@@ -26,7 +26,7 @@ void Purity::Scene::initializePhysics(b2World * world)
 
 std::vector<Purity::EntityState> Purity::Scene::getEntityStates() const
 {
-    mObjectManager->getEntityStates();
+    return mObjectManager->getEntityStates();
 }
 
 std::string Purity::Scene::getLuaEventHandlerPath() const
