@@ -3,7 +3,7 @@
 #include <iostream>
 
 Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue) 
-: mServer(false), mServerActionQueue(serverActionQueue)
+: mServer(false), mServerActionQueue(serverActionQueue), AbstractSystem()
 {
     mSocket.setBlocking(false);
     mListener.setBlocking(false);
@@ -12,6 +12,11 @@ Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQue
 
 void Purity::NetworkSystem::update(Scene* scene)
 {
+    if (mCurrentScene != scene)
+    {
+        mCurrentScene = scene;
+    }
+
     if (isServer())
     {
         listenForNewConnections();
@@ -135,15 +140,17 @@ void Purity::NetworkSystem::addClient(const sf::IpAddress& clientAddress)
 
 void Purity::NetworkSystem::sendDataToClients()
 {
+    std::vector<EntityState> listOfStates = mCurrentScene->getEntityStates();
+
     sf::Packet packet;
-    std::string data = "some data for clients";
-    packet << data;
-    
-    for (auto it = mClientAddressList.begin(); it != mClientAddressList.end(); ++it)
+
+    for (auto client = mClientAddressList.begin(); client != mClientAddressList.end(); ++client)
     {
-        if (mSocket.send(packet, *it, mPort) != sf::Socket::Done)
+        for (auto state = listOfStates.begin(); state != listOfStates.end(); ++state)
         {
-            std::cerr << "Error sending data to !" << *it << std::endl;
+            packet << *state;
+
+            mSocket.send(packet, *client, mPort);
         }
     }
 }
@@ -151,15 +158,14 @@ void Purity::NetworkSystem::sendDataToClients()
 void Purity::NetworkSystem::receiveDataFromServer()
 {
     sf::Packet packet;
-    
+    EntityState state;
     sf::IpAddress s = mServerAddress;
-    mSocket.receive(packet, s, mPort);
-    
-    std::string data;
 
-    if (packet >> data)
+    mSocket.receive(packet, s, mPort);
+
+    if (packet >> state)
     {
-        std::cout << data << std::endl;
+        std::cout << "Received state of size: " << sizeof(state) << std::endl;
     }
 }
 

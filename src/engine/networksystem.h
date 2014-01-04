@@ -9,6 +9,7 @@
 
 #include "abstractsystem.h"
 #include "networkaction.h"
+#include "../framework/scene.h"
 
 namespace Purity
 {
