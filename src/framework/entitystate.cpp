@@ -1,6 +1,6 @@
 #include "entitystate.h"
 
-Purity::EntityState::EntityState(const unsigned int id)
+Purity::EntityState::EntityState(const int id)
     : entityId(id)
 {
 }
