@@ -22,7 +22,7 @@ sf::Packet& Purity::operator <<(sf::Packet& packet, const Purity::EntityState& s
 
 sf::Packet& Purity::operator >>(sf::Packet& packet, Purity::EntityState& state)
 {
-    packet << state.entityId << state.position << state.angle;
+    packet >> state.entityId >> state.position >> state.angle;
 }
 
 sf::Packet& Purity::operator <<(sf::Packet& packet, const b2Vec2& vector)
