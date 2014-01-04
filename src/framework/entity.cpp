@@ -3,11 +3,15 @@
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
 
+unsigned int Purity::Entity::sNumOfEntities = 0;
+
 Purity::Entity::Entity()
+    : mId(++sNumOfEntities)
 {
 }
 
 Purity::Entity::Entity(const Tmx::Object* object, b2World* world, const sf::Texture * texture)
+    : Entity()
 {
     mTexture = texture;
     float x = object->GetX() / PIXELS_PER_METER;

@@ -1,7 +1,7 @@
 #include "tile.h"
 
 Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * texture, int id)
-: mTileId(id)
+: mTileId(id), Entity()
 {
     mTexture = texture;
 
@@ -10,7 +10,7 @@ Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * text
 
     setPosition(x*width, y*height);
 }
-#include <iostream>
+
 void Purity::Tile::setTextureSubrect()
 {
     if (mTexture != nullptr)
