@@ -153,6 +153,8 @@ void Purity::NetworkSystem::sendDataToClients()
                 packet << *state;
 
                 mSocket.send(packet, *client, mPort);
+
+                packet.clear();
             }
         }
     }
