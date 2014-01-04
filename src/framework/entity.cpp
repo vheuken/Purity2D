@@ -83,6 +83,8 @@ void Purity::Entity::update()
     float y = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHeightPixels/2);
 
     setPosition(x, y);
+
+    mState.update(mHitboxBody);
 }
 
 void Purity::Entity::createBody(b2World* world)

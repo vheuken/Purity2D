@@ -8,6 +8,7 @@ namespace Purity
     struct EntityState
     {
         void update(const b2Body * body);
+
         b2Vec2 position;
         float32 angle;
     };

@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 
+#include "entitystate.h"
+
 namespace luabind
 {
     struct scope;
@@ -63,6 +65,8 @@ namespace Purity
 
     private:
         std::string mName;
+
+        EntityState mState;
 
         void initializeTextureCoords();
 
