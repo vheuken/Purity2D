@@ -79,7 +79,7 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
 
     if (mSocket.receive(packet, c, mPort) != sf::Socket::Done)
     {
-        std::cout << "Error receiving actions!";
+        //std::cout << "Error receiving actions!";
     }
 
     if (packet >> action)
@@ -170,6 +170,7 @@ void Purity::NetworkSystem::receiveDataFromServer()
 
     if (packet >> state)
     {
+        std::cout << sizeof(state) << std::endl;
         //mStateQueue.push(state);
     }
 }
