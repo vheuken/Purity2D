@@ -47,6 +47,7 @@ target_link_libraries(
     lua
     luabind
     TMX-Parser
+    enet
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
 )

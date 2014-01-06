@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <enet/enet.h>
 
 #include "abstractsystem.h"
 #include "networkaction.h"
@@ -17,6 +18,7 @@ namespace Purity
     {
     public:
         NetworkSystem(std::queue<NetworkAction> * serverActionQueue);
+        ~NetworkSystem();
 
         std::string getLocalAddress();
         std::string getPublicAddress();

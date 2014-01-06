@@ -14,6 +14,7 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/SFML-2.1/include
     ${LIBS_INCLUDE_DIR}/lua-5.2.2/src
     ${LIBS_INCLUDE_DIR}/luabind/
+    ${LIBS_INCLUDE_DIR}/enet/include
 )
 
 add_subdirectory(extlibs PRE_BUILD)

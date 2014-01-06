@@ -5,9 +5,16 @@
 Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue) 
 : mServer(false), mServerActionQueue(serverActionQueue), AbstractSystem()
 {
+    enet_initialize();
+
     mSocket.setBlocking(false);
     mListener.setBlocking(false);
     luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
+}
+
+Purity::NetworkSystem::~NetworkSystem()
+{
+    enet_deinitialize();
 }
 
 void Purity::NetworkSystem::update(Scene* scene)
