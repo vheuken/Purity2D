@@ -8,7 +8,7 @@ namespace Purity
     class Host
     {
     public:
-        virtual ~Host();
+        ~Host();
 
     private:
         ENetHost* host;
