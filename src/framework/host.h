@@ -10,7 +10,7 @@ namespace Purity
     public:
         ~Host();
 
-    private:
+    protected:
         ENetHost* host;
         ENetAddress address;
     };
