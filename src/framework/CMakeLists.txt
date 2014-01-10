@@ -13,6 +13,7 @@ set( FRAMEWORK_HEADER_FILES
     tile.h
     layer.h
     entitystate.h
+    host.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
@@ -26,6 +27,7 @@ set( FRAMEWORK_SOURCE_FILES
      tile.cpp
      layer.cpp
      entitystate.cpp
+     host.cpp
 )
 
 add_library( ${FRAMEWORK_PROJECT_NAME} STATIC
