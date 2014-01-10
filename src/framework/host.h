@@ -12,6 +12,7 @@ namespace Purity
 
     private:
         ENetHost* host;
+        ENetAddress address;
     };
 }
 
