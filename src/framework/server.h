@@ -9,7 +9,7 @@ namespace Purity
     class Server : public Host
     {
     public:
-        Server(unsigned short port);
+        Server(const unsigned short port);
     };
 }
 

@@ -6,11 +6,13 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <memory>
 #include <enet/enet.h>
 
 #include "abstractsystem.h"
 #include "networkaction.h"
 #include "../framework/scene.h"
+#include "../framework/server.h"
 
 namespace Purity
 {
@@ -31,6 +33,9 @@ namespace Purity
         void receiveAction(sf::IpAddress& client);
 
         void connectToServer(std::string serverAddress);
+        
+        void initializeServer(unsigned short port);
+        void initializeClient(unsigned short port);
 
         void setServer(bool isServer);
         bool isServer() const;
@@ -44,8 +49,9 @@ namespace Purity
         std::vector<sf::IpAddress> mClientAddressList;
 
         unsigned short mPort;
-        bool mServer;
-
+        bool mIsServer;
+        
+        std::unique_ptr<Server> mServer;
         std::queue<NetworkAction>* mServerActionQueue;
         std::queue<NetworkAction>  mClientActionQueue;
         std::queue<EntityState> mStateQueue;

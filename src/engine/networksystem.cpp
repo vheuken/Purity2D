@@ -3,9 +3,12 @@
 #include <iostream>
 
 Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue) 
-: mServer(false), mServerActionQueue(serverActionQueue), AbstractSystem()
+: mIsServer(false), mServerActionQueue(serverActionQueue), AbstractSystem()
 {
-    enet_initialize();
+    if (enet_initialize() != 0)
+    {
+        std::cerr << "Error initializing enet!" << std::endl;
+    }
 
     mSocket.setBlocking(false);
     mListener.setBlocking(false);
@@ -26,15 +29,17 @@ void Purity::NetworkSystem::update(Scene* scene)
 
     if (isServer())
     {
-        listenForNewConnections();
-        sendDataToClients();
-        receiveActionsFromClients();
     }
     else
     {
-        sendActionsToServer();
-        receiveDataFromServer();
     }
+}
+
+void Purity::NetworkSystem::initializeServer(unsigned short port)
+{
+    mServer = std::unique_ptr<Server>(new Server(port));
+    mPort = port;
+    mIsServer = true;
 }
 
 void Purity::NetworkSystem::setPort(unsigned short port)
@@ -69,12 +74,12 @@ void Purity::NetworkSystem::sendActionsToServer()
 
 void Purity::NetworkSystem::setServer(bool isServer)
 {
-    this->mServer = isServer;
+    this->mIsServer = isServer;
 }
 
 bool Purity::NetworkSystem::isServer() const
 {
-    return mServer;
+    return mIsServer;
 }
 
 void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
@@ -200,5 +205,6 @@ luabind::scope Purity::NetworkSystem::luaBindings()
         .def("receiveAction", &NetworkSystem::receiveAction)
         .def("connectToServer", &NetworkSystem::connectToServer)
         .def("setServer", &NetworkSystem::setServer)
+        .def("initializeServer", &NetworkSystem::initializeServer)
         ;
 }
