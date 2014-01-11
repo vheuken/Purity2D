@@ -14,3 +14,17 @@ Purity::Server::Server(const unsigned short port)
         std::cerr << "Error occured while trying to create an ENet server host\n";
     }
 }
+
+void Purity::Server::handleEvents()
+{
+    ENetEvent event;
+
+    while (enet_host_service(host, &event, 1000) > 0)
+    {
+        switch (event.type)
+        {
+        case ENET_EVENT_TYPE_CONNECT:
+            std::cout << "New peer!\n";
+        }
+    }
+}

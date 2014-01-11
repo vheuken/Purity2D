@@ -9,6 +9,7 @@ namespace Purity
     {
     public:
         Server(const unsigned short port);
+        void handleEvents();
     };
 }
 
