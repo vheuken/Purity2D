@@ -1,6 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include <string>
 #include "host.h"
 
 namespace Purity
@@ -9,6 +10,7 @@ namespace Purity
     {
     public:
         Client();
+        void connectToServer(std::string serverAddressStr, unsigned short port);
     };
 }
 

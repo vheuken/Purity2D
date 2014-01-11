@@ -96,7 +96,7 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
 
     if (mSocket.receive(packet, c, mPort) != sf::Socket::Done)
     {
-        //std::cout << "Error receiving actions!";
+        //std::cout << "Error receiving actions";
     }
 
     if (packet >> action)
@@ -108,22 +108,7 @@ void Purity::NetworkSystem::receiveAction(sf::IpAddress& client)
 
 void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
 {
-    sf::TcpSocket socket;
-    sf::IpAddress serverAddress(serverAddressStr);
-    this->mServerAddress = serverAddress;
-    sf::Socket::Status status = socket.connect(mServerAddress, mPort);
-    if (status != sf::Socket::Done)
-    {
-    }
-    else if (status == sf::Socket::Done)
-    {
-        std::cout << "Connected to " << mServerAddress << std::endl;
-    }
-    
-    socket.disconnect();
-
-    sf::Packet emptyPacket;
-    mSocket.send(emptyPacket, mServerAddress, mPort);
+    mClient->connectToServer(serverAddressStr, mPort);
 }
 
 std::string Purity::NetworkSystem::getLocalAddress()
