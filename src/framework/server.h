@@ -1,7 +1,6 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include <string>
 #include "host.h"
 
 namespace Purity

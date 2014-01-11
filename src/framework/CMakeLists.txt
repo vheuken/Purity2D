@@ -15,6 +15,7 @@ set( FRAMEWORK_HEADER_FILES
     entitystate.h
     host.h
     server.h
+    client.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
@@ -30,6 +31,7 @@ set( FRAMEWORK_SOURCE_FILES
      entitystate.cpp
      host.cpp
      server.cpp
+     client.cpp
 )
 
 add_library( ${FRAMEWORK_PROJECT_NAME} STATIC

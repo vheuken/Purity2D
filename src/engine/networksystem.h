@@ -13,6 +13,7 @@
 #include "networkaction.h"
 #include "../framework/scene.h"
 #include "../framework/server.h"
+#include "../framework/client.h"
 
 namespace Purity
 {
@@ -35,7 +36,7 @@ namespace Purity
         void connectToServer(std::string serverAddress);
         
         void initializeServer(unsigned short port);
-        void initializeClient(unsigned short port);
+        void initializeClient();
 
         void setServer(bool isServer);
         bool isServer() const;
@@ -51,6 +52,7 @@ namespace Purity
         unsigned short mPort;
         bool mIsServer;
         
+        std::unique_ptr<Client> mClient;
         std::unique_ptr<Server> mServer;
         std::queue<NetworkAction>* mServerActionQueue;
         std::queue<NetworkAction>  mClientActionQueue;

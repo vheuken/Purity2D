@@ -42,6 +42,11 @@ void Purity::NetworkSystem::initializeServer(unsigned short port)
     mIsServer = true;
 }
 
+void Purity::NetworkSystem::initializeClient()
+{
+    mClient = std::unique_ptr<Client>(new Client());
+}
+
 void Purity::NetworkSystem::setPort(unsigned short port)
 {
     mPort = port;
@@ -206,5 +211,6 @@ luabind::scope Purity::NetworkSystem::luaBindings()
         .def("connectToServer", &NetworkSystem::connectToServer)
         .def("setServer", &NetworkSystem::setServer)
         .def("initializeServer", &NetworkSystem::initializeServer)
+        .def("initializeClient", &NetworkSystem::initializeClient)
         ;
 }
