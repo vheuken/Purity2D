@@ -29,6 +29,7 @@ void Purity::NetworkSystem::update(Scene* scene)
 
     if (isServer())
     {
+        mServer->handleEvents();
     }
     else
     {
