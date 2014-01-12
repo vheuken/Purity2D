@@ -30,6 +30,10 @@ void Purity::Server::handleEvents()
         case ENET_EVENT_TYPE_DISCONNECT:
             std::cout << "Peer disconnected!\n";
             break;
+        case ENET_EVENT_TYPE_RECEIVE:
+            std::cout << "Packet received!" << std::endl;
+            break;
+
         default:
             std::cout << "Default!\n";
         }

@@ -33,6 +33,8 @@ void Purity::Client::sendPacket(sf::Packet packet)
     ENetPacket * enetPacket;
 
     enetPacket = enet_packet_create(packet.getData(), packet.getDataSize(), ENET_PACKET_FLAG_RELIABLE);
+
+    enet_peer_send(&mHost->peers[0], 0, enetPacket);
 }
 
 void Purity::Client::connectToServer(std::string serverAddressStr, unsigned short port)
