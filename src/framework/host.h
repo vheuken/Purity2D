@@ -11,8 +11,8 @@ namespace Purity
         ~Host();
 
     protected:
-        ENetHost* host;
-        ENetAddress address;
+        ENetHost* mHost;
+        ENetAddress mAddress;
     };
 }
 

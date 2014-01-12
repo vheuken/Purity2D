@@ -2,5 +2,5 @@
 
 Purity::Host::~Host()
 {
-    enet_host_destroy(host);
+    enet_host_destroy(mHost);
 }
