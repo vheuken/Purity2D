@@ -13,7 +13,19 @@ Purity::Client::Client()
 
 void Purity::Client::handleEvents()
 {
+    ENetEvent event;
 
+    while (enet_host_service(mHost, &event, 0) > 0)
+    {
+        switch (event.type)
+        {
+        case ENET_EVENT_TYPE_RECEIVE:
+            std::cout << "Packet received!\n";
+
+        default:
+            std::cout << "Default!\n";
+        }
+    }
 }
 
 void Purity::Client::connectToServer(std::string serverAddressStr, unsigned short port)
