@@ -19,7 +19,7 @@ void Purity::Server::handleEvents()
 {
     ENetEvent event;
 
-    while (enet_host_service(mHost, &event, 1 / 120) > 0)
+    while (enet_host_service(mHost, &event, 0) > 0)
     {
         switch (event.type)
         {
