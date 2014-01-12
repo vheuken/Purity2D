@@ -1,7 +1,8 @@
 #include "client.h"
 #include <iostream>
 
-Purity::Client::Client()
+Purity::Client::Client() 
+: mServerPeer(nullptr)
 {
     mHost = enet_host_create(NULL, 1, 2, 0, 0);
     
@@ -34,7 +35,7 @@ void Purity::Client::sendPacket(sf::Packet packet)
 
     enetPacket = enet_packet_create(packet.getData(), packet.getDataSize(), ENET_PACKET_FLAG_RELIABLE);
 
-    enet_peer_send(&mHost->peers[0], 0, enetPacket);
+    enet_peer_send(mServerPeer, 0, enetPacket);
 }
 
 void Purity::Client::connectToServer(std::string serverAddressStr, unsigned short port)
@@ -57,6 +58,7 @@ void Purity::Client::connectToServer(std::string serverAddressStr, unsigned shor
         event.type == ENET_EVENT_TYPE_CONNECT)
     {
         std::cout << "Connected to " << serverAddressStr << std::endl;
+        mServerPeer = peer;
     }
     else
     {

@@ -17,6 +17,9 @@ namespace Purity
         void sendPacket(sf::Packet packet);
 
         void connectToServer(std::string serverAddressStr, unsigned short port);
+
+    private:
+        ENetPeer * mServerPeer;
     };
 }
 
