@@ -34,6 +34,17 @@ void Purity::NetworkSystem::update(Scene* scene)
     else if (mClient)
     {
         mClient->handleEvents();
+
+        while (mClientActionQueue.empty() == false)
+        {
+            sf::Packet packet;
+
+            packet << mClientActionQueue.front();
+
+            mClientActionQueue.pop();
+
+            mClient->sendPacket(packet);
+        }
     }
 }
 

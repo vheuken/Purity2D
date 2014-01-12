@@ -1,6 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include <SFML/Network.hpp>
 #include <string>
 #include "host.h"
 
@@ -12,6 +13,8 @@ namespace Purity
         Client();
 
         void handleEvents();
+
+        void sendPacket(sf::Packet packet);
 
         void connectToServer(std::string serverAddressStr, unsigned short port);
     };

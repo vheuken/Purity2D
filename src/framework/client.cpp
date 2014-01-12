@@ -28,6 +28,13 @@ void Purity::Client::handleEvents()
     }
 }
 
+void Purity::Client::sendPacket(sf::Packet packet)
+{
+    ENetPacket * enetPacket;
+
+    enetPacket = enet_packet_create(packet.getData(), packet.getDataSize(), ENET_PACKET_FLAG_RELIABLE);
+}
+
 void Purity::Client::connectToServer(std::string serverAddressStr, unsigned short port)
 {
     ENetAddress address;
