@@ -31,7 +31,6 @@ namespace Purity
         void setPort(unsigned short port);
 
         void sendAction(std::string objectName, std::string actionName);
-        void receiveAction(sf::IpAddress& client);
 
         void connectToServer(std::string serverAddress);
         
@@ -47,7 +46,6 @@ namespace Purity
         sf::UdpSocket mSocket;
         sf::TcpListener mListener;
         sf::IpAddress mServerAddress;
-        std::vector<sf::IpAddress> mClientAddressList;
 
         unsigned short mPort;
         bool mIsServer;
@@ -57,13 +55,6 @@ namespace Purity
         std::queue<NetworkAction>* mServerActionQueue;
         std::queue<NetworkAction>  mClientActionQueue;
         std::queue<EntityState> mStateQueue;
-
-        void listenForNewConnections();
-        void addClient(const sf::IpAddress& clientAddress);
-        void sendDataToClients();
-        void receiveDataFromServer();
-        void sendActionsToServer();
-        void receiveActionsFromClients();
     };
 }
 
