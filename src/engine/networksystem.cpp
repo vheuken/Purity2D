@@ -27,12 +27,13 @@ void Purity::NetworkSystem::update(Scene* scene)
         mCurrentScene = scene;
     }
 
-    if (isServer())
+    if (mServer && isServer())
     {
         mServer->handleEvents();
     }
-    else
+    else if (mClient)
     {
+        mClient->handleEvents();
     }
 }
 

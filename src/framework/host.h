@@ -10,6 +10,8 @@ namespace Purity
     public:
         ~Host();
 
+        virtual void handleEvents() = 0;
+
     protected:
         ENetHost* mHost;
         ENetAddress mAddress;

@@ -11,6 +11,11 @@ Purity::Client::Client()
     }
 }
 
+void Purity::Client::handleEvents()
+{
+
+}
+
 void Purity::Client::connectToServer(std::string serverAddressStr, unsigned short port)
 {
     ENetAddress address;

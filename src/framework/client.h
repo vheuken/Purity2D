@@ -10,6 +10,9 @@ namespace Purity
     {
     public:
         Client();
+
+        void handleEvents();
+
         void connectToServer(std::string serverAddressStr, unsigned short port);
     };
 }
