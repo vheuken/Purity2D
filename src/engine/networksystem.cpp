@@ -38,20 +38,16 @@ void Purity::NetworkSystem::update(Scene* scene)
 
         while (mClientActionQueue.empty() == false)
         {
-            sf::Packet packet;
-
-            packet << mClientActionQueue.front();
+            mClient->sendAction(mClientActionQueue.front());
 
             mClientActionQueue.pop();
-
-            mClient->sendAction(packet);
         }
     }
 }
 
 void Purity::NetworkSystem::initializeServer(unsigned short port)
 {
-    mServer = std::unique_ptr<Server>(new Server(port));
+    mServer = std::unique_ptr<Server>(new Server(port, mServerActionQueue));
     mPort = port;
     mIsServer = true;
 }

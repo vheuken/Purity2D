@@ -5,6 +5,8 @@
 #include <string>
 #include "host.h"
 
+#include "../engine/networkaction.h"
+
 namespace Purity
 {
     class Client : public Host
@@ -14,7 +16,7 @@ namespace Purity
 
         void handleEvents();
 
-        void sendAction(sf::Packet actionPacket);
+        void sendAction(NetworkAction action);
 
         void connectToServer(std::string serverAddressStr, unsigned short port);
 

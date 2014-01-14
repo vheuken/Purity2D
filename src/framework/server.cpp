@@ -1,7 +1,7 @@
 #include "server.h"
 #include <iostream>
 
-Purity::Server::Server(const unsigned short port)
+Purity::Server::Server(const unsigned short port, std::queue<NetworkAction>* actionQueue)
 {
     mAddress.host = ENET_HOST_ANY;
 
@@ -13,11 +13,14 @@ Purity::Server::Server(const unsigned short port)
     {
         std::cerr << "Error occured while trying to create an ENet server host\n";
     }
+
+    mReceivedActionQueue = actionQueue;
 }
 
 void Purity::Server::handleEvents()
 {
     ENetEvent event;
+    NetworkAction* action;
 
     while (enet_host_service(mHost, &event, 0) > 0)
     {
@@ -31,7 +34,9 @@ void Purity::Server::handleEvents()
             std::cout << "Peer disconnected!" << std::endl;
             break;
         case ENET_EVENT_TYPE_RECEIVE:
-            std::cout << "Packet received!" << std::endl;
+            action = static_cast<NetworkAction*>(event.packet->userData);
+            std::cout << action->actionName << std::endl;
+            mReceivedActionQueue->push(*action);
             break;
 
         default:

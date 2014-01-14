@@ -26,11 +26,11 @@ void Purity::Client::handleEvents()
     }
 }
 
-void Purity::Client::sendAction(sf::Packet actionPacket)
+void Purity::Client::sendAction(NetworkAction action)
 {
     ENetPacket * enetPacket;
 
-    enetPacket = enet_packet_create(actionPacket.getData(), actionPacket.getDataSize(), ENET_PACKET_FLAG_RELIABLE);
+    enetPacket = enet_packet_create(&action, sizeof(action), ENET_PACKET_FLAG_RELIABLE);
 
     enet_peer_send(mServerPeer, 0, enetPacket);
 }
