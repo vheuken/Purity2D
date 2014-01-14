@@ -22,18 +22,15 @@ void Purity::Client::handleEvents()
         {
         case ENET_EVENT_TYPE_RECEIVE:
             std::cout << "Packet received!\n";
-
-        default:
-            std::cout << "Default!\n";
         }
     }
 }
 
-void Purity::Client::sendPacket(sf::Packet packet)
+void Purity::Client::sendAction(sf::Packet actionPacket)
 {
     ENetPacket * enetPacket;
 
-    enetPacket = enet_packet_create(packet.getData(), packet.getDataSize(), ENET_PACKET_FLAG_RELIABLE);
+    enetPacket = enet_packet_create(actionPacket.getData(), actionPacket.getDataSize(), ENET_PACKET_FLAG_RELIABLE);
 
     enet_peer_send(mServerPeer, 0, enetPacket);
 }

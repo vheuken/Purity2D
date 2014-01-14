@@ -1,6 +1,8 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#include <vector>
+#include "entitystate.h"
 #include "host.h"
 
 namespace Purity
@@ -11,6 +13,8 @@ namespace Purity
         Server(const unsigned short port);
 
         void handleEvents();
+
+        void sendDataToClients(const std::vector<EntityState>& entityStates);
     };
 }
 

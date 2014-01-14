@@ -39,3 +39,16 @@ void Purity::Server::handleEvents()
         }
     }
 }
+
+void Purity::Server::sendDataToClients(const std::vector<EntityState>& entityStates)
+{
+    for (auto state = entityStates.begin(); state != entityStates.end(); ++state)
+    {
+        ENetPacket* packet = enet_packet_create(&state, sizeof(state), ENET_PACKET_FLAG_RELIABLE);
+
+        for (size_t i = 0; i < mHost->connectedPeers; ++i)
+        {
+            enet_peer_send(&mHost->peers[i], 0, packet);
+        }
+    }
+}

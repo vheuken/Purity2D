@@ -14,7 +14,7 @@ namespace Purity
 
         void handleEvents();
 
-        void sendPacket(sf::Packet packet);
+        void sendAction(sf::Packet actionPacket);
 
         void connectToServer(std::string serverAddressStr, unsigned short port);
 

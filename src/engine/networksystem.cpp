@@ -30,6 +30,7 @@ void Purity::NetworkSystem::update(Scene* scene)
     if (mServer && isServer())
     {
         mServer->handleEvents();
+        mServer->sendDataToClients(mCurrentScene->getEntityStates());
     }
     else if (mClient)
     {
@@ -43,7 +44,7 @@ void Purity::NetworkSystem::update(Scene* scene)
 
             mClientActionQueue.pop();
 
-            mClient->sendPacket(packet);
+            mClient->sendAction(packet);
         }
     }
 }
