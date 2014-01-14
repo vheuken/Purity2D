@@ -6,5 +6,8 @@ Purity::Host::~Host()
     {
         enet_peer_disconnect(&mHost->peers[i], 0);
     }
+
+    enet_host_flush(mHost);
+
     enet_host_destroy(mHost);
 }
