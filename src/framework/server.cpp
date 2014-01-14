@@ -24,11 +24,11 @@ void Purity::Server::handleEvents()
         switch (event.type)
         {
         case ENET_EVENT_TYPE_CONNECT:
-            std::cout << "New peer!\n";
+            std::cout << "New peer!" << std::endl;
             break;
         
         case ENET_EVENT_TYPE_DISCONNECT:
-            std::cout << "Peer disconnected!\n";
+            std::cout << "Peer disconnected!" << std::endl;
             break;
         case ENET_EVENT_TYPE_RECEIVE:
             std::cout << "Packet received!" << std::endl;
