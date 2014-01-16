@@ -20,7 +20,7 @@ Purity::Server::Server(const unsigned short port, std::queue<NetworkAction>* act
 void Purity::Server::handleEvents()
 {
     ENetEvent event;
-    NetworkAction action;
+    NetworkAction* action;
 
     while (enet_host_service(mHost, &event, 0) > 0)
     {
@@ -34,10 +34,12 @@ void Purity::Server::handleEvents()
             std::cout << "Peer disconnected!" << std::endl;
             break;
         case ENET_EVENT_TYPE_RECEIVE:
-            memcpy(&action, event.packet->data, event.packet->dataLength);
+            memcpy(&action, &event.packet->data, event.packet->dataLength);
+
             std::cout << "Action received!" << std::endl;
-            std::cout << action.actionName << std::endl;
+            std::cout << action->actionName << std::endl;
             //mReceivedActionQueue->push(*action);
+            enet_packet_destroy(event.packet);
             break;
 
         default:
