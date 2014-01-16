@@ -66,11 +66,8 @@ void Purity::NetworkSystem::sendAction(std::string objectName, std::string actio
 {
     NetworkAction action;
     
-    action.actionName = new char[actionName.size() + 1];
-    action.objectName = new char[objectName.size() + 1];
-
-    strcpy(action.actionName, actionName.c_str());
-    strcpy(action.objectName, objectName.c_str());
+    action.objectName = objectName;
+    action.actionName = actionName;
 
     mClientActionQueue.push(action);
 }
