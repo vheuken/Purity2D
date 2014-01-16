@@ -7,10 +7,12 @@
 
 namespace Purity
 {
+    const int NETWORK_ACTION_MAX_STRING_LENGTH = 50;
+
     struct NetworkAction
     {
-        char objectName[40];
-        char actionName[40];
+        char objectName[NETWORK_ACTION_MAX_STRING_LENGTH];
+        char actionName[NETWORK_ACTION_MAX_STRING_LENGTH];
     };
 
     //sf::Packet& operator <<(sf::Packet& packet, const NetworkAction& action);
