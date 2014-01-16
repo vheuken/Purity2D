@@ -8,12 +8,12 @@ namespace Purity
 {
     struct NetworkAction
     {
-        std::string objectName;
-        std::string actionName;
+        char* objectName;
+        char* actionName;
     };
 
-    sf::Packet& operator <<(sf::Packet& packet, const NetworkAction& action);
-    sf::Packet& operator >>(sf::Packet& packet, NetworkAction& action);
+    //sf::Packet& operator <<(sf::Packet& packet, const NetworkAction& action);
+    //sf::Packet& operator >>(sf::Packet& packet, NetworkAction& action);
 }
 
 #endif // NETWORK_ACTION_H
