@@ -39,7 +39,7 @@ void Purity::Client::connectToServer(std::string serverAddressStr, unsigned shor
 {
     ENetAddress address;
     ENetEvent event;
-    ENetPeer *peer;
+    ENetPeer *peer = nullptr;
 
     enet_address_set_host(&address, serverAddressStr.c_str());
     address.port = port;
