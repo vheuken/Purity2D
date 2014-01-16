@@ -9,8 +9,8 @@ namespace Purity
 {
     struct NetworkAction
     {
-        enet_uint8* objectName;
-        enet_uint8* actionName;
+        char objectName[40];
+        char actionName[40];
     };
 
     //sf::Packet& operator <<(sf::Packet& packet, const NetworkAction& action);
