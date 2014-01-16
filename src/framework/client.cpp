@@ -29,8 +29,8 @@ void Purity::Client::handleEvents()
 void Purity::Client::sendAction(NetworkAction action)
 {
     ENetPacket * enetPacket;
-    enet_uint16 * buffer = reinterpret_cast<enet_uint16*>(&action);
-    enetPacket = enet_packet_create(buffer, sizeof(action), ENET_PACKET_FLAG_RELIABLE);
+
+    enetPacket = enet_packet_create(&action, sizeof(NetworkAction), ENET_PACKET_FLAG_RELIABLE);
 
     enet_peer_send(mServerPeer, 0, enetPacket);
 }
