@@ -3,13 +3,14 @@
 
 #include <string>
 #include <SFML/Network.hpp>
+#include <enet/enet.h>
 
 namespace Purity
 {
     struct NetworkAction
     {
-        char* objectName;
-        char* actionName;
+        enet_uint8* objectName;
+        enet_uint8* actionName;
     };
 
     //sf::Packet& operator <<(sf::Packet& packet, const NetworkAction& action);

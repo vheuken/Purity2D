@@ -34,10 +34,11 @@ void Purity::Server::handleEvents()
             std::cout << "Peer disconnected!" << std::endl;
             break;
         case ENET_EVENT_TYPE_RECEIVE:
-            memcpy(&action, event.packet->data, sizeof(NetworkAction));
+            memcpy(&action, event.packet->data, event.packet->dataLength);
 
             std::cout << "Action received!" << std::endl;
             std::cout << sizeof(NetworkAction) << " " <<event.packet->dataLength << std::endl;
+            std::cout << action.objectName << std::endl;
             //mReceivedActionQueue->push(*action);
             enet_packet_destroy(event.packet);
             break;

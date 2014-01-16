@@ -66,8 +66,8 @@ void Purity::NetworkSystem::sendAction(std::string objectName, std::string actio
 {
     NetworkAction action;
     std::cout << sizeof(NetworkAction) << std::endl;
-    action.objectName = new char[objectName.size() + 1];
-    action.actionName = new char[actionName.size() + 1];
+    action.objectName = new enet_uint8[objectName.size() + 1];
+    action.actionName = new enet_uint8[actionName.size() + 1];
 
     std::copy(objectName.begin(), objectName.end(), action.objectName);
     std::copy(actionName.begin(), actionName.end(), action.actionName);
