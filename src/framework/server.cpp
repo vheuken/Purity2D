@@ -36,7 +36,7 @@ void Purity::Server::handleEvents()
         case ENET_EVENT_TYPE_RECEIVE:
             action = static_cast<NetworkAction*>(event.packet->userData);
             std::cout << action->actionName << std::endl;
-            mReceivedActionQueue->push(*action);
+            //mReceivedActionQueue->push(*action);
             break;
 
         default:
