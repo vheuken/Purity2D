@@ -8,8 +8,8 @@ namespace Purity
 {
     struct NetworkAction
     {
-        char* objectName;
-        char* actionName;
+        std::string objectName;
+        std::string actionName;
     };
 
     //sf::Packet& operator <<(sf::Packet& packet, const NetworkAction& action);
