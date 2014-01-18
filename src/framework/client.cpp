@@ -21,7 +21,7 @@ void Purity::Client::handleEvents()
         switch (event.type)
         {
         case ENET_EVENT_TYPE_RECEIVE:
-            std::cout << "Packet received!\n";
+            std::cout << "Packet received!" << std::endl;
         }
     }
 }
