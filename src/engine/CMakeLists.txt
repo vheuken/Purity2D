@@ -8,7 +8,6 @@ set( HEADER_FILES
     inputmanager.h
     luamanager.h
     networksystem.h
-    networkaction.h
     commandlinearguments.h
     abstractsystem.h
 )
@@ -21,7 +20,6 @@ set( SOURCE_FILES
      inputmanager.cpp
      luamanager.cpp 
      networksystem.cpp
-     networkaction.cpp 
      commandlinearguments.cpp
      abstractsystem.cpp
 

@@ -6,7 +6,7 @@
 #include "entitystate.h"
 #include "host.h"
 
-#include "../engine/networkaction.h"
+#include "networkaction.h"
 
 namespace Purity
 {

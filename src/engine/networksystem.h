@@ -10,7 +10,7 @@
 #include <enet/enet.h>
 
 #include "abstractsystem.h"
-#include "networkaction.h"
+#include "../framework/networkaction.h"
 #include "../framework/scene.h"
 #include "../framework/server.h"
 #include "../framework/client.h"

@@ -5,7 +5,7 @@
 #include <string>
 #include "host.h"
 
-#include "../engine/networkaction.h"
+#include "networkaction.h"
 
 namespace Purity
 {

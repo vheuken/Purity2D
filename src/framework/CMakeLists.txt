@@ -16,6 +16,7 @@ set( FRAMEWORK_HEADER_FILES
     host.h
     server.h
     client.h
+    networkaction.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
