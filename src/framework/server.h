@@ -3,6 +3,7 @@
 
 #include <queue>
 #include <vector>
+#include <SFML/System/Clock.hpp>
 #include "entitystate.h"
 #include "host.h"
 
@@ -21,6 +22,8 @@ namespace Purity
 
     private:
         std::queue<NetworkAction>* mReceivedActionQueue;
+
+        sf::Clock mSendRateTimer;
     };
 }
 
