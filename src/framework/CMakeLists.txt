@@ -29,7 +29,6 @@ set( FRAMEWORK_SOURCE_FILES
      objectmanager.cpp
      tile.cpp
      layer.cpp
-     entitystate.cpp
      host.cpp
      server.cpp
      client.cpp
