@@ -65,6 +65,6 @@ void Purity::Server::sendDataToClients(const std::vector<EntityState>& entitySta
 
             enet_host_broadcast(mHost, 0, packet);
         }
+        timer.restart();
     }
-    timer.restart();
 }
