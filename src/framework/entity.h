@@ -72,6 +72,8 @@ namespace Purity
 
         EntityState mState;
 
+        void updateState();
+
         void initializeTextureCoords();
 
         bool isInView(const sf::View& view) const;

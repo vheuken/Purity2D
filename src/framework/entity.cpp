@@ -6,8 +6,9 @@
 int Purity::Entity::sNumOfEntities = 0;
 
 Purity::Entity::Entity()
-    : mId(++sNumOfEntities), mState(mId)
+    : mId(++sNumOfEntities)
 {
+    mState.entityId = mId;
 }
 
 Purity::Entity::Entity(const Tmx::Object* object, b2World* world, const sf::Texture * texture)
@@ -93,7 +94,13 @@ void Purity::Entity::update()
 
     setPosition(x, y);
 
-    mState.update(mHitboxBody);
+    updateState();
+}
+
+void Purity::Entity::updateState()
+{
+    mState.position = mHitboxBody->GetPosition();
+    mState.angle = mHitboxBody->GetAngle();
 }
 
 void Purity::Entity::createBody(b2World* world)
