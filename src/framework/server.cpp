@@ -52,14 +52,15 @@ void Purity::Server::handleEvents()
 
 void Purity::Server::sendDataToClients(const std::vector<EntityState>& entityStates)
 {
-    for (auto state = entityStates.begin(); state != entityStates.end(); ++state)
+    for (auto stateIter = entityStates.begin(); stateIter != entityStates.end(); ++stateIter)
     {
-        ENetPacket* packet = enet_packet_create(&*state, sizeof(*state), ENET_PACKET_FLAG_SENT);
+        EntityState state = *stateIter;
+
+        ENetPacket* packet = enet_packet_create(&state, sizeof(state), ENET_PACKET_FLAG_SENT);
 
         for (size_t i = 0; i < mHost->connectedPeers; ++i)
         {
             enet_peer_send(&mHost->peers[i], 0, packet);
         }
-        std::cout << state->position.y << std::endl;
     }
 }
