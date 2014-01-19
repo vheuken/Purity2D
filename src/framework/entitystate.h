@@ -10,7 +10,7 @@ namespace Purity
     {
         int entityId;
         b2Vec2 position;
-        float32 angle;
+        float angle;
     };
 }
 

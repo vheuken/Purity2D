@@ -25,7 +25,7 @@ void Purity::Client::handleEvents()
             std::cout << "Packet received!" << std::endl;
             //memcpy(buffer, event.packet->data, event.packet->dataLength);
             state = static_cast<EntityState*>((void*)event.packet->data);
-            std::cout << state->position.y << std::endl;
+            std::cout << state->angle << std::endl;
         }
     }
 }
