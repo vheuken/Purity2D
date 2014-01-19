@@ -66,8 +66,8 @@ namespace Purity
         void initializeHitboxShape();
 
     private:
-        static int sNumOfEntities;
-        const int mId;
+        static unsigned int sNumOfEntities;
+        const unsigned int mId;
         std::string mName;
 
         EntityState mState;

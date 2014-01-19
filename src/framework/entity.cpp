@@ -3,7 +3,7 @@
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
 
-int Purity::Entity::sNumOfEntities = 0;
+unsigned int Purity::Entity::sNumOfEntities = 0;
 
 Purity::Entity::Entity()
     : mId(++sNumOfEntities)
