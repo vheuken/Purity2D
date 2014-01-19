@@ -8,7 +8,7 @@ namespace Purity
 {
     struct EntityState
     {
-        int entityId;
+        sf::Int32 entityId;
         b2Vec2 position;
         float32 angle;
     };
