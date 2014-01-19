@@ -56,7 +56,7 @@ void Purity::Server::sendDataToClients(const std::vector<EntityState>& entitySta
     {
         EntityState state = *stateIter;
 
-        ENetPacket* packet = enet_packet_create(&state, sizeof(state), ENET_PACKET_FLAG_SENT);
+        ENetPacket* packet = enet_packet_create(&state, sizeof(state), ENET_PACKET_FLAG_RELIABLE);
 
         enet_host_broadcast(mHost, 0, packet);
     }
