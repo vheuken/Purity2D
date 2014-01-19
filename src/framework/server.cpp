@@ -56,6 +56,7 @@ void Purity::Server::sendDataToClients(const std::vector<EntityState>& entitySta
 
     if (timer.getElapsedTime().asMilliseconds() >= 20)
     {
+        std::cout << "Sending packets to clients!!" << std::endl;
         for (auto stateIter = entityStates.begin(); stateIter != entityStates.end(); ++stateIter)
         {
             EntityState state = *stateIter;
