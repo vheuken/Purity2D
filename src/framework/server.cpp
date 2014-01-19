@@ -60,5 +60,6 @@ void Purity::Server::sendDataToClients(const std::vector<EntityState>& entitySta
         {
             enet_peer_send(&mHost->peers[i], 0, packet);
         }
+        std::cout << state->position.y << std::endl;
     }
 }

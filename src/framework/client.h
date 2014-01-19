@@ -3,8 +3,10 @@
 
 #include <SFML/Network.hpp>
 #include <string>
+#include <queue>
 #include "host.h"
 
+#include "entitystate.h"
 #include "networkaction.h"
 
 namespace Purity
@@ -22,6 +24,7 @@ namespace Purity
 
     private:
         ENetPeer * mServerPeer;
+        std::queue<EntityState> mReceivedStates;
     };
 }
 

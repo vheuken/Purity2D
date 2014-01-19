@@ -15,13 +15,15 @@ Purity::Client::Client()
 void Purity::Client::handleEvents()
 {
     ENetEvent event;
-
+    EntityState state;
     while (enet_host_service(mHost, &event, 0) > 0)
     {
         switch (event.type)
         {
         case ENET_EVENT_TYPE_RECEIVE:
             std::cout << "Packet received!" << std::endl;
+            memcpy(&state, event.packet->data, event.packet->dataLength);
+            std::cout << state.angle << std::endl;
         }
     }
 }

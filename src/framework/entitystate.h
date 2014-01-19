@@ -16,13 +16,6 @@ namespace Purity
         b2Vec2 position;
         float32 angle;
     };
-
-    sf::Packet& operator <<(sf::Packet& packet, const EntityState& action);
-    sf::Packet& operator >>(sf::Packet& packet, EntityState& action);
-
-    // b2vec2
-    sf::Packet& operator <<(sf::Packet& packet, const b2Vec2& vector);
-    sf::Packet& operator >>(sf::Packet& packet, b2Vec2& vector);
 }
 
 #endif // ENTITY_STATE_H

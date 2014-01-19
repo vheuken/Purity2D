@@ -65,7 +65,6 @@ void Purity::NetworkSystem::setPort(unsigned short port)
 void Purity::NetworkSystem::sendAction(std::string objectName, std::string actionName)
 {
     NetworkAction action;
-    std::cout << sizeof(NetworkAction) << std::endl;
 
     std::copy(objectName.begin(), objectName.end(), action.objectName);
     std::copy(actionName.begin(), actionName.end(), action.actionName);
