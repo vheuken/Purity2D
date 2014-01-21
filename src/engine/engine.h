@@ -43,7 +43,6 @@ namespace Purity
 
 	    std::unique_ptr<std::queue<sf::Event> > mInputQueue;
         std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
-        std::unique_ptr<std::map<unsigned int, EntityState> > mReceivedStates;
 
         const CommandLineArguments mProgramOptions;
 

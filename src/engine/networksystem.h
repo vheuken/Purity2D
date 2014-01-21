@@ -4,7 +4,7 @@
 #include <SFML/Network.hpp>
 #include <luabind/luabind.hpp>
 #include <string>
-#include <vector>
+#include <map>
 #include <queue>
 #include <memory>
 #include <enet/enet.h>
@@ -20,8 +20,7 @@ namespace Purity
     class NetworkSystem : public AbstractSystem
     {
     public:
-        NetworkSystem(std::queue<NetworkAction> * serverActionQueue,
-                      std::map<unsigned int, EntityState> * receivedStates);
+        NetworkSystem(std::queue<NetworkAction> * serverActionQueue);
 
         ~NetworkSystem();
 
@@ -52,7 +51,7 @@ namespace Purity
         std::unique_ptr<Server> mServer;
         std::queue<NetworkAction>* mServerActionQueue;
         std::queue<NetworkAction>  mClientActionQueue;
-        std::map<unsigned int, EntityState>* mClientReceievdStates;
+        std::unique_ptr<std::map<unsigned int, EntityState> > mClientReceievdStates;
     };
 }
 

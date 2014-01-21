@@ -24,7 +24,6 @@ void Purity::Engine::initialize()
    
     mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);		
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
-    mReceivedStates = std::unique_ptr<std::map<unsigned int, EntityState>>(new std::map<unsigned int, EntityState>);
     
     if (mProgramOptions.headless == false)
     {
@@ -109,8 +108,7 @@ void Purity::Engine::initializeInputManager()
 
 void Purity::Engine::initializeNetworkSystem()
 {
-    mNetworkSystem = std::unique_ptr<NetworkSystem>(new NetworkSystem(mServerActionQueue.get(),
-                                                                      mReceivedStates.get()));
+    mNetworkSystem = std::unique_ptr<NetworkSystem>(new NetworkSystem(mServerActionQueue.get()));
 }
 
 sf::View Purity::Engine::getView()
