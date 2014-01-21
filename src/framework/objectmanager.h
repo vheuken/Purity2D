@@ -28,6 +28,8 @@ namespace Purity
 
         const Entity* getObjectByName(const std::string& objectName);
         MovableEntity* getMovableObjectByName(const std::string& objectName);
+        MovableEntity* getMovableObjectById(unsigned int id);
+
         void updatePhysics();
 
         std::vector<EntityState> getEntityStates() const;

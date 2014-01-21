@@ -44,6 +44,11 @@ void Purity::NetworkSystem::update(Scene* scene)
 
             mClientActionQueue.pop();
         }
+
+        for (auto it = mClientReceievdStates->begin(); it != mClientReceievdStates->end(); ++it)
+        {
+            mCurrentScene->setEntityState(it->second);
+        }
     }
 }
 

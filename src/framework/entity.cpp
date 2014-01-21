@@ -48,6 +48,11 @@ float Purity::Entity::getY() const
     return getPosition().y;
 }
 
+const unsigned int Purity::Entity::getId() const
+{
+    return mId;
+}
+
 std::string Purity::Entity::getName() const
 {
     return mName;

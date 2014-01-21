@@ -101,6 +101,19 @@ void Purity::ObjectManager::initializeObjects()
     }
 }
 
+Purity::MovableEntity* Purity::ObjectManager::getMovableObjectById(const unsigned int id)
+{
+    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); ++it)
+    {
+        if (it->getId() == id)
+        {
+            return &*it;
+        }
+    }
+
+    return nullptr;
+}
+
 void Purity::ObjectManager::updatePhysics()
 {
     for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)

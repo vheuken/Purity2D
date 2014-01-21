@@ -30,6 +30,8 @@ namespace Purity
         void initializePhysics(b2World * world);
         void updatePhysics();
 
+        void setEntityState(const EntityState& state);
+
         std::vector<EntityState> getEntityStates() const;
 
         std::string getLuaEventHandlerPath() const;

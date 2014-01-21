@@ -47,6 +47,8 @@ namespace Purity
         float getX() const;
         float getY() const;
 
+        const unsigned int getId() const;
+
         EntityState getState() const;
 
         virtual void update();

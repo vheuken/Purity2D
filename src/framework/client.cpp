@@ -76,6 +76,6 @@ void Purity::Client::addState(const EntityState& state)
     // state already exists
     if (ret.second == false)
     {
-        mReceivedStates->at(ret.first->first) = ret.first->second;
+        mReceivedStates->at(statePair.first) = state;
     }
 }
