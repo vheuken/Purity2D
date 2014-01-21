@@ -26,7 +26,7 @@ void Purity::Scene::initializePhysics(b2World * world)
 
 void Purity::Scene::setEntityState(const EntityState& state)
 {
-    mObjectManager->getMovableObjectById(state.entityId)->setBodyPosition(state.position.x, state.position.y);
+    mObjectManager->getMovableEntityById(state.entityId)->setBodyPosition(state.position.x, state.position.y);
 }
 
 std::vector<Purity::EntityState> Purity::Scene::getEntityStates() const

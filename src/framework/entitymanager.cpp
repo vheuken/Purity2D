@@ -14,10 +14,10 @@ Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
     luabind::globals(LuaManager::getManager()->getState())["GEntityManager"] = this;
 }
 
-const Purity::Entity* Purity::EntityManager::getObjectByName(const std::string& objectName)
+const Purity::Entity* Purity::EntityManager::getEntityByName(const std::string& objectName)
 {
 
-    for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
+    for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
     {
         if (it->getName() == objectName)
         {
@@ -28,10 +28,10 @@ const Purity::Entity* Purity::EntityManager::getObjectByName(const std::string& 
     return nullptr;
 }
 
-Purity::MovableEntity* Purity::EntityManager::getMovableObjectByName(const std::string& objectName)
+Purity::MovableEntity* Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
 {
 
-    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); it++)
     {
         if (it->getName() == objectName)
         {
@@ -46,9 +46,9 @@ std::vector<Purity::EntityState> Purity::EntityManager::getEntityStates() const
 {
     std::vector<EntityState> states;
 
-    states.reserve(mMovableObjectList.size());
+    states.reserve(mMovableEntityList.size());
 
-    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); ++it)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
         states.push_back(it->getState());
     }
@@ -81,19 +81,19 @@ void Purity::EntityManager::initializeObjects()
                     std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
                     const sf::Texture * t = mTextureManager.getTexture("scenes/init/" + p);
                     MovableEntity object(currentObject, mWorld, t);
-                    mMovableObjectList.push_back(object);
+                    mMovableEntityList.push_back(object);
                 }
                 else
                 {
                     MovableEntity object(currentObject, mWorld, nullptr);
-                    mMovableObjectList.push_back(object);
+                    mMovableEntityList.push_back(object);
                 }
 
             }
             else
             {
                 Entity entity(currentObject, mWorld, nullptr);
-                mObjectList.push_back(entity);
+                mEntityList.push_back(entity);
 
             }
             
@@ -101,9 +101,9 @@ void Purity::EntityManager::initializeObjects()
     }
 }
 
-Purity::MovableEntity* Purity::EntityManager::getMovableObjectById(const unsigned int id)
+Purity::MovableEntity* Purity::EntityManager::getMovableEntityById(const unsigned int id)
 {
-    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); ++it)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
         if (it->getId() == id)
         {
@@ -116,11 +116,11 @@ Purity::MovableEntity* Purity::EntityManager::getMovableObjectById(const unsigne
 
 void Purity::EntityManager::updatePhysics()
 {
-    for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
+    for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
     {
         it->update();
     }
-    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); it++)
     {
         it->update();
     }
@@ -128,11 +128,11 @@ void Purity::EntityManager::updatePhysics()
 
 void Purity::EntityManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
+    for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
     {
         target.draw(*it);
     }
-    for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); it++)
     {
         target.draw(*it);
     }
@@ -141,7 +141,7 @@ void Purity::EntityManager::draw(sf::RenderTarget& target, sf::RenderStates stat
 luabind::scope Purity::EntityManager::luaBindings()
 {
     return luabind::class_<EntityManager>("EntityManager")
-        .def("getEntityByName", &EntityManager::getObjectByName)
-        .def("getMovableEntityByName", &EntityManager::getMovableObjectByName)
+        .def("getEntityByName", &EntityManager::getEntityByName)
+        .def("getMovableEntityByName", &EntityManager::getMovableEntityByName)
     ;
 }
