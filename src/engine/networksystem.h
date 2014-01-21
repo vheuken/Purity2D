@@ -20,7 +20,9 @@ namespace Purity
     class NetworkSystem : public AbstractSystem
     {
     public:
-        NetworkSystem(std::queue<NetworkAction> * serverActionQueue);
+        NetworkSystem(std::queue<NetworkAction> * serverActionQueue,
+                      std::map<unsigned int, EntityState> * receivedStates);
+
         ~NetworkSystem();
 
         std::string getLocalAddress();
@@ -43,10 +45,6 @@ namespace Purity
         static luabind::scope luaBindings();
 
     private:
-        sf::UdpSocket mSocket;
-        sf::TcpListener mListener;
-        sf::IpAddress mServerAddress;
-
         unsigned short mPort;
         bool mIsServer;
         
@@ -54,7 +52,7 @@ namespace Purity
         std::unique_ptr<Server> mServer;
         std::queue<NetworkAction>* mServerActionQueue;
         std::queue<NetworkAction>  mClientActionQueue;
-        std::queue<EntityState> mStateQueue;
+        std::map<unsigned int, EntityState>* mClientReceievdStates;
     };
 }
 

@@ -2,16 +2,18 @@
 #include "luamanager.h"
 #include <iostream>
 
-Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue) 
-: mIsServer(false), mServerActionQueue(serverActionQueue), AbstractSystem()
+Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue,
+                                     std::map<unsigned int, EntityState> * receivedStates)
+: mIsServer(false), 
+  mServerActionQueue(serverActionQueue), 
+  mClientReceievdStates(receivedStates),
+  AbstractSystem()
 {
     if (enet_initialize() != 0)
     {
         std::cerr << "Error initializing enet!" << std::endl;
     }
 
-    mSocket.setBlocking(false);
-    mListener.setBlocking(false);
     luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
 }
 
@@ -54,7 +56,7 @@ void Purity::NetworkSystem::initializeServer(unsigned short port)
 
 void Purity::NetworkSystem::initializeClient()
 {
-    mClient = std::unique_ptr<Client>(new Client());
+    mClient = std::unique_ptr<Client>(new Client(mClientReceievdStates));
 }
 
 void Purity::NetworkSystem::setPort(unsigned short port)

@@ -3,7 +3,7 @@
 
 #include <SFML/Network.hpp>
 #include <string>
-#include <queue>
+#include <map>
 #include "host.h"
 
 #include "entitystate.h"
@@ -14,7 +14,7 @@ namespace Purity
     class Client : public Host
     {
     public:
-        Client();
+        Client(std::map<unsigned int, EntityState>* receivedStates);
 
         void handleEvents();
 
@@ -24,7 +24,7 @@ namespace Purity
 
     private:
         ENetPeer * mServerPeer;
-        std::queue<EntityState> mReceivedStates;
+        std::map<unsigned int, EntityState>* mReceivedStates;
     };
 }
 

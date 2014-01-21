@@ -1,8 +1,8 @@
 #include "client.h"
 #include <iostream>
 
-Purity::Client::Client() 
-: mServerPeer(nullptr)
+Purity::Client::Client(std::map<unsigned int, EntityState>* receivedStates) 
+: mServerPeer(nullptr), mReceivedStates(receivedStates)
 {
     mHost = enet_host_create(NULL, 1, 2, 0, 0);
     
@@ -21,9 +21,8 @@ void Purity::Client::handleEvents()
         switch (event.type)
         {
         case ENET_EVENT_TYPE_RECEIVE:
-            std::cout << "Packet received!" << std::endl;
             memcpy(&state, event.packet->data, sizeof(EntityState));
-            std::cout << state.entityId << std::endl;
+            mReceivedStates->at(state.entityId) = state;
         }
     }
 }

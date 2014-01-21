@@ -107,7 +107,8 @@ void Purity::Engine::initializeInputManager()
 
 void Purity::Engine::initializeNetworkSystem()
 {
-    mNetworkSystem = std::unique_ptr<NetworkSystem>(new NetworkSystem(mServerActionQueue.get()));
+    mNetworkSystem = std::unique_ptr<NetworkSystem>(new NetworkSystem(mServerActionQueue.get(),
+                                                                      mReceivedStates.get()));
 }
 
 sf::View Purity::Engine::getView()
