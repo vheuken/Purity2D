@@ -11,7 +11,7 @@ Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
 
     initializeObjects();
 
-    luabind::globals(LuaManager::getManager()->getState())["GObjectManager"] = this;
+    luabind::globals(LuaManager::getManager()->getState())["GEntityManager"] = this;
 }
 
 const Purity::Entity* Purity::EntityManager::getObjectByName(const std::string& objectName)
@@ -140,8 +140,8 @@ void Purity::EntityManager::draw(sf::RenderTarget& target, sf::RenderStates stat
 
 luabind::scope Purity::EntityManager::luaBindings()
 {
-    return luabind::class_<EntityManager>("ObjectManager")
-        .def("getObjectByName", &EntityManager::getObjectByName)
-        .def("getMovableObjectByName", &EntityManager::getMovableObjectByName)
+    return luabind::class_<EntityManager>("EntityManager")
+        .def("getEntityByName", &EntityManager::getObjectByName)
+        .def("getMovableEntityByName", &EntityManager::getMovableObjectByName)
     ;
 }
