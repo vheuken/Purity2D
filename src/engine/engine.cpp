@@ -24,6 +24,7 @@ void Purity::Engine::initialize()
    
     mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);		
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
+    mReceivedStates = std::unique_ptr<std::map<unsigned int, EntityState>>(new std::map<unsigned int, EntityState>);
     
     if (mProgramOptions.headless == false)
     {
@@ -35,6 +36,7 @@ void Purity::Engine::initialize()
     {
         TextureManager::sIsEnabled = false;
     }
+
     initializeSceneManager();
     initializePhysicsSystem();
     initializeNetworkSystem();

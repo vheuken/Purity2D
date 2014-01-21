@@ -16,13 +16,15 @@ void Purity::Client::handleEvents()
 {
     ENetEvent event;
     EntityState state;
+
     while (enet_host_service(mHost, &event, 0) > 0)
     {
         switch (event.type)
         {
         case ENET_EVENT_TYPE_RECEIVE:
             memcpy(&state, event.packet->data, sizeof(EntityState));
-            mReceivedStates->at(state.entityId) = state;
+
+            addState(state);
         }
     }
 }
@@ -62,5 +64,18 @@ void Purity::Client::connectToServer(std::string serverAddressStr, unsigned shor
     {
         enet_peer_reset(peer);
         std::cout << "Connection to " << serverAddressStr << " failed" << std::endl;
+    }
+}
+
+void Purity::Client::addState(const EntityState& state)
+{
+    std::pair<unsigned int, EntityState> statePair(state.entityId, state);
+
+    auto ret = mReceivedStates->insert(statePair);
+
+    // state already exists
+    if (ret.second == false)
+    {
+        mReceivedStates->at(ret.first->first) = ret.first->second;
     }
 }

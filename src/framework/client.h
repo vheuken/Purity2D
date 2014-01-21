@@ -25,6 +25,8 @@ namespace Purity
     private:
         ENetPeer * mServerPeer;
         std::map<unsigned int, EntityState>* mReceivedStates;
+
+        void addState(const EntityState& state);
     };
 }
 
