@@ -26,9 +26,9 @@ namespace Purity
     public:
         EntityManager(const Tmx::Map* tmxMap, b2World* world);
 
-        const Entity* getEntityByName(const std::string& objectName);
-        MovableEntity* getMovableEntityByName(const std::string& objectName);
-        MovableEntity* getMovableEntityById(unsigned int id);
+        Entity* const getEntityByName(const std::string& objectName);
+        MovableEntity* const getMovableEntityByName(const std::string& objectName);
+        MovableEntity* const getMovableEntityById(unsigned int id);
 
         void updatePhysics();
 
