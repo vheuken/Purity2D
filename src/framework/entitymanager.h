@@ -21,10 +21,10 @@ namespace Tmx
 
 namespace Purity
 {
-    class ObjectManager : public sf::Drawable
+    class EntityManager : public sf::Drawable
     {
     public:
-        ObjectManager(const Tmx::Map* tmxMap, b2World* world);
+        EntityManager(const Tmx::Map* tmxMap, b2World* world);
 
         const Entity* getObjectByName(const std::string& objectName);
         MovableEntity* getMovableObjectByName(const std::string& objectName);

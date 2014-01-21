@@ -5,7 +5,7 @@
 #include <luabind/luabind.hpp>
 #include "../framework/entity.h"
 #include "../framework/movableentity.h"
-#include "../framework/objectmanager.h"
+#include "../framework/entitymanager.h"
 #include "engine.h"
 
 Purity::LuaManager::LuaManager()
@@ -50,7 +50,7 @@ void Purity::LuaManager::initializeBindings()
     initializeSFMLBindings();
 
     luabind::module(mLuaState) [
-        ObjectManager::luaBindings(),
+        EntityManager::luaBindings(),
             Entity::luaBindings(),
             MovableEntity::luaBindings(),
             Engine::luaBindings(),

@@ -9,7 +9,7 @@ set( FRAMEWORK_HEADER_FILES
     entity.h
     movableentity.h
     texturemanager.h
-    objectmanager.h
+    entitymanager.h
     tile.h
     layer.h
     entitystate.h
@@ -26,7 +26,7 @@ set( FRAMEWORK_SOURCE_FILES
      entity.cpp
      movableentity.cpp
      texturemanager.cpp
-     objectmanager.cpp
+     entitymanager.cpp
      tile.cpp
      layer.cpp
      host.cpp

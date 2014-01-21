@@ -19,7 +19,7 @@ void Purity::Scene::initializePhysics(b2World * world)
     mMutex.lock();
 
     initializeTiles(world);
-    mObjectManager = std::unique_ptr<ObjectManager>(new ObjectManager(mTmxMap.get(), world));
+    mObjectManager = std::unique_ptr<EntityManager>(new EntityManager(mTmxMap.get(), world));
 
     mMutex.unlock();
 }

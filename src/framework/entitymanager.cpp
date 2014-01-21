@@ -1,10 +1,10 @@
-#include "objectmanager.h"
+#include "entitymanager.h"
 
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
 #include "../engine/luamanager.h"
 
-Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
+Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
 {
     mTmxMap = tmxMap;
     mWorld = world;
@@ -14,7 +14,7 @@ Purity::ObjectManager::ObjectManager(const Tmx::Map* tmxMap, b2World* world)
     luabind::globals(LuaManager::getManager()->getState())["GObjectManager"] = this;
 }
 
-const Purity::Entity* Purity::ObjectManager::getObjectByName(const std::string& objectName)
+const Purity::Entity* Purity::EntityManager::getObjectByName(const std::string& objectName)
 {
 
     for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
@@ -28,7 +28,7 @@ const Purity::Entity* Purity::ObjectManager::getObjectByName(const std::string& 
     return nullptr;
 }
 
-Purity::MovableEntity* Purity::ObjectManager::getMovableObjectByName(const std::string& objectName)
+Purity::MovableEntity* Purity::EntityManager::getMovableObjectByName(const std::string& objectName)
 {
 
     for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); it++)
@@ -42,7 +42,7 @@ Purity::MovableEntity* Purity::ObjectManager::getMovableObjectByName(const std::
     return nullptr;
 }
 
-std::vector<Purity::EntityState> Purity::ObjectManager::getEntityStates() const
+std::vector<Purity::EntityState> Purity::EntityManager::getEntityStates() const
 {
     std::vector<EntityState> states;
 
@@ -56,7 +56,7 @@ std::vector<Purity::EntityState> Purity::ObjectManager::getEntityStates() const
     return states;
 }
 
-void Purity::ObjectManager::initializeObjects()
+void Purity::EntityManager::initializeObjects()
 {
     int numOfGroups = mTmxMap->GetNumObjectGroups();
    
@@ -101,7 +101,7 @@ void Purity::ObjectManager::initializeObjects()
     }
 }
 
-Purity::MovableEntity* Purity::ObjectManager::getMovableObjectById(const unsigned int id)
+Purity::MovableEntity* Purity::EntityManager::getMovableObjectById(const unsigned int id)
 {
     for (auto it = mMovableObjectList.begin(); it != mMovableObjectList.end(); ++it)
     {
@@ -114,7 +114,7 @@ Purity::MovableEntity* Purity::ObjectManager::getMovableObjectById(const unsigne
     return nullptr;
 }
 
-void Purity::ObjectManager::updatePhysics()
+void Purity::EntityManager::updatePhysics()
 {
     for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
     {
@@ -126,7 +126,7 @@ void Purity::ObjectManager::updatePhysics()
     }
 }
 
-void Purity::ObjectManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Purity::EntityManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     for (auto it = mObjectList.begin(); it != mObjectList.end(); it++)
     {
@@ -138,10 +138,10 @@ void Purity::ObjectManager::draw(sf::RenderTarget& target, sf::RenderStates stat
     }
 }
 
-luabind::scope Purity::ObjectManager::luaBindings()
+luabind::scope Purity::EntityManager::luaBindings()
 {
-    return luabind::class_<ObjectManager>("ObjectManager")
-        .def("getObjectByName", &ObjectManager::getObjectByName)
-        .def("getMovableObjectByName", &ObjectManager::getMovableObjectByName)
+    return luabind::class_<EntityManager>("ObjectManager")
+        .def("getObjectByName", &EntityManager::getObjectByName)
+        .def("getMovableObjectByName", &EntityManager::getMovableObjectByName)
     ;
 }

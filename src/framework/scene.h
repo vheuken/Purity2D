@@ -9,7 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <TmxParser/TmxMap.h>
 #include "gamemap.h"
-#include "objectmanager.h"
+#include "entitymanager.h"
 #include "entitystate.h"
 
 class b2World;
@@ -41,7 +41,7 @@ namespace Purity
     private:
         std::unique_ptr<Tmx::Map> mTmxMap;
         std::unique_ptr<GameMap> mMap;
-        std::unique_ptr<ObjectManager> mObjectManager;
+        std::unique_ptr<EntityManager> mObjectManager;
 
         boost::filesystem::path mLuaEventHandlerFile;
 		boost::filesystem::path mLuaPhysicsUpdateFile;
