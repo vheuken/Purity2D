@@ -31,7 +31,7 @@ namespace Purity
     const sf::Color DEFAULT_HITBOX_OUTLINE_COLOR = sf::Color::Yellow;
     const sf::Color DEFAULT_HITBOX_FILL_COLOR = sf::Color::Transparent;
 
-    class Entity : public sf::Drawable, public sf::Transformable
+    class Entity : public sf::Drawable, protected sf::Transformable
     {
     public:
         Entity();
