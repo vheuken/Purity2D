@@ -10,10 +10,10 @@
 #include <enet/enet.h>
 
 #include "abstractsystem.h"
-#include "../framework/networkaction.h"
+#include "../framework/network/networkaction.h"
 #include "../framework/scene.h"
-#include "../framework/server.h"
-#include "../framework/client.h"
+#include "../framework/network/server.h"
+#include "../framework/network/client.h"
 
 namespace Purity
 {

@@ -7,7 +7,7 @@
 #include <Box2D/Box2D.h>
 
 #include "abstractsystem.h"
-#include "../framework/networkaction.h"
+#include "../framework/network/networkaction.h"
 
 namespace Purity
 {

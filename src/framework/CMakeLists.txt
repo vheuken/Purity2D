@@ -2,6 +2,12 @@ set(FRAMEWORK_PROJECT_NAME "Purity-Framework")
 
 project(${FRAMEWORK_PROJECT_NAME})
 
+add_subdirectory(network/)
+
+set(MODULES_FOLDER "Purity Framework")
+
+set_target_properties("Purity-Network" PROPERTIES FOLDER ${MODULES_FOLDER})
+
 set( FRAMEWORK_HEADER_FILES
     scene.h
     gamemap.h
@@ -13,10 +19,6 @@ set( FRAMEWORK_HEADER_FILES
     tile.h
     layer.h
     entitystate.h
-    host.h
-    server.h
-    client.h
-    networkaction.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
@@ -29,12 +31,15 @@ set( FRAMEWORK_SOURCE_FILES
      entitymanager.cpp
      tile.cpp
      layer.cpp
-     host.cpp
-     server.cpp
-     client.cpp
 )
 
 add_library( ${FRAMEWORK_PROJECT_NAME} STATIC
              ${FRAMEWORK_HEADER_FILES}
              ${FRAMEWORK_SOURCE_FILES}
+)
+
+
+target_link_libraries(
+    ${FRAMEWORK_PROJECT_NAME}
+    Purity-Network
 )

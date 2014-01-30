@@ -6,7 +6,7 @@
 #include <map>
 #include "host.h"
 
-#include "entitystate.h"
+#include "../entitystate.h"
 #include "networkaction.h"
 
 namespace Purity
