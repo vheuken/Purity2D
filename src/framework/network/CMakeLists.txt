@@ -19,3 +19,7 @@ add_library( ${NETWORK_PROJECT_NAME} STATIC
              ${NETWORK_HEADER_FILES}
              ${NETWORK_SOURCE_FILES}
 )
+
+target_link_libraries( ${NETWORK_PROJECT_NAME}
+                       enet
+)
