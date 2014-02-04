@@ -81,7 +81,7 @@ void Purity::Engine::initializeWindow()
 {
     sf::VideoMode videoMode(960, 720);
 
-    mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D"));
+    mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D", sf::Style::None));
 
     mWindow->setActive(false);
 }
