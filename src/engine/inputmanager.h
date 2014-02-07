@@ -2,7 +2,7 @@
 #define INPUT_MANAGER_H
 
 #include <queue>
-#include <SFML/Window.hpp>
+#include <SFML/Window/Event.hpp>
 
 namespace sf
 {
@@ -11,6 +11,8 @@ namespace sf
 
 namespace Purity
 {
+    const unsigned int STRETCHABLE_BORDER_PIXELS = 50;
+
     class InputManager
     {
     public:
@@ -21,6 +23,19 @@ namespace Purity
     private:
         sf::RenderWindow* mWindow;
         std::queue<sf::Event>* mInputQueue;	
+
+        bool isWindowManipulationEvent(const sf::Event& event) const;
+        void manipulateWindow(const sf::Event& event);
+        void setWindowFlags(const sf::Event& event);
+        bool isMouseOnBorder() const;
+
+        void dragWindow();
+        void resizeWindow();
+
+        sf::Vector2i mLastMousePosRelativeToWindow;
+
+        bool mWindowDrag; 
+        bool mWindowResize;
     };
 }
 
