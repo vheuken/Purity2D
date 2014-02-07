@@ -103,6 +103,7 @@ void Purity::InputManager::resizeWindow()
 {
     sf::Vector2u newWindowSize = mWindow->getSize();
 
+    
     mWindow->setSize(newWindowSize);
 }
 
