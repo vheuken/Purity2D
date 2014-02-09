@@ -81,7 +81,13 @@ void Purity::Engine::initializeWindow()
 {
     sf::VideoMode videoMode(960, 720);
 
+    // HACK
+    // sf::Style::None won't work on Linux....
+    #ifdef __gnu_linux__
+    mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D", 0));
+    #else
     mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D", sf::Style::None));
+    #endif
 
     mWindow->setActive(false);
 }
