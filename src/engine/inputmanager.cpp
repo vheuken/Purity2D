@@ -55,7 +55,7 @@ void Purity::InputManager::manipulateWindow(const sf::Event& event)
         resizeWindow();
     }
 
-    mLastMousePosRelativeToWindow = sf::Mouse::getPosition() - mWindow->getPosition();
+    mLastMousePosRelativeToWindow = sf::Mouse::getPosition(*mWindow);
 }
 
 void Purity::InputManager::setWindowFlags(const sf::Event& event)
