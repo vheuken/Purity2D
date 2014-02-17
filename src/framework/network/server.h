@@ -4,7 +4,7 @@
 #include <queue>
 #include <vector>
 #include <SFML/System/Clock.hpp>
-#include "../entitystate.h"
+#include "../entity/entitystate.h"
 #include "host.h"
 
 #include "networkaction.h"
