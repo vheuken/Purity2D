@@ -21,4 +21,5 @@ add_library( ${ENTITY_PROJECT_NAME} STATIC
 )
 
 target_link_libraries( ${ENTITY_PROJECT_NAME}
+                       Box2D
 )
