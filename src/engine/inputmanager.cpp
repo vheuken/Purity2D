@@ -16,6 +16,8 @@ Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Even
     mWindowDrag = false;
     mWindowResize = false;
     doDrag = false;
+    dragX = 0;
+    dragY = 0;
 }
 
 void Purity::InputManager::update()
@@ -88,7 +90,7 @@ void Purity::InputManager::setWindowFlags(const sf::Event& event)
                 unsigned int u;
                     
                 Display* display = XOpenDisplay(NULL);
-                XQueryPointer(display, DefaultRootWindow(display), &root, &child, &dragX, &dragY, &f, &b, &u);
+                XQueryPointer(display, DefaultRootWindow(display), &root, &child, &f, &b, &dragX, &dragY, &u);
                 XCloseDisplay(display);
             }
         }
@@ -106,7 +108,6 @@ void Purity::InputManager::setWindowFlags(const sf::Event& event)
             {
                 mWindowDrag = false;
                 std::cout << "Window released!" << std::endl;
-
             }
         }
     }
@@ -130,14 +131,16 @@ void Purity::InputManager::dragWindow()
         
     
     // move window
-    if (true)
+    if (f != dragX && b != dragY)
     {
-        XMoveWindow(display, handle, mWindow->getPosition().x + dragX - mousePosX, mWindow->getPosition().y + dragY - mousePosY); 
+        //XMoveWindow(display, handle, mWindow->getPosition().x + (dragX - mousePosX), mWindow->getPosition().y + (dragY - mousePosY)); 
+        XMoveWindow(display, handle, mousePosX - dragX, mousePosY - dragY);
+        //mWindow->setPosition(mousePosX - mWindow->getPosition().x + dragX, mousePosY - mWindow->getPosition().y + dragY); 
+        XFlush(display);
+        std::cout << mWindow->getPosition().x + (dragX - mousePosX) << std::endl;
         
-        std::cout << dragX - mousePosX << " " << dragY - mousePosY << std::endl;
-        
-        dragX = mousePosX;
-        dragY = mousePosY;
+        //dragX = f;
+        //dragY = b;
     }
     XCloseDisplay(display);
     #else
@@ -156,14 +159,14 @@ void Purity::InputManager::resizeWindow()
 bool Purity::InputManager::isMouseOnBorder() const
 {
     sf::Vector2i mousePositionRelativeToWindow = sf::Mouse::getPosition() - mWindow->getPosition();
-    
+    /*
     if (mousePositionRelativeToWindow.x >= mWindow->getSize().x - STRETCHABLE_BORDER_PIXELS ||
         mousePositionRelativeToWindow.y >= mWindow->getSize().y - STRETCHABLE_BORDER_PIXELS ||
         mousePositionRelativeToWindow.x <= STRETCHABLE_BORDER_PIXELS ||
         mousePositionRelativeToWindow.y <= STRETCHABLE_BORDER_PIXELS)
     {
         return true;
-    }
+    }*/
 
     return false;
 }
