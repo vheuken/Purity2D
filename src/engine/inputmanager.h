@@ -36,6 +36,9 @@ namespace Purity
 
         bool mWindowDrag; 
         bool mWindowResize;
+
+        int dragX, dragY;
+        bool doDrag;
     };
 }
 
