@@ -2,7 +2,7 @@
 
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
-#include "../engine/luamanager.h"
+#include "../../engine/luamanager.h"
 
 Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
 {

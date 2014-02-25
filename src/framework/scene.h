@@ -9,8 +9,8 @@
 #include <SFML/Graphics.hpp>
 #include <TmxParser/TmxMap.h>
 #include "gamemap.h"
-#include "entitymanager.h"
-#include "entitystate.h"
+#include "entity/entitymanager.h"
+#include "entity/entitystate.h"
 
 class b2World;
 class b2Body;

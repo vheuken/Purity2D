@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "movableentity.h"
-#include "texturemanager.h"
+#include "../texturemanager.h"
 #include "entitystate.h"
 
 class b2World;
