@@ -4,7 +4,11 @@
 *.o
 *.a
 
+# Code::Blocks files
+*.cbp
+*.layout
 
+# Visual Studio files
 *.vcxproj
 *.vcxproj.filters
 *.sln
