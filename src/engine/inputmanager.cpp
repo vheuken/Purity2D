@@ -1,11 +1,8 @@
 #include "inputmanager.h"
 
+#include <iostream>
 #include <queue>
 #include <SFML/Graphics.hpp>
-
-#if !_WIN32
-#include <X11/Xlib.h>
-#endif
 
 Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue)
 {
@@ -35,14 +32,12 @@ void Purity::InputManager::update()
         {
             manipulateWindow(event);
         }
-
-
     }
 }
 
 bool Purity::InputManager::isWindowManipulationEvent(const sf::Event& event) const
 {
-    if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseMoved)
+    if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseMoved)
     {
         return true;
     }
@@ -50,7 +45,6 @@ bool Purity::InputManager::isWindowManipulationEvent(const sf::Event& event) con
     return false;
 }
 
-#include <iostream>
 void Purity::InputManager::manipulateWindow(const sf::Event& event)
 {
     setWindowFlags(event);
@@ -63,8 +57,6 @@ void Purity::InputManager::manipulateWindow(const sf::Event& event)
     {
         resizeWindow();
     }
-
-    mLastMousePosRelativeToWindow = sf::Mouse::getPosition(*mWindow);
 }
 
 void Purity::InputManager::setWindowFlags(const sf::Event& event)
@@ -83,17 +75,10 @@ void Purity::InputManager::setWindowFlags(const sf::Event& event)
                 mWindowDrag = true;
                 std::cout << "Window grabbed!" << std::endl;
 
-
-                // We don't use these variables, but they're required
-                ::Window root, child;
-                int f, b;
-                unsigned int u;
-
-                Display* display = XOpenDisplay(NULL);
-                //XQueryPointer(display, mWindow->getSystemHandle(), &root, &child, &f, &b, &dragX, &dragY, &u);
-                XCloseDisplay(display);
                 dragX = sf::Mouse::getPosition(*mWindow).x;
                 dragY = sf::Mouse::getPosition(*mWindow).y;
+                mLastMousePosRelativeToWindow = sf::Mouse::getPosition(*mWindow);
+
             }
         }
     }
@@ -106,56 +91,24 @@ void Purity::InputManager::setWindowFlags(const sf::Event& event)
                 mWindowResize = false;
                 std::cout << "Border released!" << std::endl;
             }
-            else
+            else if (mWindowDrag == false)
             {
                 mWindowDrag = false;
                 std::cout << "Window released!" << std::endl;
             }
         }
     }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) == false && mWindowDrag == true)
+    {
+        mWindowDrag = false;
+        std::cout << "Window released!" << std::endl;
+    }
 }
 
 void Purity::InputManager::dragWindow()
 {
-    #if !_WIN32
-    sf::WindowHandle handle = mWindow->getSystemHandle();
-    Display* display = XOpenDisplay(NULL);
-
-    // We don't use these variables, but they're required
-    ::Window root, child;
-    int f, b;
-    unsigned int u;
-
-    // get mouse coordinates
-    int mousePosX, mousePosY;
-
-    //XQueryPointer(display, DefaultRootWindow(display), &root, &child, &mousePosX, &mousePosY, &f, &b, &u);
-    mousePosX = sf::Mouse::getPosition().x;
-    mousePosY = sf::Mouse::getPosition().y;
-
-    // move window
-    //XMoveWindow(display, handle, mWindow->getPosition().x + (dragX - mousePosX), mWindow->getPosition().y + (dragY - mousePosY));
-
-    //XMoveWindow(display, handle, mousePosX - dragX, mousePosY - dragY);
-
-    sf::Vector2i dragPos = sf::Mouse::getPosition();
-    dragPos.x -= dragX;
-    dragPos.y -= dragY;
-
-    mWindow->setPosition(dragPos);
-    std::cout << dragX << " " << dragY << std::endl;
-    //XMoveWindow(display, handle, dragPos.x, dragPos.y);
-    //XFlush(display);
-    //mWindow->setPosition(mousePosX - mWindow->getPosition().x + dragX, mousePosY - mWindow->getPosition().y + dragY);
-    //std::cout << mWindow->getPosition().x + (dragX - mousePosX) << std::endl;
-    //std::cout << dragX << " " << dragY << std::endl;
-    //dragX = f;
-    //dragY = b;
-
-    XCloseDisplay(display);
-    #else
     mWindow->setPosition(sf::Mouse::getPosition() - mLastMousePosRelativeToWindow);
-    #endif
 }
 
 void Purity::InputManager::resizeWindow()
