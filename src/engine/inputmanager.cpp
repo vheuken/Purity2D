@@ -12,9 +12,6 @@ Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Even
     // Window manipulation stuff to be refactored away
     mWindowDrag = false;
     mWindowResize = false;
-    doDrag = false;
-    dragX = 0;
-    dragY = 0;
 }
 
 void Purity::InputManager::update()
@@ -75,10 +72,7 @@ void Purity::InputManager::setWindowFlags(const sf::Event& event)
                 mWindowDrag = true;
                 std::cout << "Window grabbed!" << std::endl;
 
-                dragX = sf::Mouse::getPosition(*mWindow).x;
-                dragY = sf::Mouse::getPosition(*mWindow).y;
                 mLastMousePosRelativeToWindow = sf::Mouse::getPosition(*mWindow);
-
             }
         }
     }

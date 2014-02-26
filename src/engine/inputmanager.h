@@ -22,7 +22,7 @@ namespace Purity
 
     private:
         sf::RenderWindow* mWindow;
-        std::queue<sf::Event>* mInputQueue;	
+        std::queue<sf::Event>* mInputQueue;
 
         bool isWindowManipulationEvent(const sf::Event& event) const;
         void manipulateWindow(const sf::Event& event);
@@ -34,11 +34,8 @@ namespace Purity
 
         sf::Vector2i mLastMousePosRelativeToWindow;
 
-        bool mWindowDrag; 
+        bool mWindowDrag;
         bool mWindowResize;
-
-        int dragX, dragY;
-        bool doDrag;
     };
 }
 
