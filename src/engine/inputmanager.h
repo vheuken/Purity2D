@@ -24,9 +24,8 @@ namespace Purity
         sf::RenderWindow* mWindow;
         std::queue<sf::Event>* mInputQueue;
 
-        bool isWindowManipulationEvent(const sf::Event& event) const;
-        void manipulateWindow(const sf::Event& event);
-        void setWindowFlags(const sf::Event& event);
+        void manipulateWindow();
+        void setWindowFlags();
         bool isMouseOnBorder() const;
 
         void dragWindow();

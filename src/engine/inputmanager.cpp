@@ -21,30 +21,20 @@ void Purity::InputManager::update()
     while (mWindow->pollEvent(event))
     {
         mInputQueue->push(event);
+
         if (event.type == sf::Event::Closed)
         {
             mWindow->close();
         }
-        else if (isWindowManipulationEvent(event))
-        {
-            manipulateWindow(event);
-        }
-    }
-}
 
-bool Purity::InputManager::isWindowManipulationEvent(const sf::Event& event) const
-{
-    if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseButtonReleased || event.type == sf::Event::MouseMoved)
-    {
-        return true;
+        manipulateWindow();
     }
 
-    return false;
 }
 
-void Purity::InputManager::manipulateWindow(const sf::Event& event)
+void Purity::InputManager::manipulateWindow()
 {
-    setWindowFlags(event);
+    setWindowFlags();
 
     if (mWindowDrag)
     {
@@ -56,47 +46,35 @@ void Purity::InputManager::manipulateWindow(const sf::Event& event)
     }
 }
 
-void Purity::InputManager::setWindowFlags(const sf::Event& event)
+void Purity::InputManager::setWindowFlags()
 {
-    if (event.type == sf::Event::MouseButtonPressed)
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
-        if (event.mouseButton.button == sf::Mouse::Left)
+        if (mWindowResize == false && isMouseOnBorder())
         {
-            if (isMouseOnBorder())
-            {
-                mWindowResize = true;
-                std::cout << "Border grabbed!" << std::endl;
-            }
-            else
-            {
-                mWindowDrag = true;
-                std::cout << "Window grabbed!" << std::endl;
+            mWindowResize = true;
+            std::cout << "Border grabbed!" << std::endl;
+        }
+        else if (mWindowDrag == false)
+        {
+            mWindowDrag = true;
+            std::cout << "Window grabbed!" << std::endl;
 
-                mLastMousePosRelativeToWindow = sf::Mouse::getPosition(*mWindow);
-            }
+            mLastMousePosRelativeToWindow = sf::Mouse::getPosition(*mWindow);
         }
     }
-    else if (event.type == sf::Event::MouseButtonReleased)
+    else
     {
-        if (event.mouseButton.button == sf::Mouse::Left)
+        if (mWindowResize)
         {
-            if (mWindowResize)
-            {
-                mWindowResize = false;
-                std::cout << "Border released!" << std::endl;
-            }
-            else if (mWindowDrag == false)
-            {
-                mWindowDrag = false;
-                std::cout << "Window released!" << std::endl;
-            }
+            mWindowResize = false;
+            std::cout << "Border released!" << std::endl;
         }
-    }
-
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) == false && mWindowDrag == true)
-    {
-        mWindowDrag = false;
-        std::cout << "Window released!" << std::endl;
+        else if (mWindowDrag)
+        {
+            mWindowDrag = false;
+            std::cout << "Window released!" << std::endl;
+        }
     }
 }
 
