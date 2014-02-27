@@ -90,7 +90,8 @@ m_atomClose   (0),
 m_oldVideoMode(-1),
 m_hiddenCursor(0),
 m_keyRepeat   (true),
-m_previousSize(-1, -1)
+m_previousSize(-1, -1),
+m_useSizeHints(false)
 {
     // Open a connection with the X server
     m_display = OpenDisplay();
@@ -120,7 +121,8 @@ m_atomClose   (0),
 m_oldVideoMode(-1),
 m_hiddenCursor(0),
 m_keyRepeat   (true),
-m_previousSize(-1, -1)
+m_previousSize(-1, -1),
+m_useSizeHints(false)
 {
     // Open a connection with the X server
     m_display = OpenDisplay();
@@ -183,7 +185,7 @@ m_previousSize(-1, -1)
         {
             static const unsigned long MWM_HINTS_FUNCTIONS   = 1 << 0;
             static const unsigned long MWM_HINTS_DECORATIONS = 1 << 1;
-    
+
             //static const unsigned long MWM_DECOR_ALL         = 1 << 0;
             static const unsigned long MWM_DECOR_BORDER      = 1 << 1;
             static const unsigned long MWM_DECOR_RESIZEH     = 1 << 2;
@@ -198,7 +200,7 @@ m_previousSize(-1, -1)
             static const unsigned long MWM_FUNC_MINIMIZE     = 1 << 3;
             static const unsigned long MWM_FUNC_MAXIMIZE     = 1 << 4;
             static const unsigned long MWM_FUNC_CLOSE        = 1 << 5;
-    
+
             struct WMHints
             {
                 unsigned long flags;
@@ -207,7 +209,7 @@ m_previousSize(-1, -1)
                 long          inputMode;
                 unsigned long state;
             };
-    
+
             WMHints hints;
             hints.flags       = MWM_HINTS_FUNCTIONS | MWM_HINTS_DECORATIONS;
             hints.decorations = 0;
@@ -236,15 +238,16 @@ m_previousSize(-1, -1)
         // This is a hack to force some windows managers to disable resizing
         if (!(style & Style::Resize))
         {
+            m_useSizeHints = true;
             XSizeHints* sizeHints = XAllocSizeHints();
             sizeHints->flags = PMinSize | PMaxSize;
-            sizeHints->min_width = sizeHints->max_width  = width;
+            sizeHints->min_width = sizeHints->max_width = width;
             sizeHints->min_height = sizeHints->max_height = height;
-            XSetWMNormalHints(m_display, m_window, sizeHints); 
+            XSetWMNormalHints(m_display, m_window, sizeHints);
             XFree(sizeHints);
         }
     }
- 
+
     // Set the window's WM class (this can be used by window managers)
     char windowClass[512];
     findExecutableName(windowClass, sizeof(windowClass));
@@ -348,6 +351,17 @@ Vector2u WindowImplX11::getSize() const
 ////////////////////////////////////////////////////////////
 void WindowImplX11::setSize(const Vector2u& size)
 {
+    // If we used size hint to fix the size of the window, we must update them
+    if (m_useSizeHints)
+    {
+        XSizeHints* sizeHints = XAllocSizeHints();
+        sizeHints->flags = PMinSize | PMaxSize;
+        sizeHints->min_width = sizeHints->max_width = size.x;
+        sizeHints->min_height = sizeHints->max_height = size.y;
+        XSetWMNormalHints(m_display, m_window, sizeHints);
+        XFree(sizeHints);
+    }
+
     XResizeWindow(m_display, m_window, size.x, size.y);
     XFlush(m_display);
 }
@@ -358,17 +372,17 @@ void WindowImplX11::setTitle(const String& title)
 {
     // Bare X11 has no Unicode window title support.
     // There is however an option to tell the window manager your unicode title via hints.
-    
+
     // Convert to UTF-8 encoding.
     std::basic_string<Uint8> utf8Title;
     Utf32::toUtf8(title.begin(), title.end(), std::back_inserter(utf8Title));
-    
+
     // Set the _NET_WM_NAME atom, which specifies a UTF-8 encoded window title.
     Atom wmName = XInternAtom(m_display, "_NET_WM_NAME", False);
     Atom useUtf8 = XInternAtom(m_display, "UTF8_STRING", False);
     XChangeProperty(m_display, m_window, wmName, useUtf8, 8,
                     PropModeReplace, utf8Title.c_str(), utf8Title.size());
-    
+
     // Set the non-Unicode title as a fallback for window managers who don't support _NET_WM_NAME.
     XStoreName(m_display, m_window, title.toAnsiString().c_str());
 }
@@ -416,7 +430,7 @@ void WindowImplX11::setIcon(unsigned int width, unsigned int height, const Uint8
                 if (i * 8 + k < width)
                 {
                     Uint8 opacity = (pixels[(i * 8 + k + j * width) * 4 + 3] > 0) ? 1 : 0;
-                    maskPixels[i + j * pitch] |= (opacity << k);                    
+                    maskPixels[i + j * pitch] |= (opacity << k);
                 }
             }
         }
@@ -578,7 +592,7 @@ void WindowImplX11::cleanup()
     {
         // Get current screen info
         XRRScreenConfiguration* config = XRRGetScreenInfo(m_display, RootWindow(m_display, m_screen));
-        if (config) 
+        if (config)
         {
             // Get the current rotation
             Rotation currentRotation;
@@ -589,7 +603,7 @@ void WindowImplX11::cleanup()
 
             // Free the configuration instance
             XRRFreeScreenConfigInfo(config);
-        } 
+        }
 
         // Reset the fullscreen window
         fullscreenWindow = NULL;
@@ -696,7 +710,7 @@ bool WindowImplX11::processEvent(XEvent windowEvent)
         // Close event
         case ClientMessage :
         {
-            if ((windowEvent.xclient.format == 32) && (windowEvent.xclient.data.l[0]) == static_cast<long>(m_atomClose))  
+            if ((windowEvent.xclient.format == 32) && (windowEvent.xclient.data.l[0]) == static_cast<long>(m_atomClose))
             {
                 Event event;
                 event.type = Event::Closed;
@@ -802,7 +816,7 @@ bool WindowImplX11::processEvent(XEvent windowEvent)
                     case Button2 : event.mouseButton.button = Mouse::Middle;   break;
                     case Button3 : event.mouseButton.button = Mouse::Right;    break;
                     case 8 :       event.mouseButton.button = Mouse::XButton1; break;
-                    case 9 :       event.mouseButton.button = Mouse::XButton2; break;            
+                    case 9 :       event.mouseButton.button = Mouse::XButton2; break;
                 }
                 pushEvent(event);
             }
@@ -825,7 +839,7 @@ bool WindowImplX11::processEvent(XEvent windowEvent)
                     case Button2 : event.mouseButton.button = Mouse::Middle;   break;
                     case Button3 : event.mouseButton.button = Mouse::Right;    break;
                     case 8 :       event.mouseButton.button = Mouse::XButton1; break;
-                    case 9 :       event.mouseButton.button = Mouse::XButton2; break;            
+                    case 9 :       event.mouseButton.button = Mouse::XButton2; break;
                 }
                 pushEvent(event);
             }
