@@ -4,6 +4,8 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
+#include "windowmanipulator.h"
+
 namespace Purity
 {
     const unsigned int STRETCHABLE_BORDER_PIXELS = 50;
@@ -17,8 +19,14 @@ namespace Purity
         void draw(const sf::Drawable& drawable);
         void display();
 
-        void setView(const sf::View &view);
+        void setView(const sf::View& view);
         const sf::View& getView() const;
+
+        void setSize(const sf::Vector2u& size);
+        sf::Vector2u getSize() const;
+
+        void setPosition(const sf::Vector2i& position);
+        sf::Vector2i getPosition() const;
 
         bool pollEvent(sf::Event& event);
 
@@ -29,23 +37,12 @@ namespace Purity
 
         void manipulateWindow();
 
+        const sf::Window& getInternalWindow() const;
+
     private:
         sf::RenderWindow mInternalWindow;
 
-        void setWindowFlags();
-        bool isMouseOnBorder() const;
-
-        void dragWindow();
-        void resizeWindow();
-        void setBorderGrabbedFlags();
-        sf::Vector2i mLastMousePosRelativeToWindow;
-
-        bool mWindowDrag;
-        bool mWindowResize;
-        bool mRightBorderGrabbed;
-        bool mBottomBorderGrabbed;
-        bool mTopBorderGrabbed;
-        bool mLeftBorderGrabbed;
+        WindowManipulator mWindowManipulator;
     };
 }
 
