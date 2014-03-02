@@ -15,6 +15,15 @@ mRightBorderGrabbed(false), mLeftBorderGrabbed(false), mBottomBorderGrabbed(fals
 {
 }
 
+void Purity::Window::clear()
+{
+    mInternalWindow.clear();
+}
+
+void Purity::Window::display()
+{
+    mInternalWindow.display();
+}
 
 void Purity::Window::manipulateWindow()
 {

@@ -12,7 +12,8 @@ namespace Purity
     {
     public:
         Window(int width, int height, std::string title);
-
+        void clear();
+        void display();
     private:
         sf::RenderWindow mInternalWindow;
 
