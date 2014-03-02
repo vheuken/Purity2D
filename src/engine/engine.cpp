@@ -21,10 +21,10 @@ void Purity::Engine::initialize()
     #ifdef __gnu_linux__
     XInitThreads();
     #endif
-   
-    mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);		
+
+    mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
-    
+
     if (mProgramOptions.headless == false)
     {
         initializeWindow();
@@ -54,10 +54,10 @@ void Purity::Engine::run()
         {
             currentScene = mSceneManager->getCurrentScene();
         }
-        
+
         mNetworkSystem->update(currentScene);
-        mPhysicsSystem->update(currentScene);    
-        
+        mPhysicsSystem->update(currentScene);
+
         if (mProgramOptions.headless == false)
         {
             mInputManager->update();
@@ -79,15 +79,7 @@ void Purity::Engine::cleanup()
 
 void Purity::Engine::initializeWindow()
 {
-    sf::VideoMode videoMode(960, 720);
-
-    // HACK
-    // sf::Style::None won't work on Linux....
-    #ifdef __gnu_linux__
-    mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D", 0));
-    #else
-    mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videoMode, "Purity2D", sf::Style::None));
-    #endif
+    mWindow = std::unique_ptr<Purity::Window>(new Purity::Window(960, 720, "Purity2D"));
 
     mWindow->setActive(false);
 }

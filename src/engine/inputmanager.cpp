@@ -2,9 +2,10 @@
 
 #include <iostream>
 #include <queue>
-#include <SFML/Graphics.hpp>
 
-Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue)
+#include "../framework/window.h"
+
+Purity::InputManager::InputManager(Purity::Window* window, std::queue<sf::Event>* inputQueue)
 {
     mWindow = window;
     mInputQueue = inputQueue;
@@ -23,4 +24,6 @@ void Purity::InputManager::update()
             mWindow->close();
         }
     }
+
+    mWindow->manipulateWindow();
 }

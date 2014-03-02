@@ -6,24 +6,21 @@
 
 #include "abstractsystem.h"
 
-namespace sf
-{
-    class RenderWindow;
-}
-
 namespace Purity
 {
+    class Window;
+
     class RenderSystem : public AbstractSystem
     {
     public:
-        RenderSystem(sf::RenderWindow* window);
+        RenderSystem(Window* window);
         ~RenderSystem();
 
         void update(Scene* scene);
 
     private:
-        sf::RenderWindow* mWindow;
-        
+        Window* mWindow;
+
         std::mutex mCurrentSceneMutex;
         std::thread mRenderThread;
 

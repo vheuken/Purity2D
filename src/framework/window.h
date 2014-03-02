@@ -14,15 +14,24 @@ namespace Purity
         Window(int width, int height, std::string title);
 
         void clear();
-        void draw(sf::Drawable drawable);
+        void draw(const sf::Drawable& drawable);
         void display();
 
+        void setView(const sf::View &view);
+        const sf::View& getView() const;
+
         bool pollEvent(sf::Event& event);
+
+        void setActive(bool active);
+        bool isOpen() const;
+
+        void close();
+
+        void manipulateWindow();
 
     private:
         sf::RenderWindow mInternalWindow;
 
-        void manipulateWindow();
         void setWindowFlags();
         bool isMouseOnBorder() const;
 

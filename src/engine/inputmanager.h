@@ -4,22 +4,19 @@
 #include <queue>
 #include <SFML/Window/Event.hpp>
 
-namespace sf
-{
-    class RenderWindow;
-}
-
 namespace Purity
 {
+    class Window;
+
     class InputManager
     {
     public:
-        InputManager(sf::RenderWindow* window, std::queue<sf::Event>* inputQueue);
+        InputManager(Window* window, std::queue<sf::Event>* inputQueue);
 
         void update();
 
     private:
-        sf::RenderWindow* mWindow;
+        Window* mWindow;
         std::queue<sf::Event>* mInputQueue;
     };
 }

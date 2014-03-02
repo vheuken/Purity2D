@@ -3,8 +3,9 @@
 
 #include <queue>
 #include <memory>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
+
+#include "../framework/window.h"
+
 #include "scenemanager.h"
 #include "rendersystem.h"
 #include "physicssystem.h"
@@ -34,7 +35,7 @@ namespace Purity
         static luabind::scope luaBindings();
 
     private:
-        std::unique_ptr<sf::RenderWindow> mWindow;
+        std::unique_ptr<Window> mWindow;
         std::unique_ptr<RenderSystem> mRenderSystem;
         std::unique_ptr<SceneManager> mSceneManager;
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;

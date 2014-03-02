@@ -2,10 +2,11 @@
 
 #include <iostream>
 #include <sstream>
-#include <SFML/Graphics.hpp>
+
+#include "../framework/window.h"
 #include "../framework/scene.h"
 
-Purity::RenderSystem::RenderSystem(sf::RenderWindow* window)
+Purity::RenderSystem::RenderSystem(Purity::Window* window)
     : AbstractSystem(),
       mWindow(window),
       mRenderThread(&RenderSystem::run, this)
