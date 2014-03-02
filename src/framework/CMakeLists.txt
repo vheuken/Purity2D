@@ -18,6 +18,7 @@ set( FRAMEWORK_HEADER_FILES
     texturemanager.h
     tile.h
     layer.h
+    window.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
@@ -27,6 +28,7 @@ set( FRAMEWORK_SOURCE_FILES
      texturemanager.cpp
      tile.cpp
      layer.cpp
+     window.cpp
 )
 
 add_library( ${FRAMEWORK_PROJECT_NAME} STATIC

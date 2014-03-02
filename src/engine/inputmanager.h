@@ -11,8 +11,6 @@ namespace sf
 
 namespace Purity
 {
-    const unsigned int STRETCHABLE_BORDER_PIXELS = 50;
-
     class InputManager
     {
     public:
@@ -23,23 +21,6 @@ namespace Purity
     private:
         sf::RenderWindow* mWindow;
         std::queue<sf::Event>* mInputQueue;
-
-        void manipulateWindow();
-        void setWindowFlags();
-        bool isMouseOnBorder() const;
-
-        void dragWindow();
-        void resizeWindow();
-        void setBorderGrabbedFlags();
-        sf::Vector2i mLastMousePosRelativeToWindow;
-
-        bool mWindowDrag;
-        bool mWindowResize;
-
-        bool mRightBorderGrabbed;
-        bool mBottomBorderGrabbed;
-        bool mTopBorderGrabbed;
-        bool mLeftBorderGrabbed;
     };
 }
 
