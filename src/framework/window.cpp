@@ -20,6 +20,11 @@ void Purity::Window::clear()
     mInternalWindow.clear();
 }
 
+void Purity::Window::draw(sf::Drawable drawable)
+{
+    mInternalWindow.draw(drawable);
+}
+
 void Purity::Window::display()
 {
     mInternalWindow.display();
