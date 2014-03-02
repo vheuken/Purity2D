@@ -4,6 +4,7 @@ project(${FRAMEWORK_PROJECT_NAME})
 
 add_subdirectory(network/)
 add_subdirectory(entity/)
+add_subdirectory(window/)
 
 set(MODULES_FOLDER "Purity Framework")
 
@@ -18,7 +19,6 @@ set( FRAMEWORK_HEADER_FILES
     texturemanager.h
     tile.h
     layer.h
-    window.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
@@ -28,7 +28,6 @@ set( FRAMEWORK_SOURCE_FILES
      texturemanager.cpp
      tile.cpp
      layer.cpp
-     window.cpp
 )
 
 add_library( ${FRAMEWORK_PROJECT_NAME} STATIC
@@ -41,4 +40,5 @@ target_link_libraries(
     ${FRAMEWORK_PROJECT_NAME}
     Purity-Network
 	Purity-Entity
+    Purity-Window
 )

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "../framework/window.h"
+#include "../framework/window/window.h"
 #include "../framework/scene.h"
 
 Purity::RenderSystem::RenderSystem(Purity::Window* window)

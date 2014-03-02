@@ -3,7 +3,7 @@
 #include <iostream>
 #include <queue>
 
-#include "../framework/window.h"
+#include "../framework/window/window.h"
 
 Purity::InputManager::InputManager(Purity::Window* window, std::queue<sf::Event>* inputQueue)
 {

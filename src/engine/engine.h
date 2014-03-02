@@ -4,7 +4,7 @@
 #include <queue>
 #include <memory>
 
-#include "../framework/window.h"
+#include "../framework/window/window.h"
 
 #include "scenemanager.h"
 #include "rendersystem.h"
