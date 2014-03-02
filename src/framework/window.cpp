@@ -30,6 +30,11 @@ void Purity::Window::display()
     mInternalWindow.display();
 }
 
+bool Purity::Window::pollEvent(sf::Event& event)
+{
+    return mInternalWindow.pollEvent(event);
+}
+
 void Purity::Window::manipulateWindow()
 {
     setWindowFlags();

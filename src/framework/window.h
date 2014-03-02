@@ -12,9 +12,12 @@ namespace Purity
     {
     public:
         Window(int width, int height, std::string title);
+
         void clear();
         void draw(sf::Drawable drawable);
         void display();
+
+        bool pollEvent(sf::Event& event);
 
     private:
         sf::RenderWindow mInternalWindow;
