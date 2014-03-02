@@ -30,11 +30,16 @@ namespace Purity
 
         void dragWindow();
         void resizeWindow();
-
+        void setBorderGrabbedFlags();
         sf::Vector2i mLastMousePosRelativeToWindow;
 
         bool mWindowDrag;
         bool mWindowResize;
+
+        bool mRightBorderGrabbed;
+        bool mBottomBorderGrabbed;
+        bool mTopBorderGrabbed;
+        bool mLeftBorderGrabbed;
     };
 }
 

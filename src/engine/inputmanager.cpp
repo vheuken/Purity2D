@@ -12,6 +12,10 @@ Purity::InputManager::InputManager(sf::RenderWindow* window, std::queue<sf::Even
     // Window manipulation stuff to be refactored away
     mWindowDrag = false;
     mWindowResize = false;
+    mRightBorderGrabbed = false;
+    mLeftBorderGrabbed = false;
+    mBottomBorderGrabbed = false;
+    mTopBorderGrabbed = false;
 }
 
 void Purity::InputManager::update()
@@ -52,6 +56,7 @@ void Purity::InputManager::setWindowFlags()
         if (mWindowResize == false && isMouseOnBorder())
         {
             mWindowResize = true;
+            setBorderGrabbedFlags();
             std::cout << "Border grabbed!" << std::endl;
         }
         else if (mWindowDrag == false && mWindowResize == false)
@@ -67,6 +72,10 @@ void Purity::InputManager::setWindowFlags()
         if (mWindowResize)
         {
             mWindowResize = false;
+            mRightBorderGrabbed = false;
+            mLeftBorderGrabbed = false;
+            mTopBorderGrabbed = false;
+            mBottomBorderGrabbed = false;
             std::cout << "Border released!" << std::endl;
         }
         else if (mWindowDrag)
@@ -74,6 +83,30 @@ void Purity::InputManager::setWindowFlags()
             mWindowDrag = false;
             std::cout << "Window released!" << std::endl;
         }
+    }
+}
+
+void Purity::InputManager::setBorderGrabbedFlags()
+{
+    sf::Vector2u windowSize = mWindow->getSize();
+    sf::Vector2u newWindowSize = windowSize;
+    sf::Vector2i newWindowPos = mWindow->getPosition();
+
+    sf::Vector2u mousePos;
+
+    mousePos.x = (unsigned int)sf::Mouse::getPosition(*mWindow).x;
+    mousePos.y = (unsigned int)sf::Mouse::getPosition(*mWindow).y;
+
+    // right
+    if (mousePos.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS)
+    {
+        mRightBorderGrabbed = true;
+    }
+
+    // bottom
+    if (mousePos.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS)
+    {
+        mBottomBorderGrabbed = true;
     }
 }
 
@@ -94,20 +127,20 @@ void Purity::InputManager::resizeWindow()
     mousePos.y = (unsigned int)sf::Mouse::getPosition(*mWindow).y;
 
     // right
-    if (mousePos.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS)
+    if (mRightBorderGrabbed)
     {
         newWindowSize.x = mousePos.x;
     }
 
     // bottom
-    if (mousePos.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS)
+    if (mBottomBorderGrabbed)
     {
         newWindowSize.y = mousePos.y;
     }
 
-    // left
+    // TODO: left
 
-    // top
+    // TODO: top
 
     mWindow->setPosition(newWindowPos);
     mWindow->setSize(newWindowSize);
