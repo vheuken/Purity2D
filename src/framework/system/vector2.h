@@ -13,6 +13,9 @@ namespace Purity
         Vector2();
         Vector2(T x, T y);
 
+        template <typename U>
+        explicit Vector2(const Vector2<U>& vector);
+
         T x;
         T y;
     };
