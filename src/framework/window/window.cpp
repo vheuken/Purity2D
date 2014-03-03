@@ -81,7 +81,7 @@ Purity::Vector2i Purity::Window::getPosition() const
     return Vector2i(x, y);
 }
 
-bool Purity::Window::pollEvent(sf::Event& event)
+bool Purity::Window::pollEvent(SDL_Event* event)
 {
     return SDL_PollEvent(event);
 }
