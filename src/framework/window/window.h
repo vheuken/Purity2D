@@ -7,6 +7,9 @@
 #include "windowmanipulator.h"
 #include "../system/vector2.h"
 
+struct SDL_Window;
+struct SDL_Renderer;
+
 namespace Purity
 {
     const unsigned int STRETCHABLE_BORDER_PIXELS = 50;
@@ -15,6 +18,7 @@ namespace Purity
     {
     public:
         Window(int width, int height, std::string title);
+        ~Window();
 
         void clear();
         void draw(const sf::Drawable& drawable);
@@ -38,10 +42,9 @@ namespace Purity
 
         void manipulateWindow();
 
-        const sf::Window& getInternalWindow() const;
-
     private:
-        sf::RenderWindow mInternalWindow;
+        SDL_Window* mInternalWindow;
+        SDL_Renderer* mRenderer;
 
         WindowManipulator mWindowManipulator;
     };
