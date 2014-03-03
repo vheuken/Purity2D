@@ -14,15 +14,10 @@ namespace Purity
     {
     public:
         RenderSystem(Window* window);
-        ~RenderSystem();
-
         void update(Scene* scene);
 
     private:
         Window* mWindow;
-
-        std::mutex mCurrentSceneMutex;
-        std::thread mRenderThread;
 
         void run();
     };

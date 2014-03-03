@@ -64,12 +64,6 @@ void Purity::Engine::run()
             mRenderSystem->update(currentScene);
         }
     }
-
-    // solves crash on exit on Windows
-    if (mProgramOptions.headless == false)
-    {
-        mRenderSystem->update(nullptr);
-    }
 }
 
 void Purity::Engine::cleanup()
