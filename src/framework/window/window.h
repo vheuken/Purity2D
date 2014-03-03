@@ -7,8 +7,10 @@
 #include "windowmanipulator.h"
 #include "../system/vector2.h"
 
+
 struct SDL_Window;
 struct SDL_Renderer;
+union  SDL_Event;
 
 namespace Purity
 {
@@ -33,7 +35,7 @@ namespace Purity
         void setPosition(const Vector2i& position);
         Vector2i getPosition() const;
 
-        bool pollEvent(sf::Event& event);
+        bool pollEvent(SDL_Event* event);
 
         void setActive(bool active);
         bool isOpen() const;

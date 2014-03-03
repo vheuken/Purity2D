@@ -5,7 +5,9 @@
 
 #include "../framework/window/window.h"
 
-Purity::InputManager::InputManager(Purity::Window* window, std::queue<sf::Event>* inputQueue)
+#include <SDL_event.h>
+
+Purity::InputManager::InputManager(Purity::Window* window, std::queue<SDL_Event*>* inputQueue)
 {
     mWindow = window;
     mInputQueue = inputQueue;
@@ -13,15 +15,18 @@ Purity::InputManager::InputManager(Purity::Window* window, std::queue<sf::Event>
 
 void Purity::InputManager::update()
 {
-    sf::Event event;
+    SDL_Event* event;
 
     while (mWindow->pollEvent(event))
     {
         mInputQueue->push(event);
 
-        if (event.type == sf::Event::Closed)
+        if (event->type == SDL_WINDOWEVENT)
         {
-            mWindow->close();
+            if (event->window.event == SDL_WINDOWEVENT_CLOSE)
+            {
+                mWindow->close();
+            }
         }
     }
 

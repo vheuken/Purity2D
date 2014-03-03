@@ -1,8 +1,6 @@
 #include "window.h"
 #include <iostream>
 
-#include <SFML/System/Vector2.hpp>
-
 #include <SDL.h>
 
 // HACK
@@ -35,7 +33,7 @@ void Purity::Window::clear()
 
 void Purity::Window::draw(const sf::Drawable& drawable)
 {
-    mInternalWindow.draw(drawable);
+    //mInternalWindow.draw(drawable);
 }
 
 void Purity::Window::display()
@@ -45,12 +43,12 @@ void Purity::Window::display()
 
 void Purity::Window::setView(const sf::View& view)
 {
-    mInternalWindow.setView(view);
+    //mInternalWindow.setView(view);
 }
 
 const sf::View& Purity::Window::getView() const
 {
-    return mInternalWindow.getView();
+    //return mInternalWindow.getView();
 }
 
 void Purity::Window::setSize(const Vector2u& size)
