@@ -5,6 +5,7 @@ project(${FRAMEWORK_PROJECT_NAME})
 add_subdirectory(network/)
 add_subdirectory(entity/)
 add_subdirectory(window/)
+add_subdirectory(system/)
 
 set(MODULES_FOLDER "Purity Framework")
 
@@ -41,4 +42,5 @@ target_link_libraries(
     Purity-Network
 	Purity-Entity
     Purity-Window
+    Purity-System
 )
