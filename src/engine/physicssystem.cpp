@@ -5,7 +5,7 @@
 #include "luamanager.h"
 #include "../framework/scene.h"
 
-Purity::PhysicsSystem::PhysicsSystem(std::queue<sf::Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue)
+Purity::PhysicsSystem::PhysicsSystem(std::queue<SDL_Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue)
 {
     mWorld = std::unique_ptr<b2World>(new b2World(GRAVITY));
 
@@ -18,14 +18,14 @@ Purity::PhysicsSystem::PhysicsSystem(std::queue<sf::Event>* inputQueue, std::que
     mServerActionQueue = serverActionQueue;
 }
 
-void Purity::PhysicsSystem::update(Purity::Scene* scene) 
+void Purity::PhysicsSystem::update(Purity::Scene* scene)
 {
     if (scene != mCurrentScene)
     {
         LuaManager* luaManager = LuaManager::getManager();
 
         mCurrentScene = scene;
-        
+
         mCurrentScene->initializePhysics(mWorld.get());
 
         std::string luaEventHandlerFileName = mCurrentScene->getLuaEventHandlerPath();
@@ -53,7 +53,7 @@ void Purity::PhysicsSystem::step()
     mFrameTimeMilleseconds = mFrameTimer.getElapsedTime().asMilliseconds();
 
     acumulator += (mFrameTimeMilleseconds - mLastTime);
-    
+
     while (acumulator >= (TIME_STEP * 1000))
     {
 	    handleInput();
@@ -72,10 +72,10 @@ void Purity::PhysicsSystem::handleInput()
     std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
     LuaManager* luaManager = LuaManager::getManager();
     lua_State* luaState = luaManager->getState();
-    
+
     while (!mInputQueue->empty())
     {
-	    sf::Event event = mInputQueue->front();
+	    SDL_Event event = mInputQueue->front();
 	    mInputQueue->pop();
 
 	    luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);

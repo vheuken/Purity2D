@@ -13,6 +13,8 @@
 #include "networksystem.h"
 #include "commandlinearguments.h"
 
+#include <SDL_events.h>
+
 namespace luabind
 {
     struct scope;
@@ -42,7 +44,7 @@ namespace Purity
         std::unique_ptr<InputManager> mInputManager;
         std::unique_ptr<NetworkSystem> mNetworkSystem;
 
-	    std::unique_ptr<std::queue<sf::Event> > mInputQueue;
+	    std::unique_ptr<std::queue<SDL_Event> > mInputQueue;
         std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
 
         const CommandLineArguments mProgramOptions;

@@ -22,7 +22,7 @@ void Purity::Engine::initialize()
     XInitThreads();
     #endif
 
-    mInputQueue = std::unique_ptr<std::queue<sf::Event> >(new std::queue<sf::Event>);
+    mInputQueue = std::unique_ptr<std::queue<SDL_Event> >(new std::queue<SDL_Event>);
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
 
     if (mProgramOptions.headless == false)
