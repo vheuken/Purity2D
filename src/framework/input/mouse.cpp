@@ -6,7 +6,7 @@
 #include <windows.h>
 #endif
 
-#include <SFML/Window/Mouse.hpp>
+#include <SDL_events.h>
 
 Purity::Vector2i Purity::Mouse::getPosition()
 {
@@ -37,23 +37,17 @@ Purity::Vector2i Purity::Mouse::getPosition()
 
 Purity::Vector2i Purity::Mouse::getPosition(const Purity::Window& relativeTo)
 {
-    sf::Vector2i pos = sf::Mouse::getPosition(relativeTo.getInternalWindow());
+    int x, y;
 
-    return Vector2i(pos.x, pos.y);
+    SDL_PumpEvents();
+    SDL_GetMouseState(&x, &y);
+
+    return Vector2i(x, y);
 }
 
 bool Purity::Mouse::isButtonPressed(Button button)
 {
-    switch(button)
-    {
-    case Left:
-        return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    SDL_PumpEvents();
 
-    case Right:
-        return sf::Mouse::isButtonPressed(sf::Mouse::Right);
-    case Middle:
-        return sf::Mouse::isButtonPressed(sf::Mouse::Middle);
-    }
-
-    return false;
+    return SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(button);
 }
