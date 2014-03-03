@@ -8,8 +8,10 @@
 Purity::Window::Window(int width, int height, std::string title)
 : mWindowManipulator(this)
 {
-    // TODO: Error checking!
-    SDL_Init(SDL_INIT_EVERYTHING);
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    {
+        std::cout << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
+    }
 
     mInternalWindow = SDL_CreateWindow(title.c_str(),
                                        100,
@@ -18,7 +20,17 @@ Purity::Window::Window(int width, int height, std::string title)
                                        height,
                                        SDL_WINDOW_BORDERLESS);
 
+    if (mInternalWindow == nullptr)
+    {
+        std::cout << "Could not create window: " << SDL_GetError() << std::endl;
+    }
+
     mRenderer = SDL_CreateRenderer(mInternalWindow, -1, 0);
+
+    if (mRenderer == nullptr)
+    {
+        std::cout << "Could not create renderer: " << SDL_GetError() << std::endl;
+    }
 }
 
 Purity::Window::~Window()
