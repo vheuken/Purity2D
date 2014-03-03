@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "windowmanipulator.h"
+#include "../system/vector2.h"
 
 namespace Purity
 {
@@ -22,11 +23,11 @@ namespace Purity
         void setView(const sf::View& view);
         const sf::View& getView() const;
 
-        void setSize(const sf::Vector2u& size);
-        sf::Vector2u getSize() const;
+        void setSize(const Vector2u& size);
+        Vector2u getSize() const;
 
-        void setPosition(const sf::Vector2i& position);
-        sf::Vector2i getPosition() const;
+        void setPosition(const Vector2i& position);
+        Vector2i getPosition() const;
 
         bool pollEvent(sf::Event& event);
 

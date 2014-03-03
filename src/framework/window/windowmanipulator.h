@@ -1,8 +1,7 @@
 #ifndef PURITY_WINDOW_MANIPULATOR_H
 #define PURITY_WINDOW_MANIPULATOR_H
 
-#include <SFML/Window/Mouse.hpp>
-#include <SFML/System/Vector2.hpp>
+#include "../system/vector2.h"
 
 namespace Purity
 {
@@ -24,7 +23,8 @@ namespace Purity
         void dragWindow();
         void resizeWindow();
         void setBorderGrabbedFlags();
-        sf::Vector2i mLastMousePosRelativeToWindow;
+
+        Vector2i mLastMousePosRelativeToWindow;
 
         bool mWindowDrag;
         bool mWindowResize;

@@ -1,6 +1,7 @@
 #include "windowmanipulator.h"
 
 #include "window.h"
+#include "../input/mouse.h"
 
 #include <iostream>
 
@@ -26,7 +27,7 @@ void Purity::WindowManipulator::manipulateWindow()
 
 void Purity::WindowManipulator::setWindowFlags()
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if (Mouse::isButtonPressed(Mouse::Left))
     {
         if (mWindowResize == false && isMouseOnBorder())
         {
@@ -39,7 +40,7 @@ void Purity::WindowManipulator::setWindowFlags()
             mWindowDrag = true;
             std::cout << "Window grabbed!" << std::endl;
 
-            mLastMousePosRelativeToWindow = sf::Mouse::getPosition(mWindow->getInternalWindow());
+            mLastMousePosRelativeToWindow = Mouse::getPosition(*mWindow);
         }
     }
     else
@@ -63,14 +64,14 @@ void Purity::WindowManipulator::setWindowFlags()
 
 void Purity::WindowManipulator::setBorderGrabbedFlags()
 {
-    sf::Vector2u windowSize = mWindow->getSize();
-    sf::Vector2u newWindowSize = windowSize;
-    sf::Vector2i newWindowPos = mWindow->getPosition();
+    Vector2u windowSize = mWindow->getSize();
+    Vector2u newWindowSize = windowSize;
+    Vector2i newWindowPos = mWindow->getPosition();
 
-    sf::Vector2u mousePos;
+    Vector2u mousePos;
 
-    mousePos.x = (unsigned int)sf::Mouse::getPosition(mWindow->getInternalWindow()).x;
-    mousePos.y = (unsigned int)sf::Mouse::getPosition(mWindow->getInternalWindow()).y;
+    mousePos.x = (unsigned int)Mouse::getPosition(*mWindow).x;
+    mousePos.y = (unsigned int)Mouse::getPosition(*mWindow).y;
 
     // right
     if (mousePos.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS)
@@ -87,19 +88,19 @@ void Purity::WindowManipulator::setBorderGrabbedFlags()
 
 void Purity::WindowManipulator::dragWindow()
 {
-    mWindow->setPosition(sf::Mouse::getPosition() - mLastMousePosRelativeToWindow);
+    mWindow->setPosition(Mouse::getPosition() - mLastMousePosRelativeToWindow);
 }
 
 void Purity::WindowManipulator::resizeWindow()
 {
-    sf::Vector2u windowSize = mWindow->getSize();
-    sf::Vector2u newWindowSize = windowSize;
-    sf::Vector2i newWindowPos = mWindow->getPosition();
+    Vector2u windowSize = mWindow->getSize();
+    Vector2u newWindowSize = windowSize;
+    Vector2i newWindowPos = mWindow->getPosition();
 
-    sf::Vector2u mousePos;
+    Vector2u mousePos;
 
-    mousePos.x = (unsigned int)sf::Mouse::getPosition(mWindow->getInternalWindow()).x;
-    mousePos.y = (unsigned int)sf::Mouse::getPosition(mWindow->getInternalWindow()).y;
+    mousePos.x = (unsigned int)Mouse::getPosition(*mWindow).x;
+    mousePos.y = (unsigned int)Mouse::getPosition(*mWindow).y;
 
     // right
     if (mRightBorderGrabbed)
@@ -123,8 +124,8 @@ void Purity::WindowManipulator::resizeWindow()
 
 bool Purity::WindowManipulator::isMouseOnBorder() const
 {
-    sf::Vector2i mousePositionRelativeToWindow = sf::Mouse::getPosition(mWindow->getInternalWindow());
-    sf::Vector2u windowSize = mWindow->getSize();
+    Vector2i mousePositionRelativeToWindow = Mouse::getPosition(*mWindow);
+    Vector2u windowSize = mWindow->getSize();
 
     if ((mousePositionRelativeToWindow.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS && mousePositionRelativeToWindow.x <= windowSize.x) ||
         (mousePositionRelativeToWindow.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS && mousePositionRelativeToWindow.y <= windowSize.y) ||

@@ -6,6 +6,7 @@ add_subdirectory(network/)
 add_subdirectory(entity/)
 add_subdirectory(window/)
 add_subdirectory(system/)
+add_subdirectory(input/)
 
 set(MODULES_FOLDER "Purity Framework")
 
@@ -43,4 +44,5 @@ target_link_libraries(
 	Purity-Entity
     Purity-Window
     Purity-System
+    Purity-Input
 )

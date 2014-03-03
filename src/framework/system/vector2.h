@@ -6,7 +6,7 @@
 
 namespace Purity
 {
-    template <T>
+    template <typename T>
     class Vector2
     {
     public:

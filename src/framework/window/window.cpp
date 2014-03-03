@@ -1,6 +1,8 @@
 #include "window.h"
 #include <iostream>
 
+#include <SFML/System/Vector2.hpp>
+
 // HACK
 // sf::Style::None won't work on Linux....
 Purity::Window::Window(int width, int height, std::string title)
@@ -39,24 +41,26 @@ const sf::View& Purity::Window::getView() const
     return mInternalWindow.getView();
 }
 
-void Purity::Window::setSize(const sf::Vector2u& size)
+void Purity::Window::setSize(const Vector2u& size)
 {
-    mInternalWindow.setSize(size);
+    sf::Vector2u s(size.x, size.y);
+    mInternalWindow.setSize(s);
 }
 
-sf::Vector2u Purity::Window::getSize() const
+Purity::Vector2u Purity::Window::getSize() const
 {
-    return mInternalWindow.getSize();
+    return Vector2u(mInternalWindow.getSize().x, mInternalWindow.getSize().y);
 }
 
-void Purity::Window::setPosition(const sf::Vector2i& position)
+void Purity::Window::setPosition(const Vector2i& position)
 {
-    mInternalWindow.setPosition(position);
+    sf::Vector2i p(position.x, position.y);
+    mInternalWindow.setPosition(p);
 }
 
-sf::Vector2i Purity::Window::getPosition() const
+Purity::Vector2i Purity::Window::getPosition() const
 {
-    return mInternalWindow.getPosition();
+    return Vector2i(mInternalWindow.getPosition().x, mInternalWindow.getPosition().y);
 }
 
 bool Purity::Window::pollEvent(sf::Event& event)
