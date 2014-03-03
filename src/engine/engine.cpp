@@ -57,6 +57,7 @@ void Purity::Engine::run()
 
         mNetworkSystem->update(currentScene);
         mPhysicsSystem->update(currentScene);
+        mRenderSystem->update(currentScene);
 
         if (mProgramOptions.headless == false)
         {

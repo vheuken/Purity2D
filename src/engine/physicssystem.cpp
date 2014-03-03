@@ -20,6 +20,7 @@ Purity::PhysicsSystem::PhysicsSystem(std::queue<SDL_Event>* inputQueue, std::que
 
 void Purity::PhysicsSystem::update(Purity::Scene* scene)
 {
+/*
     if (scene != mCurrentScene)
     {
         LuaManager* luaManager = LuaManager::getManager();
@@ -43,6 +44,7 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
 
     step();
     mCurrentScene->updatePhysics();
+    */
 }
 
 void Purity::PhysicsSystem::step()

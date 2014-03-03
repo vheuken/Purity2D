@@ -4,7 +4,7 @@
 #include <queue>
 
 #include "../framework/window/window.h"
-
+#include "../framework/input/mouse.h"
 #include <SDL_events.h>
 
 Purity::InputManager::InputManager(Purity::Window* window, std::queue<SDL_Event>* inputQueue)

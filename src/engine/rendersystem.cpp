@@ -19,6 +19,8 @@ void Purity::RenderSystem::update(Scene* scene)
     {
         mCurrentScene = scene;
     }
+
+    run();
 }
 
 void Purity::RenderSystem::run()
