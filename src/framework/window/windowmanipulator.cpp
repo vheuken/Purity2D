@@ -99,8 +99,8 @@ void Purity::WindowManipulator::resizeWindow()
 
     Vector2u mousePos;
 
-    mousePos.x = (unsigned int)Mouse::getPosition(*mWindow).x;
-    mousePos.y = (unsigned int)Mouse::getPosition(*mWindow).y;
+    mousePos.x = (unsigned int)Mouse::getPosition().x;
+    mousePos.y = (unsigned int)Mouse::getPosition().y;
 
     // right
     if (mRightBorderGrabbed)
