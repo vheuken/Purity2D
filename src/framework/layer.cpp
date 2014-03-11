@@ -27,11 +27,11 @@ void Purity::Layer::processTiles()
         for (int x = 0; x < layerWidth; x++)
         {
             tmxTile = mTmxLayer->GetTile(x, y);
-            
+
             if (tmxTile.id != 0)
             {
                 tileTexture = mTextureManager->getTexture(mSceneDir.string() + mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
-                
+
                 std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id));
 
                 col[x] = std::move(tile);
@@ -117,7 +117,7 @@ void Purity::Layer::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 
         if (tile != nullptr)
         {
-            target.draw(*tile);
+//            target.draw(*tile);
         }
     }
 }

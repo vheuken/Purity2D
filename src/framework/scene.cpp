@@ -8,7 +8,7 @@ Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
 	mLuaPhysicsUpdateFile = sceneDir.string() + DEFAULT_ON_PHYSICS_UPDATE_SCRIPT;
 
     mTmxMap = std::unique_ptr<Tmx::Map>(new Tmx::Map);
-    
+
     mTmxMap->ParseFile(mapFilePath.string());
 
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), sceneDir));
@@ -61,7 +61,7 @@ void Purity::Scene::initializeObjects(b2World* world)
 }
 
 void Purity::Scene::updatePhysics()
-{    
+{
     mMutex.lock();
 
     mObjectManager->updatePhysics();
@@ -69,13 +69,13 @@ void Purity::Scene::updatePhysics()
     mMutex.unlock();
 }
 
-void Purity::Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Purity::Scene::draw(SDL_Renderer* target) const
 {
     mMutex.lock();
-
+/*
     target.draw(*mMap, states);
 
     target.draw(*mObjectManager, states);
-
+*/
     mMutex.unlock();
 }

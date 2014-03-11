@@ -58,7 +58,7 @@ std::vector<Purity::EntityState> Purity::EntityManager::getEntityStates() const
 void Purity::EntityManager::initializeObjects()
 {
     int numOfGroups = mTmxMap->GetNumObjectGroups();
-   
+
     for (int groupNum = 0; groupNum < numOfGroups; groupNum++)
     {
         const Tmx::ObjectGroup* currentGroup;
@@ -72,7 +72,7 @@ void Purity::EntityManager::initializeObjects()
             const Tmx::Object* currentObject;
 
             currentObject = currentGroup->GetObject(objectNum);
-            
+
             if (currentObject->GetType() == "Movable")
             {
                 if (currentObject->GetProperties().GetSize() > 0)
@@ -95,7 +95,7 @@ void Purity::EntityManager::initializeObjects()
                 mEntityList.push_back(entity);
 
             }
-            
+
         }
     }
 }
@@ -125,8 +125,9 @@ void Purity::EntityManager::updatePhysics()
     }
 }
 
-void Purity::EntityManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Purity::EntityManager::draw(SDL_Renderer* target) const
 {
+/*
     for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
     {
         target.draw(*it);
@@ -135,6 +136,7 @@ void Purity::EntityManager::draw(sf::RenderTarget& target, sf::RenderStates stat
     {
         target.draw(*it);
     }
+*/
 }
 
 luabind::scope Purity::EntityManager::luaBindings()

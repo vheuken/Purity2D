@@ -6,6 +6,7 @@
 
 #include "windowmanipulator.h"
 #include "../system/vector2.h"
+#include "../graphics/drawable.h"
 
 
 struct SDL_Window;
@@ -23,7 +24,7 @@ namespace Purity
         ~Window();
 
         void clear();
-        void draw(const sf::Drawable& drawable);
+        void draw(const Drawable& drawable);
         void display();
 
         void setView(const sf::View& view);

@@ -43,7 +43,7 @@ void Purity::Window::clear()
     SDL_RenderClear(mRenderer);
 }
 
-void Purity::Window::draw(const sf::Drawable& drawable)
+void Purity::Window::draw(const Drawable& drawable)
 {
     //mInternalWindow.draw(drawable);
 }

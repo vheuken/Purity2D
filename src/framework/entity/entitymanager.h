@@ -6,6 +6,7 @@
 #include "movableentity.h"
 #include "../texturemanager.h"
 #include "entitystate.h"
+#include "../graphics/drawable.h"
 
 class b2World;
 
@@ -21,7 +22,7 @@ namespace Tmx
 
 namespace Purity
 {
-    class EntityManager : public sf::Drawable
+    class EntityManager : public Drawable
     {
     public:
         EntityManager(const Tmx::Map* tmxMap, b2World* world);
@@ -46,7 +47,7 @@ namespace Purity
 
         void initializeObjects();
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual void draw(SDL_Renderer* target) const;
     };
 }
 

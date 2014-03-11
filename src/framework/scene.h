@@ -11,6 +11,7 @@
 #include "gamemap.h"
 #include "entity/entitymanager.h"
 #include "entity/entitystate.h"
+#include "graphics/drawable.h"
 
 class b2World;
 class b2Body;
@@ -22,7 +23,7 @@ namespace Purity
     const std::string DEFAULT_EVENT_HANDLER_FUNCTION_NAME = "eventHandler";
 	const std::string DEFAULT_ON_PHYSICS_UPDATE_SCRIPT = "onPhysicsUpdate.lua";
 
-    class Scene : public sf::Drawable
+    class Scene : public Drawable
     {
     public:
         Scene(const boost::filesystem::path& sceneDir);
@@ -50,7 +51,7 @@ namespace Purity
 
         void initializeTiles(b2World* world);
         void initializeObjects(b2World* world);
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual void draw(SDL_Renderer* target) const;
     };
 
 }

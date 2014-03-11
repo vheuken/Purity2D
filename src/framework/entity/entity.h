@@ -6,6 +6,7 @@
 #include <Box2D/Box2D.h>
 
 #include "entitystate.h"
+#include "../graphics/drawable.h"
 
 namespace luabind
 {
@@ -13,7 +14,7 @@ namespace luabind
 }
 
 namespace Tmx
-{   
+{
     class Object;
 }
 
@@ -23,7 +24,7 @@ namespace Purity
     const float32 DEFAULT_HITBOX_WIDTH_METERS = 0.5;
     const float32 DEFAULT_HITBOX_HEIGHT_METERS = 1.5;
 
-    const float32 DEFAULT_HITBOX_WIDTH_PIXELS  = PIXELS_PER_METER * DEFAULT_HITBOX_WIDTH_METERS; 
+    const float32 DEFAULT_HITBOX_WIDTH_PIXELS  = PIXELS_PER_METER * DEFAULT_HITBOX_WIDTH_METERS;
     const float32 DEFAULT_HITBOX_HEIGHT_PIXELS = PIXELS_PER_METER * DEFAULT_HITBOX_HEIGHT_METERS;
 
 
@@ -31,7 +32,7 @@ namespace Purity
     const sf::Color DEFAULT_HITBOX_OUTLINE_COLOR = sf::Color::Yellow;
     const sf::Color DEFAULT_HITBOX_FILL_COLOR = sf::Color::Transparent;
 
-    class Entity : public sf::Drawable, protected sf::Transformable
+    class Entity : public Drawable, protected sf::Transformable
     {
     public:
         Entity();
@@ -43,7 +44,7 @@ namespace Purity
 
         void setBodyPosition(float x, float y);
         void setSize(float width, float height);
-        
+
         float getX() const;
         float getY() const;
 
@@ -57,7 +58,7 @@ namespace Purity
 
     protected:
         b2BodyDef mHitboxBodyDef;
-        b2Body* mHitboxBody;     
+        b2Body* mHitboxBody;
 
         sf::VertexArray mVertexArray;
         const sf::Texture * mTexture;
@@ -80,7 +81,7 @@ namespace Purity
 
         bool isInView(const sf::View& view) const;
 
-        virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+        virtual void draw(SDL_Renderer* target) const;
     };
 
 }
