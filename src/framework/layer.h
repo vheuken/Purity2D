@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "tile.h"
+#include "graphics/drawable.h"
 
 class b2World;
 
@@ -21,7 +22,7 @@ namespace Purity
 {
     class TextureManager;
 
-    class Layer : public sf::Drawable
+    class Layer : public Drawable
     {
     public:
         Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager, boost::filesystem::path sceneDir);
@@ -41,7 +42,7 @@ namespace Purity
         const Tile * getTile(int x, int y) const;
         std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual void draw(RenderTarget& target) const;
     };
 }
 

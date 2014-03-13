@@ -81,7 +81,7 @@ namespace Purity
 
         bool isInView(const sf::View& view) const;
 
-        virtual void draw(SDL_Renderer* target) const;
+        virtual void draw(RenderTarget& target) const;
     };
 
 }

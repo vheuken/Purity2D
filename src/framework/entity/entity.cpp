@@ -137,7 +137,7 @@ bool Purity::Entity::isInView(const sf::View& view) const
     return viewRect.contains( getPosition() );
 }
 
-void Purity::Entity::draw(SDL_Renderer* target) const
+void Purity::Entity::draw(Purity::RenderTarget& target) const
 {
     /*
     if ( isInView( target.getView()) )

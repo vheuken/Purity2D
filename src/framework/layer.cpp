@@ -107,8 +107,9 @@ std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::
     return listOfTilesToDraw;
 }
 
-void Purity::Layer::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
+/*
     std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(target.getView());
 
     for (auto it = listOfTilesToDraw.begin(); it != listOfTilesToDraw.end(); it++)
@@ -120,4 +121,5 @@ void Purity::Layer::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 //            target.draw(*tile);
         }
     }
+*/
 }

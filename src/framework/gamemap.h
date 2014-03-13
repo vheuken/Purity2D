@@ -11,6 +11,8 @@
 #include "tile.h"
 #include "layer.h"
 
+#include "graphics/drawable.h"
+
 class b2World;
 
 namespace Tmx
@@ -20,7 +22,7 @@ namespace Tmx
 
 namespace Purity
 {
-    class GameMap : public sf::Drawable
+    class GameMap : public Drawable
     {
     public:
         GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir);
@@ -45,7 +47,7 @@ namespace Purity
 
         sf::Sprite getTileSprite(int x, int y, int layerNum) const;
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual void draw(RenderTarget& target) const;
     };
 
 }

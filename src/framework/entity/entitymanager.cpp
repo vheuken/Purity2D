@@ -125,7 +125,7 @@ void Purity::EntityManager::updatePhysics()
     }
 }
 
-void Purity::EntityManager::draw(SDL_Renderer* target) const
+void Purity::EntityManager::draw(Purity::RenderTarget& target) const
 {
 /*
     for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)

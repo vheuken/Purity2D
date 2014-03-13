@@ -69,13 +69,13 @@ void Purity::Scene::updatePhysics()
     mMutex.unlock();
 }
 
-void Purity::Scene::draw(SDL_Renderer* target) const
+void Purity::Scene::draw(Purity::RenderTarget& target) const
 {
     mMutex.lock();
-/*
-    target.draw(*mMap, states);
 
-    target.draw(*mObjectManager, states);
-*/
+    target.draw(*mMap);
+
+    target.draw(*mObjectManager);
+
     mMutex.unlock();
 }

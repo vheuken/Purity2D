@@ -6,7 +6,7 @@
 
 #include "windowmanipulator.h"
 #include "../system/vector2.h"
-#include "../graphics/drawable.h"
+#include "../graphics/rendertarget.h"
 
 
 struct SDL_Window;
@@ -17,15 +17,11 @@ namespace Purity
 {
     const unsigned int STRETCHABLE_BORDER_PIXELS = 50;
 
-    class Window
+    class Window : public RenderTarget
     {
     public:
         Window(int width, int height, std::string title);
         ~Window();
-
-        void clear();
-        void draw(const Drawable& drawable);
-        void display();
 
         void setView(const sf::View& view);
         const sf::View& getView() const;
@@ -47,7 +43,6 @@ namespace Purity
 
     private:
         SDL_Window* mInternalWindow;
-        SDL_Renderer* mRenderer;
 
         WindowManipulator mWindowManipulator;
     };

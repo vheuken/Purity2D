@@ -3,17 +3,17 @@
 #ifndef PURITY_DRAWABLE_H
 #define PURITY_DRAWABLE_H
 
-class SDL_Renderer;
+#include "rendertarget.h"
 
 namespace Purity
 {
+    //class RenderTarget;
 
     class Drawable
     {
     protected:
         friend class RenderTarget;
-
-        virtual void draw(SDL_Renderer* target) const = 0;
+        virtual void draw(RenderTarget& target) const = 0;
     };
 }
 

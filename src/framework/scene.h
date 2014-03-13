@@ -51,7 +51,7 @@ namespace Purity
 
         void initializeTiles(b2World* world);
         void initializeObjects(b2World* world);
-        virtual void draw(SDL_Renderer* target) const;
+        virtual void draw(RenderTarget& target) const;
     };
 
 }

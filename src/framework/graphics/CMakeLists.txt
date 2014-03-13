@@ -4,14 +4,16 @@ project(${GRAPHICS_PROJECT_NAME})
 
 set( GRAPHICS_HEADER_FILES
      drawable.h
+     rendertarget.h
 )
 
-#set( GRAPHICS_SOURCE_FILES
-#)
+set( GRAPHICS_SOURCE_FILES
+     rendertarget.cpp
+)
 
 add_library ( ${GRAPHICS_PROJECT_NAME} STATIC
               ${GRAPHICS_HEADER_FILES}
-#              ${GRAPHICS_SOURCE_FILES}
+              ${GRAPHICS_SOURCE_FILES}
 )
 
 

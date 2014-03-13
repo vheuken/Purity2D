@@ -38,21 +38,6 @@ Purity::Window::~Window()
     SDL_Quit();
 }
 
-void Purity::Window::clear()
-{
-    SDL_RenderClear(mRenderer);
-}
-
-void Purity::Window::draw(const Drawable& drawable)
-{
-    //mInternalWindow.draw(drawable);
-}
-
-void Purity::Window::display()
-{
-    SDL_RenderPresent(mRenderer);
-}
-
 void Purity::Window::setView(const sf::View& view)
 {
     //mInternalWindow.setView(view);

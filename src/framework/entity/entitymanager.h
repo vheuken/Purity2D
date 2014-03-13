@@ -47,7 +47,7 @@ namespace Purity
 
         void initializeObjects();
 
-        virtual void draw(SDL_Renderer* target) const;
+        virtual void draw(RenderTarget& target) const;
     };
 }
 
