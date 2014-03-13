@@ -18,14 +18,14 @@ void Purity::Tile::setTextureSubrect()
         int id = mTileId;
         int numOfRows = mTexture->getSize().x / mWidthPixels;
         int numOfCols = mTexture->getSize().y / mHeightPixels;
-    
+
         int left = (id % numOfCols) * mWidthPixels;
         int top = (id / numOfCols) * mHeightPixels;
 
-        mVertexArray[0].texCoords = sf::Vector2f(left, top);
-        mVertexArray[1].texCoords = sf::Vector2f(left + mWidthPixels, top);
-        mVertexArray[2].texCoords = sf::Vector2f(left + mWidthPixels, top + mHeightPixels);
-        mVertexArray[3].texCoords = sf::Vector2f(left, top + mHeightPixels);
+        mVertexArray[0].texCoords = Vector2f(left, top);
+        mVertexArray[1].texCoords = Vector2f(left + mWidthPixels, top);
+        mVertexArray[2].texCoords = Vector2f(left + mWidthPixels, top + mHeightPixels);
+        mVertexArray[3].texCoords = Vector2f(left, top + mHeightPixels);
     }
 }
 
@@ -60,7 +60,7 @@ void Purity::Tile::createBody(b2World* world)
     collisionTileBodyDef.position.Set(posX, posY);
 
     mHitboxBody = world->CreateBody(&collisionTileBodyDef);
-    
+
     b2Vec2 lowerLeft = b2Vec2(0 - (mWidthPixels/PIXELS_PER_METER/2), 0 - (mHeightPixels/PIXELS_PER_METER/2));
     b2Vec2 lowerRight = b2Vec2(mWidthPixels/PIXELS_PER_METER/2, 0 - (mHeightPixels/PIXELS_PER_METER/2));
     b2Vec2 upperRight = b2Vec2(mWidthPixels/PIXELS_PER_METER/2, mHeightPixels/PIXELS_PER_METER/2);
@@ -68,16 +68,16 @@ void Purity::Tile::createBody(b2World* world)
 
     collisionTileBox.Set(lowerLeft, lowerRight);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
-    
+
     collisionTileBox.Set(upperRight, upperLeft);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
-    
+
     collisionTileBox.Set(upperLeft, lowerLeft);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
-    
+
     collisionTileBox.Set(lowerRight, upperRight);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
-    
+
 
     //mHitboxBody->SetUserData(new std::string("Tile"));
 }

@@ -81,10 +81,10 @@ void Purity::Entity::setSize(float width, float height)
 
 void Purity::Entity::initializeTextureCoords()
 {
-    mVertexArray[0].texCoords = sf::Vector2f(0, 0);
-    mVertexArray[1].texCoords = sf::Vector2f(mWidthPixels, 0);
-    mVertexArray[2].texCoords = sf::Vector2f(mWidthPixels, mHeightPixels);
-    mVertexArray[3].texCoords = sf::Vector2f(0, mHeightPixels);
+    mVertexArray[0].texCoords = Vector2f(0, 0);
+    mVertexArray[1].texCoords = Vector2f(mWidthPixels, 0);
+    mVertexArray[2].texCoords = Vector2f(mWidthPixels, mHeightPixels);
+    mVertexArray[3].texCoords = Vector2f(0, mHeightPixels);
 }
 
 Purity::EntityState Purity::Entity::getState() const
@@ -115,12 +115,12 @@ void Purity::Entity::createBody(b2World* world)
 
 void Purity::Entity::initializeHitboxShape()
 {
-    mVertexArray.setPrimitiveType(sf::Quads);
+    //mVertexArray.setPrimitiveType(sf::Quads);
 
-    mVertexArray.append(sf::Vector2f(0, 0));
-    mVertexArray.append(sf::Vector2f(mWidthPixels, 0));
-    mVertexArray.append(sf::Vector2f(mWidthPixels, mHeightPixels));
-    mVertexArray.append(sf::Vector2f(0, mHeightPixels));
+    mVertexArray.append(Vector2f(0, 0));
+    mVertexArray.append(Vector2f(mWidthPixels, 0));
+    mVertexArray.append(Vector2f(mWidthPixels, mHeightPixels));
+    mVertexArray.append(Vector2f(0, mHeightPixels));
 }
 
 bool Purity::Entity::isInView(const sf::View& view) const
@@ -152,6 +152,8 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
         target.draw(mVertexArray, states);
     }
     */
+
+    target.draw(mVertexArray);
 }
 
 luabind::scope Purity::Entity::luaBindings()

@@ -109,17 +109,29 @@ std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::
 
 void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
-/*
-    std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(target.getView());
 
-    for (auto it = listOfTilesToDraw.begin(); it != listOfTilesToDraw.end(); it++)
+    // TODO: only draw tiles in view
+    //std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(target.getView());
+
+    //auto listOfTilesToDraw = mTiles;
+
+    for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
     {
-        const Tile * tile = getTile(it->first, it->second);
+        //const Tile * tile = getTile(it->first, it->second);
 
-        if (tile != nullptr)
+        //auto row = it->second;
+
+        for (auto tileIt = it->second.begin(); tileIt != it->second.end(); ++tileIt)
         {
-//            target.draw(*tile);
+            const Tile * tile = getTile(it->first, tileIt->first);
+
+            if (tile != nullptr)
+            {
+                target.draw(*tile);
+            }
+
         }
+
     }
-*/
+
 }

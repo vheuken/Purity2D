@@ -1,6 +1,8 @@
 #ifndef PURITY_RENDER_TARGET_H
 #define PURITY_RENDER_TARGET_H
 
+#include "vertexarray.h"
+
 struct SDL_Renderer;
 
 namespace Purity
@@ -13,8 +15,10 @@ namespace Purity
         RenderTarget();
 
         void clear();
-        void draw(const Drawable& drawable);
         void display();
+
+        void draw(const Drawable& drawable);
+        void draw(const VertexArray& vertexArray);
 
     protected:
         SDL_Renderer* mRenderer;

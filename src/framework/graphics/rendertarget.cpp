@@ -12,12 +12,17 @@ void Purity::RenderTarget::clear()
     SDL_RenderClear(mRenderer);
 }
 
+void Purity::RenderTarget::display()
+{
+    SDL_RenderPresent(mRenderer);
+}
+
 void Purity::RenderTarget::draw(const Drawable& drawable)
 {
     drawable.draw(*this);
 }
 
-void Purity::RenderTarget::display()
+void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray)
 {
-    SDL_RenderPresent(mRenderer);
+
 }

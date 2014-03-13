@@ -7,6 +7,7 @@
 
 #include "entitystate.h"
 #include "../graphics/drawable.h"
+#include "../graphics/vertexarray.h"
 
 namespace luabind
 {
@@ -60,7 +61,7 @@ namespace Purity
         b2BodyDef mHitboxBodyDef;
         b2Body* mHitboxBody;
 
-        sf::VertexArray mVertexArray;
+        VertexArray mVertexArray;
         const sf::Texture * mTexture;
 
         float mWidthPixels;

@@ -4,11 +4,15 @@ project(${GRAPHICS_PROJECT_NAME})
 
 set( GRAPHICS_HEADER_FILES
      drawable.h
+     vertex.h
+     vertexarray.h
      rendertarget.h
 )
 
 set( GRAPHICS_SOURCE_FILES
      rendertarget.cpp
+     vertexarray.cpp
+     vertex.cpp
 )
 
 add_library ( ${GRAPHICS_PROJECT_NAME} STATIC
