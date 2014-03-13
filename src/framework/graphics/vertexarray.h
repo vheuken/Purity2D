@@ -3,12 +3,13 @@
 
 #include <vector>
 #include "vertex.h"
+
 namespace Purity
 {
     class VertexArray
     {
     public:
-        VertexArray() = default;
+        VertexArray();
 
         unsigned int getVertexCount() const;
 

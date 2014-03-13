@@ -127,7 +127,6 @@ void Purity::EntityManager::updatePhysics()
 
 void Purity::EntityManager::draw(Purity::RenderTarget& target) const
 {
-/*
     for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
     {
         target.draw(*it);
@@ -136,7 +135,6 @@ void Purity::EntityManager::draw(Purity::RenderTarget& target) const
     {
         target.draw(*it);
     }
-*/
 }
 
 luabind::scope Purity::EntityManager::luaBindings()

@@ -1,3 +1,5 @@
+// TODO: Lua stuff
+
 #include "physicssystem.h"
 
 #include <string>
@@ -20,10 +22,9 @@ Purity::PhysicsSystem::PhysicsSystem(std::queue<SDL_Event>* inputQueue, std::que
 
 void Purity::PhysicsSystem::update(Purity::Scene* scene)
 {
-/*
     if (scene != mCurrentScene)
     {
-        LuaManager* luaManager = LuaManager::getManager();
+    //    LuaManager* luaManager = LuaManager::getManager();
 
         mCurrentScene = scene;
 
@@ -32,19 +33,18 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
         std::string luaEventHandlerFileName = mCurrentScene->getLuaEventHandlerPath();
         std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
 
-        luaManager->doFile(luaEventHandlerFileName);
+//        luaManager->doFile(luaEventHandlerFileName);
 
         std::string physicsUpdateScript = mCurrentScene->getLuaPhysicsUpdatePath();
 
-        luaManager->doFile(physicsUpdateScript);
+   //     luaManager->doFile(physicsUpdateScript);
 
         // NETWORK STUFF
-        luaManager->doFile("scenes/init/serverActionHandler.lua");
+  //      luaManager->doFile("scenes/init/serverActionHandler.lua");
     }
 
     step();
     mCurrentScene->updatePhysics();
-    */
 }
 
 void Purity::PhysicsSystem::step()
@@ -58,9 +58,9 @@ void Purity::PhysicsSystem::step()
 
     while (acumulator >= (TIME_STEP * 1000))
     {
-	    handleInput();
-        handleServerActions();
-		runUpdateScripts();
+	//    handleInput();
+    //    handleServerActions();
+	//	runUpdateScripts();
 
         mWorld->Step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 
@@ -72,15 +72,15 @@ void Purity::PhysicsSystem::handleInput()
 {
     std::string luaEventHandlerFileName = mCurrentScene->getLuaEventHandlerPath();
     std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
-    LuaManager* luaManager = LuaManager::getManager();
-    lua_State* luaState = luaManager->getState();
+  //  LuaManager* luaManager = LuaManager::getManager();
+  //  lua_State* luaState = luaManager->getState();
 
     while (!mInputQueue->empty())
     {
 	    SDL_Event event = mInputQueue->front();
 	    mInputQueue->pop();
 
-	    luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);
+//	    luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);
     }
 }
 

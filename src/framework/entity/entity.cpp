@@ -153,7 +153,7 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
     }
     */
 
-    target.draw(mVertexArray);
+    target.draw(mVertexArray, Vector2f(getPosition().x, getPosition().y) );
 }
 
 luabind::scope Purity::Entity::luaBindings()

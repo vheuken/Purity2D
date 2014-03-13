@@ -12,13 +12,11 @@ namespace Purity
     class RenderTarget
     {
     public:
-        RenderTarget();
-
         void clear();
         void display();
 
         void draw(const Drawable& drawable);
-        void draw(const VertexArray& vertexArray);
+        void draw(const VertexArray& vertexArray, const Purity::Vector2f& position);
 
     protected:
         SDL_Renderer* mRenderer;

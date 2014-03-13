@@ -1,5 +1,9 @@
 #include "vertexarray.h"
 
+Purity::VertexArray::VertexArray()
+{
+}
+
 unsigned int Purity::VertexArray::getVertexCount() const
 {
     return mVertexList.size();

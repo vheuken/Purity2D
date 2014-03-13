@@ -5,10 +5,6 @@
 #include "luamanager.h"
 #include "../framework/texturemanager.h"
 
-#ifdef __gnu_linux__
-#include <X11/Xlib.h>
-#endif
-
 Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     : mProgramOptions(commandLineArguments)
 {
@@ -17,10 +13,6 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
 void Purity::Engine::initialize()
 {
     std::cout << "Initializing some stuff..." << std::endl;
-
-    #ifdef __gnu_linux__
-    XInitThreads();
-    #endif
 
     mInputQueue = std::unique_ptr<std::queue<SDL_Event> >(new std::queue<SDL_Event>);
     mServerActionQueue = std::unique_ptr<std::queue<NetworkAction> >(new std::queue<NetworkAction>);
@@ -57,12 +49,11 @@ void Purity::Engine::run()
 
         mNetworkSystem->update(currentScene);
         mPhysicsSystem->update(currentScene);
-        mRenderSystem->update(currentScene);
 
         if (mProgramOptions.headless == false)
         {
-            mInputManager->update();
             mRenderSystem->update(currentScene);
+            mInputManager->update();
         }
     }
 }

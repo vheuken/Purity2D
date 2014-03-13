@@ -3,8 +3,6 @@
 
 #include <SDL.h>
 
-// HACK
-// sf::Style::None won't work on Linux....
 Purity::Window::Window(int width, int height, std::string title)
 : mWindowManipulator(this)
 {
@@ -14,11 +12,11 @@ Purity::Window::Window(int width, int height, std::string title)
     }
 
     mInternalWindow = SDL_CreateWindow(title.c_str(),
-                                       100,
-                                       100,
+                                       SDL_WINDOWPOS_CENTERED,
+                                       SDL_WINDOWPOS_CENTERED,
                                        width,
                                        height,
-                                       SDL_WINDOW_BORDERLESS);
+                                       0);
 
     if (mInternalWindow == nullptr)
     {
@@ -31,6 +29,8 @@ Purity::Window::Window(int width, int height, std::string title)
     {
         std::cout << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
+
+    SDL_SetWindowBrightness(mInternalWindow, 1.0);
 }
 
 Purity::Window::~Window()

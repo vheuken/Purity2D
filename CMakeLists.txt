@@ -4,6 +4,8 @@ set(PROJECT_NAME "Purity2D")
 
 project(${PROJECT_NAME})
 
+set(CMAKE_BUILD_TYPE Debug)
+
 set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
 # include directories

@@ -8,6 +8,7 @@ namespace Purity
     class Vertex
     {
     public:
+        Vertex() = default;
         Vertex(const Vector2f& pos);
 
         Vector2f position;
