@@ -31,7 +31,6 @@ void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray, const Pu
 {;
     if (vertexArray.getVertexCount() == 4)
     {
-        //std::cout << "H" <<std::endl;
         SDL_Rect rect;
 
         rect.x = position.x;

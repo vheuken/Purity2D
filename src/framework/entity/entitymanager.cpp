@@ -16,7 +16,7 @@ Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
 
 Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& objectName)
 {
-    for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
+    for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
     {
         if (it->getName() == objectName)
         {
@@ -30,7 +30,7 @@ Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& 
 Purity::MovableEntity* const Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
 {
 
-    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); it++)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
         if (it->getName() == objectName)
         {
@@ -59,7 +59,7 @@ void Purity::EntityManager::initializeObjects()
 {
     int numOfGroups = mTmxMap->GetNumObjectGroups();
 
-    for (int groupNum = 0; groupNum < numOfGroups; groupNum++)
+    for (int groupNum = 0; groupNum < numOfGroups; ++groupNum)
     {
         const Tmx::ObjectGroup* currentGroup;
         int numOfObjectsInGroup;
@@ -67,7 +67,7 @@ void Purity::EntityManager::initializeObjects()
         currentGroup = mTmxMap->GetObjectGroup(groupNum);
         numOfObjectsInGroup = currentGroup->GetNumObjects();
 
-        for (int objectNum = 0; objectNum < numOfObjectsInGroup; objectNum++)
+        for (int objectNum = 0; objectNum < numOfObjectsInGroup; ++objectNum)
         {
             const Tmx::Object* currentObject;
 
@@ -115,11 +115,11 @@ Purity::MovableEntity* const Purity::EntityManager::getMovableEntityById(const u
 
 void Purity::EntityManager::updatePhysics()
 {
-    for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
+    for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
     {
         it->update();
     }
-    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); it++)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
         it->update();
     }
@@ -127,11 +127,11 @@ void Purity::EntityManager::updatePhysics()
 
 void Purity::EntityManager::draw(Purity::RenderTarget& target) const
 {
-    for (auto it = mEntityList.begin(); it != mEntityList.end(); it++)
+    for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
     {
         target.draw(*it);
     }
-    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); it++)
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
         target.draw(*it);
     }

@@ -20,11 +20,11 @@ void Purity::Layer::processTiles()
     int tileWidth = mTmxMap->GetTileWidth();
     int tileHeight = mTmxMap->GetTileHeight();
 
-    for (int y = 0; y < layerHeight; y++)
+    for (int y = 0; y < layerHeight; ++y)
     {
         std::map<int, std::unique_ptr<Tile>> col;
 
-        for (int x = 0; x < layerWidth; x++)
+        for (int x = 0; x < layerWidth; ++x)
         {
             tmxTile = mTmxLayer->GetTile(x, y);
 
@@ -45,9 +45,9 @@ void Purity::Layer::initializePhysics(b2World * world)
 {
     if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
     {
-        for (auto row = mTiles.begin(); row != mTiles.end(); row++)
+        for (auto row = mTiles.begin(); row != mTiles.end(); ++row)
         {
-            for (auto col = row->second.begin(); col != row->second.end(); col++)
+            for (auto col = row->second.begin(); col != row->second.end(); ++col)
             {
                 col->second.get()->initializePhysics(world);
             }
@@ -55,9 +55,9 @@ void Purity::Layer::initializePhysics(b2World * world)
     }
     else
     {
-        for (auto row = mTiles.begin(); row != mTiles.end(); row++)
+        for (auto row = mTiles.begin(); row != mTiles.end(); ++row)
         {
-            for (auto col = row->second.begin(); col != row->second.end(); col++)
+            for (auto col = row->second.begin(); col != row->second.end(); ++col)
             {
                 col->second.get()->initializeStatic();
             }
@@ -113,8 +113,6 @@ void Purity::Layer::draw(Purity::RenderTarget& target) const
     // TODO: only draw tiles in view
     //std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(target.getView());
 
-    //auto listOfTilesToDraw = mTiles;
-
     for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
     {
         //const Tile * tile = getTile(it->first, it->second);
@@ -133,5 +131,4 @@ void Purity::Layer::draw(Purity::RenderTarget& target) const
         }
 
     }
-
 }

@@ -75,10 +75,7 @@ void Purity::Scene::draw(Purity::RenderTarget& target) const
 
     target.draw(*mMap);
 
-    if (mObjectManager)
-    {
-        target.draw(*mObjectManager);
-    }
+    target.draw(*mObjectManager);
 
     mMutex.unlock();
 }

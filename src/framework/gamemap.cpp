@@ -21,7 +21,7 @@ void Purity::GameMap::processLayers()
 {
     const std::vector<Tmx::Layer *, std::allocator<Tmx::Layer *> > tmxLayers = mTmxMap->GetLayers();
 
-    for (auto it = tmxLayers.begin(); it != tmxLayers.end(); it++)
+    for (auto it = tmxLayers.begin(); it != tmxLayers.end(); ++it)
     {
         std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it, mTextureManager.get(), mSceneDir));
 
@@ -36,7 +36,7 @@ void Purity::GameMap::processTilesetsFromTMXMap()
     const sf::Texture * texture;
     const Tmx::Tileset * tileset;
 
-    for (int i = 0; i < mTmxMap->GetNumTilesets(); i++)
+    for (int i = 0; i < mTmxMap->GetNumTilesets(); ++i)
     {
         tileset = mTmxMap->GetTileset(i);
 
@@ -85,7 +85,7 @@ sf::Sprite Purity::GameMap::getTileSprite(int x, int y, int layerNum) const
 
 void Purity::GameMap::draw(Purity::RenderTarget& target) const
 {
-    for (auto it = mLayersList.begin(); it != mLayersList.end(); it++)
+    for (auto it = mLayersList.begin(); it != mLayersList.end(); ++it)
     {
         target.draw(*it->get());
     }
