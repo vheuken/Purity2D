@@ -9,7 +9,7 @@ Purity::CommandLineArguments::CommandLineArguments()
 Purity::CommandLineArguments::CommandLineArguments(int argc, char* argv[])
 : CommandLineArguments()
 {
-    for (int i = 0; i < argc; i++)
+    for (int i = 0; i < argc; ++i)
     {
         std::string arg(argv[i]); 
         
