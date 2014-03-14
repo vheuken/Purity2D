@@ -6,7 +6,10 @@
 
 void Purity::RenderTarget::clear()
 {
-    SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255);
+    if (SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255) < 0)
+    {
+        std::cout << SDL_GetError() << std::endl;
+    }
 
     if(SDL_RenderClear(mRenderer)  < 0)
     {
@@ -46,7 +49,5 @@ void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray, const Pu
         {
             std::cout << SDL_GetError() << std::endl;
         }
-
-        SDL_RenderPresent(mRenderer);
     }
 }

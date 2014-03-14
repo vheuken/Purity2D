@@ -33,7 +33,7 @@ void Purity::RenderSystem::run()
     if (mCurrentScene)
     {
         mWindow->clear();
-        //mWindow->draw(*mCurrentScene);
+        mWindow->draw(*mCurrentScene);
         mWindow->display();
     }
 

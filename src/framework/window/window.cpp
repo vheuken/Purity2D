@@ -16,21 +16,19 @@ Purity::Window::Window(int width, int height, std::string title)
                                        SDL_WINDOWPOS_CENTERED,
                                        width,
                                        height,
-                                       0);
+                                       SDL_WINDOW_BORDERLESS);
 
     if (mInternalWindow == nullptr)
     {
         std::cout << "Could not create window: " << SDL_GetError() << std::endl;
     }
 
-    mRenderer = SDL_CreateRenderer(mInternalWindow, -1, 0);
+    mRenderer = SDL_CreateRenderer(mInternalWindow, -1, SDL_RENDERER_ACCELERATED);
 
     if (mRenderer == nullptr)
     {
         std::cout << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
-
-    SDL_SetWindowBrightness(mInternalWindow, 1.0);
 }
 
 Purity::Window::~Window()

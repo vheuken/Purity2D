@@ -28,6 +28,13 @@ void Purity::InputManager::update()
                 mWindow->close();
             }
         }
+        else if (event.type == SDL_KEYDOWN)
+        {
+            if (event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                mWindow->close();
+            }
+        }
     }
 
     mWindow->manipulateWindow();

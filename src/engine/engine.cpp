@@ -22,6 +22,7 @@ void Purity::Engine::initialize()
         initializeWindow();
         initializeRenderSystem();
         initializeInputManager();
+        TextureManager::sIsEnabled = false;
     }
     else
     {
