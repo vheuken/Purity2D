@@ -2,7 +2,7 @@
 #define LAYER_H
 
 #include <map>
-#include <unordered_map>
+#include <utility>
 #include <memory>
 #include <boost/filesystem.hpp>
 #include <SFML/Graphics.hpp>
@@ -30,7 +30,7 @@ namespace Purity
         void initializePhysics(b2World * world);
 
     private:
-        std::map<int, std::map<int, std::unique_ptr<Tile> > > mTiles;
+        std::map<std::pair<int, int>, std::unique_ptr<Tile> > mTiles;
 
         const Tmx::Map * mTmxMap;
         const Tmx::Layer * mTmxLayer;

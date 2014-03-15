@@ -22,8 +22,6 @@ void Purity::Layer::processTiles()
 
     for (int y = 0; y < layerHeight; ++y)
     {
-        std::map<int, std::unique_ptr<Tile>> col;
-
         for (int x = 0; x < layerWidth; ++x)
         {
             tmxTile = mTmxLayer->GetTile(x, y);
@@ -34,10 +32,11 @@ void Purity::Layer::processTiles()
 
                 std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id));
 
-                col[x] = std::move(tile);
+                std::pair<int, int> tileCoordinates(x, y);
+
+                mTiles[tileCoordinates] = std::move(tile);
             }
         }
-        mTiles[y] = std::move(col);
     }
 }
 
@@ -45,38 +44,29 @@ void Purity::Layer::initializePhysics(b2World * world)
 {
     if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
     {
-        for (auto row = mTiles.begin(); row != mTiles.end(); ++row)
+        for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
         {
-            for (auto col = row->second.begin(); col != row->second.end(); ++col)
-            {
-                col->second.get()->initializePhysics(world);
-            }
+            it->second->initializePhysics(world);
         }
     }
     else
     {
-        for (auto row = mTiles.begin(); row != mTiles.end(); ++row)
+        for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
         {
-            for (auto col = row->second.begin(); col != row->second.end(); ++col)
-            {
-                col->second.get()->initializeStatic();
-            }
+            it->second->initializeStatic();
         }
     }
 }
 
 const Purity::Tile * Purity::Layer::getTile(int x, int y) const
 {
-    auto row = mTiles.find(y);
+    std::pair <int, int> tileCoordinates(x, y);
 
-    if ( row != mTiles.end() )
+    auto tileIterator = mTiles.find(tileCoordinates);
+
+    if ( tileIterator != mTiles.end() )
     {
-        auto col = row->second.find(x);
-
-        if ( col != row->second.end() )
-        {
-            return col->second.get();
-        }
+        return tileIterator->second.get();
     }
 
     return nullptr;
@@ -109,26 +99,8 @@ std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::
 
 void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
-
-    // TODO: only draw tiles in view
-    //std::vector<std::pair<int, int> > listOfTilesToDraw = getListOfTilesToDraw(target.getView());
-
     for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
     {
-        //const Tile * tile = getTile(it->first, it->second);
-
-        //auto row = it->second;
-
-        for (auto tileIt = it->second.begin(); tileIt != it->second.end(); ++tileIt)
-        {
-            const Tile * tile = getTile(it->first, tileIt->first);
-
-            if (tile != nullptr)
-            {
-                target.draw(*tile);
-            }
-
-        }
-
+        target.draw(*it->second.get());
     }
 }
