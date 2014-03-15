@@ -28,7 +28,9 @@ void Purity::Layer::processTiles()
 
             if (tmxTile.id != 0)
             {
-                tileTexture = mTextureManager->getTexture(mSceneDir.string() + mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource());
+                std::string texturePathStr = mSceneDir.string() + mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource();
+
+                tileTexture = mTextureManager->getTexture(texturePathStr);
 
                 std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id));
 
