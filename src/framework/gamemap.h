@@ -7,7 +7,7 @@
 #include <boost/filesystem.hpp>
 
 #include "spritesheet.h"
-#include "texturemanager.h"
+#include "graphics/texturemanager.h"
 #include "tile.h"
 #include "layer.h"
 

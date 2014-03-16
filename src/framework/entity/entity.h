@@ -8,6 +8,7 @@
 #include "entitystate.h"
 #include "../graphics/drawable.h"
 #include "../graphics/vertexarray.h"
+#include "../graphics/texture.h"
 
 namespace luabind
 {
@@ -37,7 +38,7 @@ namespace Purity
     {
     public:
         Entity();
-        Entity(const Tmx::Object* object, b2World* world, const sf::Texture * texture);
+        Entity(const Tmx::Object* object, b2World* world, const Texture * texture);
 
         virtual void createBody(b2World* world);
         void setName(std::string name);
@@ -62,7 +63,7 @@ namespace Purity
         b2Body* mHitboxBody;
 
         VertexArray mVertexArray;
-        const sf::Texture * mTexture;
+        const Texture * mTexture;
 
         float mWidthPixels;
         float mHeightPixels;

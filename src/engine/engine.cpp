@@ -3,7 +3,7 @@
 #include <iostream>
 #include <luabind/luabind.hpp>
 #include "luamanager.h"
-#include "../framework/texturemanager.h"
+#include "../framework/graphics/texturemanager.h"
 
 Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     : mProgramOptions(commandLineArguments)

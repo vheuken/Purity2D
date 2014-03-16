@@ -4,13 +4,13 @@ Purity::SpriteSheet::SpriteSheet()
 {
 }
 
-Purity::SpriteSheet::SpriteSheet(const sf::Texture& spriteSheetTexture, 
+Purity::SpriteSheet::SpriteSheet(const Purity::Texture& spriteSheetTexture,
                              int tileWidth, int tileHeight)
 {
     this->tileWidth  = tileWidth;
     this->tileHeight = tileHeight;
 
-    spriteSheet.setTexture(spriteSheetTexture);
+//    spriteSheet.setTexture(spriteSheetTexture);
 }
 
 sf::Sprite Purity::SpriteSheet::getTile(int tileId)
@@ -56,7 +56,7 @@ void Purity::SpriteSheet::setSpriteSheetSubRect(int tileId)
 
     leftCoordinate = ((tileId) % getNumOfRows()) * getTileWidth();
     topCoordinate  = ((tileId) / getNumOfRows()) * getTileHeight();
-                    
+
     rectangle.height = getTileHeight();
     rectangle.width = getTileWidth();
     rectangle.top = topCoordinate;
@@ -67,13 +67,13 @@ void Purity::SpriteSheet::setSpriteSheetSubRect(int tileId)
 
 void Purity::SpriteSheet::addSprite(int tileId)
 {
-    
+
     if (isSpriteUsed(tileId) == false)
     {
         setSpriteSheetSubRect(tileId);
         spriteSheetMap[tileId] = spriteSheet;
     }
-    
+
 }
 
 int Purity::SpriteSheet::getTileWidth() const

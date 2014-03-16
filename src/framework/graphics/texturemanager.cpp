@@ -2,11 +2,7 @@
 
 bool Purity::TextureManager::sIsEnabled = true;
 
-Purity::TextureManager::TextureManager()
-{
-}
-
-const sf::Texture* Purity::TextureManager::getTexture(const boost::filesystem::path& texturePath)
+const Purity::Texture* Purity::TextureManager::getTexture(const boost::filesystem::path& texturePath)
 {
     if (sIsEnabled == true)
     {
@@ -35,6 +31,6 @@ bool Purity::TextureManager::isTextureUsed(const boost::filesystem::path& textur
 
 void Purity::TextureManager::addTexture(const boost::filesystem::path& texturePath)
 {
-    textureMap[texturePath] = std::unique_ptr<sf::Texture>(new sf::Texture());
+    textureMap[texturePath] = std::unique_ptr<Texture>(new Texture());
     textureMap[texturePath]->loadFromFile(texturePath.string());
 }

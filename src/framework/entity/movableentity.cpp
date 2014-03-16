@@ -2,7 +2,7 @@
 
 #include <luabind/luabind.hpp>
 
-Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world, const sf::Texture * texture)
+Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world, const Purity::Texture * texture)
     : Entity(object, world, texture)
 {
     mHitboxBody->SetType(b2_dynamicBody);
@@ -13,7 +13,7 @@ void Purity::MovableEntity::applyLinearImpulse(float x, float y)
 {
     b2Vec2 force;
     force.Set(x, y);
-    mHitboxBody->ApplyLinearImpulse(force, b2Vec2(0,0), false); 
+    mHitboxBody->ApplyLinearImpulse(force, b2Vec2(0,0), false);
 }
 
 void Purity::MovableEntity::setLinearVelocity(float x, float y)

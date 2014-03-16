@@ -8,6 +8,7 @@ set( GRAPHICS_HEADER_FILES
      vertexarray.h
      rendertarget.h
      texture.h
+     texturemanager.h
 )
 
 set( GRAPHICS_SOURCE_FILES
@@ -15,6 +16,7 @@ set( GRAPHICS_SOURCE_FILES
      vertexarray.cpp
      vertex.cpp
      texture.cpp
+     texturemanager.cpp
 )
 
 add_library ( ${GRAPHICS_PROJECT_NAME} STATIC

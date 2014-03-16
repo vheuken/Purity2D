@@ -2,7 +2,7 @@
 
 #include <TmxParser/Tmx.h>
 
-#include "texturemanager.h"
+#include "graphics/texturemanager.h"
 
 Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  TextureManager * textureManager, boost::filesystem::path sceneDir )
 : mTmxMap(tmxMap), mTmxLayer(tmxLayer), mTextureManager(textureManager), mSceneDir(sceneDir)
@@ -12,7 +12,7 @@ Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  Text
 
 void Purity::Layer::processTiles()
 {
-    const sf::Texture * tileTexture;
+    const Texture * tileTexture;
     Tmx::MapTile tmxTile;
 
     int layerHeight = mTmxLayer->GetHeight();

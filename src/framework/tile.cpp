@@ -1,6 +1,6 @@
 #include "tile.h"
 
-Purity::Tile::Tile(int x, int y, int width, int height, const sf::Texture * texture, int id)
+Purity::Tile::Tile(int x, int y, int width, int height, const Purity::Texture * texture, int id)
 : mTileId(id), Entity()
 {
     mTexture = texture;

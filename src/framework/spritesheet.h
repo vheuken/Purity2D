@@ -5,6 +5,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "graphics/texture.h"
+
 namespace Purity
 {
 
@@ -16,7 +18,7 @@ namespace Purity
     {
     private:
         sf::Sprite spriteSheet;
-        // map holds multiple "copies" of the same sprite 
+        // map holds multiple "copies" of the same sprite
         // with a set subrect
         // key value refers to tile ID
         std::map<int, sf::Sprite> spriteSheetMap;
@@ -36,7 +38,7 @@ namespace Purity
     public:
         // defualt constructor does nothing
         SpriteSheet();
-        SpriteSheet(const sf::Texture& spriteSheetTexture, 
+        SpriteSheet(const Texture& spriteSheetTexture,
                     int tileWidth = DEFAULT_TILE_WIDTH,
                     int tileHeight = DEFAULT_TILE_HEIGHT);
 

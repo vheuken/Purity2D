@@ -11,7 +11,7 @@ Purity::Entity::Entity()
     mState.entityId = mId;
 }
 
-Purity::Entity::Entity(const Tmx::Object* object, b2World* world, const sf::Texture * texture)
+Purity::Entity::Entity(const Tmx::Object* object, b2World* world, const Purity::Texture * texture)
     : Entity()
 {
     mTexture = texture;

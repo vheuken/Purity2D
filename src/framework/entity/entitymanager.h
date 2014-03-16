@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "movableentity.h"
-#include "../texturemanager.h"
+#include "../graphics/texturemanager.h"
 #include "entitystate.h"
 #include "../graphics/drawable.h"
 

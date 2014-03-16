@@ -19,7 +19,6 @@ set( FRAMEWORK_HEADER_FILES
     scene.h
     gamemap.h
     spritesheet.h
-    texturemanager.h
     tile.h
     layer.h
 )
@@ -28,7 +27,6 @@ set( FRAMEWORK_SOURCE_FILES
      scene.cpp
      gamemap.cpp
      spritesheet.cpp
-     texturemanager.cpp
      tile.cpp
      layer.cpp
 )

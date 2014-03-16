@@ -2,6 +2,9 @@
 
 #include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
+
+#include "../graphics/texture.h"
+
 #include "../../engine/luamanager.h"
 
 Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
@@ -78,7 +81,7 @@ void Purity::EntityManager::initializeObjects()
                 if (currentObject->GetProperties().GetSize() > 0)
                 {
                     std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
-                    const sf::Texture * t = mTextureManager.getTexture("scenes/init/" + p);
+                    const Texture * t = mTextureManager.getTexture("scenes/init/" + p);
                     MovableEntity object(currentObject, mWorld, t);
                     mMovableEntityList.push_back(object);
                 }

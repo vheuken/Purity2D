@@ -33,7 +33,7 @@ void Purity::GameMap::processTilesetsFromTMXMap()
 {
     SpriteSheet spriteSheet;
     std::string tilesetFileName;
-    const sf::Texture * texture;
+    const Texture * texture;
     const Tmx::Tileset * tileset;
 
     for (int i = 0; i < mTmxMap->GetNumTilesets(); ++i)

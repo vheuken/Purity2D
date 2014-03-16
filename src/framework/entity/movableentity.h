@@ -13,7 +13,7 @@ namespace Purity
     class MovableEntity : public Entity
     {
     public:
-        MovableEntity(const Tmx::Object* object, b2World* world, const sf::Texture * texture);
+        MovableEntity(const Tmx::Object* object, b2World* world, const Texture * texture);
 
         void applyLinearImpulse(float x, float y);
         void setLinearVelocity(float x, float y);
