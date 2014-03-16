@@ -4,7 +4,7 @@
 #include <memory>
 #include <map>
 #include <boost/filesystem.hpp>
-#include <SFML/Graphics.hpp>
+#include <SDL.h>
 
 namespace Purity
 {
