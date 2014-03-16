@@ -17,7 +17,7 @@ set(SDL2_IMAGE_SRC
 	IMG_pnm.c
 	IMG_tga.c
 	IMG_tif.c
-	IMG_webp.c
+#	IMG_webp.c
 	IMG_xcf.c
 	IMG_xpm.c
 	IMG_xv.c
@@ -34,7 +34,7 @@ add_definitions(
 	-DLOAD_PNM
 	-DLOAD_TGA
 	-DLOAD_TIF
-	-DLOAD_WEBP
+#	-DLOAD_WEBP
 	-DLOAD_XPM
 	-DLOAD_XV
 )
