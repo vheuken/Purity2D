@@ -30,7 +30,11 @@ Purity::Vector2u Purity::Texture::getSize() const
 {
     int width, height;
 
-    SDL_QueryTexture(mInternalTexture, NULL, NULL, &width, &height);
+    if (SDL_QueryTexture(mInternalTexture, NULL, NULL, &width, &height) < 0)
+    {
+        std::cerr << SDL_GetError() << std::endl;
+        return Vector2u(0, 0);
+    }
 
     return Vector2u(static_cast<unsigned int>(width),
                     static_cast<unsigned int>(height));
