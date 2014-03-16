@@ -40,7 +40,7 @@ add_definitions(
 )
 
 add_library(SDL2_image-static STATIC ${SDL2_IMAGE_SRC})
-target_include_directories(SDL2_image-static PUBLIC .)
+#target_include_directories(SDL2_image-static PUBLIC .)
 target_link_libraries(SDL2_image-static
 	SDL2
 	LIBPNG
