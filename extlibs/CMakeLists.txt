@@ -5,6 +5,7 @@ add_subdirectory(luabind)
 add_subdirectory(TmxParser)
 add_subdirectory(enet)
 add_subdirectory(SDL2-2.0.1)
+add_subdirectory(SDL2_image-2.0.0)
 
 set(EXTLIBS_FOLDER "External Libraries")
 
@@ -14,3 +15,4 @@ set_target_properties("luabind" PROPERTIES FOLDER ${EXTLIBS_FOLDER})
 set_target_properties("TMX-Parser" PROPERTIES FOLDER ${EXTLIBS_FOLDER})
 set_target_properties("enet" PROPERTIES FOLDER ${EXTLIBS_FOLDER})
 set_target_properties("SDL2" PROPERTIES FOLDER ${EXTLIBS_FOLDER})
+set_target_properties("SDL2_image-static" PROPERTIES FOLDER ${EXTLIBS_FOLDER})
