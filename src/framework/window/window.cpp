@@ -23,9 +23,9 @@ Purity::Window::Window(int width, int height, std::string title)
         std::cout << "Could not create window: " << SDL_GetError() << std::endl;
     }
 
-    mRenderer = SDL_CreateRenderer(mInternalWindow, -1, SDL_RENDERER_ACCELERATED);
+    sRenderer = SDL_CreateRenderer(mInternalWindow, -1, SDL_RENDERER_ACCELERATED);
 
-    if (mRenderer == nullptr)
+    if (sRenderer == nullptr)
     {
         std::cout << "Could not create renderer: " << SDL_GetError() << std::endl;
     }

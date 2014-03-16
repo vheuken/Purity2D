@@ -4,11 +4,13 @@ project(${GRAPHICS_PROJECT_NAME})
 
 set( GRAPHICS_HEADER_FILES
      drawable.h
+
      vertex.h
      vertexarray.h
      rendertarget.h
      texture.h
      texturemanager.h
+     renderer.h
 )
 
 set( GRAPHICS_SOURCE_FILES
@@ -17,6 +19,7 @@ set( GRAPHICS_SOURCE_FILES
      vertex.cpp
      texture.cpp
      texturemanager.cpp
+     renderer.cpp
 )
 
 add_library ( ${GRAPHICS_PROJECT_NAME} STATIC

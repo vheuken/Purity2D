@@ -6,12 +6,12 @@
 
 void Purity::RenderTarget::clear()
 {
-    if (SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255) < 0)
+    if (SDL_SetRenderDrawColor(sRenderer, 0, 0, 0, 255) < 0)
     {
         std::cout << SDL_GetError() << std::endl;
     }
 
-    if(SDL_RenderClear(mRenderer)  < 0)
+    if(SDL_RenderClear(sRenderer)  < 0)
     {
         std::cout << SDL_GetError() << std::endl;
     }
@@ -19,7 +19,7 @@ void Purity::RenderTarget::clear()
 
 void Purity::RenderTarget::display()
 {
-    SDL_RenderPresent(mRenderer);
+    SDL_RenderPresent(sRenderer);
 }
 
 void Purity::RenderTarget::draw(const Drawable& drawable)
@@ -39,12 +39,12 @@ void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray, const Pu
         rect.w = vertexArray[1].position.x - vertexArray[0].position.x;
         rect.h = vertexArray[2].position.y - vertexArray[0].position.y;
 
-        if (SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255) < 0)
+        if (SDL_SetRenderDrawColor(sRenderer, 255, 0, 0, 255) < 0)
         {
             std::cout << SDL_GetError() << std::endl;
         }
 
-        if (SDL_RenderDrawRect(mRenderer, &rect) < 0)
+        if (SDL_RenderDrawRect(sRenderer, &rect) < 0)
         {
             std::cout << SDL_GetError() << std::endl;
         }

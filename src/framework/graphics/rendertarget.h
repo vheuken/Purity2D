@@ -2,14 +2,13 @@
 #define PURITY_RENDER_TARGET_H
 
 #include "vertexarray.h"
-
-struct SDL_Renderer;
+#include "renderer.h"
 
 namespace Purity
 {
     class Drawable;
 
-    class RenderTarget
+    class RenderTarget : protected Renderer
     {
     public:
         void clear();
@@ -17,9 +16,6 @@ namespace Purity
 
         void draw(const Drawable& drawable);
         void draw(const VertexArray& vertexArray, const Purity::Vector2f& position);
-
-    protected:
-        SDL_Renderer* mRenderer;
     };
 }
 

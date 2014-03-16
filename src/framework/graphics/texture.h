@@ -3,21 +3,25 @@
 
 #include <string>
 
+#include "renderer.h"
+
 #include "../system/vector2.h"
 
 struct SDL_Texture;
 
 namespace Purity
 {
-    class Texture
+    class Texture : protected Renderer
     {
     public:
+        ~Texture();
+
         bool loadFromFile(const std::string& path);
 
         Vector2u getSize() const;
 
     private:
-        SDL_Texture * mTexture;
+        SDL_Texture * mInternalTexture;
     };
 }
 
