@@ -10,7 +10,7 @@ bool Purity::Texture::loadFromFile(const std::string& path)
 
     if (surface == nullptr)
     {
-        std::cerr << SDL_GetError() << std::endl;
+        std::cerr << IMG_GetError() << std::endl;
         return false;
     }
 

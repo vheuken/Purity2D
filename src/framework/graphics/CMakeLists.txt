@@ -11,6 +11,7 @@ set( GRAPHICS_HEADER_FILES
      texture.h
      texturemanager.h
      renderer.h
+     rect.h
 )
 
 set( GRAPHICS_SOURCE_FILES
@@ -20,6 +21,7 @@ set( GRAPHICS_SOURCE_FILES
      texture.cpp
      texturemanager.cpp
      renderer.cpp
+     rect.cpp
 )
 
 add_library ( ${GRAPHICS_PROJECT_NAME} STATIC
