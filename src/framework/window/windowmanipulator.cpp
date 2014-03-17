@@ -70,8 +70,8 @@ void Purity::WindowManipulator::setBorderGrabbedFlags()
 
     Vector2u mousePos;
 
-    mousePos.x = (unsigned int)Mouse::getPosition(*mWindow).x;
-    mousePos.y = (unsigned int)Mouse::getPosition(*mWindow).y;
+    mousePos.x = static_cast<unsigned int>(Mouse::getPosition(*mWindow).x);
+    mousePos.y = static_cast<unsigned int>(Mouse::getPosition(*mWindow).y);
 
     // right
     if (mousePos.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS)
@@ -83,6 +83,18 @@ void Purity::WindowManipulator::setBorderGrabbedFlags()
     if (mousePos.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS)
     {
         mBottomBorderGrabbed = true;
+    }
+
+    // left
+    if (mousePos.x <= STRETCHABLE_BORDER_PIXELS)
+    {
+        mLeftBorderGrabbed = true;
+    }
+
+    // top
+    if (mousePos.y <= STRETCHABLE_BORDER_PIXELS)
+    {
+        mTopBorderGrabbed = true;
     }
 }
 
@@ -114,12 +126,23 @@ void Purity::WindowManipulator::resizeWindow()
         newWindowSize.y = mousePos.y - mWindow->getPosition().y;
     }
 
-    // TODO: left
+    // left
+    if (mLeftBorderGrabbed)
+    {
+        newWindowPos.x = mousePos.x;
 
-    // TODO: top
+        newWindowSize.x += mWindow->getPosition().x - newWindowPos.x;
+    }
 
-    mWindow->setPosition(newWindowPos);
+    // top
+    if (mTopBorderGrabbed)
+    {
+        newWindowPos.y = mousePos.y;
+        newWindowSize.y += mWindow->getPosition().y - newWindowPos.y;
+    }
+
     mWindow->setSize(newWindowSize);
+    mWindow->setPosition(newWindowPos);
 }
 
 bool Purity::WindowManipulator::isMouseOnBorder() const
