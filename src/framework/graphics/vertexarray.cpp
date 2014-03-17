@@ -46,13 +46,3 @@ Purity::Rect Purity::VertexArray::getBounds() const
 
     return bounds;
 }
-
-bool Purity::VertexArray::xCompare(const Purity::Vertex& a, const Purity::Vertex& b) const
-{
-    return a.position.x < b.position.x;
-}
-
-bool Purity::VertexArray::yCompare(const Purity::Vertex& a, const Purity::Vertex& b) const
-{
-    return a.position.y < b.position.y;
-}

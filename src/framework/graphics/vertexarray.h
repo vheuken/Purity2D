@@ -21,9 +21,6 @@ namespace Purity
 
     private:
         std::vector<Vertex> mVertexList;
-
-        bool xCompare(const Vertex& a, const Vertex& b) const;
-        bool yCompare(const Vertex& a, const Vertex& b) const;
     };
 }
 
