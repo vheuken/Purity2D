@@ -32,13 +32,13 @@ Purity::Rect Purity::VertexArray::getBounds() const
     std::sort(vertexList.begin(), vertexList.end(),
               [](const Vertex& a, const Vertex& b) -> bool
               {
-                  return (a.position.x) < (b.position.x);
+                  return a.position.x < b.position.x;
               });
 
     std::sort(vertexList.begin(), vertexList.end(),
               [](const Vertex& a, const Vertex& b) -> bool
               {
-                  return (a.position.y) < (b.position.y);
+                  return a.position.y < b.position.y;
               });
 
     bounds.width = mVertexList[1].position.x - mVertexList[0].position.x;
