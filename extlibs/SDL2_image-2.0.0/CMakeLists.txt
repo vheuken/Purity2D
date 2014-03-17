@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
+add_subdirectory(external/libpng-1.6.2)
+add_subdirectory(external/jpeg-9)
+add_subdirectory(external/tiff-4.0.3)
+
 include_directories(
     ${LIBS_INCLUDE_DIR}/SDL2-2.0.1/include
 )
@@ -17,7 +21,7 @@ set(SDL2_IMAGE_SRC
 	IMG_pnm.c
 	IMG_tga.c
 	IMG_tif.c
-#	IMG_webp.c
+	IMG_webp.c
 	IMG_xcf.c
 	IMG_xpm.c
 	IMG_xv.c
@@ -33,7 +37,7 @@ add_definitions(
 	-DLOAD_PNG
 	-DLOAD_PNM
 	-DLOAD_TGA
-	-DLOAD_TIF
+#	-DLOAD_TIF
 #	-DLOAD_WEBP
 	-DLOAD_XPM
 	-DLOAD_XV
@@ -43,7 +47,7 @@ add_library(SDL2_image-static STATIC ${SDL2_IMAGE_SRC})
 #target_include_directories(SDL2_image-static PUBLIC .)
 target_link_libraries(SDL2_image-static
 	SDL2
-	LIBPNG
-	TIFF
-	JPEG
+	png16
+#	tiff-static
+    jpeg-static
 )

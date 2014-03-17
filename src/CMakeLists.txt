@@ -15,6 +15,7 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/luabind/
     ${LIBS_INCLUDE_DIR}/enet/include
     ${LIBS_INCLUDE_DIR}/SDL2-2.0.1/include
+    ${LIBS_INCLUDE_DIR}/SDL2_image-2.0.0/
 )
 
 #set(SFML_LIBS_PATH "${PROJECT_SOURCE_DIR}/libs/SFML-2.0/lib/Release")

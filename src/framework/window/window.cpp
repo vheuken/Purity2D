@@ -2,14 +2,21 @@
 #include <iostream>
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 Purity::Window::Window(int width, int height, std::string title)
 : mWindowManipulator(this)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        std::cout << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
+        std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
     }
+
+    // TODO: add IMG_INIT_TIFF  when libtiff builds
+    if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 0)
+    {
+        std::cerr << "Unable to initilize SDL_Image: " << IMG_GetError() << std::endl;
+    };
 
     mInternalWindow = SDL_CreateWindow(title.c_str(),
                                        SDL_WINDOWPOS_CENTERED,
@@ -20,19 +27,20 @@ Purity::Window::Window(int width, int height, std::string title)
 
     if (mInternalWindow == nullptr)
     {
-        std::cout << "Could not create window: " << SDL_GetError() << std::endl;
+        std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
     }
 
     sRenderer = SDL_CreateRenderer(mInternalWindow, -1, SDL_RENDERER_ACCELERATED);
 
     if (sRenderer == nullptr)
     {
-        std::cout << "Could not create renderer: " << SDL_GetError() << std::endl;
+        std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
 }
 
 Purity::Window::~Window()
 {
+    IMG_Quit();
     SDL_Quit();
 }
 
