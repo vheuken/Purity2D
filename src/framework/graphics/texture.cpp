@@ -6,7 +6,7 @@
 
 bool Purity::Texture::loadFromFile(const std::string& path)
 {
-    SDL_Surface* surface = SDL_LoadBMP(path.c_str());
+    SDL_Surface* surface = IMG_Load(path.c_str());
 
     if (surface == nullptr)
     {
