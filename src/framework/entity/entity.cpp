@@ -81,10 +81,10 @@ void Purity::Entity::setSize(float width, float height)
 
 void Purity::Entity::initializeTextureCoords()
 {
-    mVertexArray[0].texCoords = Vector2f(0, 0);
-    mVertexArray[1].texCoords = Vector2f(mWidthPixels, 0);
-    mVertexArray[2].texCoords = Vector2f(mWidthPixels, mHeightPixels);
-    mVertexArray[3].texCoords = Vector2f(0, mHeightPixels);
+    mVertexArray[0].texCoords = Vector2i(0, 0);
+    mVertexArray[1].texCoords = Vector2i(mWidthPixels, 0);
+    mVertexArray[2].texCoords = Vector2i(mWidthPixels, mHeightPixels);
+    mVertexArray[3].texCoords = Vector2i(0, mHeightPixels);
 }
 
 Purity::EntityState Purity::Entity::getState() const
@@ -117,10 +117,10 @@ void Purity::Entity::initializeHitboxShape()
 {
     //mVertexArray.setPrimitiveType(sf::Quads);
 
-    mVertexArray.append(Vector2f(0, 0));
-    mVertexArray.append(Vector2f(mWidthPixels, 0));
-    mVertexArray.append(Vector2f(mWidthPixels, mHeightPixels));
-    mVertexArray.append(Vector2f(0, mHeightPixels));
+    mVertexArray.append(Vector2i(0, 0));
+    mVertexArray.append(Vector2i(mWidthPixels, 0));
+    mVertexArray.append(Vector2i(mWidthPixels, mHeightPixels));
+    mVertexArray.append(Vector2i(0, mHeightPixels));
 }
 
 bool Purity::Entity::isInView(const sf::View& view) const

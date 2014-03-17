@@ -3,14 +3,13 @@
 
 #include <vector>
 #include "vertex.h"
+#include "rect.h"
 
 namespace Purity
 {
     class VertexArray
     {
     public:
-        VertexArray();
-
         unsigned int getVertexCount() const;
 
         Vertex& operator[](unsigned int index);
@@ -18,8 +17,13 @@ namespace Purity
 
         void append(const Vertex& vertex);
 
+        Rect getBounds() const;
+
     private:
         std::vector<Vertex> mVertexList;
+
+        bool xCompare(const Vertex& a, const Vertex& b) const;
+        bool yCompare(const Vertex& a, const Vertex& b) const;
     };
 }
 

@@ -15,7 +15,7 @@ namespace Purity
         int height;
         int width;
 
-        explicit operator SDL_Rect();
+        explicit operator SDL_Rect() const;
     };
 }
 

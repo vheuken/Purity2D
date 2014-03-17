@@ -22,10 +22,10 @@ void Purity::Tile::setTextureSubrect()
         int left = (id % numOfCols) * mWidthPixels;
         int top = (id / numOfCols) * mHeightPixels;
 
-        mVertexArray[0].texCoords = Vector2f(left, top);
-        mVertexArray[1].texCoords = Vector2f(left + mWidthPixels, top);
-        mVertexArray[2].texCoords = Vector2f(left + mWidthPixels, top + mHeightPixels);
-        mVertexArray[3].texCoords = Vector2f(left, top + mHeightPixels);
+        mVertexArray[0].texCoords = Vector2i(left, top);
+        mVertexArray[1].texCoords = Vector2i(left + mWidthPixels, top);
+        mVertexArray[2].texCoords = Vector2i(left + mWidthPixels, top + mHeightPixels);
+        mVertexArray[3].texCoords = Vector2i(left, top + mHeightPixels);
     }
 }
 
@@ -77,7 +77,6 @@ void Purity::Tile::createBody(b2World* world)
 
     collisionTileBox.Set(lowerRight, upperRight);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
-
 
     //mHitboxBody->SetUserData(new std::string("Tile"));
 }

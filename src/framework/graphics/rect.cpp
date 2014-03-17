@@ -1,6 +1,6 @@
 #include "rect.h"
 
-Purity::Rect::operator SDL_Rect()
+Purity::Rect::operator SDL_Rect() const
 {
     SDL_Rect rect;
 
@@ -9,4 +9,6 @@ Purity::Rect::operator SDL_Rect()
 
     rect.h = height;
     rect.w = width;
+
+    return rect;
 }

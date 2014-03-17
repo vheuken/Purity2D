@@ -9,10 +9,10 @@ namespace Purity
     {
     public:
         Vertex() = default;
-        Vertex(const Vector2f& pos);
+        Vertex(const Vector2i& pos);
 
-        Vector2f position;
-        Vector2f texCoords;
+        Vector2i position;
+        Vector2i texCoords;
     };
 }
 
