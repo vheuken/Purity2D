@@ -35,10 +35,7 @@ void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray, const Pu
 
         rect.x = position.x;
         rect.y = position.y;
-/*
-        rect.w = vertexArray[1].position.x - vertexArray[0].position.x;
-        rect.h = vertexArray[2].position.y - vertexArray[0].position.y;
-*/
+
         if (SDL_SetRenderDrawColor(sRenderer, 255, 0, 0, 255) < 0)
         {
             std::cout << SDL_GetError() << std::endl;
