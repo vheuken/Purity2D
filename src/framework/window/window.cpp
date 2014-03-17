@@ -13,7 +13,8 @@ Purity::Window::Window(int width, int height, std::string title)
     }
 
     // TODO: add IMG_INIT_TIFF  when libtiff builds
-    if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 0)
+    int imgFlags = IMG_INIT_JPG | IMG_INIT_PNG;
+    if (IMG_Init(imgFlags) != imgFlags)
     {
         std::cerr << "Unable to initilize SDL_Image: " << IMG_GetError() << std::endl;
     };
