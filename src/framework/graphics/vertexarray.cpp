@@ -44,7 +44,7 @@ Purity::Rect Purity::VertexArray::getBounds() const
     bounds.width = mVertexList[1].position.x - mVertexList[0].position.x;
     bounds.height = mVertexList[2].position.y - mVertexList[0].position.y;
 
-    return std::move(bounds);
+    return bounds;
 }
 
 bool Purity::VertexArray::xCompare(const Purity::Vertex& a, const Purity::Vertex& b) const
