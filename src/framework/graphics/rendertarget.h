@@ -3,6 +3,7 @@
 
 #include "vertexarray.h"
 #include "renderer.h"
+#include "../spritesheet.h"
 
 namespace Purity
 {
@@ -16,6 +17,7 @@ namespace Purity
 
         void draw(const Drawable& drawable);
         void draw(const VertexArray& vertexArray, const Purity::Vector2f& position);
+        void draw(const SpriteSheet* spriteSheet, unsigned short animationFrame, const Purity::Vector2f& position);
     };
 }
 

@@ -20,6 +20,8 @@ namespace Purity
 
         Vector2u getSize() const;
 
+        explicit operator SDL_Texture*() const;
+
     private:
         SDL_Texture * mInternalTexture;
     };

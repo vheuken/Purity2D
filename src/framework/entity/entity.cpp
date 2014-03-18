@@ -138,21 +138,14 @@ bool Purity::Entity::isInView(const sf::View& view) const
 
 void Purity::Entity::draw(Purity::RenderTarget& target) const
 {
-    /*
-    if ( isInView( target.getView()) )
+    if (mSpriteSheet)
     {
-        states.transform *= getTransform();
-
-        if (mTexture)
-        {
-            states.texture = mTexture;
-        }
-
-        target.draw(mVertexArray, states);
+        target.draw(mSpriteSheet.get(), mAnimationFrame, Vector2f(getPosition().x, getPosition().y));
     }
-    */
-
-    target.draw(mVertexArray, Vector2f(getPosition().x, getPosition().y) );
+    else
+    {
+        target.draw(mVertexArray, Vector2f(getPosition().x, getPosition().y));
+    }
 }
 
 luabind::scope Purity::Entity::luaBindings()

@@ -47,3 +47,18 @@ void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray, const Pu
         }
     }
 }
+
+void Purity::RenderTarget::draw(const SpriteSheet* spriteSheet, unsigned short animationFrame, const Purity::Vector2f& position)
+{
+    SDL_Texture* texture = static_cast<SDL_Texture*>(*spriteSheet->getTexture());
+    SDL_Rect textureSubRect = static_cast<SDL_Rect>(spriteSheet->getTileSubRect(animationFrame));
+
+    SDL_Rect drawRect;
+
+    drawRect.x = position.x;
+    drawRect.y = position.y;
+    drawRect.w = textureSubRect.w;
+    drawRect.h = textureSubRect.h;
+
+    SDL_RenderCopy(sRenderer, texture, &textureSubRect, &drawRect);
+}

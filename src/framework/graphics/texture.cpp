@@ -45,3 +45,9 @@ Purity::Texture::~Texture()
 {
     SDL_DestroyTexture(mInternalTexture);
 }
+
+
+Purity::Texture::operator SDL_Texture*() const
+{
+    return mInternalTexture;
+}

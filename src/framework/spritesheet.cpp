@@ -47,3 +47,4 @@ int Purity::SpriteSheet::getNumOfCols() const
 {
     return mTexture->getSize().x / getTileWidth();
 }
+

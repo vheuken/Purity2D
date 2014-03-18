@@ -3,6 +3,7 @@
 Purity::Tile::Tile(int x, int y, int width, int height, const Purity::Texture * texture, int id)
 : mTileId(id), Entity()
 {
+    mAnimationFrame = id;
     mTexture = texture;
 
     mWidthPixels = width;
@@ -15,6 +16,7 @@ void Purity::Tile::setTextureSubrect()
 {
     if (mTexture != nullptr)
     {
+        /*
         int id = mTileId;
         int numOfRows = mTexture->getSize().x / mWidthPixels;
         int numOfCols = mTexture->getSize().y / mHeightPixels;
@@ -26,6 +28,11 @@ void Purity::Tile::setTextureSubrect()
         mVertexArray[1].texCoords = Vector2i(left + mWidthPixels, top);
         mVertexArray[2].texCoords = Vector2i(left + mWidthPixels, top + mHeightPixels);
         mVertexArray[3].texCoords = Vector2i(left, top + mHeightPixels);
+        */
+
+        std::unique_ptr<SpriteSheet> spriteSheet(new SpriteSheet(mTexture, mWidthPixels, mHeightPixels));
+
+        mSpriteSheet = std::move(spriteSheet);
     }
 }
 
