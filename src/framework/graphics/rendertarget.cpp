@@ -36,14 +36,14 @@ void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray, const Pu
         rect.x = position.x;
         rect.y = position.y;
 
-        if (SDL_SetRenderDrawColor(sRenderer, 255, 0, 0, 255) < 0)
+        if (SDL_SetRenderDrawColor(sRenderer, 255, 0, 0, 255) != 0)
         {
-            std::cout << SDL_GetError() << std::endl;
+            std::cerr << SDL_GetError() << std::endl;
         }
 
-        if (SDL_RenderDrawRect(sRenderer, &rect) < 0)
+        if (SDL_RenderDrawRect(sRenderer, &rect) != 0)
         {
-            std::cout << SDL_GetError() << std::endl;
+            std::cerr << SDL_GetError() << std::endl;
         }
     }
 }
@@ -60,5 +60,8 @@ void Purity::RenderTarget::draw(const SpriteSheet* spriteSheet, unsigned short a
     drawRect.w = textureSubRect.w;
     drawRect.h = textureSubRect.h;
 
-    SDL_RenderCopy(sRenderer, texture, &textureSubRect, &drawRect);
+    if (SDL_RenderCopy(sRenderer, texture, &textureSubRect, &drawRect) != 0)
+    {
+        std::cerr << SDL_GetError() << std::endl;
+    }
 }
