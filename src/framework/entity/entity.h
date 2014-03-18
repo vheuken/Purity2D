@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <string>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 
@@ -9,6 +10,8 @@
 #include "../graphics/drawable.h"
 #include "../graphics/vertexarray.h"
 #include "../graphics/texture.h"
+#include "../graphics/rect.h"
+#include "../spritesheet.h"
 
 namespace luabind
 {
@@ -63,7 +66,9 @@ namespace Purity
         b2Body* mHitboxBody;
 
         VertexArray mVertexArray;
-        const Texture * mTexture;
+
+        const Texture* mTexture;
+        std::unique_ptr<SpriteSheet> mSpriteSheet;
 
         float mWidthPixels;
         float mHeightPixels;

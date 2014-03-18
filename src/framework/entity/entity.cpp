@@ -29,7 +29,6 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world, const Purity::
 
     initializeTextureCoords();
 }
-
 void Purity::Entity::setBodyPosition(float x, float y)
 {
     b2Vec2 pos;

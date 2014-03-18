@@ -83,19 +83,19 @@ void Purity::EntityManager::initializeObjects()
                     std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
                     const Texture * t = mTextureManager.getTexture("scenes/init/" + p);
                     MovableEntity object(currentObject, mWorld, t);
-                    mMovableEntityList.push_back(object);
+                    mMovableEntityList.push_back(std::move(object));
                 }
                 else
                 {
                     MovableEntity object(currentObject, mWorld, nullptr);
-                    mMovableEntityList.push_back(object);
+                    mMovableEntityList.push_back(std::move(object));
                 }
 
             }
             else
             {
                 Entity entity(currentObject, mWorld, nullptr);
-                mEntityList.push_back(entity);
+                mEntityList.push_back(std::move(entity));
 
             }
 

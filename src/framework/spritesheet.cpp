@@ -1,98 +1,49 @@
 #include "spritesheet.h"
 
-Purity::SpriteSheet::SpriteSheet()
+Purity::SpriteSheet::SpriteSheet(const Texture* texture,
+                                 int tileWidth,
+                                 int tileHeight)
 {
+    mTileWidth  = tileWidth;
+    mTileHeight = tileHeight;
+
+    mTexture = texture;
 }
 
-Purity::SpriteSheet::SpriteSheet(const Purity::Texture& spriteSheetTexture,
-                             int tileWidth, int tileHeight)
+Purity::Rect Purity::SpriteSheet::getTileSubRect(int tileId) const
 {
-    this->tileWidth  = tileWidth;
-    this->tileHeight = tileHeight;
+    Rect tileRect;
 
-//    spriteSheet.setTexture(spriteSheetTexture);
+    tileRect.position.x = ((tileId) % getNumOfRows()) * getTileWidth();
+    tileRect.position.y = ((tileId) / getNumOfRows()) * getTileHeight();
+
+    tileRect.width  = getTileWidth();
+    tileRect.height = getTileHeight();
+
+    return tileRect;
 }
 
-sf::Sprite Purity::SpriteSheet::getTile(int tileId)
+const Purity::Texture* Purity::SpriteSheet::getTexture() const
 {
-    // if sprite is already in spriteMap
-    if ( isSpriteUsed(tileId) )
-    {
-        return spriteSheetMap[tileId];
-    }
-
-    addSprite(tileId);
-
-    return spriteSheetMap[tileId];
-}
-
-sf::Sprite Purity::SpriteSheet::getSpriteSheet()
-{
-    return spriteSheet;
-}
-
-bool Purity::SpriteSheet::isSpriteUsed(int tileID)
-{
-    std::map<int, sf::Sprite>::iterator found;
-
-    found = spriteSheetMap.find(tileID);
-
-    // if sprite is NOT in the map
-    if ( found == spriteSheetMap.end() )
-    {
-        return false;
-    }
-
-    return true;
-}
-
-void Purity::SpriteSheet::setSpriteSheetSubRect(int tileId)
-{
-    // coordinates for left and right of rect
-    int leftCoordinate;
-    int topCoordinate;
-
-    sf::IntRect rectangle;
-
-    leftCoordinate = ((tileId) % getNumOfRows()) * getTileWidth();
-    topCoordinate  = ((tileId) / getNumOfRows()) * getTileHeight();
-
-    rectangle.height = getTileHeight();
-    rectangle.width = getTileWidth();
-    rectangle.top = topCoordinate;
-    rectangle.left = leftCoordinate;
-
-    spriteSheet.setTextureRect(rectangle);
-}
-
-void Purity::SpriteSheet::addSprite(int tileId)
-{
-
-    if (isSpriteUsed(tileId) == false)
-    {
-        setSpriteSheetSubRect(tileId);
-        spriteSheetMap[tileId] = spriteSheet;
-    }
-
+    return mTexture;
 }
 
 int Purity::SpriteSheet::getTileWidth() const
 {
-    return tileWidth;
+    return mTileWidth;
 }
 
 int Purity::SpriteSheet::getTileHeight() const
 {
-    return tileHeight;
+    return mTileHeight;
 }
 
-int Purity::SpriteSheet::getNumOfRows()
+int Purity::SpriteSheet::getNumOfRows() const
 {
-    return getSpriteSheet().getTexture()->getSize().x / getTileWidth();
-
+    return mTexture->getSize().x / getTileWidth();
 }
 
-int Purity::SpriteSheet::getNumOfCols()
+int Purity::SpriteSheet::getNumOfCols() const
 {
-    return getSpriteSheet().getTexture()->getSize().y / getTileHeight();
+    return mTexture->getSize().x / getTileWidth();
 }
