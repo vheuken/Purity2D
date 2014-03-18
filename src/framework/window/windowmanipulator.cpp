@@ -106,8 +106,10 @@ void Purity::WindowManipulator::dragWindow()
 void Purity::WindowManipulator::resizeWindow()
 {
     Vector2u windowSize = mWindow->getSize();
+    Vector2i windowPos = mWindow->getPosition();
+
     Vector2u newWindowSize = windowSize;
-    Vector2i newWindowPos = mWindow->getPosition();
+    Vector2i newWindowPos = windowPos;
 
     Vector2u mousePos;
 
@@ -117,28 +119,27 @@ void Purity::WindowManipulator::resizeWindow()
     // right
     if (mRightBorderGrabbed)
     {
-        newWindowSize.x = mousePos.x - mWindow->getPosition().x;
+        newWindowSize.x = mousePos.x - windowPos.x;
     }
 
     // bottom
     if (mBottomBorderGrabbed)
     {
-        newWindowSize.y = mousePos.y - mWindow->getPosition().y;
+        newWindowSize.y = mousePos.y - windowPos.y;
     }
 
     // left
     if (mLeftBorderGrabbed)
     {
         newWindowPos.x = mousePos.x;
-
-        newWindowSize.x += mWindow->getPosition().x - newWindowPos.x;
+        newWindowSize.x += windowPos.x - newWindowPos.x;
     }
 
     // top
     if (mTopBorderGrabbed)
     {
         newWindowPos.y = mousePos.y;
-        newWindowSize.y += mWindow->getPosition().y - newWindowPos.y;
+        newWindowSize.y += windowPos.y - newWindowPos.y;
     }
 
     mWindow->setSize(newWindowSize);
