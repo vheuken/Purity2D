@@ -16,20 +16,6 @@ void Purity::Tile::setTextureSubrect()
 {
     if (mTexture != nullptr)
     {
-        /*
-        int id = mTileId;
-        int numOfRows = mTexture->getSize().x / mWidthPixels;
-        int numOfCols = mTexture->getSize().y / mHeightPixels;
-
-        int left = (id % numOfCols) * mWidthPixels;
-        int top = (id / numOfCols) * mHeightPixels;
-
-        mVertexArray[0].texCoords = Vector2i(left, top);
-        mVertexArray[1].texCoords = Vector2i(left + mWidthPixels, top);
-        mVertexArray[2].texCoords = Vector2i(left + mWidthPixels, top + mHeightPixels);
-        mVertexArray[3].texCoords = Vector2i(left, top + mHeightPixels);
-        */
-
         std::unique_ptr<SpriteSheet> spriteSheet(new SpriteSheet(mTexture, mWidthPixels, mHeightPixels));
 
         mSpriteSheet = std::move(spriteSheet);

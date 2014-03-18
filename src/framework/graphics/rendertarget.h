@@ -16,7 +16,7 @@ namespace Purity
         void display();
 
         void draw(const Drawable& drawable);
-        void draw(const VertexArray& vertexArray, const Purity::Vector2f& position);
+        void draw(const Purity::Rect& rectToDraw);
         void draw(const SpriteSheet* spriteSheet, unsigned short animationFrame, const Purity::Vector2f& position);
     };
 }

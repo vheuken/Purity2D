@@ -27,24 +27,18 @@ void Purity::RenderTarget::draw(const Drawable& drawable)
     drawable.draw(*this);
 }
 
-void Purity::RenderTarget::draw(const Purity::VertexArray& vertexArray, const Purity::Vector2f& position)
+void Purity::RenderTarget::draw(const Purity::Rect& rectToDraw)
 {
-    if (vertexArray.getVertexCount() == 4)
+    SDL_Rect rect = static_cast<SDL_Rect>(rectToDraw);
+
+    if (SDL_SetRenderDrawColor(sRenderer, 255, 0, 0, 255) != 0)
     {
-        SDL_Rect rect = static_cast<SDL_Rect>( vertexArray.getBounds() );
+        std::cerr << SDL_GetError() << std::endl;
+    }
 
-        rect.x = position.x;
-        rect.y = position.y;
-
-        if (SDL_SetRenderDrawColor(sRenderer, 255, 0, 0, 255) != 0)
-        {
-            std::cerr << SDL_GetError() << std::endl;
-        }
-
-        if (SDL_RenderDrawRect(sRenderer, &rect) != 0)
-        {
-            std::cerr << SDL_GetError() << std::endl;
-        }
+    if (SDL_RenderDrawRect(sRenderer, &rect) != 0)
+    {
+        std::cerr << SDL_GetError() << std::endl;
     }
 }
 

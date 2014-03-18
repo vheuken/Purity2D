@@ -64,8 +64,7 @@ namespace Purity
     protected:
         b2BodyDef mHitboxBodyDef;
         b2Body* mHitboxBody;
-
-        VertexArray mVertexArray;
+        Rect mHitboxRect;
 
         const Texture* mTexture;
         std::unique_ptr<SpriteSheet> mSpriteSheet;
@@ -84,8 +83,6 @@ namespace Purity
         EntityState mState;
 
         void updateState();
-
-        void initializeTextureCoords();
 
         bool isInView(const sf::View& view) const;
 
