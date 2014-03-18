@@ -16,5 +16,5 @@ add_library( ${INPUT_PROJECT_NAME} STATIC
 )
 
 target_link_libraries( ${INPUT_PROJECT_NAME}
-                       SDL2
+                       SDL2-static
 )

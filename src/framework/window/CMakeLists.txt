@@ -21,6 +21,6 @@ target_link_libraries ( ${WINDOW_PROJECT_NAME}
                         sfml-window
                         sfml-graphics
                         sfml-system
-                        SDL2
+                        SDL2-static
                         SDL2_image-static
 )
