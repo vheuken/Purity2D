@@ -116,16 +116,36 @@ void Purity::WindowManipulator::resizeWindow()
     mousePos.x = static_cast<unsigned int>(Mouse::getPosition().x);
     mousePos.y = static_cast<unsigned int>(Mouse::getPosition().y);
 
+    SDL_Rect displayBounds;
+
+    // TODO: test on multiple monitors with different resolutions
+    if (SDL_GetDisplayBounds(0, &displayBounds) != 0)
+    {
+        std::cerr << SDL_GetError() << std::endl;
+    }
+
     // right
     if (mRightBorderGrabbed)
     {
         newWindowSize.x = mousePos.x - windowPos.x;
+
+        // TODO: is this necessary on windows?
+        if (mousePos.x == (displayBounds.w - 1))
+        {
+            newWindowSize.x += 1;
+        }
     }
 
     // bottom
     if (mBottomBorderGrabbed)
     {
         newWindowSize.y = mousePos.y - windowPos.y;
+
+        // TODO: is this necessary on windows?
+        if (mousePos.y == (displayBounds.h - 1))
+        {
+            newWindowSize.y += 1;
+        }
     }
 
     // left
