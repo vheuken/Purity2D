@@ -1,7 +1,7 @@
 #ifndef PURITY_MOUSE_H
 #define PURITY_MOUSE_H
 
-#include <SDL_mouse.h>
+#include <SDL.h>
 
 #include "../system/vector2.h"
 #include "../window/window.h"

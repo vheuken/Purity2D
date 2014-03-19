@@ -11,7 +11,6 @@
 Purity::Vector2i Purity::Mouse::getPosition()
 {
 #ifdef __gnu_linux__
-/*
     // Open a connection with the X server
     Display* display = XOpenDisplay(NULL);
 
@@ -19,15 +18,15 @@ Purity::Vector2i Purity::Mouse::getPosition()
     ::Window root, child;
     int x, y;
     unsigned int buttons;
-*/
+
     int gx = 0;
     int gy = 0;
-/*
+
     XQueryPointer(display, DefaultRootWindow(display), &root, &child, &gx, &gy, &x, &y, &buttons);
 
     // Close the connection with the X server
     XCloseDisplay(display);
-*/
+
     return Vector2i(gx, gy);
 #elif defined _WIN32
     POINT point;

@@ -15,6 +15,13 @@ add_library( ${INPUT_PROJECT_NAME} STATIC
              ${INPUT_SOURCE_FILES}
 )
 
-target_link_libraries( ${INPUT_PROJECT_NAME}
-                       SDL2-static
-)
+if (UNIX)
+    target_link_libraries( ${INPUT_PROJECT_NAME}
+                           SDL2-static
+                           X11
+    )
+else()
+    target_link_libraries( ${INPUT_PROJECT_NAME}
+                           SDL2-static
+    )
+endif()
