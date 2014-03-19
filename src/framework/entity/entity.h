@@ -11,6 +11,7 @@
 #include "../graphics/vertexarray.h"
 #include "../graphics/texture.h"
 #include "../graphics/rect.h"
+#include "../graphics/transformable.h"
 #include "../spritesheet.h"
 
 namespace luabind
@@ -32,12 +33,9 @@ namespace Purity
     const float32 DEFAULT_HITBOX_WIDTH_PIXELS  = PIXELS_PER_METER * DEFAULT_HITBOX_WIDTH_METERS;
     const float32 DEFAULT_HITBOX_HEIGHT_PIXELS = PIXELS_PER_METER * DEFAULT_HITBOX_HEIGHT_METERS;
 
-
     const float DEFAULT_HITBOX_OUTLINE_THICKNESS = 2.0;
-    const sf::Color DEFAULT_HITBOX_OUTLINE_COLOR = sf::Color::Yellow;
-    const sf::Color DEFAULT_HITBOX_FILL_COLOR = sf::Color::Transparent;
 
-    class Entity : public Drawable, protected sf::Transformable
+    class Entity : public Drawable, protected Transformable
     {
     public:
         Entity();
@@ -83,8 +81,6 @@ namespace Purity
         EntityState mState;
 
         void updateState();
-
-        bool isInView(const sf::View& view) const;
 
         virtual void draw(RenderTarget& target) const;
     };

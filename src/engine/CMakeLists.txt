@@ -38,10 +38,6 @@ target_link_libraries(
 	Purity-Framework
 	
     Box2D
-    sfml-system
-    sfml-graphics
-    sfml-window
-    sfml-network
     lua
     luabind
     TMX-Parser

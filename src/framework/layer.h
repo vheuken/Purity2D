@@ -5,7 +5,6 @@
 #include <utility>
 #include <memory>
 #include <boost/filesystem.hpp>
-#include <SFML/Graphics.hpp>
 
 #include "tile.h"
 #include "graphics/drawable.h"
@@ -40,7 +39,7 @@ namespace Purity
         void processTiles();
 
         const Tile * getTile(int x, int y) const;
-        std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
+        //std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
 
         virtual void draw(RenderTarget& target) const;
     };

@@ -8,10 +8,10 @@ Purity::Server::Server(const unsigned short port, std::queue<NetworkAction>* act
     mAddress.port = port;
 
     mHost = enet_host_create(&mAddress, 32, 2, 0, 0);
-    
+
     if (mHost == NULL)
     {
-        std::cerr << "Error occured while trying to create an ENet server host\n";
+        std::cerr << "Error occured while trying to create an ENet server host" << std::endl;
     }
 
     mReceivedActionQueue = actionQueue;
@@ -29,7 +29,7 @@ void Purity::Server::handleEvents()
         case ENET_EVENT_TYPE_CONNECT:
             std::cout << "New peer!" << std::endl;
             break;
-        
+
         case ENET_EVENT_TYPE_DISCONNECT:
             std::cout << "Peer disconnected!" << std::endl;
             break;
@@ -52,7 +52,8 @@ void Purity::Server::handleEvents()
 
 void Purity::Server::sendDataToClients(const std::vector<EntityState>& entityStates)
 {
-    if (mSendRateTimer.getElapsedTime().asMilliseconds() >= 20)
+    // TODO: Replace with Purity::Clock
+    //if (mSendRateTimer.getElapsedTime().asMilliseconds() >= 20)
     {
         for (auto stateIter = entityStates.begin(); stateIter != entityStates.end(); ++stateIter)
         {
@@ -63,6 +64,7 @@ void Purity::Server::sendDataToClients(const std::vector<EntityState>& entitySta
             enet_host_broadcast(mHost, 0, packet);
         }
 
-        mSendRateTimer.restart();
+        // TODO: Replace with Purity::Clock
+        //mSendRateTimer.restart();
     }
 }

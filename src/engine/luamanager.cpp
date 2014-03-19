@@ -1,6 +1,5 @@
 #include "luamanager.h"
 
-#include <SFML/Graphics.hpp>
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include "../framework/entity/entity.h"
@@ -47,7 +46,7 @@ void Purity::LuaManager::initializeBindings()
 {
     luabind::open(mLuaState);
 
-    initializeSFMLBindings();
+    //initializeSFMLBindings();
 
     luabind::module(mLuaState) [
         EntityManager::luaBindings(),
@@ -56,11 +55,12 @@ void Purity::LuaManager::initializeBindings()
             Engine::luaBindings(),
             NetworkSystem::luaBindings()
     ];
-    
+
 }
 
 void Purity::LuaManager::initializeSFMLBindings()
-{    
+{
+    /*
     luabind::open(mLuaState);
     luabind::module(mLuaState)
     [
@@ -215,4 +215,5 @@ void Purity::LuaManager::initializeSFMLBindings()
                 .def_readwrite("y", &sf::Vector2f::y)
 
     ];
+    */
 }

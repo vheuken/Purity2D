@@ -4,10 +4,12 @@ project(${SYSTEM_PROJECT_NAME})
 
 set( SYSTEM_HEADER_FILES
      vector2.h
+     timer.h
 )
 
-set( SYSTEM_SOURCE_FILES
+set( SYSTEM_SOURCE_FILES     
      vector2.inl
+     timer.cpp
 )
 
 add_library( ${SYSTEM_PROJECT_NAME} STATIC 

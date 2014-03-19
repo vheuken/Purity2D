@@ -23,7 +23,8 @@ namespace Purity
     private:
         std::queue<NetworkAction>* mReceivedActionQueue;
 
-        sf::Clock mSendRateTimer;
+        // TODO: replace with Purity::Clock
+        //sf::Clock mSendRateTimer;
     };
 }
 

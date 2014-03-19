@@ -113,20 +113,6 @@ void Purity::Entity::initializeHitboxShape()
     mHitboxRect.height = mHeightPixels;
 }
 
-bool Purity::Entity::isInView(const sf::View& view) const
-{
-    sf::Vector2f viewPos, viewSize;
-
-    viewPos = view.getCenter();
-    viewSize = view.getSize();
-    viewPos.x -= view.getSize().x/2;
-    viewPos.y -= view.getSize().y/2;
-
-    sf::FloatRect viewRect(viewPos, viewSize);
-
-    return viewRect.contains( getPosition() );
-}
-
 void Purity::Entity::draw(Purity::RenderTarget& target) const
 {
     if (mSpriteSheet)

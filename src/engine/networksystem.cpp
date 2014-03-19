@@ -3,8 +3,8 @@
 #include <iostream>
 
 Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue)
-: mIsServer(false), 
-  mServerActionQueue(serverActionQueue), 
+: mIsServer(false),
+  mServerActionQueue(serverActionQueue),
   AbstractSystem()
 {
     if (enet_initialize() != 0)
@@ -99,12 +99,14 @@ void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
 
 std::string Purity::NetworkSystem::getLocalAddress()
 {
-    return sf::IpAddress::getLocalAddress().toString();
+    return "";
+    //return sf::IpAddress::getLocalAddress().toString();
 }
 
 std::string Purity::NetworkSystem::getPublicAddress()
 {
-    return sf::IpAddress::getPublicAddress().toString();
+    return "";
+    //return sf::IpAddress::getPublicAddress().toString();
 }
 
 luabind::scope Purity::NetworkSystem::luaBindings()

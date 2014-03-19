@@ -14,7 +14,7 @@ Purity::PhysicsSystem::PhysicsSystem(std::queue<SDL_Event>* inputQueue, std::que
     mCurrentScene = nullptr;
     mLastTime = 0;
     mFrameTimeMilleseconds = 0;
-    mFrameTimer.restart().asMicroseconds();
+    //mFrameTimer.restart().asMicroseconds();
 
     mInputQueue = inputQueue;
     mServerActionQueue = serverActionQueue;
@@ -52,7 +52,7 @@ void Purity::PhysicsSystem::step()
     static float acumulator = 0.0;
 
     mLastTime = mFrameTimeMilleseconds;
-    mFrameTimeMilleseconds = mFrameTimer.getElapsedTime().asMilliseconds();
+    mFrameTimeMilleseconds = mFrameTimer.getElapsedTime();
 
     acumulator += (mFrameTimeMilleseconds - mLastTime);
 

@@ -3,12 +3,12 @@
 
 #include <queue>
 #include <memory>
-#include <SFML/Window.hpp>
 #include <Box2D/Box2D.h>
 #include <SDL_events.h>
 
 #include "abstractsystem.h"
 #include "../framework/network/networkaction.h"
+#include "../framework/system/timer.h"
 
 namespace Purity
 {
@@ -26,7 +26,7 @@ namespace Purity
         void update(Scene* scene);
 
     private:
-        sf::Clock mFrameTimer;
+        Timer mFrameTimer;
         unsigned int mLastTime;
         unsigned int mFrameTimeMilleseconds;
         std::unique_ptr<b2World> mWorld;

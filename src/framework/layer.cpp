@@ -75,6 +75,7 @@ const Purity::Tile * Purity::Layer::getTile(int x, int y) const
     return nullptr;
 }
 
+/*
 std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::View& view) const
 {
     std::vector<std::pair<int, int> > listOfTilesToDraw;
@@ -99,6 +100,7 @@ std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::
 
     return listOfTilesToDraw;
 }
+*/
 
 void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
