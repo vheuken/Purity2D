@@ -25,6 +25,7 @@ namespace Purity
         void setBorderGrabbedFlags();
 
         Vector2i mLastMousePosRelativeToWindow;
+        Vector2i mWindowResizeOffsetRightBottom;
 
         bool mWindowDrag;
         bool mWindowResize;

@@ -34,6 +34,9 @@ void Purity::WindowManipulator::setWindowFlags()
             mWindowResize = true;
             setBorderGrabbedFlags();
             std::cout << "Border grabbed!" << std::endl;
+
+            mWindowResizeOffsetRightBottom = Mouse::getPosition(*mWindow);
+            mWindowResizeOffsetRightBottom = static_cast<Vector2i>(mWindow->getSize()) - mWindowResizeOffsetRightBottom;
         }
         else if (mWindowDrag == false && mWindowResize == false)
         {
@@ -111,10 +114,7 @@ void Purity::WindowManipulator::resizeWindow()
     Vector2u newWindowSize = windowSize;
     Vector2i newWindowPos = windowPos;
 
-    Vector2u mousePos;
-
-    mousePos.x = static_cast<unsigned int>(Mouse::getPosition().x);
-    mousePos.y = static_cast<unsigned int>(Mouse::getPosition().y);
+    Vector2u mousePos = static_cast<Vector2u>(Mouse::getPosition());
 
     SDL_Rect displayBounds;
 
@@ -127,10 +127,10 @@ void Purity::WindowManipulator::resizeWindow()
     // right
     if (mRightBorderGrabbed)
     {
-        newWindowSize.x = mousePos.x - windowPos.x;
+        newWindowSize.x = mousePos.x - windowPos.x + mWindowResizeOffsetRightBottom.x;
 
         // TODO: is this necessary on windows?
-        if (mousePos.x == (displayBounds.w - 1))
+        if ((newWindowSize.x + windowPos.x) == (displayBounds.w - 1))
         {
             newWindowSize.x += 1;
         }
@@ -139,10 +139,10 @@ void Purity::WindowManipulator::resizeWindow()
     // bottom
     if (mBottomBorderGrabbed)
     {
-        newWindowSize.y = mousePos.y - windowPos.y;
+        newWindowSize.y = mousePos.y - windowPos.y + mWindowResizeOffsetRightBottom.y;
 
         // TODO: is this necessary on windows?
-        if (mousePos.y == (displayBounds.h - 1))
+        if ((newWindowSize.y + windowPos.y) == (displayBounds.h - 1))
         {
             newWindowSize.y += 1;
         }
@@ -151,6 +151,7 @@ void Purity::WindowManipulator::resizeWindow()
     // left
     if (mLeftBorderGrabbed)
     {
+        std::cout << mWindowResizeOffsetRightBottom.x << std::endl;
         newWindowPos.x = mousePos.x;
         newWindowSize.x += windowPos.x - newWindowPos.x;
     }
