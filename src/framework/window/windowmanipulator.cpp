@@ -37,6 +37,8 @@ void Purity::WindowManipulator::setWindowFlags()
 
             mWindowResizeOffsetRightBottom = Mouse::getPosition(*mWindow);
             mWindowResizeOffsetRightBottom = static_cast<Vector2i>(mWindow->getSize()) - mWindowResizeOffsetRightBottom;
+
+            mWindowResizeOffsetLeftTop = Mouse::getPosition(*mWindow);
         }
         else if (mWindowDrag == false && mWindowResize == false)
         {
@@ -151,15 +153,14 @@ void Purity::WindowManipulator::resizeWindow()
     // left
     if (mLeftBorderGrabbed)
     {
-        std::cout << mWindowResizeOffsetRightBottom.x << std::endl;
-        newWindowPos.x = mousePos.x;
+        newWindowPos.x = mousePos.x - mWindowResizeOffsetLeftTop.x;
         newWindowSize.x += windowPos.x - newWindowPos.x;
     }
 
     // top
     if (mTopBorderGrabbed)
     {
-        newWindowPos.y = mousePos.y;
+        newWindowPos.y = mousePos.y - mWindowResizeOffsetLeftTop.y;
         newWindowSize.y += windowPos.y - newWindowPos.y;
     }
 

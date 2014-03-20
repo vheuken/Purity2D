@@ -26,6 +26,7 @@ namespace Purity
 
         Vector2i mLastMousePosRelativeToWindow;
         Vector2i mWindowResizeOffsetRightBottom;
+        Vector2i mWindowResizeOffsetLeftTop;
 
         bool mWindowDrag;
         bool mWindowResize;
