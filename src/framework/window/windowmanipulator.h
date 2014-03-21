@@ -5,6 +5,8 @@
 
 namespace Purity
 {
+    const unsigned int STRETCHABLE_BORDER_PIXELS = 30;
+
     class Window;
 
     class WindowManipulator
