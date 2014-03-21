@@ -15,8 +15,6 @@ union  SDL_Event;
 
 namespace Purity
 {
-    const unsigned int STRETCHABLE_BORDER_PIXELS = 50;
-
     class Window : public RenderTarget
     {
     public:
