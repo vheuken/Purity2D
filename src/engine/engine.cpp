@@ -94,21 +94,3 @@ void Purity::Engine::initializeNetworkSystem()
 {
     mNetworkSystem = std::unique_ptr<NetworkSystem>(new NetworkSystem(mServerActionQueue.get()));
 }
-
-sf::View Purity::Engine::getView()
-{
-    return mWindow->getView();
-}
-
-void Purity::Engine::setView(const sf::View & view)
-{
-    mWindow->setView(view);
-}
-
-luabind::scope Purity::Engine::luaBindings()
-{
-    return luabind::class_<Engine>("Engine")
-        .def("getView", &Engine::getView)
-        .def("setView", &Engine::setView)
-    ;
-}

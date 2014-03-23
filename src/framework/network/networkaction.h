@@ -2,7 +2,6 @@
 #define NETWORK_ACTION_H
 
 #include <string>
-#include <SFML/Network.hpp>
 #include <enet/enet.h>
 
 namespace Purity

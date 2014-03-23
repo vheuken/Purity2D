@@ -1,7 +1,6 @@
 #ifndef OBJECT_MANAGER_H
 #define OBJECT_MANAGER_H
 
-#include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "movableentity.h"
 #include "../graphics/texturemanager.h"

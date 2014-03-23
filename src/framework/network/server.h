@@ -3,7 +3,6 @@
 
 #include <queue>
 #include <vector>
-#include <SFML/System/Clock.hpp>
 #include "../entity/entitystate.h"
 #include "host.h"
 

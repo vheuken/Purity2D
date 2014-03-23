@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <memory>
-#include <SFML/Graphics.hpp>
 #include <boost/filesystem.hpp>
 
 #include "spritesheet.h"

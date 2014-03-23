@@ -45,6 +45,7 @@ Purity::Window::~Window()
     SDL_Quit();
 }
 
+/*
 void Purity::Window::setView(const sf::View& view)
 {
     //mInternalWindow.setView(view);
@@ -54,6 +55,7 @@ const sf::View& Purity::Window::getView() const
 {
     //return mInternalWindow.getView();
 }
+*/
 
 void Purity::Window::setSize(const Vector2u& size)
 {

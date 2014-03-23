@@ -1,7 +1,6 @@
 #ifndef NETWORK_SYSTEM_H
 #define NETWORK_SYSTEM_H
 
-#include <SFML/Network.hpp>
 #include <luabind/luabind.hpp>
 #include <string>
 #include <map>

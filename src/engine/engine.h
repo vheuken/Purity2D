@@ -31,11 +31,6 @@ namespace Purity
         void run();
         void cleanup();
 
-        sf::View getView();
-        void setView(const sf::View & view);
-
-        static luabind::scope luaBindings();
-
     private:
         std::unique_ptr<Window> mWindow;
         std::unique_ptr<RenderSystem> mRenderSystem;

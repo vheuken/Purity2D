@@ -2,7 +2,6 @@
 #define PURITY_WINDOW_H
 
 #include <string>
-#include <SFML/Graphics.hpp>
 
 #include "windowmanipulator.h"
 #include "../system/vector2.h"
@@ -21,8 +20,10 @@ namespace Purity
         Window(int width, int height, std::string title);
         ~Window();
 
-        void setView(const sf::View& view);
-        const sf::View& getView() const;
+        
+        // TODO: Replace with nonSFML stuff
+        //void setView(const sf::View& view);
+        //const sf::View& getView() const;
 
         void setSize(const Vector2u& size);
         Vector2u getSize() const;

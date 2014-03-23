@@ -40,7 +40,13 @@ set(PNGLIB_NAME libpng${PNGLIB_MAJOR}${PNGLIB_MINOR})
 set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 
 # needed packages
-find_package(ZLIB REQUIRED)
+#find_package(ZLIB REQUIRED)
+set(ZLIB_INCLUDE_DIR "../zlib-1.2.8/") 
+
+file (GLOB zlib_src
+	"../zlib-1.2.8/*.h" "../zlib-1.2.8/*.c"
+)
+
 include_directories(${ZLIB_INCLUDE_DIR})
 
 if(NOT WIN32)
@@ -142,26 +148,26 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${ZLIB_INCLUDE_DIR})
 unset(PNG_LIB_TARGETS)
 
 if(PNG_SHARED)
-  add_library(${PNG_LIB_NAME} SHARED ${libpng_sources})
+  add_library(${PNG_LIB_NAME} SHARED ${libpng_sources} ${zlib_src})
   set(PNG_LIB_TARGETS ${PNG_LIB_NAME})
   if(MSVC)
     # msvc does not append 'lib' - do it here to have consistent name
     set_target_properties(${PNG_LIB_NAME} PROPERTIES PREFIX "lib")
     set_target_properties(${PNG_LIB_NAME} PROPERTIES IMPORT_PREFIX "lib")
   endif()
-  target_link_libraries(${PNG_LIB_NAME} ${ZLIB_LIBRARY} ${M_LIBRARY})
+  target_link_libraries(${PNG_LIB_NAME}${M_LIBRARY})
 endif()
 
 if(PNG_STATIC)
 # does not work without changing name
   set(PNG_LIB_NAME_STATIC ${PNG_LIB_NAME}_static)
-  add_library(${PNG_LIB_NAME_STATIC} STATIC ${libpng_sources})
+  add_library(${PNG_LIB_NAME_STATIC} STATIC ${libpng_sources} ${zlib_src})
   list(APPEND PNG_LIB_TARGETS ${PNG_LIB_NAME_STATIC})
   if(MSVC)
     # msvc does not append 'lib' - do it here to have consistent name
     set_target_properties(${PNG_LIB_NAME_STATIC} PROPERTIES PREFIX "lib")
   endif()
-  target_link_libraries(${PNG_LIB_NAME_STATIC} ${ZLIB_LIBRARY} ${M_LIBRARY})
+  target_link_libraries(${PNG_LIB_NAME_STATIC} ${M_LIBRARY})
 endif()
 
 if(NOT PNG_LIB_TARGETS)

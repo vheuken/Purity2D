@@ -52,7 +52,6 @@ void Purity::LuaManager::initializeBindings()
         EntityManager::luaBindings(),
             Entity::luaBindings(),
             MovableEntity::luaBindings(),
-            Engine::luaBindings(),
             NetworkSystem::luaBindings()
     ];
 
