@@ -55,3 +55,7 @@ add_library(enet STATIC
         unix.c
         win32.c
     )
+
+if (WIN32)
+	target_link_libraries(enet ws2_32)
+endif()

@@ -3,7 +3,7 @@ add_subdirectory(lua-5.2.2)
 add_subdirectory(luabind)
 add_subdirectory(TmxParser)
 add_subdirectory(enet)
-add_subdirectory(SDL2-2.0.1)
+add_subdirectory(SDL2-2.0.3)
 add_subdirectory(SDL2_image-2.0.0)
 
 set(EXTLIBS_FOLDER "External Libraries")

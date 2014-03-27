@@ -5,7 +5,8 @@ add_subdirectory(external/jpeg-9)
 add_subdirectory(external/tiff-4.0.3)
 
 include_directories(
-    ${LIBS_INCLUDE_DIR}/SDL2-2.0.1/include
+    ${LIBS_INCLUDE_DIR}/SDL2-2.0.3/include
+	external/libpng-1.6.2
 )
 
 project(SDL2_image)

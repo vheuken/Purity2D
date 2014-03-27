@@ -31,7 +31,6 @@ add_executable( ${ENGINE_PROJECT_NAME}
                 ${SOURCE_FILES}
 )
 
-
 target_link_libraries(
     ${ENGINE_PROJECT_NAME}
 	
@@ -42,6 +41,7 @@ target_link_libraries(
     luabind
     TMX-Parser
     enet
+	
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
 )
