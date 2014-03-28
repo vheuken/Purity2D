@@ -31,8 +31,6 @@ void Purity::Engine::initialize()
     initializeSceneManager();
     initializePhysicsSystem();
     initializeNetworkSystem();
-
-    luabind::globals(LuaManager::getManager()->getState())["GPurityEngine"] = this;
 }
 
 void Purity::Engine::run()
