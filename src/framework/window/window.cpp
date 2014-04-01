@@ -3,11 +3,6 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_syswm.h>
-
-#ifdef __gnu_linux__
-#include <X11/Xutil.h>
-#endif // __gnu_linux__
 
 Purity::Window::Window(int width, int height, std::string title)
 : mWindowManipulator(this)
@@ -100,50 +95,6 @@ Purity::Vector2i Purity::Window::getPosition() const
     SDL_GetWindowPosition(mInternalWindow, &x, &y);
 
     return Vector2i(x, y);
-}
-
-void Purity::Window::moveAndResize(const Vector2i& position, const Vector2u& newSize)
-{
-    SDL_SysWMinfo windowInfo;
-
-    SDL_VERSION(&windowInfo.version);
-
-    if (SDL_GetWindowWMInfo(mInternalWindow, &windowInfo))
-    {
-        if (windowInfo.subsystem == SDL_SYSWM_X11)
-        {
-            Display* xdisplay = windowInfo.info.x11.display;
-            ::Window xwindow = windowInfo.info.x11.window;
-
-            XSizeHints *sizeHints = XAllocSizeHints();
-            long userHints;
-
-            XGetWMNormalHints(xdisplay, xwindow, sizeHints, &userHints);
-
-            sizeHints->min_width = newSize.x;
-            sizeHints->max_width = newSize.x;
-
-            sizeHints->min_height = newSize.y;
-            sizeHints->max_height = newSize.y;
-
-            XSetWMNormalHints(xdisplay, xwindow, sizeHints);
-
-            XFree(sizeHints);
-
-            XMoveResizeWindow(xdisplay,
-                              xwindow,
-                              position.x,
-                              position.y,
-                              newSize.x,
-                              newSize.y);
-
-
-            //XMoveWindow(xdisplay, xwindow, position.x, position.y);
-            //XResizeWindow(xdisplay, xwindow, newSize.x, newSize.y);
-            //XRaiseWindow(xdisplay, xwindow);
-            //XFlush(windowInfo.info.x11.display);
-        }
-    }
 }
 
 bool Purity::Window::pollEvent(SDL_Event* event)

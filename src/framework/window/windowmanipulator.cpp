@@ -165,8 +165,6 @@ void Purity::WindowManipulator::resizeWindow()
 
     mWindow->setPosition(newWindowPos);
     mWindow->setSize(newWindowSize);
-
-    //mWindow->moveAndResize(newWindowPos, newWindowSize);
 }
 
 bool Purity::WindowManipulator::isMouseOnBorder() const
