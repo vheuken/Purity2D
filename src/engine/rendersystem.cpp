@@ -28,6 +28,7 @@ void Purity::RenderSystem::run()
     {
         mWindow->clear();
         mWindow->draw(*mCurrentScene);
+        mWindow->manipulateWindow();
         mWindow->display();
     }
 }

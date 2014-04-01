@@ -3,6 +3,11 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_syswm.h>
+
+#ifdef __gnu_linux__
+#include <X11/Xutil.h>
+#endif // __gnu_linux__
 
 Purity::Window::Window(int width, int height, std::string title)
 : mWindowManipulator(this)
@@ -37,6 +42,14 @@ Purity::Window::Window(int width, int height, std::string title)
     {
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
+
+    Rect v;
+    v.width = 500;
+    v.height = 500;
+    v.position.x = 10;
+    v.position.x = 10;
+
+    setView(v);
 }
 
 Purity::Window::~Window()
@@ -45,21 +58,25 @@ Purity::Window::~Window()
     SDL_Quit();
 }
 
-/*
-void Purity::Window::setView(const sf::View& view)
+
+void Purity::Window::setView(const Purity::View& view)
 {
-    //mInternalWindow.setView(view);
+    mView = view;
+
+    applyView();
 }
 
-const sf::View& Purity::Window::getView() const
+
+const Purity::View& Purity::Window::getView() const
 {
-    //return mInternalWindow.getView();
+    return mView;
 }
-*/
+
 
 void Purity::Window::setSize(const Vector2u& size)
 {
     SDL_SetWindowSize(mInternalWindow, size.x, size.y);
+    applyView();
 }
 
 Purity::Vector2u Purity::Window::getSize() const
@@ -85,14 +102,53 @@ Purity::Vector2i Purity::Window::getPosition() const
     return Vector2i(x, y);
 }
 
+void Purity::Window::moveAndResize(const Vector2i& position, const Vector2u& newSize)
+{
+    SDL_SysWMinfo windowInfo;
+
+    SDL_VERSION(&windowInfo.version);
+
+    if (SDL_GetWindowWMInfo(mInternalWindow, &windowInfo))
+    {
+        if (windowInfo.subsystem == SDL_SYSWM_X11)
+        {
+            Display* xdisplay = windowInfo.info.x11.display;
+            ::Window xwindow = windowInfo.info.x11.window;
+
+            XSizeHints *sizeHints = XAllocSizeHints();
+            long userHints;
+
+            XGetWMNormalHints(xdisplay, xwindow, sizeHints, &userHints);
+
+            sizeHints->min_width = newSize.x;
+            sizeHints->max_width = newSize.x;
+
+            sizeHints->min_height = newSize.y;
+            sizeHints->max_height = newSize.y;
+
+            XSetWMNormalHints(xdisplay, xwindow, sizeHints);
+
+            XFree(sizeHints);
+
+            XMoveResizeWindow(xdisplay,
+                              xwindow,
+                              position.x,
+                              position.y,
+                              newSize.x,
+                              newSize.y);
+
+
+            //XMoveWindow(xdisplay, xwindow, position.x, position.y);
+            //XResizeWindow(xdisplay, xwindow, newSize.x, newSize.y);
+            //XRaiseWindow(xdisplay, xwindow);
+            //XFlush(windowInfo.info.x11.display);
+        }
+    }
+}
+
 bool Purity::Window::pollEvent(SDL_Event* event)
 {
     return SDL_PollEvent(event);
-}
-
-void Purity::Window::setActive(bool active)
-{
-    //mInternalWindow.setActive(active);
 }
 
 bool Purity::Window::isOpen() const
@@ -109,4 +165,11 @@ void Purity::Window::close()
 void Purity::Window::manipulateWindow()
 {
     mWindowManipulator.manipulateWindow();
+}
+
+void Purity::Window::applyView()
+{
+    SDL_Rect viewport = static_cast<SDL_Rect>(mView.getViewport());
+
+    SDL_RenderSetViewport(sRenderer, &viewport);
 }

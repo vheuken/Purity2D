@@ -64,8 +64,6 @@ void Purity::Engine::cleanup()
 void Purity::Engine::initializeWindow()
 {
     mWindow = std::unique_ptr<Purity::Window>(new Purity::Window(960, 720, "Purity2D"));
-
-    mWindow->setActive(false);
 }
 
 void Purity::Engine::initializeRenderSystem()

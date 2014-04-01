@@ -36,6 +36,4 @@ void Purity::InputManager::update()
             }
         }
     }
-
-    mWindow->manipulateWindow();
 }

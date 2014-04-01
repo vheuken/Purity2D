@@ -35,7 +35,6 @@ void Purity::WindowManipulator::setWindowFlags()
             setBorderGrabbedFlags();
             std::cout << "Border grabbed!" << std::endl;
 
-            mWindowResizeOffsetRightBottom = Mouse::getPosition(*mWindow);
             mWindowResizeOffsetRightBottom = static_cast<Vector2i>(mWindow->getSize()) - mWindowResizeOffsetRightBottom;
 
             mWindowResizeOffsetLeftTop = Mouse::getPosition(*mWindow);
@@ -164,8 +163,10 @@ void Purity::WindowManipulator::resizeWindow()
         newWindowSize.y += windowPos.y - newWindowPos.y;
     }
 
-    mWindow->setSize(newWindowSize);
     mWindow->setPosition(newWindowPos);
+    mWindow->setSize(newWindowSize);
+
+    //mWindow->moveAndResize(newWindowPos, newWindowSize);
 }
 
 bool Purity::WindowManipulator::isMouseOnBorder() const

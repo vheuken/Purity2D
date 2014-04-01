@@ -6,7 +6,7 @@
 #include "windowmanipulator.h"
 #include "../system/vector2.h"
 #include "../graphics/rendertarget.h"
-
+#include "../graphics/view.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -20,10 +20,8 @@ namespace Purity
         Window(int width, int height, std::string title);
         ~Window();
 
-        
-        // TODO: Replace with nonSFML stuff
-        //void setView(const sf::View& view);
-        //const sf::View& getView() const;
+        void setView(const View& view);
+        const View& getView() const;
 
         void setSize(const Vector2u& size);
         Vector2u getSize() const;
@@ -31,9 +29,10 @@ namespace Purity
         void setPosition(const Vector2i& position);
         Vector2i getPosition() const;
 
+        void moveAndResize(const Vector2i& position, const Vector2u& newSize);
+
         bool pollEvent(SDL_Event* event);
 
-        void setActive(bool active);
         bool isOpen() const;
 
         void close();
@@ -44,6 +43,10 @@ namespace Purity
         SDL_Window* mInternalWindow;
 
         WindowManipulator mWindowManipulator;
+
+        View mView;
+
+        void applyView();
     };
 }
 
