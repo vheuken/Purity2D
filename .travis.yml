@@ -2,6 +2,7 @@ language: cpp
 compiler:
   - gcc
 before_script:
+  - cmake --version
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # GCC 4.7
   - sudo add-apt-repository -y ppa:apokluda/boost1.53 # Boost 1.53
   - sudo apt-get -qq update
