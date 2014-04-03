@@ -37,14 +37,6 @@ Purity::Window::Window(int width, int height, std::string title)
     {
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
-
-    Rect v;
-    v.width = 500;
-    v.height = 500;
-    v.position.x = 10;
-    v.position.x = 10;
-
-    setView(v);
 }
 
 Purity::Window::~Window()
@@ -71,7 +63,7 @@ const Purity::View& Purity::Window::getView() const
 void Purity::Window::setSize(const Vector2u& size)
 {
     SDL_SetWindowSize(mInternalWindow, size.x, size.y);
-    applyView();
+    //applyView();
 }
 
 Purity::Vector2u Purity::Window::getSize() const

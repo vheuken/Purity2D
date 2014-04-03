@@ -52,6 +52,7 @@ void Purity::Engine::run()
         {
             mRenderSystem->update(currentScene);
             mInputManager->update();
+            mWindow->manipulateWindow();
         }
     }
 }
