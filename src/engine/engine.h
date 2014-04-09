@@ -27,9 +27,7 @@ namespace Purity
     public:
         Engine(const CommandLineArguments& commandLineArguments);
 
-        void initialize();
         void run();
-        void cleanup();
 
     private:
         std::unique_ptr<Window> mWindow;

@@ -13,11 +13,7 @@ int main(int argc, char* argv[])
 
     Purity::Engine engine(arguments);
 
-    engine.initialize();
-
     engine.run();
-
-    engine.cleanup();
 
     return 0;
 }

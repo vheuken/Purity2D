@@ -8,10 +8,6 @@
 Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     : mProgramOptions(commandLineArguments)
 {
-}
-
-void Purity::Engine::initialize()
-{
     std::cout << "Initializing some stuff..." << std::endl;
 
     mInputQueue = std::unique_ptr<std::queue<SDL_Event> >(new std::queue<SDL_Event>);
@@ -55,11 +51,6 @@ void Purity::Engine::run()
             mWindow->manipulateWindow();
         }
     }
-}
-
-void Purity::Engine::cleanup()
-{
-    std::cout << "Cleaning up..." << std::endl;
 }
 
 void Purity::Engine::initializeWindow()

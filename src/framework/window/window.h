@@ -14,10 +14,17 @@ union  SDL_Event;
 
 namespace Purity
 {
+    enum class ViewportType 
+    {
+        LETTERBOX,
+        CENTER,
+        STRETCH
+    };
+
     class Window : public RenderTarget
     {
     public:
-        Window(int width, int height, std::string title);
+        Window(int width, int height, std::string title, ViewportType viewportType = ViewportType::CENTER);
         ~Window();
 
         void setView(const View& view);
@@ -46,7 +53,7 @@ namespace Purity
 
         View mView;
 
-        void applyView();
+        ViewportType mViewportType;
     };
 }
 

@@ -4,8 +4,9 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-Purity::Window::Window(int width, int height, std::string title)
-: mWindowManipulator(this)
+Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
+: mWindowManipulator(this),
+  mViewportType(viewportType)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -49,8 +50,6 @@ Purity::Window::~Window()
 void Purity::Window::setView(const Purity::View& view)
 {
     mView = view;
-
-    applyView();
 }
 
 
@@ -63,7 +62,6 @@ const Purity::View& Purity::Window::getView() const
 void Purity::Window::setSize(const Vector2u& size)
 {
     SDL_SetWindowSize(mInternalWindow, size.x, size.y);
-    //applyView();
 }
 
 Purity::Vector2u Purity::Window::getSize() const
@@ -108,11 +106,4 @@ void Purity::Window::close()
 void Purity::Window::manipulateWindow()
 {
     mWindowManipulator.manipulateWindow();
-}
-
-void Purity::Window::applyView()
-{
-    SDL_Rect viewport = static_cast<SDL_Rect>(mView.getViewport());
-
-    SDL_RenderSetViewport(sRenderer, &viewport);
 }
