@@ -36,8 +36,6 @@ namespace Purity
         void setPosition(const Vector2i& position);
         Vector2i getPosition() const;
 
-        void moveAndResize(const Vector2i& position, const Vector2u& newSize);
-
         bool pollEvent(SDL_Event* event);
 
         bool isOpen() const;
