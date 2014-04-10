@@ -13,6 +13,11 @@ set(MODULES_FOLDER "Purity Framework")
 
 set_target_properties("Purity-Network" PROPERTIES FOLDER ${MODULES_FOLDER})
 set_target_properties("Purity-Entity" PROPERTIES FOLDER ${MODULES_FOLDER})
+set_target_properties("Purity-Window" PROPERTIES FOLDER ${MODULES_FOLDER})
+set_target_properties("Purity-Graphics" PROPERTIES FOLDER ${MODULES_FOLDER})
+set_target_properties("Purity-System" PROPERTIES FOLDER ${MODULES_FOLDER})
+set_target_properties("Purity-Input" PROPERTIES FOLDER ${MODULES_FOLDER})
+
 
 
 set( FRAMEWORK_HEADER_FILES
