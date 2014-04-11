@@ -64,7 +64,7 @@ namespace Purity
         Rect mHitboxRect;
 
         const Texture* mTexture;
-        std::shared_ptr<SpriteSheet> mSpriteSheet;
+        std::unique_ptr<SpriteSheet> mSpriteSheet;
         unsigned short mAnimationFrame;
 
         float mWidthPixels;
