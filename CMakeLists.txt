@@ -18,10 +18,11 @@ include_directories(
 
 add_subdirectory(extlibs PRE_BUILD)
 
-
-# C++11
 IF (NOT MSVC)
+	# C++11
 	ADD_DEFINITIONS(-std=c++11)
+	
+	# statically link libgcc and libstdc++
 	set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
 ENDIF (NOT MSVC)
 
