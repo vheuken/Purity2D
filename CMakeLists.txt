@@ -4,7 +4,7 @@ set(PROJECT_NAME "Purity2D")
 
 project(${PROJECT_NAME})
 
-set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE Debug)
 
 set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -17,4 +17,12 @@ include_directories(
 )
 
 add_subdirectory(extlibs PRE_BUILD)
+
+
+# C++11
+IF (NOT MSVC)
+	ADD_DEFINITIONS(-std=c++11)
+	set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+ENDIF (NOT MSVC)
+
 add_subdirectory(src)
