@@ -14,6 +14,7 @@ set(LIBS_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extlibs")
 include_directories(
     ${LIBS_INCLUDE_DIR}/lua-5.2.2/src    
     ${LIBS_INCLUDE_DIR}/luabind/
+	${LIBS_INCLUDE_DIR}/guisan/include
 )
 
 add_subdirectory(extlibs PRE_BUILD)

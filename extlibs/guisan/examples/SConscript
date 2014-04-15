@@ -1,0 +1,20 @@
+Import('*')
+
+### SDL 2D Examples
+sdlhelloworld = env.Clone()
+sdlhelloworld.ParseConfig('pkg-config --cflags --libs sdl2')
+sdlhelloworld.ParseConfig('pkg-config --cflags --libs SDL2_image')
+sdlhelloworld.Append(LIBS = 'guisan')
+sdlhelloworld.Program(
+	target = 'sdlhelloworld',
+	source = ['sdlhelloworld.cpp']
+)
+
+sdlwidgets = env.Clone()
+sdlwidgets.ParseConfig('pkg-config --cflags --libs sdl2')
+sdlwidgets.ParseConfig('pkg-config --cflags --libs SDL2_image')
+sdlwidgets.Append(LIBS = 'guisan')
+sdlwidgets.Program(
+	target = 'sdlwidgets',
+	source = ['sdlwidgets.cpp']
+)
