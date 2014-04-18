@@ -4,7 +4,7 @@
 
 #include "graphics/texturemanager.h"
 
-Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  TextureManager * textureManager, boost::filesystem::path sceneDir )
+Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  TextureManager * textureManager, std::string sceneDir )
 : mTmxMap(tmxMap), mTmxLayer(tmxLayer), mTextureManager(textureManager), mSceneDir(sceneDir)
 {
     processTiles();
@@ -29,7 +29,7 @@ void Purity::Layer::processTiles()
             if (tmxTile.id != 0)
             {
                 std::string tilesetPathStr = mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource();
-                std::string texturePathStr = mSceneDir.string() + tilesetPathStr;
+                std::string texturePathStr = mSceneDir + tilesetPathStr;
 
                 tileTexture = mTextureManager->getTexture(texturePathStr);
 

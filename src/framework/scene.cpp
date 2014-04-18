@@ -1,15 +1,15 @@
 #include "scene.h"
 
-Purity::Scene::Scene(const boost::filesystem::path& sceneDir)
+Purity::Scene::Scene(const std::string& sceneDir)
 {
-    boost::filesystem::path mapFilePath(sceneDir.string() + DEFAULT_MAP_FILENAME);
+    std::string mapFilePath(sceneDir + DEFAULT_MAP_FILENAME);
 
-    mLuaEventHandlerFile = sceneDir.string() + DEFAULT_EVENT_HANDLER_FILENAME;
-	mLuaPhysicsUpdateFile = sceneDir.string() + DEFAULT_ON_PHYSICS_UPDATE_SCRIPT;
+    mLuaEventHandlerFile = sceneDir + DEFAULT_EVENT_HANDLER_FILENAME;
+    mLuaPhysicsUpdateFile = sceneDir + DEFAULT_ON_PHYSICS_UPDATE_SCRIPT;
 
     mTmxMap = std::unique_ptr<Tmx::Map>(new Tmx::Map);
 
-    mTmxMap->ParseFile(mapFilePath.string());
+    mTmxMap->ParseFile(mapFilePath);
 
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), sceneDir));
 }
@@ -36,7 +36,7 @@ std::vector<Purity::EntityState> Purity::Scene::getEntityStates() const
 
 std::string Purity::Scene::getLuaEventHandlerPath() const
 {
-    return mLuaEventHandlerFile.string();
+    return mLuaEventHandlerFile;
 }
 
 std::string Purity::Scene::getLuaEventHandlerFunctionName() const
@@ -46,7 +46,7 @@ std::string Purity::Scene::getLuaEventHandlerFunctionName() const
 
 std::string Purity::Scene::getLuaPhysicsUpdatePath() const
 {
-    return mLuaPhysicsUpdateFile.string();
+    return mLuaPhysicsUpdateFile;
 }
 
 

@@ -4,7 +4,7 @@
 #include <map>
 #include <utility>
 #include <memory>
-#include <boost/filesystem.hpp>
+#include <string>
 
 #include "tile.h"
 #include "graphics/drawable.h"
@@ -24,7 +24,7 @@ namespace Purity
     class Layer : public Drawable
     {
     public:
-        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager, boost::filesystem::path sceneDir);
+        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager, std::string sceneDir);
 
         void initializePhysics(b2World * world);
 
@@ -34,7 +34,7 @@ namespace Purity
         const Tmx::Map * mTmxMap;
         const Tmx::Layer * mTmxLayer;
         TextureManager * mTextureManager;
-        boost::filesystem::path mSceneDir;
+        std::string mSceneDir;
 
         void processTiles();
 

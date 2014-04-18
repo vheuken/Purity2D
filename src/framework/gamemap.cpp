@@ -2,7 +2,7 @@
 
 #include <TmxParser/Tmx.h>
 
-Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir)
+Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const std::string& sceneDir)
     : mSceneDir(sceneDir), mTmxMap(tmxMap), mTextureManager(new TextureManager())
 {
     //processTilesetsFromTMXMap();

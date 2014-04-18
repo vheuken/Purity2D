@@ -17,7 +17,7 @@ include_directories(
 
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
-FIND_PACKAGE( Boost COMPONENTS filesystem system REQUIRED)
+
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 if (WIN32)

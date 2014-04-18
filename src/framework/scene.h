@@ -5,7 +5,6 @@
 #include <vector>
 #include <memory>
 #include <mutex>
-#include <boost/filesystem.hpp>
 #include <TmxParser/TmxMap.h>
 #include "gamemap.h"
 #include "entity/entitymanager.h"
@@ -25,7 +24,7 @@ namespace Purity
     class Scene : public Drawable
     {
     public:
-        Scene(const boost::filesystem::path& sceneDir);
+        Scene(const std::string& sceneDir);
 
         void initializePhysics(b2World * world);
         void updatePhysics();
@@ -43,8 +42,8 @@ namespace Purity
         std::unique_ptr<GameMap> mMap;
         std::unique_ptr<EntityManager> mObjectManager;
 
-        boost::filesystem::path mLuaEventHandlerFile;
-		boost::filesystem::path mLuaPhysicsUpdateFile;
+        std::string mLuaEventHandlerFile;
+        std::string mLuaPhysicsUpdateFile;
 
         mutable std::mutex mMutex;
 

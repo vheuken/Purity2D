@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <memory>
-#include <boost/filesystem.hpp>
+#include <string>
 
 #include "spritesheet.h"
 #include "graphics/texturemanager.h"
@@ -24,12 +24,12 @@ namespace Purity
     class GameMap : public Drawable
     {
     public:
-        GameMap(const Tmx::Map* tmxMap, const boost::filesystem::path& sceneDir);
+        GameMap(const Tmx::Map* tmxMap, const std::string& sceneDir);
 
         void initializeTilePhysics(b2World * world);
 
     private:
-        const boost::filesystem::path mSceneDir;
+        const std::string mSceneDir;
         const Tmx::Map * mTmxMap;
 
         std::map<int, std::map<int, std::unique_ptr<Tile> > > mPhysicsTileList;
