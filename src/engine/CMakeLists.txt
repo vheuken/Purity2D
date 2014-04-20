@@ -38,7 +38,6 @@ target_link_libraries(
 	
     Box2D
     lua
-    luabind
     TMX-Parser
     enet
 	Guisan

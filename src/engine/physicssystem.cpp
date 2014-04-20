@@ -3,7 +3,6 @@
 #include "physicssystem.h"
 
 #include <string>
-#include <luabind/luabind.hpp>
 #include "luamanager.h"
 #include "../framework/scene.h"
 
@@ -92,7 +91,7 @@ void Purity::PhysicsSystem::handleServerActions()
         NetworkAction action = mServerActionQueue->front();
         mServerActionQueue->pop();
 
-        luabind::call_function<void>(luaManager->getState(), "serverActionHandler", action.objectName, action.actionName);
+        //luabind::call_function<void>(luaManager->getState(), "serverActionHandler", action.objectName, action.actionName);
     }
 }
 
@@ -100,5 +99,5 @@ void Purity::PhysicsSystem::runUpdateScripts()
 {
     LuaManager* luaManager = LuaManager::getManager();
 
-    luabind::call_function<void>(luaManager->getState(), "onPhysicsUpdate");
+    //luabind::call_function<void>(luaManager->getState(), "onPhysicsUpdate");
 }

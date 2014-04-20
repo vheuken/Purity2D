@@ -14,7 +14,7 @@ Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQue
 
     mClientReceievdStates = std::unique_ptr<std::map<unsigned int, EntityState> >(new std::map<unsigned int, EntityState>);
 
-    luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
+    //luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
 }
 
 Purity::NetworkSystem::~NetworkSystem()
@@ -108,7 +108,7 @@ std::string Purity::NetworkSystem::getPublicAddress()
     return "";
     //return sf::IpAddress::getPublicAddress().toString();
 }
-
+/*
 luabind::scope Purity::NetworkSystem::luaBindings()
 {
     return luabind::class_<NetworkSystem>("NetworkSystem")
@@ -122,3 +122,4 @@ luabind::scope Purity::NetworkSystem::luaBindings()
         .def("initializeClient", &NetworkSystem::initializeClient)
         ;
 }
+*/

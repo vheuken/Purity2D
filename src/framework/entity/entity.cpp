@@ -1,6 +1,5 @@
 #include "entity.h"
 
-#include <luabind/luabind.hpp>
 #include <TmxParser/Tmx.h>
 
 unsigned int Purity::Entity::sNumOfEntities = 0;
@@ -124,10 +123,11 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
         target.draw(mHitboxRect);
     }
 }
-
+/*
 luabind::scope Purity::Entity::luaBindings()
 {
     return luabind::class_<Entity>("Object")
         .def("getName", &Entity::getName)
     ;
 }
+*/

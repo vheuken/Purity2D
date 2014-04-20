@@ -1,7 +1,6 @@
 #include "engine.h"
 
 #include <iostream>
-#include <luabind/luabind.hpp>
 #include "luamanager.h"
 #include "../framework/graphics/texturemanager.h"
 

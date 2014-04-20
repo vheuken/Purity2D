@@ -1,7 +1,6 @@
 #include "luamanager.h"
 
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
 #include "../framework/entity/entity.h"
 #include "../framework/entity/movableentity.h"
 #include "../framework/entity/entitymanager.h"
@@ -43,7 +42,7 @@ void Purity::LuaManager::loadFile(const std::string& luaFileName)
 }
 
 void Purity::LuaManager::initializeBindings()
-{
+{/*
     luabind::open(mLuaState);
 
     //initializeSFMLBindings();
@@ -54,7 +53,7 @@ void Purity::LuaManager::initializeBindings()
             MovableEntity::luaBindings(),
             NetworkSystem::luaBindings()
     ];
-
+*/
 }
 
 void Purity::LuaManager::initializeSFMLBindings()

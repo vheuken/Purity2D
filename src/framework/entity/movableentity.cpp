@@ -1,7 +1,5 @@
 #include "movableentity.h"
 
-#include <luabind/luabind.hpp>
-
 Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world, const Purity::Texture * texture)
     : Entity(object, world, texture)
 {
@@ -33,7 +31,7 @@ float Purity::MovableEntity::getLinearVelocityX() const
 {
     return mHitboxBody->GetLinearVelocity().x;
 }
-
+/*
 luabind::scope Purity::MovableEntity::luaBindings()
 {
     return luabind::class_<MovableEntity, Entity>("MovableObject")
@@ -45,3 +43,4 @@ luabind::scope Purity::MovableEntity::luaBindings()
         .def("getY", &Entity::getY)
     ;
 }
+*/
