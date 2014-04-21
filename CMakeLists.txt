@@ -15,7 +15,10 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/lua-5.2.2/src    
     ${LIBS_INCLUDE_DIR}/luabind/
 	${LIBS_INCLUDE_DIR}/guisan/include
+	C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/include
 )
+
+link_directories(C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/lib/)
 
 add_subdirectory(extlibs PRE_BUILD)
 

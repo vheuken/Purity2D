@@ -15,7 +15,7 @@ add_library( ${INPUT_PROJECT_NAME} STATIC
              ${INPUT_SOURCE_FILES}
 )
 
-if (UNIX)
+if (UNIX AND NOT ANDROID)
     target_link_libraries( ${INPUT_PROJECT_NAME}
                            SDL2-static
                            X11

@@ -9,10 +9,10 @@ include_directories(
 
 
 file(GLOB headers RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-     include/*.hpp include/guichan/*.hpp include/guichan/sdl/*.hpp include/guichan/opengl/*.hpp include/guichan/widgets/*.hpp)
+     include/*.hpp include/guichan/*.hpp include/guichan/sdl/*.hpp include/guichan/widgets/*.hpp)
 
 file(GLOB sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-     src/*.cpp  src/sdl/*.cpp src/opengl/*.cpp src/widgets/*.cpp)
+     src/*.cpp  src/sdl/*.cpp src/widgets/*.cpp)
 
 add_library(Guisan STATIC ${headers} ${sources})
 target_link_libraries(Guisan SDL2-static SDL2_image-static)

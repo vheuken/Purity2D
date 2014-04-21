@@ -22,6 +22,13 @@
 #ifndef _SDL_config_h
 #define _SDL_config_h
 
+/* 
+PURITY2D FIX 
+*/
+#ifdef __ANDROID__
+#include <wchar.h>
+#endif
+
 /**
  *  \file SDL_config.h.in
  *

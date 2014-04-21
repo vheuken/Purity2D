@@ -23,6 +23,10 @@
 #include <assert.h>
 #include <float.h>
 
+
+// Added string.h to fix android
+#include <string.h>
+
 #define B2_NOT_USED(x) ((void)(x))
 #define b2Assert(A) assert(A)
 

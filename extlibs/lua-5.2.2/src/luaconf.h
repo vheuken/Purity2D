@@ -11,7 +11,6 @@
 #include <limits.h>
 #include <stddef.h>
 
-
 /*
 ** ==================================================================
 ** Search for "@@" to find all configurable definitions.
@@ -58,7 +57,12 @@
 #define LUA_USE_LONGLONG	/* assume support for long long */
 #endif
 
-
+/*
+ADDED TO FIX BUILD ON ANDROID
+*/
+#ifdef __ANDROID__
+#define getlocaledecpoint() '.'
+#endif
 
 /*
 @@ LUA_USE_POSIX includes all functionality listed as X/Open System

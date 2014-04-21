@@ -27,6 +27,7 @@
 
 #include "base64.h"
 #include <iostream>
+#include <cctype>
 
 static const std::string base64_chars = 
              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
