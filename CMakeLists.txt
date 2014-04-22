@@ -27,7 +27,8 @@ IF (NOT MSVC)
 	ADD_DEFINITIONS(-std=c++11)
 	
 	# statically link libgcc and libstdc++
-	set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+	set(CMAKE_EXE_LINKER_FLAGS "--sysroot=C:/android/android-ndk-r9d/platforms/android-19/arch-arm")
+	#set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
 ENDIF (NOT MSVC)
 
 add_subdirectory(src)
