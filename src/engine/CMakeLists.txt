@@ -26,10 +26,17 @@ set( SOURCE_FILES
      main.cpp
 )
 
-add_executable( ${ENGINE_PROJECT_NAME} 
-                ${HEADER_FILES}
-                ${SOURCE_FILES}
-)
+if (ANDROID)
+	add_library( ${ENGINE_PROJECT_NAME} STATIC
+					${HEADER_FILES}
+					${SOURCE_FILES}
+	)
+else()
+	add_executable( ${ENGINE_PROJECT_NAME} 
+					${HEADER_FILES}
+					${SOURCE_FILES}
+	)
+endif(ANDROID)
 
 target_link_libraries(
     ${ENGINE_PROJECT_NAME}
