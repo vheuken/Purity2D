@@ -15,10 +15,14 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/lua-5.2.2/src    
     ${LIBS_INCLUDE_DIR}/luabind/
 	${LIBS_INCLUDE_DIR}/guisan/include
-	C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/include
 )
 
-link_directories(C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/lib/)
+if (ANDROID)
+    link_directories(C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/lib/)
+    include_directories(
+        C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/include
+    )
+endif(ANDROID)
 
 add_subdirectory(extlibs PRE_BUILD)
 
@@ -27,8 +31,10 @@ IF (NOT MSVC)
 	ADD_DEFINITIONS(-std=c++11)
 	
 	# statically link libgcc and libstdc++
-	set(CMAKE_EXE_LINKER_FLAGS "--sysroot=C:/android/android-ndk-r9d/platforms/android-19/arch-arm")
-	#set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+	if (ANDROID)
+        set(CMAKE_EXE_LINKER_FLAGS "--sysroot=C:/android/android-ndk-r9d/platforms/android-19/arch-arm")
+    endif()
+	set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
 ENDIF (NOT MSVC)
 
 add_subdirectory(src)
