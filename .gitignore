@@ -185,3 +185,7 @@ Win32/
 
 # vim swp files
 *.swp
+
+# android stuff
+cmake/toolchains/*.png
+cmake/toolchains/*.jpg
