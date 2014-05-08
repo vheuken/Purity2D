@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <Box2D/Box2D.h>
+#include <lua.hpp>
 
 #include "entitystate.h"
 #include "../graphics/drawable.h"
@@ -12,6 +13,7 @@
 #include "../graphics/rect.h"
 #include "../graphics/transformable.h"
 #include "../spritesheet.h"
+
 
 namespace luabind
 {
@@ -56,7 +58,7 @@ namespace Purity
 
         virtual void update();
 
-        static luabind::scope luaBindings();
+        static void luaBindings(lua_State* state);
 
     protected:
         b2BodyDef mHitboxBodyDef;

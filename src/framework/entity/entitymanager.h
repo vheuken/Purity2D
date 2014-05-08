@@ -1,6 +1,8 @@
 #ifndef OBJECT_MANAGER_H
 #define OBJECT_MANAGER_H
 
+#include <lua.hpp>
+
 #include "entity.h"
 #include "movableentity.h"
 #include "../graphics/texturemanager.h"
@@ -34,7 +36,7 @@ namespace Purity
 
         std::vector<EntityState> getEntityStates() const;
 
-        static luabind::scope luaBindings();
+        static void luaBindings(lua_State* state);
 
     private:
         const Tmx::Map* mTmxMap;

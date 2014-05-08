@@ -1,6 +1,8 @@
 #ifndef MOVABLE_ENTITY_H
 #define MOVABLE_ENTITY_H
 
+#include <lua.hpp>
+
 #include "entity.h"
 
 namespace luabind
@@ -20,7 +22,7 @@ namespace Purity
         float getLinearVelocityX() const;
         float getLinearVelocityY() const;
 
-        static luabind::scope luaBindings();
+        static void luaBindings(lua_State* state);
     };
 }
 

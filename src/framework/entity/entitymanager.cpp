@@ -1,5 +1,6 @@
 #include "entitymanager.h"
 
+#include <LuaBridge.h>
 #include <TmxParser/Tmx.h>
 
 #include "../graphics/texture.h"
@@ -14,6 +15,7 @@ Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
     initializeObjects();
 
     //luabind::globals(LuaManager::getManager()->getState())["GEntityManager"] = this;
+    luabridge::setGlobal(LuaManager::getManager()->getState(), this, "GEntityManager");
 }
 
 Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& objectName)
@@ -139,12 +141,15 @@ void Purity::EntityManager::draw(Purity::RenderTarget& target) const
     }
 }
 
-/*
-luabind::scope Purity::EntityManager::luaBindings()
+
+void Purity::EntityManager::luaBindings(lua_State* state)
 {
-    return luabind::class_<EntityManager>("EntityManager")
-        .def("getEntityByName", &EntityManager::getEntityByName)
-        .def("getMovableEntityByName", &EntityManager::getMovableEntityByName)
-    ;
+    luabridge::getGlobalNamespace(state)
+            .beginNamespace("Purity")
+                .beginClass <EntityManager> ("EntityManager")
+                    .addFunction("getEntityByName", &EntityManager::getEntityByName)
+                    .addFunction("getMovableEntityByName", &EntityManager::getMovableEntityByName)
+                .endClass()
+            .endNamespace();
 }
-*/
+

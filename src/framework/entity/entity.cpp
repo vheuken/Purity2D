@@ -1,6 +1,7 @@
 #include "entity.h"
 
 #include <TmxParser/Tmx.h>
+#include <LuaBridge.h>
 
 unsigned int Purity::Entity::sNumOfEntities = 0;
 
@@ -123,11 +124,14 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
         target.draw(mHitboxRect);
     }
 }
-/*
-luabind::scope Purity::Entity::luaBindings()
+
+void Purity::Entity::luaBindings(lua_State* state)
 {
-    return luabind::class_<Entity>("Object")
-        .def("getName", &Entity::getName)
-    ;
+    luabridge::getGlobalNamespace(state)
+        .beginNamespace("Purity")
+            .beginClass<Entity>("Entity")
+                .addFunction("getName", &Entity::getName)
+            .endClass()
+        .endNamespace();
 }
-*/
+

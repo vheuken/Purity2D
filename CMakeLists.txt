@@ -15,6 +15,7 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/lua-5.2.2/src    
     ${LIBS_INCLUDE_DIR}/luabind/
 	${LIBS_INCLUDE_DIR}/guisan/include
+    ${LIBS_INCLUDE_DIR}/LuaBridge/
 )
 
 if (ANDROID)
@@ -28,7 +29,7 @@ add_subdirectory(extlibs PRE_BUILD)
 
 IF (NOT MSVC)
 	# C++11
-	ADD_DEFINITIONS(-std=c++11)
+	ADD_DEFINITIONS(-std=c++11 -Wall)
 	
 	# statically link libgcc and libstdc++
 	if (ANDROID)

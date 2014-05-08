@@ -13,6 +13,8 @@
 #include "../framework/network/server.h"
 #include "../framework/network/client.h"
 
+struct lua_State;
+
 namespace Purity
 {
     class NetworkSystem : public AbstractSystem
@@ -39,7 +41,7 @@ namespace Purity
         void setServer(bool isServer);
         bool isServer() const;
 
-        static luabind::scope luaBindings();
+        void static luaBindings(lua_State* state);
 
     private:
         unsigned short mPort;

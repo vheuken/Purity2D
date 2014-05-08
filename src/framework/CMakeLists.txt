@@ -26,6 +26,7 @@ set( FRAMEWORK_HEADER_FILES
     spritesheet.h
     tile.h
     layer.h
+    event.h
 )
 
 set( FRAMEWORK_SOURCE_FILES
@@ -34,6 +35,7 @@ set( FRAMEWORK_SOURCE_FILES
      spritesheet.cpp
      tile.cpp
      layer.cpp
+     event.cpp
 )
 
 add_library( ${FRAMEWORK_PROJECT_NAME} STATIC

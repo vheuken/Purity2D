@@ -1,6 +1,8 @@
 #include "luamanager.h"
 
 #include <lua.hpp>
+#include <LuaBridge.h>
+#include <SDL.h>
 #include "../framework/entity/entity.h"
 #include "../framework/entity/movableentity.h"
 #include "../framework/entity/entitymanager.h"
@@ -42,7 +44,13 @@ void Purity::LuaManager::loadFile(const std::string& luaFileName)
 }
 
 void Purity::LuaManager::initializeBindings()
-{/*
+{
+    NetworkSystem::luaBindings(mLuaState);
+    EntityManager::luaBindings(mLuaState);
+    Entity::luaBindings(mLuaState);
+    MovableEntity::luaBindings(mLuaState);
+    initializeSFMLBindings();
+/*
     luabind::open(mLuaState);
 
     //initializeSFMLBindings();
@@ -58,6 +66,25 @@ void Purity::LuaManager::initializeBindings()
 
 void Purity::LuaManager::initializeSFMLBindings()
 {
+    luabridge::getGlobalNamespace(mLuaState)
+        .beginNamespace("Purity")
+            .beginClass <SDL_Keysym> ("Keysym")
+                .addData("sym", &SDL_Keysym::sym)
+            .endClass()
+            .beginClass <SDL_KeyboardEvent> ("Key")
+                .addData("keysym", &SDL_KeyboardEvent::keysym)
+            .endClass()
+            .beginClass <SDL_Event> ("Event")
+                .addData("type", &SDL_Event::type, false)
+                .addData("key",  &SDL_Event::key)
+            .endClass()
+        .endNamespace()
+        .beginNamespace("Event")
+            .addVariable("KeyPressed", new Uint32(SDL_KEYDOWN))
+            .addVariable("Left", new Uint32(SDLK_LEFT))
+            .addVariable("Right", new Uint32(SDLK_RIGHT))
+            .addVariable("Up", new Uint32(SDLK_UP))
+        .endNamespace();
     /*
     luabind::open(mLuaState);
     luabind::module(mLuaState)

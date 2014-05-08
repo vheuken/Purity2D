@@ -1,6 +1,7 @@
 #include "networksystem.h"
 #include "luamanager.h"
 #include <iostream>
+#include <LuaBridge.h>
 
 Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue)
 : mIsServer(false),
@@ -15,6 +16,7 @@ Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQue
     mClientReceievdStates = std::unique_ptr<std::map<unsigned int, EntityState> >(new std::map<unsigned int, EntityState>);
 
     //luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
+    luabridge::setGlobal(LuaManager::getManager()->getState(), this, "GPurityNetwork");
 }
 
 Purity::NetworkSystem::~NetworkSystem()
@@ -108,18 +110,20 @@ std::string Purity::NetworkSystem::getPublicAddress()
     return "";
     //return sf::IpAddress::getPublicAddress().toString();
 }
-/*
-luabind::scope Purity::NetworkSystem::luaBindings()
+
+void Purity::NetworkSystem::luaBindings(lua_State* state)
 {
-    return luabind::class_<NetworkSystem>("NetworkSystem")
-        .def("getLocalAddress", &NetworkSystem::getLocalAddress)
-        .def("getPublicAddress", &NetworkSystem::getPublicAddress)
-        .def("setPort", &NetworkSystem::setPort)
-        .def("sendAction", &NetworkSystem::sendAction)
-        .def("connectToServer", &NetworkSystem::connectToServer)
-        .def("setServer", &NetworkSystem::setServer)
-        .def("initializeServer", &NetworkSystem::initializeServer)
-        .def("initializeClient", &NetworkSystem::initializeClient)
-        ;
+    luabridge::getGlobalNamespace(state)
+            .beginNamespace("Purity")
+                .beginClass<NetworkSystem> ("NetworkSystem")
+                    .addFunction("getLocalAddress", &NetworkSystem::getLocalAddress)
+                    .addFunction("getPublicAddress", &NetworkSystem::getPublicAddress)
+                    .addFunction("setPort", &NetworkSystem::setPort)
+                    .addFunction("connectToServer", &NetworkSystem::connectToServer)
+                    .addFunction("setServer", &NetworkSystem::setServer)
+                    .addFunction("initializeServer", &NetworkSystem::initializeServer)
+                    .addFunction("initializeClient", &NetworkSystem::initializeClient)
+                .endClass()
+            .endNamespace();
 }
-*/
+
