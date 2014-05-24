@@ -47,7 +47,6 @@ target_link_libraries(
     lua
     TMX-Parser
     enet
-	Guisan
 	
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
