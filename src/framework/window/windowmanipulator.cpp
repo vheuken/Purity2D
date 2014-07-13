@@ -173,7 +173,7 @@ void Purity::WindowManipulator::resizeWindow()
 bool Purity::WindowManipulator::isMouseOnBorder() const
 {
     Vector2i mousePositionRelativeToWindow = Mouse::getPosition(*mWindow);
-    Vector2u windowSize = mWindow->getSize();
+    Vector2i windowSize = static_cast<Vector2i>(mWindow->getSize());
 
     if ((mousePositionRelativeToWindow.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS && mousePositionRelativeToWindow.x <= windowSize.x) ||
         (mousePositionRelativeToWindow.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS && mousePositionRelativeToWindow.y <= windowSize.y) ||
