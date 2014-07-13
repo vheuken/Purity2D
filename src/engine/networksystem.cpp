@@ -4,9 +4,9 @@
 #include <LuaBridge.h>
 
 Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue)
-: mIsServer(false),
-  mServerActionQueue(serverActionQueue),
-  AbstractSystem()
+: AbstractSystem(),
+  mIsServer(false),
+  mServerActionQueue(serverActionQueue)
 {
     if (enet_initialize() != 0)
     {

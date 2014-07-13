@@ -46,11 +46,11 @@ namespace Purity
     private:
         unsigned short mPort;
         bool mIsServer;
-        
-        std::unique_ptr<Client> mClient;
-        std::unique_ptr<Server> mServer;
+
         std::queue<NetworkAction>* mServerActionQueue;
         std::queue<NetworkAction>  mClientActionQueue;
+        std::unique_ptr<Client> mClient;
+        std::unique_ptr<Server> mServer;
         std::unique_ptr<std::map<unsigned int, EntityState> > mClientReceievdStates;
     };
 }
