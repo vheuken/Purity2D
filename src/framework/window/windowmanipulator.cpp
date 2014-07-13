@@ -6,8 +6,13 @@
 #include <iostream>
 
 Purity::WindowManipulator::WindowManipulator(Window* window)
-: mWindow(window), mWindowDrag(false), mWindowResize(false),
-mRightBorderGrabbed(false), mLeftBorderGrabbed(false), mBottomBorderGrabbed(false), mTopBorderGrabbed(false)
+: mWindow(window),
+  mWindowDrag(false),
+  mWindowResize(false),
+  mRightBorderGrabbed(false),
+  mLeftBorderGrabbed(false),
+  mBottomBorderGrabbed(false),
+  mTopBorderGrabbed(false)
 {
 }
 
@@ -129,7 +134,7 @@ void Purity::WindowManipulator::resizeWindow()
         newWindowSize.x = mousePos.x - windowPos.x + mWindowResizeOffsetRightBottom.x;
 
         // TODO: is this necessary on windows?
-        if ((newWindowSize.x + windowPos.x) == (displayBounds.w - 1))
+        if ((newWindowSize.x + windowPos.x) == static_cast<unsigned int>((displayBounds.w - 1)))
         {
             newWindowSize.x += 1;
         }
@@ -141,7 +146,7 @@ void Purity::WindowManipulator::resizeWindow()
         newWindowSize.y = mousePos.y - windowPos.y + mWindowResizeOffsetRightBottom.y;
 
         // TODO: is this necessary on windows?
-        if ((newWindowSize.y + windowPos.y) == (displayBounds.h - 1))
+        if ((newWindowSize.y + windowPos.y) == static_cast<unsigned int>((displayBounds.h - 1)))
         {
             newWindowSize.y += 1;
         }

@@ -5,7 +5,7 @@
 
 namespace Purity
 {
-    const unsigned int STRETCHABLE_BORDER_PIXELS = 30;
+    const int STRETCHABLE_BORDER_PIXELS = 30;
 
     class Window;
 
@@ -33,9 +33,9 @@ namespace Purity
         bool mWindowDrag;
         bool mWindowResize;
         bool mRightBorderGrabbed;
+        bool mLeftBorderGrabbed;
         bool mBottomBorderGrabbed;
         bool mTopBorderGrabbed;
-        bool mLeftBorderGrabbed;
     };
 }
 
