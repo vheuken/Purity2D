@@ -25,6 +25,8 @@ void Purity::Client::handleEvents()
             memcpy(&state, event.packet->data, sizeof(EntityState));
 
             addState(state);
+        default:
+            break;
         }
     }
 }

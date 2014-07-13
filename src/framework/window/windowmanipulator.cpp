@@ -69,8 +69,6 @@ void Purity::WindowManipulator::setWindowFlags()
 void Purity::WindowManipulator::setBorderGrabbedFlags()
 {
     Vector2u windowSize = mWindow->getSize();
-    Vector2u newWindowSize = windowSize;
-    Vector2i newWindowPos = mWindow->getPosition();
 
     Vector2u mousePos;
 
