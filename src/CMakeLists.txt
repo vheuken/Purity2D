@@ -11,8 +11,7 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/lua-5.2.2/src
     ${LIBS_INCLUDE_DIR}/enet/include
     ${LIBS_INCLUDE_DIR}/SDL2-2.0.3/include
-    ${LIBS_INCLUDE_DIR}/SDL2_image-2.0.0/
-	${LIBS_INCLUDE_DIR}/stb_image/
+    ${LIBS_INCLUDE_DIR}/stb_image/
 )
 
 if (WIN32)

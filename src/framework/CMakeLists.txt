@@ -47,7 +47,7 @@ add_library( ${FRAMEWORK_PROJECT_NAME} STATIC
 target_link_libraries(
     ${FRAMEWORK_PROJECT_NAME}
     Purity-Network
-	Purity-Entity
+    Purity-Entity
     Purity-Window
     Purity-System
     Purity-Input

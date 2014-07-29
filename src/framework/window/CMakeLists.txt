@@ -19,5 +19,4 @@ add_library( ${WINDOW_PROJECT_NAME} STATIC
 
 target_link_libraries ( ${WINDOW_PROJECT_NAME}
                         SDL2-static
-                        SDL2_image-static
 )

@@ -12,9 +12,7 @@ set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 set(LIBS_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extlibs")
 
 include_directories(
-    ${LIBS_INCLUDE_DIR}/lua-5.2.2/src    
-    ${LIBS_INCLUDE_DIR}/luabind/
-	${LIBS_INCLUDE_DIR}/guisan/include
+    ${LIBS_INCLUDE_DIR}/lua-5.2.2/src
     ${LIBS_INCLUDE_DIR}/LuaBridge/
     ${LIBS_INCLUDE_DIR}/stb_image/
 )

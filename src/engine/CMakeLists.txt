@@ -41,13 +41,13 @@ endif(ANDROID)
 target_link_libraries(
     ${ENGINE_PROJECT_NAME}
 	
-	Purity-Framework
+    Purity-Framework
 	
     Box2D
     lua
     TMX-Parser
     enet
-	STB_Image
+    STB_Image
 	
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}

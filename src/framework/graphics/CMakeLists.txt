@@ -38,5 +38,5 @@ SET_TARGET_PROPERTIES(${GRAPHICS_PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 target_link_libraries( ${GRAPHICS_PROJECT_NAME}
                        SDL2-static
-					   STB_Image
+                       STB_Image
 )

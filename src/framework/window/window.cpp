@@ -2,7 +2,6 @@
 #include <iostream>
 
 #include <SDL.h>
-#include <SDL_image.h>
 
 Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
 : mWindowManipulator(this),
@@ -12,13 +11,6 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     {
         std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
     }
-
-    // TODO: add IMG_INIT_TIFF  when libtiff builds
-    int imgFlags = IMG_INIT_JPG | IMG_INIT_PNG;
-    if (IMG_Init(imgFlags) != imgFlags)
-    {
-        std::cerr << "Unable to initilize SDL_Image: " << IMG_GetError() << std::endl;
-    };
 
     mInternalWindow = SDL_CreateWindow(title.c_str(),
                                        SDL_WINDOWPOS_CENTERED,
@@ -42,7 +34,6 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
 
 Purity::Window::~Window()
 {
-    IMG_Quit();
     SDL_Quit();
 }
 
