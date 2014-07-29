@@ -59,12 +59,19 @@ SDL_Surface* Purity::Texture::loadImage(const std::string& path)
     uint32_t rmask, gmask, bmask, amask;
     SDL_Surface *rv;
 
-    FILE *file = fopen(path.c_str(), "rb");
-    if (!file)
-        return 0;
+    SDL_RWops* file = SDL_RWFromFile(path.c_str(), "rb");
 
-    data = stbi_load_from_file(file, &x, &y, &comp, 0);
-    fclose(file);
+    if (!file)
+    {
+        return nullptr;
+    }
+
+    int fileSize = file->size(file);
+    unsigned char* fileData = new unsigned char[fileSize + 1];
+    file->read(file, fileData, 1, fileSize);
+
+    data = stbi_load_from_memory(fileData, fileSize, &x, &y, &comp, 0);
+    file->close(file);
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
     rmask = 0xff000000;
@@ -88,7 +95,9 @@ SDL_Surface* Purity::Texture::loadImage(const std::string& path)
     }
 
     memcpy(rv->pixels, data, comp * x * y);
+
     stbi_image_free(data);
+    delete [] fileData;
 
     return rv;
 }
