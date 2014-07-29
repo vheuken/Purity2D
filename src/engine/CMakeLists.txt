@@ -47,6 +47,7 @@ target_link_libraries(
     lua
     TMX-Parser
     enet
+	STB_Image
 	
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}

@@ -8,6 +8,7 @@
 #include "../system/vector2.h"
 
 struct SDL_Texture;
+struct SDL_Surface;
 
 namespace Purity
 {
@@ -23,7 +24,9 @@ namespace Purity
         explicit operator SDL_Texture*() const;
 
     private:
-        SDL_Texture * mInternalTexture;
+        SDL_Texture* mInternalTexture;
+
+        SDL_Surface* loadImage(const std::string& path);
     };
 }
 

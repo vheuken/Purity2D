@@ -4,6 +4,7 @@ add_subdirectory(TmxParser)
 add_subdirectory(enet)
 add_subdirectory(SDL2-2.0.3)
 add_subdirectory(SDL2_image-2.0.0)
+add_subdirectory(stb_image)
 
 set(EXTLIBS_FOLDER "External Libraries")
 

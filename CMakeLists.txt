@@ -16,6 +16,7 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/luabind/
 	${LIBS_INCLUDE_DIR}/guisan/include
     ${LIBS_INCLUDE_DIR}/LuaBridge/
+    ${LIBS_INCLUDE_DIR}/stb_image/
 )
 
 if (ANDROID)
