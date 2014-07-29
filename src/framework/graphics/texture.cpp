@@ -1,7 +1,7 @@
 #include "texture.h"
 
 #include <iostream>
-#include <SDL.h>STB_IMAGE_IMPLEMENTATION
+#include <SDL.h>
 #include <stb_image.h>
 
 bool Purity::Texture::loadFromFile(const std::string& path)
