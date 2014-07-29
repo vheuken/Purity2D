@@ -1,5 +1,9 @@
 set (PROJECT_NAME "TMX-Parser")
-include_directories(tinyxml zlib)
+
+add_definitions(-DUSE_SDL2_LOAD)
+
+include_directories(tinyxml zlib ../SDL2-2.0.3/include)
+
 set ( HEADER_FILES
 	 Tmx.h
 	 TmxEllipse.h
