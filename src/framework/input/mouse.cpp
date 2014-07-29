@@ -33,7 +33,7 @@ Purity::Vector2i Purity::Mouse::getPosition()
     GetCursorPos(&point);
     return Vector2i(point.x, point.y);
 #elif defined __APPLE__
-#error Not implemented on OS X
+#warning Not implemented on OS X
 #endif
 }
 
