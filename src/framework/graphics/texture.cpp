@@ -1,6 +1,7 @@
 #include "texture.h"
 
 #include <iostream>
+#include <cstring>
 #include <SDL.h>
 #include <stb_image.h>
 
