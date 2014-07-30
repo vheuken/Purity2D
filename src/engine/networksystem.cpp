@@ -15,7 +15,6 @@ Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQue
 
     mClientReceievdStates = std::unique_ptr<std::map<unsigned int, EntityState> >(new std::map<unsigned int, EntityState>);
 
-    //luabind::globals(LuaManager::getManager()->getState())["GPurityNetwork"] = this;
     luabridge::setGlobal(LuaManager::getManager()->getState(), this, "GPurityNetwork");
 }
 
