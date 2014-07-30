@@ -80,10 +80,10 @@ void Purity::PhysicsSystem::handleInput()
 	    SDL_Event event = mInputQueue->front();
 	    mInputQueue->pop();
 
-//	    luabind::call_function<void>(luaState, luaEventHandlerFunction.c_str(), event);
-        try{
-        luabridge::LuaRef update = luabridge::getGlobal(luaManager->getState(), luaEventHandlerFunction.c_str());
-        update(event);
+        try
+        {
+            luabridge::LuaRef update = luabridge::getGlobal(luaManager->getState(), luaEventHandlerFunction.c_str());
+            update(event);
         } catch (luabridge::LuaException e)
         {
             std::cout << e.what() << std::endl;
