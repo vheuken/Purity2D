@@ -187,5 +187,4 @@ Win32/
 *.swp
 
 # android stuff
-cmake/toolchains/*.png
-cmake/toolchains/*.jpg
+libs/
