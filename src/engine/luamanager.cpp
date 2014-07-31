@@ -35,7 +35,19 @@ lua_State* Purity::LuaManager::getState()
 
 void Purity::LuaManager::doFile(const std::string& luaFileName)
 {
-    luaL_dofile(mLuaState, luaFileName.c_str());
+    SDL_RWops* file = SDL_RWFromFile(luaFileName.c_str(), "rb");
+
+    int fileSize = file->size(file);
+    char* fileContents = new char[fileSize + 1];
+
+    file->read(file, fileContents, 1, fileSize);
+    fileContents[fileSize] = '\0';
+
+    file->close(file);
+
+    luaL_dostring(mLuaState, fileContents);
+
+    delete [] fileContents;
 }
 
 void Purity::LuaManager::loadFile(const std::string& luaFileName)
