@@ -2,6 +2,7 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
   message(FATAL_ERROR "Prevented in-tree built. Please create a build directory outside of the SDL source code and call cmake from there")
 endif()
 if(ANDROID)
+set(SDL2_SOURCE_DIR .)
 include_directories(include)
 file(GLOB SOURCE_FILES   
   ${SDL2_SOURCE_DIR}/src/*.c
@@ -31,7 +32,7 @@ file(GLOB SOURCE_FILES
   ${SDL2_SOURCE_DIR}/src/timer/unix/*.c
   ${SDL2_SOURCE_DIR}/src/video/*.c
   ${SDL2_SOURCE_DIR}/src/video/android/*.c
-   ${SDL2_SOURCE_DIR}/src/main/android/*.c
+  ${SDL2_SOURCE_DIR}/src/main/android/*.c
   )
   add_library(SDL2-static STATIC ${SOURCE_FILES})
   target_link_libraries(SDL2-static dl GLESv1_CM GLESv2 log android)

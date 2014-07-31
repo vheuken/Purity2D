@@ -18,9 +18,9 @@ include_directories(
 )
 
 if (ANDROID)
-    link_directories(C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/lib/)
+    link_directories(C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/lib/)
     include_directories(
-        C:/android/android-ndk-r9d/platforms/android-19/arch-arm/usr/include
+        C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/include
     )
 endif(ANDROID)
 
