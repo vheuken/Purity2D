@@ -1,0 +1,17 @@
+#####
+# BUILDING P2D FOR ANDROID ON WINDOWS
+##### 
+
+Step 1. Install and open Cygwin
+
+Step 2. Make a standalone toolchain for your target platform using
+        build\core\setup-toolchain.sh
+		
+Step 3. Go to P2D root directory and create directory "build" and go into it
+
+Step 4. Run the following command:
+        cmake.exe -G"MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
+        -DCMAKE_MAKE_PROGRAM=PATH_TO_ANDROID_NDK/prebuilt/windows-x86_64/bin/make.exe ..
+
+Step 5. Run the following command:
+        cmake.exe --build .
