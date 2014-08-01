@@ -106,8 +106,8 @@ void Purity::PhysicsSystem::handleServerActions()
 
 void Purity::PhysicsSystem::runUpdateScripts()
 {
-    LuaManager* luaManager = LuaManager::getManager();
+    //LuaManager* luaManager = LuaManager::getManager();
 
-    luabridge::LuaRef update = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
-    update();
+    //luabridge::LuaRef update = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
+    //update();
 }
