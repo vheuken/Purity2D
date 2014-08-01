@@ -22,8 +22,6 @@ set( SOURCE_FILES
      networksystem.cpp
      commandlinearguments.cpp
      abstractsystem.cpp
-
-     main.cpp
 )
 
 if (ANDROID)
@@ -31,10 +29,16 @@ if (ANDROID)
 					${HEADER_FILES}
 					${SOURCE_FILES}
 	)
+	
+	add_library( "main" SHARED 
+                 ../../../extlibs/SDL2-2.0.3/src/main/android/SDL_android_main.c
+                 main.cpp )
 else()
 	add_executable( ${ENGINE_PROJECT_NAME} 
 					${HEADER_FILES}
 					${SOURCE_FILES}
+					
+                    main.cpp
 	)
 endif(ANDROID)
 
@@ -52,3 +56,10 @@ target_link_libraries(
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
 )
+
+if (ANDROID)
+target_link_libraries(
+    "main"
+    ${ENGINE_PROJECT_NAME}
+)
+endif(ANDROID)

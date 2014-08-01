@@ -1,9 +1,5 @@
 project(${PROJECT_NAME})
 
-if (UNIX)
-    SET(CMAKE_CXX_FLAGS "-std=c++11")
-endif()
-
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 
 include_directories( 

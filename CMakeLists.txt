@@ -3,11 +3,12 @@ cmake_minimum_required(VERSION 2.8)
 set(PROJECT_NAME "Purity2D")
 
 project(${PROJECT_NAME})
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 #set(CMAKE_BUILD_TYPE Debug)
 
 set_property( GLOBAL PROPERTY USE_FOLDERS ON)
-
+#ADD_DEFINITIONS("-fPIC")
 # include directories
 set(LIBS_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extlibs")
 
@@ -20,7 +21,7 @@ include_directories(
 if (ANDROID)
     link_directories(C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/lib/)
     include_directories(
-        C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/include
+        C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/include/
     )
 endif(ANDROID)
 
@@ -32,10 +33,10 @@ IF (NOT MSVC)
 	
 	# statically link libgcc and libstdc++
 	if (ANDROID)
-        set(CMAKE_EXE_LINKER_FLAGS "--sysroot=C:/android/android-ndk-r9d/platforms/android-19/arch-arm")
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --sysroot=C:/android/android-ndk-r10/platforms/android-19/arch-arm/")
     endif()
     IF (NOT APPLE)
-	    set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+	    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
     endif()
 ENDIF (NOT MSVC)
 

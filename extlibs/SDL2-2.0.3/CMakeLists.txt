@@ -33,6 +33,7 @@ file(GLOB SOURCE_FILES
   ${SDL2_SOURCE_DIR}/src/video/*.c
   ${SDL2_SOURCE_DIR}/src/video/android/*.c
   ${SDL2_SOURCE_DIR}/src/main/android/*.c
+  ${SDL2_SOURCE_DIR}/src/main/libm/*.c
   )
   add_library(SDL2-static STATIC ${SOURCE_FILES})
   target_link_libraries(SDL2-static dl GLESv1_CM GLESv2 log android)
