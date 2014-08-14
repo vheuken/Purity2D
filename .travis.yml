@@ -6,4 +6,4 @@ language:
 compiler:
   - gcc
 script: 
-  - ./build-scripts/linux.sh
+  - bash build-scripts/linux.sh
