@@ -40,7 +40,7 @@ IF (NOT MSVC)
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --sysroot=C:/android/android-ndk-r10/platforms/android-19/arch-arm/")
     endif()
     IF (NOT APPLE)
-	    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
+#	    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
     endif()
 ENDIF (NOT MSVC)
 
