@@ -7,3 +7,4 @@ compiler:
   - gcc
 script:
   - '[[ $TRAVIS_OS_NAME == "linux" ]] && bash build-scripts/linux.sh'
+  - '[[ $TRAVIS_OS_NAME == "osx" ]] && bash build-scripts/osx.sh'
