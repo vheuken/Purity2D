@@ -5,5 +5,5 @@ language:
   - cpp
 compiler:
   - gcc
-script: 
-  - bash build-scripts/linux.sh
+script:
+  - '[[ $TRAVIS_OS_NAME == "linux" ]] && bash build-scripts/linux.sh'
