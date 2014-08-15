@@ -15,3 +15,21 @@ Step 4. Run the following command:
 
 Step 5. Run the following command:
         cmake.exe --build .
+
+#####
+# BUILDING P2D FOR ANDROID ON LINUX
+#####
+
+Step 1. Set the environment variable $ANDROID_NDK to the root of the NDK directory
+
+Step 2. Make a standalone toolchain for your target platform using
+        build/tools/make-standalone-toolchain.sh
+
+Step 3. Go to P2D root directory and create directory "build" and go into it
+
+Step 4. Run the following command:
+        cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
+	-DANDROID_NATIVE_API_LEVEL=android-19
+
+Step 5. Run the following command:
+	make
