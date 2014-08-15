@@ -29,7 +29,7 @@ namespace Purity
     class Event
     {
     public:
-        unsigned int getType() const;
+        EventType getType() const;
     private:
         SDL_Event mEvent;
     };
