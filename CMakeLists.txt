@@ -22,13 +22,6 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/stb_image/
 )
 
-if (ANDROID)
-    link_directories(C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/lib/)
-    include_directories(
-        C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/include/
-    )
-endif(ANDROID)
-
 add_subdirectory(extlibs)
 
 IF (NOT MSVC)
