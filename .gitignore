@@ -188,3 +188,4 @@ Win32/
 
 # android stuff
 libs/
+gen/
