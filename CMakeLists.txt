@@ -22,23 +22,12 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/stb_image/
 )
 
-if (ANDROID)
-    link_directories(C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/lib/)
-    include_directories(
-        C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/include/
-    )
-endif(ANDROID)
-
 add_subdirectory(extlibs)
 
 IF (NOT MSVC)
 	# C++11
 	ADD_DEFINITIONS(-std=c++11 -Wall)
 	
-	# statically link libgcc and libstdc++
-	if (ANDROID)
-        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --sysroot=C:/android/android-ndk-r10/platforms/android-19/arch-arm/")
-    endif()
     IF (NOT APPLE)
 #	    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
     endif()
