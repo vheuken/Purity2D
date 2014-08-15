@@ -29,7 +29,7 @@ if (ANDROID)
     )
 endif(ANDROID)
 
-add_subdirectory(extlibs PRE_BUILD)
+add_subdirectory(extlibs)
 
 IF (NOT MSVC)
 	# C++11
