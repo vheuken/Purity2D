@@ -5,9 +5,9 @@
 
 #include "../framework/window/window.h"
 #include "../framework/input/mouse.h"
-#include <SDL_events.h>
+#include "../framework/system/event.h"
 
-Purity::InputManager::InputManager(Purity::Window* window, std::queue<SDL_Event>* inputQueue)
+Purity::InputManager::InputManager(Purity::Window* window, std::queue<Event>* inputQueue)
 {
     mWindow = window;
     mInputQueue = inputQueue;
@@ -15,25 +15,25 @@ Purity::InputManager::InputManager(Purity::Window* window, std::queue<SDL_Event>
 
 void Purity::InputManager::update()
 {
-    SDL_Event event;
+    Event event;
 
-    while (mWindow->pollEvent(&event))
+    while (mWindow->pollEvent(event))
     {
         mInputQueue->push(event);
 
         if (event.type == SDL_WINDOWEVENT)
-        {
+        {/*
             if (event.window.event == SDL_WINDOWEVENT_CLOSE)
             {
                 mWindow->close();
-            }
+            }*/
         }
-        else if (event.type == SDL_KEYDOWN)
-        {
+        else if (event.type == Event::KeyPressed)
+        {/*
             if (event.key.keysym.sym == SDLK_ESCAPE)
             {
                 mWindow->close();
-            }
+            }*/
         }
     }
 }

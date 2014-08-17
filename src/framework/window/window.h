@@ -7,6 +7,7 @@
 #include "../system/vector2.h"
 #include "../graphics/rendertarget.h"
 #include "../graphics/view.h"
+#include "../system/event.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -36,7 +37,7 @@ namespace Purity
         void setPosition(const Vector2i& position);
         Vector2i getPosition() const;
 
-        bool pollEvent(SDL_Event* event);
+        bool pollEvent(Event& event);
 
         bool isOpen() const;
 

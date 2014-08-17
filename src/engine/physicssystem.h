@@ -4,11 +4,11 @@
 #include <queue>
 #include <memory>
 #include <Box2D/Box2D.h>
-#include <SDL_events.h>
 
 #include "abstractsystem.h"
 #include "../framework/network/networkaction.h"
 #include "../framework/system/timer.h"
+#include "../framework/system/event.h"
 
 namespace Purity
 {
@@ -21,7 +21,7 @@ namespace Purity
     class PhysicsSystem : public AbstractSystem
     {
     public:
-        PhysicsSystem(std::queue<SDL_Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue);
+        PhysicsSystem(std::queue<Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue);
 
         void update(Scene* scene);
 
@@ -31,7 +31,7 @@ namespace Purity
         unsigned int mFrameTimeMilleseconds;
         std::unique_ptr<b2World> mWorld;
 
-        std::queue<SDL_Event>* mInputQueue;
+        std::queue<Event>* mInputQueue;
         std::queue<NetworkAction>* mServerActionQueue;
 
 	    void step();

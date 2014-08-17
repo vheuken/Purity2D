@@ -3,7 +3,7 @@
 
 #include <queue>
 
-#include <SDL_events.h>
+#include "../framework/system/event.h"
 
 namespace Purity
 {
@@ -12,13 +12,13 @@ namespace Purity
     class InputManager
     {
     public:
-        InputManager(Window* window, std::queue<SDL_Event>* inputQueue);
+        InputManager(Window* window, std::queue<Event>* inputQueue);
 
         void update();
 
     private:
         Window* mWindow;
-        std::queue<SDL_Event>* mInputQueue;
+        std::queue<Event>* mInputQueue;
     };
 }
 

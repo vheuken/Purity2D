@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "../framework/window/window.h"
+#include "../framework/system/event.h"
 
 #include "scenemanager.h"
 #include "rendersystem.h"
@@ -12,8 +13,6 @@
 #include "inputmanager.h"
 #include "networksystem.h"
 #include "commandlinearguments.h"
-
-#include <SDL_events.h>
 
 namespace luabind
 {
@@ -37,7 +36,7 @@ namespace Purity
         std::unique_ptr<InputManager> mInputManager;
         std::unique_ptr<NetworkSystem> mNetworkSystem;
 
-	    std::unique_ptr<std::queue<SDL_Event> > mInputQueue;
+        std::unique_ptr<std::queue<Event> > mInputQueue;
         std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
 
         const CommandLineArguments mProgramOptions;

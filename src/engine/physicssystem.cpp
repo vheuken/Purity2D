@@ -8,7 +8,7 @@
 #include "luamanager.h"
 #include "../framework/scene.h"
 
-Purity::PhysicsSystem::PhysicsSystem(std::queue<SDL_Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue)
+Purity::PhysicsSystem::PhysicsSystem(std::queue<Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue)
 {
     mWorld = std::unique_ptr<b2World>(new b2World(GRAVITY));
 
@@ -77,7 +77,7 @@ void Purity::PhysicsSystem::handleInput()
 
     while (!mInputQueue->empty())
     {
-	    SDL_Event event = mInputQueue->front();
+        Event event = mInputQueue->front();
 	    mInputQueue->pop();
 
         try
