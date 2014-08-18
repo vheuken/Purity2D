@@ -62,7 +62,7 @@ void Purity::LuaManager::initializeBindings()
     EntityManager::luaBindings(mLuaState);
     Entity::luaBindings(mLuaState);
     MovableEntity::luaBindings(mLuaState);
-    initializeSFMLBindings();
+    initializeMiscBindings();
 }
 
 void Purity::LuaManager::initializeMiscBindings()
