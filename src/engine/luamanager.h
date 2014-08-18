@@ -23,7 +23,7 @@ namespace Purity
         lua_State* mLuaState;
 
         void initializeBindings();
-        void initializeSFMLBindings();
+        void initializeMiscBindings();
     };
 }
 
