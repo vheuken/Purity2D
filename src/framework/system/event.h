@@ -41,7 +41,7 @@ namespace Purity
             KeyEvent keyEvent;
         };
 
-        EventType type;
+        int type;
 
         Event& operator=(const SDL_Event& event);
     };

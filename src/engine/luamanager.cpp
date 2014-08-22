@@ -76,5 +76,8 @@ void Purity::LuaManager::initializeMiscBindings()
             .beginClass<Event::KeyEvent>("KeyEvent")
                 .addData("code", &Event::KeyEvent::code, false)
             .endClass()
+            .beginNamespace("Eventt")
+                .addVariable("KeyPressed", new int(Event::EventType::KeyPressed), false)
+            .endNamespace()
         .endNamespace();
 }
