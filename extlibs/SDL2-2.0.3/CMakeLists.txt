@@ -37,6 +37,41 @@ file(GLOB SOURCE_FILES
   )
   add_library(SDL2-static STATIC ${SOURCE_FILES})
   target_link_libraries(SDL2-static dl GLESv1_CM GLESv2 log android)
+
+elseif(IOS)
+  ${SDL2_SOURCE_DIR}/src/*.c
+  ${SDL2_SOURCE_DIR}/src/atomic/*.c
+  ${SDL2_SOURCE_DIR}/src/audio/*.c
+  ${SDL2_SOURCE_DIR}/src/audio/coreaudio/*.c
+  ${SDL2_SOURCE_DIR}/src/audio/dummy/*.c
+  #${SDL2_SOURCE_DIR}/src/core/android/*.c
+  ${SDL2_SOURCE_DIR}/src/cpuinfo/*.c
+  ${SDL2_SOURCE_DIR}/src/dynapi/*.c
+  ${SDL2_SOURCE_DIR}/src/events/*.c
+  ${SDL2_SOURCE_DIR}/src/file/cocoa/*.m
+  ${SDL2_SOURCE_DIR}/src/file/*.c
+  ${SDL2_SOURCE_DIR}/src/haptic/*.c
+  ${SDL2_SOURCE_DIR}/src/haptic/dummy/*.c
+  ${SDL2_SOURCE_DIR}/src/joystick/*.c
+  ${SDL2_SOURCE_DIR}/src/joystick/iphoneos/*.m
+  ${SDL2_SOURCE_DIR}/src/loadso/dlopen/*.c
+  ${SDL2_SOURCE_DIR}/src/power/*.c
+  ${SDL2_SOURCE_DIR}/src/power/uikit/*.m
+  ${SDL2_SOURCE_DIR}/src/filesystem/dummy/*.c
+  ${SDL2_SOURCE_DIR}/src/render/*.c
+  ${SDL2_SOURCE_DIR}/src/render/*/*.c
+  ${SDL2_SOURCE_DIR}/src/stdlib/*.c
+  ${SDL2_SOURCE_DIR}/src/thread/*.c
+  ${SDL2_SOURCE_DIR}/src/thread/pthread/*.c
+  ${SDL2_SOURCE_DIR}/src/timer/*.c
+  ${SDL2_SOURCE_DIR}/src/timer/unix/*.c
+  ${SDL2_SOURCE_DIR}/src/video/*.c
+  ${SDL2_SOURCE_DIR}/src/video/uikit/*.m
+  ${SDL2_SOURCE_DIR}/src/main/dummy/*.c
+  ${SDL2_SOURCE_DIR}/src/main/libm/*.c
+  ) 
+ add_library(SDL2-static STATIC ${SOURCE_FILES}) 
+
 else()
 cmake_minimum_required(VERSION 2.6)
 project(SDL2 C)
