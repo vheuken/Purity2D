@@ -33,12 +33,18 @@ if (ANDROID)
 	add_library( "main" SHARED 
                  ../../../extlibs/SDL2-2.0.3/src/main/android/SDL_android_main.c
                  main.cpp )
+
+elseif(IOS)
+	add_executable( ${ENGINE_PROJECT_NAME} MACOSX_BUNDLE 
+					${HEADER_FILES}
+					${SOURCE_FILES}
+		                        main.cpp
+	)
 else()
 	add_executable( ${ENGINE_PROJECT_NAME} 
 					${HEADER_FILES}
 					${SOURCE_FILES}
-					
-                    main.cpp
+		                        main.cpp
 	)
 endif(ANDROID)
 
@@ -51,10 +57,7 @@ target_link_libraries(
     lua
     TMX-Parser
     enet
-    STB_Image
-	
-    ${Boost_SYSTEM_LIBRARY}
-    ${Boost_FILESYSTEM_LIBRARY}
+    STB_Image	
 )
 
 if (ANDROID)
