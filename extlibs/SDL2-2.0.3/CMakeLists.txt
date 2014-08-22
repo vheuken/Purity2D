@@ -39,6 +39,9 @@ file(GLOB SOURCE_FILES
   target_link_libraries(SDL2-static dl GLESv1_CM GLESv2 log android)
 
 elseif(IOS)
+set(SDL2_SOURCE_DIR .)
+include_directories(include)
+file(GLOB SOURCE_FILES   
   ${SDL2_SOURCE_DIR}/src/*.c
   ${SDL2_SOURCE_DIR}/src/atomic/*.c
   ${SDL2_SOURCE_DIR}/src/audio/*.c
