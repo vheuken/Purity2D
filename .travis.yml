@@ -5,6 +5,9 @@ language:
   - cpp
 compiler:
   - gcc
+env:
+  matrix:
+    - IOS_ANDROID=false
 script:
-  - if [[ $TRAVIS_OS_NAME == "linux" ]]; then bash build-scripts/linux.sh; fi
-  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then bash build-scripts/osx.sh; fi
+  - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
+  - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then bash build-scripts/osx.sh; fi
