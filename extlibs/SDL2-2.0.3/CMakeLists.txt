@@ -73,7 +73,17 @@ file(GLOB SOURCE_FILES
   ${SDL2_SOURCE_DIR}/src/main/dummy/*.c
   ${SDL2_SOURCE_DIR}/src/main/libm/*.c
   ) 
+ find_library(UIKIT NAMES UIKit)
+ find_library(OPENGLES NAMES OpenGLES)
+ find_library(COREAUDIO NAMES CoreAudio)
+ find_library(AUDIOTOOLBOX NAMES AudioToolbox)
+ find_library(COREGRAPHICS NAMES CoreGraphics)
+ find_library(FOUNDATION NAMES Foundation)
+ find_library(COREMOTION NAMES CoreMotion)
  add_library(SDL2-static STATIC ${SOURCE_FILES}) 
+ target_link_libraries(SDL2-static ${UIKIT} ${OPENGLES} ${COREAUDIO}
+                       ${AUDIOTOOLBOX} ${COREGRAPHICS} ${FOUNDATION}
+                       ${COREMOTION} )
 
 else()
 cmake_minimum_required(VERSION 2.6)
