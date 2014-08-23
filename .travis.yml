@@ -9,7 +9,6 @@ env:
   matrix:
     - IOS_ANDROID=false
     - IOS_ANDROID=true
-    - FUCK_SHAWN=PENIS
 script:
   # OS X and Linux desktop builds
   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
