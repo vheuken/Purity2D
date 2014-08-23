@@ -69,6 +69,7 @@ file(GLOB SOURCE_FILES
   ${SDL2_SOURCE_DIR}/src/timer/*.c
   ${SDL2_SOURCE_DIR}/src/timer/unix/*.c
   ${SDL2_SOURCE_DIR}/src/video/*.c
+  ${SDL2_SOURCE_DIR}/src/video/dummy/*.c
   ${SDL2_SOURCE_DIR}/src/video/uikit/*.m
   ${SDL2_SOURCE_DIR}/src/main/dummy/*.c
   ${SDL2_SOURCE_DIR}/src/main/libm/*.c
@@ -80,10 +81,11 @@ file(GLOB SOURCE_FILES
  find_library(COREGRAPHICS NAMES CoreGraphics)
  find_library(FOUNDATION NAMES Foundation)
  find_library(COREMOTION NAMES CoreMotion)
+ find_library(QUARTZCORE NAMES QuartzCore)
  add_library(SDL2-static STATIC ${SOURCE_FILES}) 
  target_link_libraries(SDL2-static ${UIKIT} ${OPENGLES} ${COREAUDIO}
                        ${AUDIOTOOLBOX} ${COREGRAPHICS} ${FOUNDATION}
-                       ${COREMOTION} )
+                       ${COREMOTION} ${QUARTZCORE})
 
 else()
 cmake_minimum_required(VERSION 2.6)
