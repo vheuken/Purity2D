@@ -29,11 +29,11 @@ void Purity::InputManager::update()
             }*/
         }
         else if (event.type == Event::KeyPressed)
-        {/*
-            if (event.key.keysym.sym == SDLK_ESCAPE)
+        {
+            if (event.keyEvent.code == SDLK_ESCAPE)
             {
                 mWindow->close();
-            }*/
+            }
         }
     }
 }
