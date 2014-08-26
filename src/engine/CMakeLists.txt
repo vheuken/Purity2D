@@ -57,7 +57,8 @@ target_link_libraries(
     lua
     TMX-Parser
     enet
-    STB_Image	
+    STB_Image
+	inih	
 )
 
 if (ANDROID)
