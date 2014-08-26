@@ -3,6 +3,7 @@
 #include <iostream>
 #include "luamanager.h"
 #include "../framework/graphics/texturemanager.h"
+#include <LuaBridge.h>
 
 Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     : mProgramOptions(commandLineArguments)
@@ -26,6 +27,9 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     initializeSceneManager();
     initializePhysicsSystem();
     initializeNetworkSystem();
+
+    // TODO: move somewhere else?
+    luabridge::setGlobal(LuaManager::getManager()->getState(), LuaManager::getManager(), "GPurityLuaManager");
 }
 
 void Purity::Engine::run()
