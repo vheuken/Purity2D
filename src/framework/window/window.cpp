@@ -7,7 +7,8 @@
 
 Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
 : mWindowManipulator(this),
-  mViewportType(viewportType)
+  mViewportType(viewportType),
+  mIsBorderless(Configuration::getInstance()->getBool("window", "borderless", false))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -15,11 +16,14 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     }
 
     int flags = 0;
-    auto config = Configuration::getInstance();
 
-    if (config->getBool("window", "borderless", false))
+    if (mIsBorderless)
     {
         flags = SDL_WINDOW_BORDERLESS;
+    }
+    else
+    {
+        flags = SDL_WINDOW_RESIZABLE;
     }
 
     mInternalWindow = SDL_CreateWindow(title.c_str(),
@@ -111,5 +115,8 @@ void Purity::Window::close()
 
 void Purity::Window::manipulateWindow()
 {
-    mWindowManipulator.manipulateWindow();
+    if (mIsBorderless == true)
+    {
+        mWindowManipulator.manipulateWindow();
+    }
 }

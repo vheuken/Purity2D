@@ -53,6 +53,8 @@ namespace Purity
         View mView;
 
         ViewportType mViewportType;
+
+        bool mIsBorderless;
     };
 }
 
