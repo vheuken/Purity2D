@@ -3,6 +3,8 @@
 
 #include <SDL.h>
 
+#include "../system/configuration.h"
+
 Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
 : mWindowManipulator(this),
   mViewportType(viewportType)
@@ -12,12 +14,20 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
         std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
     }
 
+    int flags = 0;
+    auto config = Configuration::getInstance();
+
+    if (config->getBool("window", "borderless", "false"))
+    {
+        flags = SDL_WINDOW_BORDERLESS;
+    }
+
     mInternalWindow = SDL_CreateWindow(title.c_str(),
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
                                        width,
                                        height,
-                                       SDL_WINDOW_BORDERLESS);
+                                       flags);
 
     if (mInternalWindow == nullptr)
     {
