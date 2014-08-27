@@ -1,6 +1,5 @@
 #include "engine.h"
 #include "commandlinearguments.h"
-#include "../framework/system/configuration.h"
 
 // HACK!
 // SDL2 redefines main, which messes with Windows

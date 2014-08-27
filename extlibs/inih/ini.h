@@ -16,6 +16,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>
+#include "../SDL2-2.0.3/include/SDL_rwops.h"
 
 /* Parse given INI-style file. May have [section]s, name=value pairs
    (whitespace stripped), and comments starting with ';' (semicolon). Section
@@ -37,7 +38,7 @@ int ini_parse(const char* filename,
 
 /* Same as ini_parse(), but takes a FILE* instead of filename. This doesn't
    close the file when it's finished -- the caller must do that. */
-int ini_parse_file(FILE* file,
+int ini_parse_file(SDL_RWops* file,
                    int (*handler)(void* user, const char* section,
                                   const char* name, const char* value),
                    void* user);

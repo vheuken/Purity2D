@@ -10,7 +10,6 @@ http://code.google.com/p/inih/
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-#include "../SDL2-2.0.3/include/SDL.h"
 
 #include "ini.h"
 
@@ -59,8 +58,32 @@ static char* strncpy0(char* dest, const char* src, size_t size)
     return dest;
 }
 
+char *sgets( char * str, int num, char **input )
+{
+    char *next = *input;
+    int  numread = 0;
+
+    while ( numread + 1 < num && *next ) {
+        int isnewline = ( *next == '\n' );
+        *str++ = *next++;
+        numread++;
+        // newline terminates the line but is included
+        if ( isnewline )
+            break;
+    }
+
+    if ( numread == 0 )
+        return NULL;  // "eof"
+
+    // must have hit the null terminator or end of line
+    *str = '\0';  // null terminate this tring
+    // set up input for next call
+    *input = next;
+    return str;
+}
+
 /* See documentation in header file. */
-int ini_parse_file(FILE* file,
+int ini_parse_file(SDL_RWops* file,
                    int (*handler)(void*, const char*, const char*,
                                   const char*),
                    void* user)
@@ -87,9 +110,14 @@ int ini_parse_file(FILE* file,
         return -2;
     }
 #endif
+    size_t fileSize = file->size(file);
+    char* fileContents = (char*)malloc(fileSize + 1);
+    file->read(file, fileContents, 1, fileSize);
+    fileContents[fileSize] = '\0';
+
 
     /* Scan through file line by line */
-    while (fgets(line, INI_MAX_LINE, file) != NULL) {
+    while (sgets(line, INI_MAX_LINE, &fileContents) != NULL) {
         lineno++;
 
         start = line;
@@ -161,7 +189,7 @@ int ini_parse_file(FILE* file,
 #if !INI_USE_STACK
     free(line);
 #endif
-
+    free(fileContents);
     return error;
 }
 
@@ -170,13 +198,14 @@ int ini_parse(const char* filename,
               int (*handler)(void*, const char*, const char*, const char*),
               void* user)
 {
-    FILE* file;
+    SDL_RWops* file = SDL_RWFromFile(filename, "r");
     int error;
 
-    file = fopen(filename, "r");
     if (!file)
         return -1;
     error = ini_parse_file(file, handler, user);
-    fclose(file);
+
+    file->close(file);
+
     return error;
 }
