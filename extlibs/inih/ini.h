@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>
-#include "../SDL2-2.0.3/include/SDL_rwops.h"
+#include <SDL.h>
 
 /* Parse given INI-style file. May have [section]s, name=value pairs
    (whitespace stripped), and comments starting with ';' (semicolon). Section

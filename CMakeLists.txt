@@ -31,7 +31,7 @@ IF (NOT MSVC)
 	ADD_DEFINITIONS(-std=c++11 -Wall)
 	
     IF (NOT APPLE AND NOT ANDROID AND NOT UNIX)
-            set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
+#            set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
     endif()
 ENDIF (NOT MSVC)
 

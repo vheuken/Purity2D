@@ -1,6 +1,7 @@
 #ifndef PURITY_CONFIGURATION_H
 #define PURITY_CONFIGURATION_H
 
+#include <memory>
 #include <string>
 #include <INIReader.h>
 
@@ -21,7 +22,7 @@ namespace Purity
     private:
         Configuration();
 
-        INIReader mConfigFile;
+        std::unique_ptr<INIReader> mConfigFile;
     };
 }
 

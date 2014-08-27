@@ -11,6 +11,7 @@ http://code.google.com/p/inih/
 #include <ctype.h>
 #include <string.h>
 
+#define INI_USE_STACK 0
 #include "ini.h"
 
 #if !INI_USE_STACK
@@ -58,28 +59,33 @@ static char* strncpy0(char* dest, const char* src, size_t size)
     return dest;
 }
 
-char *sgets( char * str, int num, char **input )
+char *rwgets(char *buf, int count, SDL_RWops *rw)
 {
-    char *next = *input;
-    int  numread = 0;
+    int i;
 
-    while ( numread + 1 < num && *next ) {
-        int isnewline = ( *next == '\n' );
-        *str++ = *next++;
-        numread++;
-        // newline terminates the line but is included
-        if ( isnewline )
+    buf[count - 1] = '\0';
+
+    for (i = 0; i < count - 1; i++)
+    {
+        if (SDL_RWread(rw, buf + i, 1, 1) != 1)
+        {
+            if (i == 0)
+            {
+                return NULL;
+            }
+
             break;
+        }
+
+        if (buf[i] == '\n')
+        {
+            break;
+        }
     }
 
-    if ( numread == 0 )
-        return NULL;  // "eof"
+    buf[i] = '\0';
 
-    // must have hit the null terminator or end of line
-    *str = '\0';  // null terminate this tring
-    // set up input for next call
-    *input = next;
-    return str;
+    return buf;
 }
 
 /* See documentation in header file. */
@@ -110,14 +116,9 @@ int ini_parse_file(SDL_RWops* file,
         return -2;
     }
 #endif
-    size_t fileSize = file->size(file);
-    char* fileContents = (char*)malloc(fileSize + 1);
-    file->read(file, fileContents, 1, fileSize);
-    fileContents[fileSize] = '\0';
-
 
     /* Scan through file line by line */
-    while (sgets(line, INI_MAX_LINE, &fileContents) != NULL) {
+    while (rwgets(line, INI_MAX_LINE, file) != NULL) {
         lineno++;
 
         start = line;
@@ -189,7 +190,7 @@ int ini_parse_file(SDL_RWops* file,
 #if !INI_USE_STACK
     free(line);
 #endif
-    free(fileContents);
+    //free(fileContents);
     return error;
 }
 
