@@ -17,7 +17,7 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     int flags = 0;
     auto config = Configuration::getInstance();
 
-    if (config->getBool("window", "borderless", "false"))
+    if (config->getBool("window", "borderless", false))
     {
         flags = SDL_WINDOW_BORDERLESS;
     }

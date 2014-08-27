@@ -10,6 +10,7 @@ http://code.google.com/p/inih/
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include "../SDL2-2.0.3/include/SDL.h"
 
 #include "ini.h"
 
