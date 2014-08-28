@@ -28,7 +28,9 @@ namespace Purity
 
             TouchBegan             = SDL_FINGERDOWN,       // TODO: Implement
             TouchMoved             = SDL_FINGERMOTION,     // TODO: Implement
-            TouchEnded             = SDL_FINGERUP          // TODO: Implement
+            TouchEnded             = SDL_FINGERUP,         // TODO: Implement
+
+            Closed                 = SDL_WINDOWEVENT_CLOSE
         };
 
         struct KeyEvent

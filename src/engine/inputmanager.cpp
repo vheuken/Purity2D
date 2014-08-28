@@ -21,12 +21,9 @@ void Purity::InputManager::update()
     {
         mInputQueue->push(event);
 
-        if (event.type == SDL_WINDOWEVENT)
-        {/*
-            if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-            {
-                mWindow->close();
-            }*/
+        if (event.type == Event::Closed)
+        {
+            mWindow->close();
         }
         else if (event.type == Event::KeyPressed)
         {

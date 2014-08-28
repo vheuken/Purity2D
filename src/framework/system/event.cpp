@@ -11,6 +11,13 @@ Purity::Event& Purity::Event::operator=(const SDL_Event& sdlEvent)
     case SDL_KEYUP:
         convertKeyReleasedEvent(*this, sdlEvent);
         break;
+
+    case SDL_WINDOWEVENT:
+        if (sdlEvent.window.event == SDL_WINDOWEVENT_CLOSE)
+        {
+            this->type = Event::Closed;
+        }
+        break;
     }
 
     return *this;
