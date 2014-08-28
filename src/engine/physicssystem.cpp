@@ -1,5 +1,3 @@
-// TODO: Lua stuff
-
 #include "physicssystem.h"
 
 #include <string>
@@ -106,8 +104,8 @@ void Purity::PhysicsSystem::handleServerActions()
 
 void Purity::PhysicsSystem::runUpdateScripts()
 {
-    LuaManager* luaManager = LuaManager::getManager();
+    auto luaManager = LuaManager::getManager();
 
-    luabridge::LuaRef updateScript = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
+    auto updateScript = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
     updateScript();
 }

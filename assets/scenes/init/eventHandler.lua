@@ -1,13 +1,12 @@
-dofile("scenes/init/playerMovement.lua")
+GPurityLuaManager:doFile("scenes/init/playerMovement.lua")  
 
-function eventHandler(event)
-    
+function eventHandler(event)  
     player = GEntityManager:getMovableEntityByName(playerName)
     
-    if (event.Type == Event.KeyPressed) then
-        if (event.Key.Code == Keyboard.Left) then
+    if (event.type == Purity.EventType.KeyPressed) then
+        if (event.keyEvent.code == Purity.Keyboard.Left) then
             moveLeft(player)
-        elseif (event.Key.Code == Keyboard.Right) then
+        elseif (event.keyEvent.code == Purity.Keyboard.Right) then
             moveRight(player)
         else
             jump(player)

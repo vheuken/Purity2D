@@ -53,7 +53,7 @@ void Purity::NetworkSystem::update(Scene* scene)
     }
 }
 
-void Purity::NetworkSystem::initializeServer(unsigned short port)
+void Purity::NetworkSystem::initializeServer(const unsigned short port)
 {
     mServer = std::unique_ptr<Server>(new Server(port, mServerActionQueue));
     mPort = port;

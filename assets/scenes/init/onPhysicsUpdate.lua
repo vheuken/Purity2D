@@ -1,7 +1,7 @@
 local startup = true
 
 
-dofile("scenes/init/servercfg.lua")
+GPurityLuaManager:doFile("scenes/init/servercfg.lua")
 
 function onPhysicsUpdate()
     if startup == true then

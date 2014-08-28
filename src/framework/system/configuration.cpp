@@ -1,5 +1,5 @@
 #include "configuration.h"
-#include <iostream>
+
 Purity::Configuration::Configuration()
 {
     mConfigFile = std::unique_ptr<INIReader>(new INIReader("config.ini"));
@@ -18,10 +18,7 @@ std::string Purity::Configuration::getString(std::string section, std::string na
 
 bool Purity::Configuration::getBool(std::string section, std::string name, bool defaultValue)
 {
-    std::cout << "HI" << std::endl;
-    auto tmp  =  mConfigFile->GetBoolean(section, name, defaultValue);
-    std::cout << "BYE" << std::endl;
-    return tmp;
+    return mConfigFile->GetBoolean(section, name, defaultValue);
 }
 
 double Purity::Configuration::getReal(std::string section, std::string name, double defaultValue)

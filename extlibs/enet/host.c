@@ -1,4 +1,4 @@
-/** 
+/**
  @file host.c
  @brief ENet host management functions
 */

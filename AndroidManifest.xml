@@ -41,4 +41,7 @@
 
     <!-- Allow writing to external storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
+	
+    <!-- Allow internet access -->
+	<uses-permission android:name="android.permission.INTERNET" />
 </manifest> 

@@ -9,6 +9,14 @@ if(ANDROID)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 endif(ANDROID)
 
+if (ANDROID)
+    link_directories(C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/lib/)
+    include_directories(
+        C:/android/android-ndk-r10/platforms/android-19/arch-arm/usr/include/
+    )
+endif(ANDROID)
+
+
 #set(CMAKE_BUILD_TYPE Debug)
 
 set_property( GLOBAL PROPERTY USE_FOLDERS ON)
@@ -31,7 +39,7 @@ IF (NOT MSVC)
 	ADD_DEFINITIONS(-std=c++11 -Wall)
 	
     IF (NOT APPLE AND NOT ANDROID AND NOT UNIX)
-#            set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -static")
     endif()
 ENDIF (NOT MSVC)
 

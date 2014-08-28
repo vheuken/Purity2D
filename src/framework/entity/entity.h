@@ -29,7 +29,7 @@ namespace Tmx
 
 namespace Purity
 {
-    const float32 PIXELS_PER_METER = Configuration::getInstance()->getReal("physics", "pixels_per_meter", 30.0);
+    const float32 PIXELS_PER_METER = 30.f;//= Configuration::getInstance()->getReal("physics", "pixels_per_meter", 30.0);
     const float32 DEFAULT_HITBOX_WIDTH_METERS = 0.5;
     const float32 DEFAULT_HITBOX_HEIGHT_METERS = 1.5;
 
