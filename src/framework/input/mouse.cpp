@@ -4,6 +4,8 @@
 #include <X11/Xlib.h>
 #elif defined _WIN32
 #include <windows.h>
+#elif __APPLE__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #include <SDL_events.h>
@@ -33,7 +35,14 @@ Purity::Vector2i Purity::Mouse::getPosition()
     GetCursorPos(&point);
     return Vector2i(point.x, point.y);
 #elif defined __APPLE__
-#warning Not implemented on OS X
+    auto event = CGEventCreate(nullptr);
+    auto cursor = CGEventGetLocation(event);
+    
+    Vector2i ret(cursor.x, cursor.y);
+    
+    CFRelease(event);
+    
+    return ret;
 #endif
 }
 
