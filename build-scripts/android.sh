@@ -36,7 +36,7 @@ export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
 #Workaround to allow Android SDK update automation
 printf "$headerFormat" "Updating Android SDK"
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui \
-         --filter "tools", "platform-tools", "build-tools-20.0.0", "android-20"
+         --filter "tools, platform-tools, build-tools-20.0.0, android-20"
 printf "$headerFormat" "Finished updating Android SDK"
 
 printf "$headerFormat" "Building engine"
