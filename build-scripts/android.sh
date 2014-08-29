@@ -1,6 +1,8 @@
+
+
 printf "\n\n\e[1;34mWorking in location: `pwd`\e[0m\n\n"
 export BUILD_HOME=`pwd` &&\
-         printf "Created \$BUILD_HOME at `pwd`\n\n"
+         printf "Created \$BUILD_HOME at `pwd`\n"
 
 printf "\n\n\e[1;34mInstalling core Android development packages\e[0m\n\n"
 printf "Downloading and extracting Android NDK\n"
@@ -15,11 +17,11 @@ curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
 
 printf "\n\n\e[1;34mConfiguring build environment\e[0m\n\n"
 export ANDROID_NDK=`pwd`/android-ndk-r10 &&\
-         printf "Created \$ANDROID_NDK at `pwd`/android-ndk-r10\n\n"
+         printf "Created \$ANDROID_NDK at `pwd`/android-ndk-r10\n"
 export ANDROID_SDK=`pwd`/android-sdk-linux &&\
-         printf "Created \$ANDROID_SDK at `pwd`/android-sdk-linux\n\n"
+         printf "Created \$ANDROID_SDK at `pwd`/android-sdk-linux\n"
 export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
-         printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n\n"
+         printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n"
 
 #Workaround to allow Android SDK update automation
 printf "\n\n\e[1;34mUpdating Android SDK\e[0m\n\n"
@@ -40,6 +42,8 @@ printf "\n\n\e[1;34mBuilding APK\e[0m\n\n"
 cd $BUILD_HOME
 android update project \
          --name purity2d-build --path . --target "android-20"
+
+ls -la $ANDROID_SDK/build-tools/20.0.0/
 
 ant debug
 
