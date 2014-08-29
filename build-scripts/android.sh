@@ -5,9 +5,10 @@ curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz | tar -zx
 
 printf "\n\nConfiguring and updating Android build environment\n"
-export ANDROID_NDK=`pwd`/android-ndk-r10 \
-         ANDROID_SDK=`pwd`/android-sdk-linux \
-         PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+export ANDROID_NDK=`pwd`/android-ndk-r10
+export ANDROID_SDK=`pwd`/android-sdk-linux
+export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+
 printf "\n\nTesting location\n"
 prinf "Compare android-sdk-linux with ANDROID_SDK"
 ls -la ./android-sdk-linux
