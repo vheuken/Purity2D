@@ -8,10 +8,11 @@ printf "$headerFormat" "Working in location: `pwd`"
 export BUILD_HOME=`pwd` &&\
          printf "Created \$BUILD_HOME at `pwd`\n"
 
-sudo apt-get -qqy update
-sudo apt-get -qqy install ia32-libs
-sudo apt-get -qqy install libncurses5:i386 libstdc++6:i386 zlib1g:i386
-sudo apt-get -qqy install libc6-i386 lib32gcc1 lib32z1
+printf "$headerFormat" "Installing i386 architecture libraries"
+sudo apt-get -y update
+sudo apt-get -y install ia32-libs
+sudo apt-get -y install libncurses5:i386 libstdc++6:i386 zlib1g:i386
+sudo apt-get -y install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
 
 printf "$headerFormat" "Installing core Android development packages"
 printf "Downloading and extracting Android NDK\n"
@@ -47,7 +48,7 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
 		
 cmake --build . -- -j4 && cd $BUILD_HOME
 
-printf "$headerFormar" "Building APK"
+printf "$headerFormat" "Building APK"
 cd $BUILD_HOME
 android update project \
          --name purity2d-build --path . --target "android-20"
