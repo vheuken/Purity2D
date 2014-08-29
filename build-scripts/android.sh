@@ -1,27 +1,20 @@
-printf "\n\nWorking in location:     `pwd`\n"
+printf "\n\n\e[1;34mWorking in location:     `pwd`\e[0m\n"
 
-printf "\n\nInstalling core Android development packages\n"
+printf "\n\n\e[1;34mInstalling core Android development packages[0m\n\n"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 | tar -jx
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz | tar -zx
 
-printf "\n\nConfiguring and updating Android build environment\n"
+printf "\n\n\e[1;34mConfiguring and Android build environment[0m\n\n"
 export ANDROID_NDK=`pwd`/android-ndk-r10
 export ANDROID_SDK=`pwd`/android-sdk-linux
 export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
 
-printf "\n\nTesting location\n"
-prinf "Compare android-sdk-linux with ANDROID_SDK"
-ls -la ./android-sdk-linux
-ls -la $ANDROID_SDK
-printf "Compare android-sdk-linux/tools with ANDROID_SDK/tools"
-ls -la ./android-sdk-linux/tools
-ls -la $ANDROID_SDK/tools
-printf "checking PATH"
-echo $PATH
 #Workaround to allow Android SDK update automation
+printf "\n\n\e[1;34mUpdating Android SDK[0m\n\n"
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
+printf "\n\n\e[1;34mFinished updating Android SDK[0m\n\n"
 
-
+printf "\n\n\e[1;34mCompiling[0m\n\n"
 bash $ANDROID_NDK/build/tools/make-standalone-toolchain.sh
 
 mkdir build && cd build
@@ -31,6 +24,13 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
 		
 cmake --build . -- -j4
 
+printf "\n\n\e[1;34mBuilding APK[0m\n\n"
+android update project \
+         --name purity2d-build --path . --target "android-20"
+
+ant debug
+
+tree ./
 
 
 
