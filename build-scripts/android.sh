@@ -1,6 +1,6 @@
 #Formatting
 #Header
-startHeader='\e[0;34m\n\n'
+startHeader='\e[1;34m\n\n'
 endHeader='\e[0m\n\n'
 
 printf "$startHeader Working in location: `pwd` $endHeader"
