@@ -9,10 +9,14 @@ export ANDROID_NDK=`pwd`/android-ndk-r10 \
          ANDROID_SDK=`pwd`/android-sdk-linux \
          PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
 printf "\n\nTesting location\n"
+prinf "Compare android-sdk-linux with ANDROID_SDK"
 ls -la ./android-sdk-linux
 ls -la $ANDROID_SDK
+printf "Compare android-sdk-linux/tools with ANDROID_SDK/tools"
 ls -la ./android-sdk-linux/tools
 ls -la $ANDROID_SDK/tools
+printf "checking PATH"
+echo $PATH
 #Workaround to allow Android SDK update automation
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
 
