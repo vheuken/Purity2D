@@ -7,11 +7,6 @@ headerFormat="\n\n\e[1;34m %s \e[0m\n\n"
 printf "$headerFormat" "Working in location: `pwd`"
 export BUILD_HOME=`pwd` &&\
          printf "Created \$BUILD_HOME at `pwd`\n"
-         
-printf "$headerFormat" "Installing libraries"
-dpkg --add-architecture i386
-apt-get -qqy update
-apt-get -qqy install libncurses5:i386 libstdc++6:i386 zlib1g:i386
 
 printf "$headerFormat" "Installing core Android development packages"
 printf "Downloading and extracting Android NDK\n"
