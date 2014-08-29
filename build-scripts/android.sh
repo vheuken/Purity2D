@@ -10,9 +10,8 @@ export BUILD_HOME=`pwd` &&\
 
 #Need generic libraries, the following only works on Ubuntu 12.04
 printf "$headerFormat" "Installing i386 architecture libraries"
-sudo apt-get -y update
-#sudo apt-get -y install libncurses5:i386 libstdc++6:i386 zlib1g:i386
-sudo apt-get -y install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
+sudo apt-get -qqy update
+sudo apt-get -qqy install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
 
 printf "$headerFormat" "Installing core Android development packages"
 printf "Downloading and extracting Android NDK\n"
@@ -33,7 +32,7 @@ export ANDROID_SDK=`pwd`/android-sdk-linux &&\
 export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
          printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n"
 
-#Workaround to allow Android SDK update automation
+#Workaround to allow Android SDK update automation, hardcoded for Android API level 20
 printf "$headerFormat" "Updating Android SDK"
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui \
          --filter "tools, platform-tools, build-tools-20.0.0, android-20"
