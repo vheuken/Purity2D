@@ -12,6 +12,8 @@
 
 Purity::Vector2i Purity::Mouse::getPosition()
 {
+    Vector2i ret(0,0);
+    
 #ifdef __gnu_linux__
     // Open a connection with the X server
     Display* display = XOpenDisplay(NULL);
@@ -29,21 +31,25 @@ Purity::Vector2i Purity::Mouse::getPosition()
     // Close the connection with the X server
     XCloseDisplay(display);
 
-    return Vector2i(gx, gy);
+    ret.x = gx;
+    ret.y = gy;
 #elif defined _WIN32
     POINT point;
     GetCursorPos(&point);
-    return Vector2i(point.x, point.y);
+    
+    ret.x = point.x;
+    ret.y = point.y;
 #elif defined __APPLE__ && !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     auto event = CGEventCreate(nullptr);
     auto cursor = CGEventGetLocation(event);
     
-    Vector2i ret(cursor.x, cursor.y);
+    ret.x = cursor.x;
+    ret.y = cursor.y;
     
     CFRelease(event);
+#endif
     
     return ret;
-#endif
 }
 
 
