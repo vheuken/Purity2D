@@ -15,8 +15,6 @@ script:
   #- if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then bash build-scripts/osx.sh; fi
   
   # iOS and Android builds
-  #- if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then bash build-scripts/android.sh; fi
+  - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then bash build-scripts/android.sh; fi
   #- if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then bash build-scripts/ios.sh; fi
 
-  #Above lines are commented out while waiting for Travis-CI multi-OS push. Quick hack below.
-- if [[ $IOS_ANDROID == true  ]]; then bash build-scripts/android.sh; fi
