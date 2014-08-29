@@ -33,9 +33,9 @@ export ANDROID_SDK=`pwd`/android-sdk-linux &&\
 export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
          printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n"
 
-#Workaround to allow Android SDK update automation, hard coded for "android-20"
+#Workaround to allow Android SDK update automation
 printf "$headerFormat" "Updating Android SDK"
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "android-20"
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui #--filter "android-20"
 printf "$headerFormat" "Finished updating Android SDK"
 
 printf "$headerFormat" "Building engine"
