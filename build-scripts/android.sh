@@ -8,6 +8,11 @@ printf "$headerFormat" "Working in location: `pwd`"
 export BUILD_HOME=`pwd` &&\
          printf "Created \$BUILD_HOME at `pwd`\n"
 
+sudo apt-get -qqy update
+sudo apt-get -qqy install ia32-libs
+sudo apt-get -qqy install libncurses5:i386 libstdc++6:i386 zlib1g:i386
+sudo apt-get -qqy install libc6-i386 lib32gcc1 lib32z1
+
 printf "$headerFormat" "Installing core Android development packages"
 printf "Downloading and extracting Android NDK\n"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
