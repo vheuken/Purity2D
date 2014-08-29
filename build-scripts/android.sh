@@ -85,13 +85,14 @@ keytool -genkey -noprompt \
 printf "$headerFormat" "Signing APK"
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
          -keystore keystore -storepass password ./bin/purity2d-build-release-unsigned.apk alias_name &&\
+         mv ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-signed.apk
          printf "Signed APK\n"
 
 printf "$headerFormat" "Validating build"
 cd $BUILD_HOME
 ls -la ./bin
 
-jarsigner -verify -verbose -certs ./bin/purity2d-build-release.apk
+jarsigner -verify -verbose -certs ./bin/purity2d-build-release-signed.apk
 
 printf "$headerFormat" "Validating build again"
 ls -la ./bin
