@@ -1,7 +1,7 @@
 #Formatting
 #Header
-startHeader='\e[1;34m\n\n'
-endHeader='\e[0m\n\n'
+startHeader="\n\n\e[1;34m"
+endHeader="\e[0m\n\n"
 
 printf "$startHeader Working in location: `pwd` $endHeader"
 export BUILD_HOME=`pwd` &&\
