@@ -10,7 +10,7 @@ env:
     - IOS_ANDROID=false
     - IOS_ANDROID=true
 script:
-  # OS X and Linux desktop builds
+  # OSX and generic GNU/Linux desktop builds
   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then bash build-scripts/osx.sh; fi
   
