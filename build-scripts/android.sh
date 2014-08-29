@@ -27,9 +27,15 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
 		
 cmake --build . -- -j4 &&/
 
+#Tests
+printf "\n\n\e[1;36mTests\e[0m\n\n"
+pwd
+ls -la
+
+
 printf "\n\n\e[1;34mBuilding APK\e[0m\n\n"
 android update project \
-         --name purity2d-build --path ./bin --target "android-20"
+         --name purity2d-build --path . --target "android-20"
 
 #ant debug
 #
