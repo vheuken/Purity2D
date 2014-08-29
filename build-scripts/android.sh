@@ -1,7 +1,7 @@
 printf "\n\nWorking in location:     `pwd`\n"
 
 printf "\n\nInstalling core Android development packages\n"
-wget http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 | tar xf &
+wget http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 | tar xf  &
 wget http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz | tar xzf &
 wait
 
@@ -10,7 +10,7 @@ export ANDROID_NDK=`pwd`/android-ndk-r10 \
          ANDROID_SDK=`pwd`/android-sdk-linux/sdk \
          PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
 printf "\n\nTesting location\n"
-ls $ANDROID_SDK/tools
+ls -la
 #Workaround to allow Android SDK update automation
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
 
