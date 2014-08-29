@@ -1,11 +1,11 @@
-echo "Working in location:     `pwd`"
+printf "\n\nWorking in location:     `pwd`"
 
-echo "Installing core Android development packages"
+echo "\n\nInstalling core Android development packages"
 wget http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 | tar -x -z &
-wget http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz | tar -x -z &
+#wget http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz | tar -x -z &
 wait
 
-echo "Configuring and updating Android build environment"
+echo "\n\nConfiguring and updating Android build environment"
 export ANDROID_NDK=`pwd`/android-ndk-r10 \
          ANDROID_SDK=`pwd`/android-sdk-linux \
          PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
