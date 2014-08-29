@@ -4,7 +4,7 @@
 #include <X11/Xlib.h>
 #elif defined _WIN32
 #include <windows.h>
-#elif __APPLE__
+#elif __APPLE__ && !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
@@ -34,7 +34,7 @@ Purity::Vector2i Purity::Mouse::getPosition()
     POINT point;
     GetCursorPos(&point);
     return Vector2i(point.x, point.y);
-#elif defined __APPLE__
+#elif defined __APPLE__ && !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     auto event = CGEventCreate(nullptr);
     auto cursor = CGEventGetLocation(event);
     
