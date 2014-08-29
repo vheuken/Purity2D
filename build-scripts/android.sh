@@ -9,6 +9,8 @@ printf "\n\nConfiguring and updating Android build environment\n"
 export ANDROID_NDK=`pwd`/android-ndk-r10 \
          ANDROID_SDK=`pwd`/android-sdk-linux/sdk \
          PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+printf "\n\nTesting location\n"
+echo "$ANDROID_SDK/tools"
 #Workaround to allow Android SDK update automation
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
 
