@@ -1,4 +1,6 @@
 printf "\n\n\e[1;34mWorking in location: `pwd`\e[0m\n"
+export BUILD_HOME=`pwd` &&\
+         echo "Created \$BUILD_HOME at `pwd`"
 
 printf "\n\n\e[1;34mInstalling core Android development packages\e[0m\n\n"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 | tar -jx
@@ -25,7 +27,7 @@ mkdir build && cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
          -DANDROID_NATIVE_API_LEVEL=android-19
 		
-cmake --build . -- -j4 && cd $HOME
+cmake --build . -- -j4 && cd $BUILD_HOME
 
 #Tests
 printf "\n\n\e[1;36mTests\e[0m\n\n"
@@ -34,7 +36,7 @@ ls -la
 
 
 printf "\n\n\e[1;34mBuilding APK\e[0m\n\n"
-cd $HOME
+cd $BUILD_HOME
 android update project \
          --name purity2d-build --path . --target "android-20"
 
