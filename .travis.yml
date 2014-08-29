@@ -9,6 +9,10 @@ env:
   matrix:
     - IOS_ANDROID=false
     - IOS_ANDROID=true
+before_install:
+ - sudo dpkg --add-architecture i386
+ - sudo apt-get -qqy update
+ - sudo apt-get -qqy install libncurses5:i386 libstdc++6:i386 zlib1g:i386
 script:
   # OSX and generic GNU/Linux desktop builds
   #- if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
