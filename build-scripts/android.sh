@@ -70,13 +70,13 @@ keytool -genkey -noprompt \
          -dname "CN=, OU=, O=, L=, S=, C=" \
          -keystore keystore \
          -storepass password \
-         -keypass password
+         -keypass password \
          -keyalg RSA \
          -keysize 2048 \
          -validity 10000
 
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-         -keystore keystore ./bin/purity2d-build.apk alias_name
+         -keystore keystore ./bin/purity2d-build-unsigned.apk alias_name
 
 printf "$headerFormat" "Validating build"
 cd $BUILD_HOME
