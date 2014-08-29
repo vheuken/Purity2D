@@ -25,7 +25,7 @@ mkdir build && cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
          -DANDROID_NATIVE_API_LEVEL=android-19
 		
-cmake --build . -- -j4 &&/
+cmake --build . -- -j4 && cd $HOME
 
 #Tests
 printf "\n\n\e[1;36mTests\e[0m\n\n"
@@ -34,12 +34,11 @@ ls -la
 
 
 printf "\n\n\e[1;34mBuilding APK\e[0m\n\n"
+cd $HOME
 android update project \
          --name purity2d-build --path . --target "android-20"
 
-#ant debug
-#
-#tree ./
+ant debug
 
 
 
