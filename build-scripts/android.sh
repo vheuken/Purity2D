@@ -10,7 +10,7 @@ export BUILD_HOME=`pwd` &&\
 
 printf "$headerFormat" "Installing i386 architecture libraries"
 sudo apt-get -y update
-sudo apt-get -y install ia32-libs
+sudo apt-get -y install ia32-libs-multiarch ia32-libs
 sudo apt-get -y install libncurses5:i386 libstdc++6:i386 zlib1g:i386
 sudo apt-get -y install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
 
