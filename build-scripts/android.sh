@@ -37,10 +37,10 @@ export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
          printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n"
 
 
-#Workaround to allow Android SDK update automation, hardcoded for Android API level 20
+#Workaround to allow Android SDK update automation
 printf "$headerFormat" "Updating Android SDK"
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui \
-         --filter "platform-tools, build-tools-20.0.0, android-20"
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
+#         --filter "platform-tools, build-tools-20.0.0, android-20, build-tools-19"
 printf "$headerFormat" "Finished updating Android SDK"
 
 
