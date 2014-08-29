@@ -44,7 +44,7 @@ printf "$headerFormat" "Updating Android SDK"
 printf "$headerFormat" "Finished updating Android SDK"
 
 
-printf "$headerFormat" "Building engine"
+printf "$headerFormat" "Building binaries"
 bash $ANDROID_NDK/build/tools/make-standalone-toolchain.sh
 
 mkdir build && cd build
@@ -55,15 +55,20 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
 cmake --build . -- -j4 && cd $BUILD_HOME
 
 
-printf "$headerFormat" "Building APK"
+printf "$headerFormat" "Starting APK build"
 cd $BUILD_HOME
 android update project \
          --name purity2d-build --path . --target "android-20"
 
+
+printf "$headerFormat" "Building debug APK"
 ant debug
 
+
+printf "$headerFormat" "Building release APK"
 ant release
 
+printf "$headerFormat" "Generating signature"
 #Needs to be refined.
 keytool -genkey -noprompt \
          -alias alias_name \
@@ -73,10 +78,14 @@ keytool -genkey -noprompt \
          -keypass password \
          -keyalg RSA \
          -keysize 2048 \
-         -validity 10000
+         -validity 10000 &&\
+         printf "Generated signature\n"
 
+
+printf "$headerFormat" "Signing APK"
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-         -keystore keystore ./bin/purity2d-build-unsigned.apk alias_name
+         -keystore keystore -storepass password ./bin/purity2d-build-unsigned.apk alias_name &&\
+         printf "Signed APK\n"
 
 printf "$headerFormat" "Validating build"
 cd $BUILD_HOME
