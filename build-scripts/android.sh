@@ -6,11 +6,12 @@ printf "\n\n\e[1;34mInstalling core Android development packages\e[0m\n\n"
 printf "Downloading and extracting Android NDK\n"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
          | tar -jx &&\
-         printf "Extracted Android NDK to `pwd`\n\n"
-printf "Downloading and extracting Android SDK\n\n"
+         printf "Extracted Android NDK to `pwd`\n"
+
+printf "Downloading and extracting Android SDK\n"
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
          | tar -zx &&\
-         printf "Extracted Android NDK to 'pwd'\n\n"
+         printf "Extracted Android NDK to `pwd`\n"
 
 printf "\n\n\e[1;34mConfiguring build environment\e[0m\n\n"
 export ANDROID_NDK=`pwd`/android-ndk-r10 &&\
@@ -20,9 +21,9 @@ export ANDROID_SDK=`pwd`/android-sdk-linux &&\
 export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
          printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n\n"
 
-#Workaround to allow Android SDK update automation, only downloads "android-20"
+#Workaround to allow Android SDK update automation
 printf "\n\n\e[1;34mUpdating Android SDK\e[0m\n\n"
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "android-20"
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui #--filter "android-20"
 printf "\n\n\e[1;34mFinished updating Android SDK\e[0m\n\n"
 
 printf "\n\n\e[1;34mBuilding engine\e[0m\n\n"
@@ -34,12 +35,6 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
          -DANDROID_NATIVE_API_LEVEL=android-19
 		
 cmake --build . -- -j4 && cd $BUILD_HOME
-
-#Tests
-printf "\n\n\e[1;36mTests\e[0m\n\n"
-pwd
-ls -la
-
 
 printf "\n\n\e[1;34mBuilding APK\e[0m\n\n"
 cd $BUILD_HOME
