@@ -40,7 +40,7 @@ export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
 #Workaround to allow Android SDK update automation, hardcoded for Android API level 20
 printf "$headerFormat" "Updating Android SDK"
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui \
-         --filter "tools, platform-tools, build-tools-20.0.0, android-20"
+         --filter "platform-tools, build-tools-20.0.0, android-20"
 printf "$headerFormat" "Finished updating Android SDK"
 
 
@@ -84,14 +84,14 @@ keytool -genkey -noprompt \
 
 printf "$headerFormat" "Signing APK"
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-         -keystore keystore -storepass password ./bin/purity2d-build-unsigned.apk alias_name &&\
+         -keystore keystore -storepass password ./bin/purity2d-build-release-unsigned.apk alias_name &&\
          printf "Signed APK\n"
 
 printf "$headerFormat" "Validating build"
 cd $BUILD_HOME
 ls -la ./bin
 
-jarsigner -verify -verbose -certs ./bin/purity2d-build.apk
+jarsigner -verify -verbose -certs ./bin/purity2d-build-release.apk
 
 printf "$headerFormat" "Validating build again"
 ls -la ./bin
