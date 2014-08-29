@@ -12,12 +12,12 @@ export ANDROID_SDK=`pwd`/android-sdk-linux &&\
 export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
          echo "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH"
 
-#Workaround to allow Android SDK update automation
+#Workaround to allow Android SDK update automation, only downloads "android-20"
 printf "\n\n\e[1;34mUpdating Android SDK\e[0m\n\n"
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --filter "android-20"
 printf "\n\n\e[1;34mFinished updating Android SDK\e[0m\n\n"
 
-printf "\n\n\e[1;34mCompiling\e[0m\n\n"
+printf "\n\n\e[1;34mBuilding engine\e[0m\n\n"
 bash $ANDROID_NDK/build/tools/make-standalone-toolchain.sh
 
 mkdir build && cd build
@@ -25,11 +25,11 @@ mkdir build && cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
          -DANDROID_NATIVE_API_LEVEL=android-19
 		
-cmake --build . -- -j4
+cmake --build . -- -j4 &&/
 
 printf "\n\n\e[1;34mBuilding APK\e[0m\n\n"
 android update project \
-         --name purity2d-build --path . --target "android-20"
+         --name purity2d-build --path ./bin --target "android-20"
 
 #ant debug
 #
