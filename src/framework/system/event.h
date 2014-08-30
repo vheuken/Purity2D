@@ -38,9 +38,17 @@ namespace Purity
             SDL_Keycode code;
         };
 
+        struct TouchEvent
+        {
+            float x, y;
+            float dx, dy;
+            float pressure;
+        };
+
         union
         {
             KeyEvent keyEvent;
+            TouchEvent touchEvent;
         };
 
         int type;
@@ -51,6 +59,7 @@ namespace Purity
 
     void convertKeyPressedEvent(Purity::Event& event, const SDL_Event& sdlEvent);
     void convertKeyReleasedEvent(Purity::Event& event, const SDL_Event& sdlEvent);
+    void convertTouchEvent(Purity::Event& event, const SDL_Event& sdlEvent);
 }
 
 #endif // PURITY_EVENT_H

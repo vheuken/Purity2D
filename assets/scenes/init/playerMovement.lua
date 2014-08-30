@@ -1,4 +1,4 @@
-dofile("scenes/init/servercfg.lua")
+GPurityLuaManager:doFile("scenes/init/servercfg.lua")
 
 function moveRight (player)
     if isServer then
