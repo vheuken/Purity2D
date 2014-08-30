@@ -85,7 +85,7 @@ keytool -genkey -noprompt \
 
 printf "$headerFormat" "Signing APK"
 cd $BUILD_HOME
-cp ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-signed.apk \
+cp ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-signing.apk \
          && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
                  -keystore keystore -storepass password ./bin/purity2d-build-release-signing.apk alias_name \
          && mv ./bin/purity2d-build-release-signing.apk ./bin/purity2d-build-release-signed.apk \
