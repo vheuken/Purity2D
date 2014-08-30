@@ -35,6 +35,7 @@ if (ANDROID)
                  main.cpp )
 
 elseif(IOS)
+	set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.purity.engine")
 	add_executable( ${ENGINE_PROJECT_NAME} MACOSX_BUNDLE 
 					${HEADER_FILES}
 					${SOURCE_FILES}
