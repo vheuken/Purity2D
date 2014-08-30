@@ -1,8 +1,15 @@
 #Formatting
-#Prints string in blue with two lines of surrounding whitespace.
-headerFormat="\n\n\e[1;34m%s\e[0m\n\n"
+tfBold=`tput bold`
+tfNormal=`tput sgr0`
+tcBlue="\e[1;34m"
+tcCyan="\e[1;36m"
+tcNormal="\e[0m"
+#Prints string in bold blue with three lines of surrounding whitespace.
+headerFormat="\n\n\n\${tfBold}${tcBlue}%s${tfNormal}${tcNormal}\n\n\n\n"
+#Prints string in blue with one line of surrounding whitespace
+messageFormat"\n\e${tcBlue}%s${tcNormal}\n\n"
 #Prints directory in cyan
-location="\e[1;36m`pwd`\e[0m"
+location="${tcCyan}`pwd`${tcNormal}"
 #Need header $
 #$header="printf $Headerformat %s"
 
