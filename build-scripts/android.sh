@@ -7,7 +7,7 @@ tcNormal="\e[0m"
 #Prints string in bold blue with many lines of surrounding whitespace.
 headerFormat="\n\n\n\n\n${tfBold}${tcBlue}%s${tfNormal}${tcNormal}\n\n\n"
 #Prints string in blue with one line of surrounding whitespace
-messageFormat"\n${tcCyan}%s${tcNormal}\n\n"
+messageFormat="\n${tcCyan}%s${tcNormal}\n\n"
 #Prints directory in cyan
 location="${tcCyan}`pwd`${tcNormal}"
 #Need header $
