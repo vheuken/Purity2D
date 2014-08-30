@@ -97,7 +97,7 @@ jarsigner -verify -certs ./bin/purity2d-build-release-signed.apk
 
 printf "$headerFormat" "Builds Available:"
 cd $BUILD_HOME
-printf "$location"
-ls -l ./bin/*.apk
+printf "$location\n"
+ls -l ./bin
 
 
