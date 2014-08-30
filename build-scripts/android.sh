@@ -30,9 +30,9 @@ curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
 
 
 printf "$headerFormat" "Configuring build environment"
-export ANDROID_NDK=`pwd`/android-ndk-r10 &&\
+export ANDROID_NDK=`pwd`/android-ndk-r10 \
          && printf "Created \$ANDROID_NDK at $location/android-ndk-r10\n"
-export ANDROID_SDK=`pwd`/android-sdk-linux &&\
+export ANDROID_SDK=`pwd`/android-sdk-linux \
          && printf "Created \$ANDROID_SDK at $location/android-sdk-linux\n"
 export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools \
          && printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n"
