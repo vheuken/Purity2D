@@ -21,21 +21,21 @@ sudo apt-get -qqy install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z
 printf "$headerFormat" "Installing core Android development packages"
 printf "Downloading and extracting Android NDK\n"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
-         | tar -jx &&\
-         printf "Extracted Android NDK to $location\n"
+         | tar -jx \
+         && printf "Extracted Android NDK to $location\n"
 printf "Downloading and extracting Android SDK\n"
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
-         | tar -zx &&\
-         printf "Extracted Android NDK to $location\n"
+         | tar -zx \
+         && printf "Extracted Android NDK to $location\n"
 
 
 printf "$headerFormat" "Configuring build environment"
 export ANDROID_NDK=`pwd`/android-ndk-r10 &&\
-         printf "Created \$ANDROID_NDK at $location/android-ndk-r10\n"
+         && printf "Created \$ANDROID_NDK at $location/android-ndk-r10\n"
 export ANDROID_SDK=`pwd`/android-sdk-linux &&\
-         printf "Created \$ANDROID_SDK at $location/android-sdk-linux\n"
-export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools &&\
-         printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n"
+         && printf "Created \$ANDROID_SDK at $location/android-sdk-linux\n"
+export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools \
+         && printf "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH\n"
 
 
 #Workaround to allow Android SDK update automation, hardcoded for Android  API 20 (4.4W). 
@@ -79,8 +79,8 @@ keytool -genkey -noprompt \
          -keypass password \
          -keyalg RSA \
          -keysize 2048 \
-         -validity 10000 &&\
-         printf "Generated signature\n"
+         -validity 10000 \
+&& printf "Generated signature\n"
 
 
 printf "$headerFormat" "Signing APK"
@@ -97,6 +97,6 @@ jarsigner -verify -certs ./bin/purity2d-build-release-signed.apk
 
 printf "$headerFormat" "Builds Available:"
 cd $BUILD_HOME
-ls -la ./bin | grep *.apk
+ls -la ./bin
 
 
