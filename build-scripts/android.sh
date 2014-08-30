@@ -63,14 +63,14 @@ android update project \
 
 
 printf "$headerFormat" "Building debug APK"
-ant debug \
+ant debug
 #Clarifying semantics
-&& mv ./bin/purity2d-build-debug.apk ./bin/purity2d-build-debug-aligned.apk
+mv ./bin/purity2d-build-debug.apk ./bin/purity2d-build-debug-aligned.apk
 
 printf "$headerFormat" "Building release APK"
-ant release \
+ant release
 #Clarifying semantics
-&& mv ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-unsigned-unaligned.apk
+mv ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-unsigned-unaligned.apk
 
 printf "$headerFormat" "Generating signature"
 #Needs to be refined.
