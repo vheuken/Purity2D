@@ -7,7 +7,7 @@ location="\e[1;36m`pwd`\e[0m"
 #$header="printf $Headerformat %s"
 
 
-printf "$headerFormat" "Working in $location"
+printf "$headerFormat" "Working in `pwd`"
 export BUILD_HOME=`pwd` &&\
          printf "Created \$BUILD_HOME at $location\n"
 
@@ -63,11 +63,14 @@ android update project \
 
 
 printf "$headerFormat" "Building debug APK"
-ant debug
-
+ant debug \
+#Clarifying semantics
+&& mv ./bin/purity2d-build-debug.apk ./bin/purity2d-build-debug-aligned.apk
 
 printf "$headerFormat" "Building release APK"
-ant release
+ant release \
+#Clarifying semantics
+&& mv ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-unsigned-unaligned.apk
 
 printf "$headerFormat" "Generating signature"
 #Needs to be refined.
@@ -83,21 +86,29 @@ keytool -genkey -noprompt \
 && printf "Generated signature\n"
 
 
-printf "$headerFormat" "Signing APK"
+printf "$headerFormat" "Creating signed release APK"
 cd $BUILD_HOME
-cp ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-signing.apk \
+cp ./bin/purity2d-build-release-unsigned-unaligned.apk ./bin/signing.apk \
          && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-                 -keystore keystore -storepass password ./bin/purity2d-build-release-signing.apk alias_name \
-         && mv ./bin/purity2d-build-release-signing.apk ./bin/purity2d-build-release-signed.apk \
+                 -keystore keystore -storepass password ./bin/signing.apk alias_name \
+         && mv ./bin/signing.apk ./bin/purity2d-build-release-signed-unaligned.apk \
          && printf "Signed APK\n"
 
-printf "$headerFormat" "Validating builds"
+printf "$headerFormat" "Zipaligning APKs"
+printf "Aligning signed APK\n"
+zipalign -v 4 ./bin/purity2d-build-release-signed-unaligned.apk purity2d-build-release-signed-aligned.apk
+printf "Aligning unsigned APK\n"
+zipalign -v 4 ./bin/purity2d-build-release-unsigned-unaligned.apk purity2d-build-release-unsigned-aligned.apk
+
+printf "$headerFormat" "Validating APK build signatures"
 cd $BUILD_HOME
-jarsigner -verify -certs ./bin/purity2d-build-release-signed.apk
+printf "Verifying aligned APK\n"
+jarsigner -verify -certs ./bin/purity2d-build-release-signed-aligned.apk
+printf "Verifying unaligned APK\n"
+jarsigner -verify -certs ./bin/purity2d-build-release-signed-unaligned.apk
 
 printf "$headerFormat" "Builds Available:"
 cd $BUILD_HOME
-printf "$location\n"
 ls -l ./bin
 
 
