@@ -7,7 +7,7 @@ location="\e[1;36m`pwd`\e[0m"
 #$header="printf $Headerformat %s"
 
 
-printf "$headerFormat" "Working in location: `pwd`"
+printf "$headerFormat" "Working in $location"
 export BUILD_HOME=`pwd` &&\
          printf "Created \$BUILD_HOME at $location\n"
 
@@ -97,6 +97,7 @@ jarsigner -verify -certs ./bin/purity2d-build-release-signed.apk
 
 printf "$headerFormat" "Builds Available:"
 cd $BUILD_HOME
-ls -la ./bin
+printf "$location"
+ls -l ./bin/*.apk
 
 
