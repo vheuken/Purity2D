@@ -2,7 +2,7 @@
 #Prints string in blue with two lines of surrounding whitespace.
 headerFormat="\n\n\e[1;34m%s\e[0m\n\n"
 #Prints directory in cyan
-location="\n\n\e[1;36m`pwd`[0m\n\n"
+location="\e[1;36m`pwd`\e[0m"
 #Need header $
 #$header="printf $Headerformat %s"
 
@@ -84,9 +84,10 @@ keytool -genkey -noprompt \
 
 
 printf "$headerFormat" "Signing APK"
-cp ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-signing.apk \
+cd $BUILD_HOME
+cp ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-signed.apk \
          && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-                 -keystore keystore -storepass password ./bin/purity2d-build-release-unsigned.apk alias_name \
+                 -keystore keystore -storepass password ./bin/purity2d-build-release-signing.apk alias_name \
          && mv ./bin/purity2d-build-release-signing.apk ./bin/purity2d-build-release-signed.apk \
          && printf "Signed APK\n"
 
@@ -95,6 +96,7 @@ cd $BUILD_HOME
 jarsigner -verify -certs ./bin/purity2d-build-release-signed.apk
 
 printf "$headerFormat" "Builds Available:"
+cd $BUILD_HOME
 ls -la ./bin | grep *.apk
 
 
