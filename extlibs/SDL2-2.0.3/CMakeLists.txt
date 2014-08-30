@@ -71,7 +71,6 @@ file(GLOB SOURCE_FILES
   ${SDL2_SOURCE_DIR}/src/video/*.c
   ${SDL2_SOURCE_DIR}/src/video/dummy/*.c
   ${SDL2_SOURCE_DIR}/src/video/uikit/*.m
-  ${SDL2_SOURCE_DIR}/src/main/dummy/*.c
   ${SDL2_SOURCE_DIR}/src/main/libm/*.c
   ) 
  find_library(UIKIT NAMES UIKit)

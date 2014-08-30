@@ -10,7 +10,6 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mViewportType(viewportType),
   mIsBorderless(Configuration::getInstance()->getBool("window", "borderless", false))
 {
-    SDL_SetMainReady();
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
