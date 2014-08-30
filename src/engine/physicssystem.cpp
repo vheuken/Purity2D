@@ -66,10 +66,6 @@ void Purity::PhysicsSystem::step()
         acumulator -= (TIME_STEP * 1000);
     }
 }
-#include <android/log.h>
-
-#define LOGI(TAG,...) __android_log_print(ANDROID_LOG_INFO   , TAG,__VA_ARGS__)
-
 
 void Purity::PhysicsSystem::handleInput()
 {
@@ -84,13 +80,11 @@ void Purity::PhysicsSystem::handleInput()
 
         try
         {
-            LOGI("DEBUGSTUFF", "about to do event script\n");
             auto eventHandlerScript = luabridge::getGlobal(luaManager->getState(), luaEventHandlerFunction.c_str());
             eventHandlerScript(event);
         }
         catch (luabridge::LuaException e)
         {
-            LOGI("DEBUGSTUFF", e.what());
             std::cerr << e.what() << std::endl;
         }
     }
