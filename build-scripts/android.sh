@@ -100,9 +100,9 @@ ls $ANDROID_SDK/build-tools/20.0.0
 export PATH=$PATH:$ANDROID_SDK/build-tools/20.0.0 \
          && printf "Added \$ANDROID_SDK/build-tools/android-4.4W to \$PATH\n"
 printf "Aligning signed APK\n"
-zipalign -v 4 ./bin/purity2d-build-release-signed-unaligned.apk purity2d-build-release-signed-aligned.apk
+zipalign -v 4 ./bin/purity2d-build-release-signed-unaligned.apk ./bin/purity2d-build-release-signed-aligned.apk
 printf "Aligning unsigned APK\n"
-zipalign -v 4 ./bin/purity2d-build-release-unsigned-unaligned.apk purity2d-build-release-unsigned-aligned.apk
+zipalign -v 4 ./bin/purity2d-build-release-unsigned-unaligned.apk ./purity2d-build-release-unsigned-aligned.apk
 
 printf "$headerFormat" "Validating APK build signatures"
 cd $BUILD_HOME
