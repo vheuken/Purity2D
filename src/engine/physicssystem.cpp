@@ -82,9 +82,10 @@ void Purity::PhysicsSystem::handleInput()
         {
             luabridge::LuaRef eventHandlerScript = luabridge::getGlobal(luaManager->getState(), luaEventHandlerFunction.c_str());
             eventHandlerScript(event);
-        } catch (luabridge::LuaException e)
+        }
+        catch (luabridge::LuaException e)
         {
-            std::cout << e.what() << std::endl;
+            std::cerr << e.what() << std::endl;
         }
     }
 }
@@ -96,16 +97,26 @@ void Purity::PhysicsSystem::handleServerActions()
     {
         NetworkAction action = mServerActionQueue->front();
         mServerActionQueue->pop();
-
-        luabridge::LuaRef serverActionHandlerScript = luabridge::getGlobal(luaManager->getState(), "serverActionHandler");
-        serverActionHandlerScript(action.objectName, action.actionName);
+        try{
+            luabridge::LuaRef serverActionHandlerScript = luabridge::getGlobal(luaManager->getState(), "serverActionHandler");
+            serverActionHandlerScript(action.objectName, action.actionName);
+        }
+        catch (luabridge::LuaException e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
     }
 }
 
 void Purity::PhysicsSystem::runUpdateScripts()
 {
+    try{
     auto luaManager = LuaManager::getManager();
 
     auto updateScript = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
-    updateScript();
+        updateScript();
+    } catch (luabridge::LuaException e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 }
