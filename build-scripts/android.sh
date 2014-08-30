@@ -5,7 +5,7 @@ tcBlue="\e[1;34m"
 tcCyan="\e[1;36m"
 tcNormal="\e[0m"
 #Prints string in bold blue with three lines of surrounding whitespace.
-headerFormat="\n\n\n\${tfBold}${tcBlue}%s${tfNormal}${tcNormal}\n\n\n\n"
+headerFormat="\n\n\n${tfBold}${tcBlue}%s${tfNormal}${tcNormal}\n\n\n\n"
 #Prints string in blue with one line of surrounding whitespace
 messageFormat"\n\e${tcBlue}%s${tcNormal}\n\n"
 #Prints directory in cyan
