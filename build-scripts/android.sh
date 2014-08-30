@@ -102,6 +102,9 @@ zipalign -v 4 ./bin/purity2d-build-release-unsigned-unaligned.apk purity2d-build
 
 printf "$headerFormat" "Validating APK build signatures"
 cd $BUILD_HOME
+#Workaround for zipalign, hardcoded for API 20 (4.4W)
+export PATH=$PATH:$ANDROID_SDK/build-tools\android-4.4W \
+         && printf "Added \$ANDROID_SDK/build-tools/android-4.4W to \$PATH\n"
 printf "Verifying aligned APK\n"
 jarsigner -verify -certs ./bin/purity2d-build-release-signed-aligned.apk
 printf "Verifying unaligned APK\n"
@@ -109,6 +112,6 @@ jarsigner -verify -certs ./bin/purity2d-build-release-signed-unaligned.apk
 
 printf "$headerFormat" "Builds Available:"
 cd $BUILD_HOME
-ls -l ./bin
+ls -l ./bin/*.apk
 
 
