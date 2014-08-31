@@ -4,8 +4,11 @@
   <image source="RockTile.png" width="192" height="192"/>
  </tileset>
  <objectgroup name="Entities" width="60" height="45">
-  <object name="Player2" type="Movable" x="407" y="176" width="24" height="63"/>
-  <object name="Player1" type="Movable" x="81" y="182" width="24" height="63"/>
+  <object name="Player-Android" type="Movable" x="144" y="178" width="24" height="63"/>
+  <object name="Player-Windows" type="Movable" x="81" y="182" width="24" height="63"/>
+  <object name="Player-Linux" type="Movable" x="195" y="181" width="24" height="63"/>
+  <object name="Player-iOS" type="Movable" x="269" y="179" width="24" height="63"/>
+  <object name="Player-OSX" type="Movable" x="355" y="186" width="24" height="63"/>
  </objectgroup>
  <layer name="collision" width="60" height="45">
   <properties>
