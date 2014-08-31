@@ -56,6 +56,12 @@ mkdir purity2d-build \
 tar -czf purity2d-build.tgz purity2d-build \
          && printf "${messageFormat}" "Done"
 
+printf "${headerFormat}" "Tests"
+printf "${messageFormat}" "Files in ${BUILD_ASSETS}"
+ls -l ${BUILD_ASSETS}
+printf "${messageFormat}" "Files in ${BUILD_BIN}/purity2d-build"
+ls -l ${BUILD_BIN}/purity2d-build
+
 
 printf "${headerFormat}" "Gathering final release files"
 cd ${BUILD_BIN}
