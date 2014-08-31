@@ -52,9 +52,8 @@ void Purity::Server::handleEvents()
 
 void Purity::Server::sendDataToClients(const std::vector<EntityState>& entityStates)
 {
-    // TODO: Replace with Purity::Clock
-    //if (mSendRateTimer.getElapsedTime().asMilliseconds() >= 20)
-    {
+    //if (mSendRateTimer.getElapsedTime() >= 20)
+    //{
         for (auto stateIter = entityStates.begin(); stateIter != entityStates.end(); ++stateIter)
         {
             EntityState state = *stateIter;
@@ -64,7 +63,6 @@ void Purity::Server::sendDataToClients(const std::vector<EntityState>& entitySta
             enet_host_broadcast(mHost, 0, packet);
         }
 
-        // TODO: Replace with Purity::Clock
-        //mSendRateTimer.restart();
-    }
+        mSendRateTimer.restart();
+    //}
 }

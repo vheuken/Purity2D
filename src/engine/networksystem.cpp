@@ -122,6 +122,7 @@ void Purity::NetworkSystem::luaBindings(lua_State* state)
                     .addFunction("setServer", &NetworkSystem::setServer)
                     .addFunction("initializeServer", &NetworkSystem::initializeServer)
                     .addFunction("initializeClient", &NetworkSystem::initializeClient)
+                    .addFunction("sendAction", &NetworkSystem::sendAction)
                 .endClass()
             .endNamespace();
 }

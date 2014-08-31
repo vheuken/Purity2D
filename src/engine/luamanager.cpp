@@ -99,5 +99,11 @@ void Purity::LuaManager::initializeMiscBindings()
             .beginClass<LuaManager>("LuaManager")
                 .addFunction("doFile", &LuaManager::doFile)
             .endClass()
+
+            .beginClass<EntityState>("EntityState")
+                .addData("entityId", &EntityState::entityId)
+                .addData("position", &EntityState::position)
+                .addData("angle", &EntityState::angle)
+            .endClass()
         .endNamespace();
 }

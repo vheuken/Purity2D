@@ -100,7 +100,7 @@ void Purity::PhysicsSystem::handleServerActions()
         try
         {
             auto serverActionHandler = luabridge::getGlobal(luaManager->getState(), "serverActionHandler");
-            serverActionHandler(action.objectName, action.actionName);
+            serverActionHandler(std::string(action.objectName), std::string(action.actionName));
         }
         catch (luabridge::LuaException e)
         {
