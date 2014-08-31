@@ -86,8 +86,9 @@ ant release
 #Clarifying semantics
 mv ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-unsigned-unaligned.apk
 
-printf "${headerFormat}" "Generating signature"
+printf "${headerFormat}" "Generating signature in"
 #Needs to be refined.
+cd ${BUILD_BIN}
 keytool -genkey -noprompt \
          -alias alias_name \
          -dname "CN=, OU=, O=, L=, S=, C=" \
@@ -97,7 +98,7 @@ keytool -genkey -noprompt \
          -keyalg RSA \
          -keysize 2048 \
          -validity 10000 \
-&& printf "${messageFormat}" "Generated signature"
+&& printf "${messageFormat}" "Generated signature in ${BUILD_BIN}"
 
 
 printf "${headerFormat}" "Creating signed release APK"
