@@ -19,8 +19,11 @@ location="${cyan}`pwd`${clearFormat}"
 
 
 printf "${headerFormat}" "Working in `pwd`"
-export BUILD_HOME=`pwd` &&\
-         printf "${messageFormat}" "Created \$BUILD_HOME at `pwd`"
+export BUILD_HOME=`pwd` \
+         && printf "${messageFormat}" "Created \${BUILD_HOME} at `pwd`"
+mkdir bin \
+         && export BUILD_BIN=./bin \
+         && printf "${messageFormat}" "Created \${BUILD_BIN} at `pwd`/bin"
 
 
 #Need generic libraries, the following only works on Ubuntu 12.04
@@ -42,11 +45,11 @@ curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
 
 printf "${headerFormat}" "Configuring build environment"
 export ANDROID_NDK=`pwd`/android-ndk-r10 \
-         && printf "${messageFormat}" "Created \$ANDROID_NDK at `pwd`/android-ndk-r10"
+         && printf "${messageFormat}" "Created \${ANDROID_NDK} at `pwd`/android-ndk-r10"
 export ANDROID_SDK=`pwd`/android-sdk-linux \
-         && printf "${messageFormat}" "Created \$ANDROID_SDK at `pwd`/android-sdk-linux"
-export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools \
-         && printf "${messageFormat}" "Added \$ANDROID_SDK/tools and \$ANDROID_SDK/platform-tools to \$PATH"
+         && printf "${messageFormat}" "Created \${ANDROID_SDK} at `pwd`/android-sdk-linux"
+export PATH=$PATH:${ANDROID_SDK}/tools:$ANDROID_SDK/platform-tools \
+         && printf "${messageFormat}" "Added \${ANDROID_SDK}/tools and \${ANDROID_SDK}/platform-tools to \$PATH"
 
 
 #Workaround to allow Android SDK update automation, hardcoded for Android  API 20 (4.4W). 
@@ -57,18 +60,18 @@ printf "${messageFormat}" "Finished updating Android SDK"
 
 
 printf "${headerFormat}" "Building binaries"
-bash $ANDROID_NDK/build/tools/make-standalone-toolchain.sh
+bash ${ANDROID_NDK}/build/tools/make-standalone-toolchain.sh
 
 mkdir build && cd build
 
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
          -DANDROID_NATIVE_API_LEVEL=android-19
 		
-cmake --build . -- -j4 && cd $BUILD_HOME
+cmake --build . -- -j4 && cd ${BUILD_HOME}
 
 
 printf "${headerFormat}" "Starting APK build"
-cd $BUILD_HOME
+cd ${BUILD_HOME}
 android update project \
          --name purity2d-build --path . --target "android-20"
 
@@ -98,36 +101,37 @@ keytool -genkey -noprompt \
 
 
 printf "${headerFormat}" "Creating signed release APK"
-cd $BUILD_HOME
-cp ./bin/purity2d-build-release-unsigned-unaligned.apk ./bin/signing.apk \
+cd ${BUILD_BIN}
+cp purity2d-build-release-unsigned-unaligned.apk signing.apk \
          && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-                 -keystore keystore -storepass password ./bin/signing.apk alias_name \
-         && mv ./bin/signing.apk ./bin/purity2d-build-release-signed-unaligned.apk \
+                 -keystore keystore -storepass password signing.apk alias_name \
+         && mv signing.apk purity2d-build-release-signed-unaligned.apk \
          && printf "${messageFormat}" "Signed APK"
 
 printf "${headerFormat}" "Zipaligning APKs"
 #Workaround for zipalign, hardcoded for API 20 (4.4W)
-ls $ANDROID_SDK/build-tools/20.0.0
+cd ${BUILD_BIN}
 export PATH=$PATH:$ANDROID_SDK/build-tools/20.0.0 \
          && printf "${messageFormat}" "Added \$ANDROID_SDK/build-tools/20.0.0 to \$PATH"
 printf "${messageFormat}" "Aligning signed APK"
-zipalign -v 4 ./bin/purity2d-build-release-signed-unaligned.apk ./bin/purity2d-build-release-signed-aligned.apk
+zipalign -v 4 purity2d-build-release-signed-unaligned.apk purity2d-build-release-signed-aligned.apk
 printf "${messageFormat}" "Aligning unsigned APK"
-zipalign -v 4 ./bin/purity2d-build-release-unsigned-unaligned.apk ./bin/purity2d-build-release-unsigned-aligned.apk
+zipalign -v 4 purity2d-build-release-unsigned-unaligned.apk purity2d-build-release-unsigned-aligned.apk
 
 printf "${headerFormat}" "Validating APK build signatures"
-cd $BUILD_HOME
+cd ${BUILD_BIN}
 printf "${messageFormat}" "Verifying aligned APK"
-jarsigner -verify -certs ./bin/purity2d-build-release-signed-aligned.apk
+jarsigner -verify -certs purity2d-build-release-signed-aligned.apk
 printf "${messageFormat}" "Verifying unaligned APK"
-jarsigner -verify -certs ./bin/purity2d-build-release-signed-unaligned.apk
+jarsigner -verify -certs purity2d-build-release-signed-unaligned.apk
 
-printf "${headerFormat}" "Contents of `pwd`/bin"
-cd $BUILD_HOME
-ls -l ./bin
+printf "${headerFormat}" "Contents of ${BUILD_BIN}"
+cd ${BUILD_BIN}
+ls -a
 
 printf "${headerFormat}" "Builds Available:"
-cd $BUILD_HOME
-ls -l ./bin/*.apk
+cd ${BUILD_BIN}
+ls -1 *.apk
+#ls *.apk | cat
 
 
