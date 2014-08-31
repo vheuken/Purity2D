@@ -8,12 +8,11 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
          git config --global user.name "Travis"
          
          printf "Connecting to gh-pages\n"
-         #Currently hardcoded for swloper/Purity2D. 
-         git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/swloper/Purity2D.git  gh-pages > /dev/null
+         git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}  gh-pages > /dev/null
          
-#         printf "Copying new files\n"
-#         cd gh-pages
-#         cp -Rf ${TRAVIS_BUILD_DIR}/release/* .
+         printf "Copying new files\n"
+         cd gh-pages
+         cp -Rf ${TRAVIS_BUILD_DIR}/release/* .
          
          printf "Committing and pushing files\n"
          git add -f .
