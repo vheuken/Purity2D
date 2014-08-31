@@ -10,8 +10,9 @@ cyan="\e[1;36m"
 white="\e[1;37m"
 #Prints string in bold blue with many lines of surrounding whitespace.
 headerFormat="\n\n\n\n\n${cyan}%s${clearFormat}\n\n"
-#Prints string in blue with one line of surrounding whitespace
+#Message formats
 messageFormat="\n${blue}%s${clearFormat}\n\n"
+successFormat="\n${green}%s${clearFormat}\n\n"
 #Prints directory in cyan
 location="${cyan}`pwd`${clearFormat}"
 #Need header $
@@ -35,18 +36,20 @@ sudo apt-get -qqy install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z
 printf "${headerFormat}" "Installing core Android development packages"
 printf "${messageFormat}" "Downloading and extracting Android NDK"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
-         | tar -jx --strip-components=1 ${BUILD_HOME}/androidndk-r10 \
+         | tar -jx \
+         && mv android-ndk-r10 android-ndk \
          && printf "${messageFormat}" "Extracted Android NDK to `pwd`"
 printf "$messageFormat" "Downloading and extracting Android SDK"
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
-         | tar -zx --strip-components=1 ${BUILD_HOME}/android-sdk_r23.0.2-linux \
+         | tar -zx \
+         && mv android-sdk-linux android-sdk \
          && printf "${messageFormat}" "Extracted Android NDK to `pwd`"
 
 
 printf "${headerFormat}" "Configuring build environment"
-export ANDROID_NDK=`pwd`/android-ndk-r10 \
+export ANDROID_NDK=`pwd`/android-ndk \
          && printf "${messageFormat}" "Created \${ANDROID_NDK} at `pwd`/android-ndk-r10"
-export ANDROID_SDK=`pwd`/android-sdk-linux \
+export ANDROID_SDK=`pwd`/android-sdk \
          && printf "${messageFormat}" "Created \${ANDROID_SDK} at `pwd`/android-sdk-linux"
 export PATH=$PATH:${ANDROID_SDK}/tools:$ANDROID_SDK/platform-tools \
          && printf "${messageFormat}" "Added \${ANDROID_SDK}/tools and \${ANDROID_SDK}/platform-tools to \$PATH"
