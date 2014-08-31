@@ -22,7 +22,7 @@ printf "${headerFormat}" "Working in `pwd`"
 export BUILD_HOME=`pwd` \
          && printf "${messageFormat}" "Created \${BUILD_HOME} at `pwd`"
 mkdir bin \
-         && export BUILD_BIN=./bin \
+         && export BUILD_BIN=`pwd`/bin \
          && printf "${messageFormat}" "Created \${BUILD_BIN} at `pwd`/bin"
 
 
