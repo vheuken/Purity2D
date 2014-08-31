@@ -9,11 +9,18 @@ env:
   matrix:
     - IOS_ANDROID=false
     - IOS_ANDROID=true
+  global:
+    #The secure string is specific to a single repository and needs to be generated for each user/project
+    - secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
 script:
-  # OSX and generic GNU/Linux desktop builds
-  - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
-  - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then bash build-scripts/osx.sh; fi
+    # OSX and generic GNU/Linux desktop builds
+    - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
+    - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then bash build-scripts/osx.sh; fi
   
-  # iOS and Android builds
-  - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then bash build-scripts/android.sh; fi
-  - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then bash build-scripts/ios.sh; fi
+    # iOS and Android builds
+    - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then bash build-scripts/android.sh; fi
+    - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then bash build-scripts/ios.sh; fi
+after_success:
+    #Permission error workaround
+    - chmod a+x ./.update-gh-pages.sh
+    - ./.update-gh-pages.sh
