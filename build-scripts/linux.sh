@@ -50,7 +50,7 @@ make -j4
 
 printf "${headerFormat}" "Building packages"
 mkdir ${BUILD_BIN}/purity2d-build \
-          && cp {${BUILD_BIN}/*,${BUILD_RELEASE}/*} ${BUILD_BIN}/purity2d-build \
+          && cp {${BUILD_BIN}/*,${BUILD_ASSETS}/*} ${BUILD_BIN}/purity2d-build \
           && tar -czf purity2d-build.tgz \
           && printf "${messageFormat}" "Done"
 
