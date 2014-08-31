@@ -17,15 +17,15 @@ successFormat="\n${green}%s${clearFormat}\n\n"
 
 printf "${headerFormat}" "Configuring build environment"
 export BUILD_HOME=`pwd` \
-          && printf "${messageFormat}" "Created \${BUILD_HOME} at ${BUILD_HOME}"
+         && printf "${messageFormat}" "Created \${BUILD_HOME} at ${BUILD_HOME}"
 mkdir bin \
           && export BUILD_BIN=${BUILD_HOME}/bin \
-          && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
+         && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
 export BUILD_ASSETS=${BUILD_HOME}/assets \
-          && printf "${messageFormat}" "Created \${BUILD_ASSETS} at ${BUILD_ASSETS}"
+         && printf "${messageFormat}" "Created \${BUILD_ASSETS} at ${BUILD_ASSETS}"
 mkdir release \
-          && export BUILD_RELEASE=${BUILD_HOME}/release \
-          && printf "${messageFormat}" "Created \${BUILD_RELEASE} at ${BUILD_RELEASE}"
+         && export BUILD_RELEASE=${BUILD_HOME}/release \
+         && printf "${messageFormat}" "Created \${BUILD_RELEASE} at ${BUILD_RELEASE}"
 
 
 
@@ -52,9 +52,9 @@ make -j4
 printf "${headerFormat}" "Building packages"
 cd ${BUILD_BIN}
 mkdir purity2d-build \
-          && cp {*,${BUILD_ASSETS}/*} $purity2d-build \
-          && tar -czf purity2d-build.tgz purity2d-build \
-          && printf "${messageFormat}" "Done"
+         && cp {*,${BUILD_ASSETS}/*} $purity2d-build
+tar -czf purity2d-build.tgz purity2d-build \
+         && printf "${messageFormat}" "Done"
 
 
 printf "${headerFormat}" "Gathering final release files"
@@ -66,7 +66,7 @@ cp *.tgz ${BUILD_RELEASE} \
          && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
 
 
-printf "${headerFormat}" "Available release:"
+printf "${headerFormat}" "Available releases:"
 cd ${BUILD_RELEASE}
 ls -1
 #ls | cat
