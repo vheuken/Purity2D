@@ -1,21 +1,17 @@
 #Formatting
-bright=`tput bold`
-clearFormat=`tput sgr0`
-#tcBlue="\e[1;34m"
-#tcCyan="\e[1;36m"
-#tcNormal="\e[0m"
-black=`tput setaf 1`
-red=`tput setaf 2`
-green=`tput setaf 3`
-yellow=`tput setaf 4`
-blue=`tput setaf 5`
-magenta=`tput setaf 6`
-cyan=`tput setaf 7`
-white=`tput setaf 8`
+clearFormat="\e[0m"
+black="\e[1;30m"
+red="\e[1;31m"
+green="\e[1;32m"
+yellow="\e[1;33m"
+blue="\e[1;34m"
+magenta="\e[1;35m"
+cyan="\e[1;36m"
+white="\e[1;37m"
 #Prints string in bold blue with many lines of surrounding whitespace.
-headerFormat="\n\n\n\n\n${bright}${cyan}%s${clearFormat}\n\n"
+headerFormat="\n\n\n\n\n${cyan}%s${clearFormat}\n\n"
 #Prints string in blue with one line of surrounding whitespace
-messageFormat="\n${cyan}%s${clearFormat}\n\n"
+messageFormat="\n${blue}%s${clearFormat}\n\n"
 #Prints directory in cyan
 location="${cyan}`pwd`${clearFormat}"
 #Need header $
