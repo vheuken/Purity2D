@@ -19,20 +19,19 @@ location="${cyan}`pwd`${clearFormat}"
 #$header="printf $Headerformat %s"
 
 
-printf "${headerFormat}" "Working in `pwd`"
+printf "${headerFormat}" "Configuring build environment"
+printf "${messageFormat}" "Working in `pwd`"
 export BUILD_HOME=`pwd` \
          && printf "${messageFormat}" "Created \${BUILD_HOME} at `pwd`"
 mkdir bin \
          && export BUILD_BIN=`pwd`/bin \
          && printf "${messageFormat}" "Created \${BUILD_BIN} at `pwd`/bin"
-
-printf "${headerFormat}" "Configuring build environment"
-mkdir android-ndk \
-         && export ANDROID_NDK=`pwd`/android-ndk \
-         && printf "${messageFormat}" "Created \${ANDROID_NDK} at ${ANDROID_NDK}"
 mkdir android-sdk \
          && export ANDROID_SDK=`pwd`/android-sdk \
          && printf "${messageFormat}" "Created \${ANDROID_SDK} at ${ANDROID_SDK}"
+mkdir android-ndk \
+         && export ANDROID_NDK=`pwd`/android-ndk \
+         && printf "${messageFormat}" "Created \${ANDROID_NDK} at ${ANDROID_NDK}"
 export PATH=$PATH:${ANDROID_SDK}/tools:${ANDROID_SDK}/platform-tools \
          && printf "${messageFormat}" "Added \${ANDROID_SDK}/tools and \${ANDROID_SDK}/platform-tools to \$PATH"
 
@@ -43,22 +42,18 @@ sudo apt-get -qqy install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z
 
 
 printf "${headerFormat}" "Installing core Android development packages"
-printf "${messageFormat}" "Downloading and extracting Android NDK"
-curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
-         | tar -jx \
-         && mv android-ndk-r10/* android-ndk \
-         && rm android-ndk-linux \
-         && printf "${messageFormat}" "Extracted Android NDK to `pwd`"
 printf "$messageFormat" "Downloading and extracting Android SDK"
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
          | tar -zx \
          && mv android-sdk-linux/* android-sdk \
          && rm android-sdk-linux \
-         && printf "${messageFormat}" "Extracted Android NDK to `pwd`"
-
-
-
-
+         && printf "${messageFormat}" "Extracted Android NDK to ${ANDROID_SDK}"
+printf "${messageFormat}" "Downloading and extracting Android NDK"
+curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
+         | tar -jx \
+         && mv android-ndk-r10/* android-ndk \
+         && rm android-ndk-linux \
+         && printf "${messageFormat}" "Extracted Android NDK to ${ANDROID_NDK}"
 
 #Workaround to allow Android SDK update automation, hardcoded for Android  API 20 (4.4W). 
 printf "${headerFormat}" "Updating Android SDK"
