@@ -16,6 +16,9 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     if (mProgramOptions.headless == false)
     {
         initializeWindow();
+#ifdef TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+        SDL_StartTextInput();
+#endif
         initializeRenderSystem();
         initializeInputManager();
     }

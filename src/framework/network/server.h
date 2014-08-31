@@ -8,6 +8,8 @@
 
 #include "networkaction.h"
 
+#include "../system/timer.h"
+
 namespace Purity
 {
     class Server : public Host
@@ -22,8 +24,8 @@ namespace Purity
     private:
         std::queue<NetworkAction>* mReceivedActionQueue;
 
-        // TODO: replace with Purity::Clock
-        //sf::Clock mSendRateTimer;
+        Timer mSendRateTimer;
+
     };
 }
 

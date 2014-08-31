@@ -127,11 +127,12 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
 
 void Purity::Entity::luaBindings(lua_State* state)
 {
+/*
     luabridge::getGlobalNamespace(state)
         .beginNamespace("Purity")
             .beginClass<Entity>("Entity")
                 .addFunction("getName", &Entity::getName)
             .endClass()
-        .endNamespace();
+        .endNamespace();*/
 }
 

@@ -165,9 +165,9 @@ void Purity::WindowManipulator::resizeWindow()
         newWindowPos.y = mousePos.y - mWindowResizeOffsetLeftTop.y;
         newWindowSize.y += windowPos.y - newWindowPos.y;
     }
-
-    mWindow->setPosition(newWindowPos);
+    
     mWindow->setSize(newWindowSize);
+    mWindow->setPosition(newWindowPos);
 }
 
 bool Purity::WindowManipulator::isMouseOnBorder() const

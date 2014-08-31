@@ -34,7 +34,8 @@ if (ANDROID)
                  ../../../extlibs/SDL2-2.0.3/src/main/android/SDL_android_main.c
                  main.cpp )
 
-elseif(IOS)
+elseif(IOS OR APPLE)
+	set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.purity.engine")
 	add_executable( ${ENGINE_PROJECT_NAME} MACOSX_BUNDLE 
 					${HEADER_FILES}
 					${SOURCE_FILES}
