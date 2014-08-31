@@ -22,10 +22,10 @@ location="${cyan}`pwd`${clearFormat}"
 printf "${headerFormat}" "Configuring build environment"
 printf "${messageFormat}" "Working in `pwd`"
 export BUILD_HOME=`pwd` \
-         && printf "${messageFormat}" "Created \${BUILD_HOME} at `pwd`"
+         && printf "${messageFormat}" "Created \${BUILD_HOME} at ${BUILD_HOME}"
 mkdir bin \
          && export BUILD_BIN=`pwd`/bin \
-         && printf "${messageFormat}" "Created \${BUILD_BIN} at `pwd`/bin"
+         && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
 mkdir android-sdk \
          && export ANDROID_SDK=`pwd`/android-sdk \
          && printf "${messageFormat}" "Created \${ANDROID_SDK} at ${ANDROID_SDK}"
@@ -81,15 +81,18 @@ android update project \
 
 printf "${headerFormat}" "Building debug APK"
 ant debug
-#Clarifying semantics
-mv ./bin/purity2d-build-debug.apk ./bin/purity2d-build-debug-aligned.apk
 
 printf "${headerFormat}" "Building release APK"
 ant release
-#Clarifying semantics
-mv ./bin/purity2d-build-release-unsigned.apk ./bin/purity2d-build-release-unsigned-unaligned.apk
 
-printf "${headerFormat}" "Generating signature in"
+#Clarifying semantics
+printf "${headerFormat}" "Semantic fixes"
+cd ${BUILD_BIN}
+mv purity2d-build-debug.apk purity2d-build-debug-aligned.apk
+mv purity2d-build-release-unsigned.apk purity2d-build-release-unsigned-unaligned.apk
+printf "${messageFormat}" "Done"
+
+printf "${headerFormat}" "Generating signature"
 #Needs to be refined.
 cd ${BUILD_BIN}
 keytool -genkey -noprompt \
