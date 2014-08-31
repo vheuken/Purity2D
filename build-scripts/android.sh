@@ -1,15 +1,23 @@
 #Formatting
-tfBold=`tput bold`
-tfNormal=`tput sgr0`
-tcBlue="\e[1;34m"
-tcCyan="\e[1;36m"
-tcNormal="\e[0m"
+bright=`tput bold`
+clearFormat=`tput sgr0`
+#tcBlue="\e[1;34m"
+#tcCyan="\e[1;36m"
+#tcNormal="\e[0m"
+black=`tput setf 1`
+red=`tput setf 2`
+green=`tput setf 3`
+yellow=`tput setf 4`
+blue=`tput setf 5`
+magenta=`tput setf 6`
+cyan=`tput setf 7`
+white=`tput setf 8`
 #Prints string in bold blue with many lines of surrounding whitespace.
-headerFormat="\n\n\n\n\n${tfBold}${tcBlue}%s${tfNormal}${tcNormal}\n\n\n"
+headerFormat="\n\n\n\n\n${bright}${cyan}%s${clearFormat}\n\n"
 #Prints string in blue with one line of surrounding whitespace
-messageFormat="\n${tcCyan}%s${tcNormal}\n\n"
+messageFormat="\n${cyan}%s${clearFormat}\n\n"
 #Prints directory in cyan
-location="${tcCyan}`pwd`${tcNormal}"
+location="${cyan}`pwd`${clearFormat}"
 #Need header $
 #$header="printf $Headerformat %s"
 
