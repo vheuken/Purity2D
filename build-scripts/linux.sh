@@ -52,7 +52,8 @@ make -j4
 printf "${headerFormat}" "Building packages"
 cd ${BUILD_BIN}
 mkdir purity2d-build \
-         && cp {*,${BUILD_ASSETS}/*} purity2d-build
+         && cp * purity2d-build \
+         && cp -r ${BUILD_ASSETS}/* purity2d-build
 tar -czf purity2d-build.tgz purity2d-build \
          && printf "${messageFormat}" "Done"
 
