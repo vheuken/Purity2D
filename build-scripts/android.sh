@@ -23,15 +23,18 @@ printf "${headerFormat}" "Configuring build environment"
 printf "${messageFormat}" "Working in `pwd`"
 export BUILD_HOME=`pwd` \
          && printf "${messageFormat}" "Created \${BUILD_HOME} at ${BUILD_HOME}"
-mkdir bin \
-         && export BUILD_BIN=`pwd`/bin \
-         && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
 mkdir android-sdk \
-         && export ANDROID_SDK=`pwd`/android-sdk \
+         && export ANDROID_SDK=${BUILD_HOME}/android-sdk \
          && printf "${messageFormat}" "Created \${ANDROID_SDK} at ${ANDROID_SDK}"
 mkdir android-ndk \
-         && export ANDROID_NDK=`pwd`/android-ndk \
+         && export ANDROID_NDK=${BUILD_HOME}/android-ndk \
          && printf "${messageFormat}" "Created \${ANDROID_NDK} at ${ANDROID_NDK}"
+mkdir bin \
+         && export BUILD_BIN=${BUILD_HOME}/bin \
+         && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
+mkdir release \
+         && export BUILD_RELEASE=${BUILD_HOME}/release \
+         && printf "${messageFormat}" "Created \${BUILD_RELEASE} at ${BUILD_RELEASE}"
 export PATH=$PATH:${ANDROID_SDK}/tools:${ANDROID_SDK}/platform-tools \
          && printf "${messageFormat}" "Added \${ANDROID_SDK}/tools and \${ANDROID_SDK}/platform-tools to \$PATH"
 
@@ -92,6 +95,7 @@ mv purity2d-build-debug.apk purity2d-build-debug-aligned.apk
 mv purity2d-build-release-unsigned.apk purity2d-build-release-unsigned-unaligned.apk
 printf "${messageFormat}" "Done"
 
+
 printf "${headerFormat}" "Generating signature"
 #Needs to be refined.
 cd ${BUILD_BIN}
@@ -115,6 +119,7 @@ cp purity2d-build-release-unsigned-unaligned.apk signing.apk \
          && mv signing.apk purity2d-build-release-signed-unaligned.apk \
          && printf "${messageFormat}" "Signed APK"
 
+
 printf "${headerFormat}" "Zipaligning APKs"
 #Workaround for zipalign, hardcoded for API 20 (4.4W)
 cd ${BUILD_BIN}
@@ -125,6 +130,7 @@ zipalign -v 4 purity2d-build-release-signed-unaligned.apk purity2d-build-release
 printf "${messageFormat}" "Aligning unsigned APK"
 zipalign -v 4 purity2d-build-release-unsigned-unaligned.apk purity2d-build-release-unsigned-aligned.apk
 
+
 printf "${headerFormat}" "Validating APK build signatures"
 cd ${BUILD_BIN}
 printf "${messageFormat}" "Verifying aligned APK"
@@ -132,13 +138,19 @@ jarsigner -verify -certs purity2d-build-release-signed-aligned.apk
 printf "${messageFormat}" "Verifying unaligned APK"
 jarsigner -verify -certs purity2d-build-release-signed-unaligned.apk
 
-printf "${headerFormat}" "Contents of ${BUILD_BIN}"
-cd ${BUILD_BIN}
-ls -a
 
-printf "${headerFormat}" "Builds Available:"
+printf "${headerFormat}" "Gathering final release files"
 cd ${BUILD_BIN}
-ls -1 *.apk
-#ls *.apk | cat
+printf "${messageFormat}" "Contents of ${BUILD_BIN}"
+ls -a
+printf "${messageFormat}" "Exporting release (APK) files"
+cp *.apk ${BUILD_RELEASE} \
+         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
+
+
+printf "${headerFormat}" "Available release:"
+cd ${BUILD_RELEASE}
+ls -1
+#ls | cat
 
 
