@@ -46,13 +46,13 @@ printf "$messageFormat" "Downloading and extracting Android SDK"
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
          | tar -zx \
          && mv android-sdk-linux/* android-sdk \
-         && rm android-sdk-linux \
+         && rmdir android-sdk-linux \
          && printf "${messageFormat}" "Extracted Android NDK to ${ANDROID_SDK}"
 printf "${messageFormat}" "Downloading and extracting Android NDK"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
          | tar -jx \
          && mv android-ndk-r10/* android-ndk \
-         && rm android-ndk-linux \
+         && rmdir android-ndk-r10 \
          && printf "${messageFormat}" "Extracted Android NDK to ${ANDROID_NDK}"
 
 #Workaround to allow Android SDK update automation, hardcoded for Android  API 20 (4.4W). 
