@@ -35,11 +35,11 @@ sudo apt-get -qqy install libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z
 printf "${headerFormat}" "Installing core Android development packages"
 printf "${messageFormat}" "Downloading and extracting Android NDK"
 curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.tar.bz2 \
-         | tar -jxf -C ${BUILD_HOME}/androidndk-r10 \
+         | tar -jxf --strip-components=1 ${BUILD_HOME}/androidndk-r10 \
          && printf "${messageFormat}" "Extracted Android NDK to `pwd`"
 printf "$messageFormat" "Downloading and extracting Android SDK"
 curl --location http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz \
-         | tar -zxf -C ${BUILD_HOME/android-sdk_r23.0.2-linux.tgz \
+         | tar -zxf --strip-components=1 ${BUILD_HOME}/android-sdk_r23.0.2-linux.tgz \
          && printf "${messageFormat}" "Extracted Android NDK to `pwd`"
 
 
