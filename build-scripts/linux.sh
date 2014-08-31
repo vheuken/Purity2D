@@ -17,13 +17,16 @@ successFormat="\n${green}%s${clearFormat}\n\n"
 
 printf "${headerFormat}" "Configuring build environment"
 export BUILD_HOME=`pwd` \
-         && printf "${messageFormat}" "Created \${BUILD_HOME} at ${BUILD_HOME}"
+          && printf "${messageFormat}" "Created \${BUILD_HOME} at ${BUILD_HOME}"
 mkdir bin \
-         && export BUILD_BIN=${BUILD_HOME}/bin \
-         && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
+          && export BUILD_BIN=${BUILD_HOME}/bin \
+          && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
+export BUILD_ASSETS=${BUILD_HOME}/assets \
+          && printf "${messageFormat}" "Created \${BUILD_ASSETS} at ${BUILD_ASSETS}"
 mkdir release \
-         && export BUILD_RELEASE=${BUILD_HOME}/release \
-         && printf "${messageFormat}" "Created \${BUILD_RELEASE} at ${BUILD_RELEASE}"
+          && export BUILD_RELEASE=${BUILD_HOME}/release \
+          && printf "${messageFormat}" "Created \${BUILD_RELEASE} at ${BUILD_RELEASE}"
+
 
 
 # sets up build environment for Ubuntu 12.04 (used by Travis-CI)
@@ -45,12 +48,23 @@ cmake ..
 
 make -j4
 
+printf "${headerFormat}" "Building packages"
+mkdir ${BUILD_BIN}/purity2d-build \
+          && cp {${BUILD_BIN}/*,${BUILD_RELEASE}/*} ${BUILD_BIN}/purity2d-build \
+          && tar -czf purity2d-build.tgz \
+          && printf "${messageFormat}" "Done"
 
-printf "${headerFormat}" "Test"
-printf "${messageFormat}" "Showing ${BUILD_HOME}"
-ls -l ${BUILD_HOME}
-printf "${messageFormat}" "Showing ${BUILD_BIN}"
-ls -l ${BUILD_BIN}
-printf "${messageFormat}" "${BUILD_HOME}/assets"
-ls -l ${BUILD_HOME}/assets
 
+printf "${headerFormat}" "Gathering final release files"
+cd ${BUILD_BIN}
+printf "${messageFormat}" "Contents of ${BUILD_BIN}"
+ls -a
+printf "${messageFormat}" "Exporting release (TGZ) files"
+cp *.tgz ${BUILD_RELEASE} \
+         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
+
+
+printf "${headerFormat}" "Available release:"
+cd ${BUILD_RELEASE}
+ls -1
+#ls | cat
