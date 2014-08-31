@@ -20,4 +20,4 @@ script:
   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then bash build-scripts/android.sh; fi
   #- if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then bash build-scripts/ios.sh; fi
 after_success:
-    - ./update-gh-pages.sh
+    - sudo ./update-gh-pages.sh
