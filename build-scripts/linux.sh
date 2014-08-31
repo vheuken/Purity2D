@@ -38,7 +38,8 @@ sudo apt-get -qq install g++-4.7
 
 
 printf "${headerFormat}" "Installing libraries"
-sudo apt-get install -qqy libpthread-stubs0-dev libgl1-mesa-dev libglu1-mesa-dev libx11-dev libxrandr-dev
+sudo apt-get install -qqy libpthread-stubs0-dev libgl1-mesa-dev libglu1-mesa-dev libx11-dev libxrandr-dev \
+         && printf "${messageFormat}" "Done"
 
 
 printf "${headerFormat}" "Building binaries"
@@ -49,9 +50,10 @@ cmake ..
 make -j4
 
 printf "${headerFormat}" "Building packages"
-mkdir ${BUILD_BIN}/purity2d-build \
-          && cp {${BUILD_BIN}/*,${BUILD_ASSETS}/*} ${BUILD_BIN}/purity2d-build \
-          && tar -czf purity2d-build.tgz \
+cd ${BUILD_BIN}
+mkdir $purity2d-build \
+          && cp {*,${BUILD_ASSETS}/*} $purity2d-build
+          && tar -czf purity2d-build.tgz purity2d-build \
           && printf "${messageFormat}" "Done"
 
 
