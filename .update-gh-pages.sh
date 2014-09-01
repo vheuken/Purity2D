@@ -3,7 +3,8 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
          printf "Starting gh-pages update\n"
          
          printf "Setting up Git\n"
-         cd ${TRAVIS_BUILD_DIR}/release
+         cd ${TRAVIS_BUILD_DIR}
+         mkdir Git && cd Git
          git config --global user.email "travis@travis-ci.org"
          git config --global user.name "Travis"
          
