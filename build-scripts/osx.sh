@@ -52,7 +52,7 @@ cd ${BUILD_BIN}
 printf "${messageFormat}" "Building debug package"
 mkdir purity2d-build 
 cp -r Debug/* purity2d-build
-cp -r ${BUILD_ASSETS}/* purity2d-build
+cp -r ${BUILD_ASSETS}/* purity2d-build/Purity-Engine.app/Contents/MacOS
 zip -r purity2d-build.zip purity2d-build \
          && printf "${messageFormat}" "Done"
 
