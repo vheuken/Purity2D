@@ -52,11 +52,12 @@ cd ${BUILD_BIN}
 printf "${messageFormat}" "Building debug package"
 mkdir purity2d-build
 printf "${messageFormat}" "Debug message: copying binary"
-cp -r Debug/* purity2d-build
+cp -R Debug/* purity2d-build
 printf "${messageFormat}" "Debug message: copying assets"
 #OSX does not support the [-p   --parents] option in [cp]
 mkdir -p purity-2d-build/Purity-Engine.app/Contents/Resources
-cp -R ${BUILD_ASSETS}/* purity2d-build/Purity-Engine.app/Contents/Resources/
+ls -la purity-2d-build/Purity-Engine.app/Contents/Resources
+cp -R ${BUILD_ASSETS}/* purity2d-build/Purity-Engine.app/Contents/Resources
 printf "${messageFormat}" "Debug message: creating zip"
 zip -r purity2d-build.zip purity2d-build \
          && printf "${messageFormat}" "Done"
