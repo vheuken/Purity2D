@@ -58,7 +58,7 @@ printf "${messageFormat}" "Debug message: copying assets"
 mkdir -p purity-2d-build/Purity-Engine.app/Contents/Resources
 ls -la purity-2d-build/Purity-Engine.app/Contents/Resources
 cd purity2d-build 
-cp -R ${BUILD_ASSETS}/* Purity-Engine.app #purity2d-build/Purity-Engine.app/Contents/Resources
+cp -R ${BUILD_ASSETS}/* Purity-Engine.app/Contents/ #purity2d-build/Purity-Engine.app/Contents/Resources
 cd ..
 printf "${messageFormat}" "Debug message: creating zip"
 zip -r purity2d-build.zip purity2d-build \
