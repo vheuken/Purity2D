@@ -39,7 +39,9 @@ printf "${messageFormat}" "Contents of ${BUILD_HOME}"
 ls -a ${BUILD_HOME}
 printf "${messageFormat}" "Contents of ${BUILD_BIN}"
 ls -a ${BUILD_BIN}
+printf "${messageFormat}" "Contents of ${BUILD_BIN}"
+ls -a ${BUILD_BIN}/Debug
 printf "${messageFormat}" "Contents of ${BUILD_ASSETS}"
-la -a ${BUILD_ASSETS}
+ls -a ${BUILD_ASSETS}
 
 
