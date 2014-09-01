@@ -11,7 +11,7 @@ env:
     - IOS_ANDROID=true
   global:
     #The secure string is specific to a single repository and needs to be generated for each user/project
-    - secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
+    secure: awuC9Zp0wPHPJkIs7mQKF1rxWLLM2bLm7EtCzl6NOYVB+ez+LyONaiWRxxFXivWjWYO3m1iWGZlzY2x+irvY1aHAxa4Ohd70/bb1cz3TDSEkLJM4HfduoRXP7CCIx/q6cqMScX6DD2UHVYjqtpbuMwuQR+tLbz3vzHx+GNLZw/8=
 script:
     # OSX and generic GNU/Linux desktop builds
     - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
