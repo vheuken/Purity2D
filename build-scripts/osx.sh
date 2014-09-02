@@ -47,7 +47,7 @@ cd purity2d-build-debug
 zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
 printf "${headerFormat}" "Building relase package"
 mkdir purity2d-build-release
-cp -R release/* purity2d-build-release/
+cp -R Release/* purity2d-build-release/
 #OSX does not support the [-p   --parents] option in [cp]
 mkdir -p purity2d-build-release/Purity-Engine.app/Contents/Resources
 cp -R ${BUILD_ASSETS}/* purity2d-build-release/Purity-Engine.app/Contents/Resources/
