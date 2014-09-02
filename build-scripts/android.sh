@@ -76,27 +76,23 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
 cmake --build . -- -j4 && cd ${BUILD_HOME}
 
 
-printf "${headerFormat}" "Starting APK build"
+printf "${headerFormat}" "Starting package build"
 cd ${BUILD_HOME}
 android update project \
          --name purity2d-build --path . --target "android-20"
-
-
-printf "${headerFormat}" "Building debug APK"
+printf "${messageFormat}" "Building debug packages"
 ant debug
-
-printf "${headerFormat}" "Building release APK"
+printf "${messageFormat}" "Building release packages"
 ant release
-
-#Clarifying semantics
-printf "${headerFormat}" "Semantic fixes"
+#Clarifying names to make packages easier to identify
+printf "${messageFormat}" "Semantic fixes"
 cd ${BUILD_BIN}
 mv purity2d-build-debug.apk purity2d-build-debug-aligned.apk
 mv purity2d-build-release-unsigned.apk purity2d-build-release-unsigned-unaligned.apk
 printf "${messageFormat}" "Done"
 
 
-printf "${headerFormat}" "Generating signature"
+printf "${headerFormat}" "Generating signatures for signed packages"
 #Needs to be refined.
 cd ${BUILD_BIN}
 keytool -genkey -noprompt \
@@ -111,16 +107,16 @@ keytool -genkey -noprompt \
 && printf "${messageFormat}" "Generated signature in ${BUILD_BIN}"
 
 
-printf "${headerFormat}" "Creating signed release APK"
+printf "${headerFormat}" "Creating signed release package"
 cd ${BUILD_BIN}
 cp purity2d-build-release-unsigned-unaligned.apk signing.apk \
          && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
                  -keystore keystore -storepass password signing.apk alias_name \
          && mv signing.apk purity2d-build-release-signed-unaligned.apk \
-         && printf "${messageFormat}" "Signed APK"
+         && printf "${messageFormat}" "Signed package"
 
 
-printf "${headerFormat}" "Zipaligning APKs"
+printf "${headerFormat}" "Aligning archives for release packages"
 #Workaround for zipalign, hardcoded for API 20 (4.4W)
 cd ${BUILD_BIN}
 export PATH=$PATH:$ANDROID_SDK/build-tools/20.0.0 \
@@ -131,11 +127,11 @@ printf "${messageFormat}" "Aligning unsigned APK"
 zipalign -v 4 purity2d-build-release-unsigned-unaligned.apk purity2d-build-release-unsigned-aligned.apk
 
 
-printf "${headerFormat}" "Validating APK build signatures"
+printf "${headerFormat}" "Validating package signatures"
 cd ${BUILD_BIN}
-printf "${messageFormat}" "Verifying aligned APK"
+printf "${messageFormat}" "Verifying aligned package"
 jarsigner -verify -certs purity2d-build-release-signed-aligned.apk
-printf "${messageFormat}" "Verifying unaligned APK"
+printf "${messageFormat}" "Verifying unaligned package"
 jarsigner -verify -certs purity2d-build-release-signed-unaligned.apk
 
 
@@ -143,7 +139,7 @@ printf "${headerFormat}" "Gathering final release files"
 cd ${BUILD_BIN}
 printf "${messageFormat}" "Contents of ${BUILD_BIN}"
 ls -a
-printf "${messageFormat}" "Exporting release (APK) files"
+printf "${messageFormat}" "Exporting release files"
 cp *.apk ${BUILD_RELEASE} \
          && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
 
