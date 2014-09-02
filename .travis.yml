@@ -1,48 +1,48 @@
 os:
-    linux
-    osx
+     linux
+     osx
 
 language:
-    cpp
+     cpp
 
 compiler:
-    gcc
+     gcc
 
 env:
-    matrix:
-      IOS_ANDROID=false
-      IOS_ANDROID=true
+     matrix:
+         IOS_ANDROID=false
+         IOS_ANDROID=true
     
-    global:
-      # The secure string is specific to a single repository and needs to be generated for each user/project
-      secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
+     global:
+         # The secure string is specific to a single repository and needs to be generated for each user/project
+         secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
 
 script:
-    # Generic GNU/Linux build
-    if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then
-      export export ${BUILD_OS}=Linux
-      bash build-scripts/linux.sh
-    fi
+     # Generic GNU/Linux build
+     if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then
+         export export ${BUILD_OS}=Linux
+         bash build-scripts/linux.sh
+     fi
     
-    # OSX build
-    if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then
-      export export ${BUILD_OS}=OSX
-      bash build-scripts/osx.sh
-    fi
+     # OSX build
+     if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then
+         export export ${BUILD_OS}=OSX
+         bash build-scripts/osx.sh
+     fi
     
-    # Android build
-    if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then
-      export export ${BUILD_OS}=Android
-      bash build-scripts/android.sh
-    fi
+     # Android build
+     if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then
+         export export ${BUILD_OS}=Android
+         bash build-scripts/android.sh
+     fi
     
-    # iOS build
-    if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then
-      export export ${BUILD_OS}=iOS
-      bash build-scripts/ios.sh
-    fi
+     # iOS build
+     if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then
+         export export ${BUILD_OS}=iOS
+         bash build-scripts/ios.sh
+     fi
 
 after_success:
-    # Permission error workaround
-    chmod a+x ./.update-gh-pages.sh
-    ./.update-gh-pages.sh
+     # Permission error workaround
+     chmod a+x ./.update-gh-pages.sh
+     ./.update-gh-pages.sh
