@@ -67,11 +67,11 @@ cd purity2d-build-release
 printf "${messageFormat}" "Copying APP to `pwd`/app"
 mkdir -p app && cp -R Purity-Engine.app ./app/
 
-printf "${messageFormat}" "Running pkgbuild analyze"
+printf "${messageFormat}" "Running pkgbuild to analyze and create PKG"
 pwd
 ls -A
 pkgbuild --analyze --root ./app 'Purity-Engine.plist'
-pkgbuild --root ./Purity-Engine.app \
+pkgbuild --root ./ \
     --component-plist Purity-Engine.plist \
     Purity-Engine.pkg
 
