@@ -73,7 +73,7 @@ ls -A
 pkgbuild --analyze --root ./app 'Purity-Engine.plist'
 cd app
 pkgbuild --root ./Purity-Engine.app \
-    --component-plist HelloWorldAppComponents.plist \
+    --component-plist Purity-Engine.plist \
     Purity-Engine.pkg
 
 
