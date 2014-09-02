@@ -18,8 +18,6 @@ env:
     secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
 
 script:
-    - |
-    
     # Generic GNU/Linux build
     if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export export ${BUILD_OS}=Linux && bash build-scripts/linux.sh; fi
     
