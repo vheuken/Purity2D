@@ -19,7 +19,7 @@ printf "${headerFormat}" "Configuring build environment"
 export BUILD_HOME=`pwd` \
          && printf "${messageFormat}" "Created \${BUILD_HOME} at ${BUILD_HOME}"
 mkdir bin \
-          && export BUILD_BIN=${BUILD_HOME}/bin \
+         && export BUILD_BIN=${BUILD_HOME}/bin \
          && printf "${messageFormat}" "Created \${BUILD_BIN} at ${BUILD_BIN}"
 export BUILD_ASSETS=${BUILD_HOME}/assets \
          && printf "${messageFormat}" "Created \${BUILD_ASSETS} at ${BUILD_ASSETS}"
