@@ -35,26 +35,27 @@ cmake -G Xcode ..
 xcodebuild
 
 
-printf "${headerFormat}" "Building packages"
+printf "${headerFormat}" "Starting package build"
 cd ${BUILD_BIN}
-mkdir purity2d-build
-cp -R Debug/* purity2d-build/
+printf "${headerFormat}" "Building debug package"
+mkdir purity2d-build-debug
+cp -R Debug/* purity2d-build-debug/
 #OSX does not support the [-p   --parents] option in [cp]
-mkdir -p purity2d-build/Purity-Engine.app/Contents/Resources
-cp -R ${BUILD_ASSETS}/* purity2d-build/Purity-Engine.app/Contents/Resources/
-zip -r purity2d-build.zip purity2d-build \
-         && printf "${messageFormat}" "Done"
+mkdir -p purity2d-build-debug/Purity-Engine.app/Contents/Resources
+cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app/Contents/Resources/
+zip -r purity2d-build-debug.zip purity2d-build-debug/Purity-Engine.app
+printf "${messageFormat}" "Done"
 
 printf "${headerFormat}" "Gathering final release files"
 cd ${BUILD_BIN}
 printf "${messageFormat}" "Contents of ${BUILD_BIN}"
 ls -a
-printf "${messageFormat}" "Exporting release (ZIP) files"
+printf "${messageFormat}" "Exporting release files"
 cp *.zip ${BUILD_RELEASE} \
          && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
 
 
-printf "${headerFormat}" "Available releases:"
+printf "${headerFormat}" "Available packages:"
 cd ${BUILD_RELEASE}
 ls -1
 #ls | cat
