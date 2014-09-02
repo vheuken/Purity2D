@@ -44,6 +44,13 @@ cp -R Debug/* purity2d-build-debug/
 mkdir -p purity2d-build-debug/Purity-Engine.app/Contents/Resources
 cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app/Contents/Resources/
 zip -r purity2d-build-debug.zip purity2d-build-debug/Purity-Engine.app
+printf "${headerFormat}" "Building relase package"
+mkdir purity2d-build-release
+cp -R release/* purity2d-build-release/
+#OSX does not support the [-p   --parents] option in [cp]
+mkdir -p purity2d-build-release/Purity-Engine.app/Contents/Resources
+cp -R ${BUILD_ASSETS}/* purity2d-build-release/Purity-Engine.app/Contents/Resources/
+zip -r purity2d-build-release.zip purity2d-build-release/Purity-Engine.app
 printf "${messageFormat}" "Done"
 
 printf "${headerFormat}" "Gathering final release files"
