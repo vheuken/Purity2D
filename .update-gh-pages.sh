@@ -13,7 +13,7 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
          
          printf "Copying new files\n"
          cd gh-pages
-         cp -Rf ${TRAVIS_BUILD_DIR}/release/* .
+         cp -Rf ${TRAVIS_BUILD_DIR}/release/* ./${BUILD_OS}
          
          printf "Committing and pushing files\n"
          git add -f .
