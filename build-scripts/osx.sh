@@ -32,8 +32,8 @@ printf "${headerFormat}" "Building binaries"
 cd ${BUILD_HOME}
 mkdir build && cd build
 cmake -G Xcode ..
-xcodebuild \
-         && xcodebuild -configuration Release
+##xcodebuild
+xcodebuild -configuration Release
 
 printf "${headerFormat}" "Starting package build"
 
@@ -80,13 +80,14 @@ touch installerImage.png \
          license.txt
 
 printf "${messageFormat}" "Running productbuild synthesize"
+cd ..
 pwd
 ls -A
 productbuild --synthesize \
 --package 'Purity-Engine.pkg' \
 Distribution.xml
 
-printf "${messageFormat}" "Running productbuild synthesize"
+printf "${messageFormat}" "listing files"
 pwd
 ls -A
 ##mkdir resources
@@ -113,17 +114,27 @@ printf "${messageFormat}" "Done"
 
 
 
-
-printf "${headerFormat}" "Gathering final release files"
+printf "${headerFormat}" "Gathering test files"
 cd ${BUILD_BIN}
 printf "${messageFormat}" "Contents of ${BUILD_BIN}"
 ls -A
 printf "${messageFormat}" "Exporting release files"
-cp *.zip ${BUILD_RELEASE} \
-         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
+cp -R * ${BUILD_RELEASE} \
+         && printf "${messageFormat}" "Copied test files to ${BUILD_RELEASE}"
 
 
-printf "${headerFormat}" "Available packages:"
-cd ${BUILD_RELEASE}
-ls -1
-#ls | cat
+
+
+##printf "${headerFormat}" "Gathering final release files"
+##cd ${BUILD_BIN}
+##printf "${messageFormat}" "Contents of ${BUILD_BIN}"
+##ls -A
+##printf "${messageFormat}" "Exporting release files"
+##cp *.zip ${BUILD_RELEASE} \
+##         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
+
+
+##printf "${headerFormat}" "Available packages:"
+##cd ${BUILD_RELEASE}
+##ls -1
+###ls | cat
