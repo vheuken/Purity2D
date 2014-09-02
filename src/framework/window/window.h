@@ -37,6 +37,8 @@ namespace Purity
         void setPosition(const Vector2i& position);
         Vector2i getPosition() const;
 
+        bool setActive(bool active);
+
         bool pollEvent(Event& event);
 
         bool isOpen() const;
