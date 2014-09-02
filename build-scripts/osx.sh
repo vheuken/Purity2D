@@ -32,8 +32,8 @@ printf "${headerFormat}" "Building binaries"
 cd ${BUILD_HOME}
 mkdir build && cd build
 cmake -G Xcode ..
-xcodebuild
-
+xcodebuild \
+         && xcodebuild -configuration Release
 
 printf "${headerFormat}" "Starting package build"
 cd ${BUILD_BIN}
