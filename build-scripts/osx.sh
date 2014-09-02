@@ -89,7 +89,7 @@ Distribution.xml
 printf "${messageFormat}" "Running productbuild synthesize"
 pwd
 ls -A
-#mkdir resources
+##mkdir resources
 #cp ./installerImage.png /resources
 #cp ./license.txt /resources
  
