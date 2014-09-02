@@ -72,6 +72,10 @@ pwd
 ls -A
 pkgbuild --analyze --root ./app 'Purity-Engine.plist'
 cd app
+pkgbuild --root ./Purity-Engine.app \
+    --component-plist HelloWorldAppComponents.plist \
+    Purity-Engine.pkg
+
 
 printf "${messageFormat}" "Making dummy files"
 pwd
