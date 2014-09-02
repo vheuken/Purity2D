@@ -60,20 +60,36 @@ zip --recurse-paths ../purity2d-build-release.zip Purity-Engine.app
 
 
 
+
+
+
+
+
 printf "${headerFormat}" "Building relase package (PKG)"
 cd ${BUILD_BIN}
 cd purity2d-build-release
 
+
+
 printf "${messageFormat}" "Copying APP to `pwd`/app"
 mkdir -p app && cp -R Purity-Engine.app ./app/
 
-printf "${messageFormat}" "Running pkgbuild to analyze and create PKG"
+
+
+printf "${messageFormat}" "Running pkgbuild to analyze files for PKG"
 pwd
 ls -A
 pkgbuild --analyze --root ./app 'Purity-Engine.plist'
+
+
+
+printf "${messageFormat}" "Running pkgbuild to create PKG"
 pkgbuild --root ./ \
     --component-plist Purity-Engine.plist \
     Purity-Engine.pkg
+
+
+
 
 
 printf "${messageFormat}" "Making dummy files"
@@ -81,6 +97,9 @@ pwd
 ls -A
 touch installerImage.png \
          license.txt
+
+
+
 
 printf "${messageFormat}" "Running productbuild synthesize"
 cd ..
@@ -90,28 +109,46 @@ productbuild --synthesize \
 --package 'Purity-Engine.pkg' \
 Distribution.xml
 
+
+
+
 printf "${messageFormat}" "listing files"
 pwd
 ls -A
 ##mkdir resources
 #cp ./installerImage.png /resources
 #cp ./license.txt /resources
+
+
  
 #mkdir helper_scripts
 #cp ./postinstall 
+
+
  
 #cp $(SRC)/*.plist .
 #cp $(SRC)/Distribution.xml
 
 
+
+
 #chmod -R a+xr 'Purity-Engine.app'
 #chmod -R a+xr examples
+
+
 
 #printf "${messageFormat}" "Moving APP"
 #cp -Rfp 'Purity-Engine.app' app/'Purity-Engine.app'
 
 
+
+
 printf "${messageFormat}" "Done"
+
+
+
+
+
 
 
 
