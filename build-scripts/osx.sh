@@ -85,7 +85,7 @@ pkgbuild --analyze --root ./app.dst 'Purity-Engine.plist'
 
 printf "${messageFormat}" "Running pkgbuild to create PKG"
 pwd
-la -A
+ls -A
 pkgbuild \
          --root ./dst \
          --component-plist Purity-Engine.plist \
