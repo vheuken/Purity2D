@@ -42,19 +42,22 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 xcodebuild
 
 
-printf "${headerFormat}" "Listing files"
-cat /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS*.*.sdk/SDKSettings.plist
 
-## Build archive
-#xcodebuild archive \
-#         -archivePath $ARCHIVE_NAME
+# Build archive
+xcodebuild archive \
+         CODE_SIGN_IDENTITY="" \
+         CODE_SIGNING_REQUIRED=NO \
+         -archivePath Purity-Engine.xcarchive
 # Export it to an IPA
-#xcodebuild \
-#         -exportArchive \
-#
-#         -archivePath $ARCHIVE_NAME.xcarchive \
-#         -exportPath $ARCHIVE_NAME \
-#         -exportFormat ipa \
+xcodebuild \
+         -exportArchive \
+         -exportFormat ipa \
+         -archivePath Purity-Engine.xcarchive \
+         -exportPath Purity-Engine.ipa \
+         CODE_SIGN_IDENTITY="" \
+         CODE_SIGNING_REQUIRED=NO \
+         -alltargets \
+         -configuration Release
 
 
 
