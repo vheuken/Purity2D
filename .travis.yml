@@ -1,26 +1,39 @@
 os:
-  - linux
-  - osx
-language: 
-  - cpp
+   - linux
+   - osx
+
+language:
+   - cpp
+
 compiler:
-  - gcc
+   - gcc
+
 env:
-  matrix:
-    - IOS_ANDROID=false
-    - IOS_ANDROID=true
-  global:
-    #The secure string is specific to a single repository and needs to be generated for each user/project
-    secure: awuC9Zp0wPHPJkIs7mQKF1rxWLLM2bLm7EtCzl6NOYVB+ez+LyONaiWRxxFXivWjWYO3m1iWGZlzY2x+irvY1aHAxa4Ohd70/bb1cz3TDSEkLJM4HfduoRXP7CCIx/q6cqMScX6DD2UHVYjqtpbuMwuQR+tLbz3vzHx+GNLZw/8=
+   matrix:
+##     - IOS_ANDROID=false
+     - IOS_ANDROID=true
+    
+   global:
+     # The secure string !{GH_TOKEN} is specific to a single repository and needs to be generated for each user/project
+     - secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
+
 script:
-    # OSX and generic GNU/Linux desktop builds
-    - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then bash build-scripts/linux.sh; fi
-    - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then bash build-scripts/osx.sh; fi
-  
-    # iOS and Android builds
-    - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then bash build-scripts/android.sh; fi
-    - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then bash build-scripts/ios.sh; fi
+   # Generic GNU/Linux build
+##   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
+   
+   # OSX build
+##   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
+   
+   # Android build
+##   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
+   
+   # iOS build
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
+
 after_success:
-    #Permission error workaround
-    - chmod a+x ./.update-gh-pages.sh
-    - ./.update-gh-pages.sh
+   # Permissions error workaround for script
+   - chmod a+x ./.travis-update-gh-pages.sh && ./.travis-update-gh-pages.sh
+
+
+
+
