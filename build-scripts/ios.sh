@@ -42,6 +42,21 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 xcodebuild
 
 
+printf "${headerFormat}" "Listing files"
+cat /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS*.*.sdk/SDKSettings.plist
+
+## Build archive
+#xcodebuild archive \
+#         -archivePath $ARCHIVE_NAME
+# Export it to an IPA
+#xcodebuild \
+#         -exportArchive \
+#
+#         -archivePath $ARCHIVE_NAME.xcarchive \
+#         -exportPath $ARCHIVE_NAME \
+#         -exportFormat ipa \
+
+
 
 printf "${headerFormat}" "Tests"
 printf "${messageFormat}" "Contents of `pwd`"
