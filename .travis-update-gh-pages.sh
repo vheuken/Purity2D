@@ -3,7 +3,8 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
          printf "Starting gh-pages update\n"
          
          printf "Setting up Git\n"
-         cd ${TRAVIS_BUILD_DIR}/release
+         cd ${TRAVIS_BUILD_DIR}
+         mkdir Git && cd Git
          git config --global user.email "travis@travis-ci.org"
          git config --global user.name "Travis"
          
@@ -12,7 +13,8 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
          
          printf "Copying new files\n"
          cd gh-pages
-         cp -Rf ${TRAVIS_BUILD_DIR}/release/* .
+         test ! -d ${BUILD_OS} && mkdir ${BUILD_OS}
+         cp -Rf ${TRAVIS_BUILD_DIR}/release/* ./${BUILD_OS}
          
          printf "Committing and pushing files\n"
          git add -f .
