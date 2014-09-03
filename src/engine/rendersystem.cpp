@@ -28,8 +28,6 @@ void Purity::RenderSystem::update(Scene* scene)
 
 void Purity::RenderSystem::run()
 {
-    mWindow->setActive(true);
-
     while (mWindow->isOpen())
     {
         std::cout << "window is open!" << std::endl;
