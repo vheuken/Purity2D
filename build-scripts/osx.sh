@@ -32,20 +32,20 @@ printf "${headerFormat}" "Building binaries"
 cd ${BUILD_HOME}
 mkdir build && cd build
 cmake -G Xcode ..
-##xcodebuild
-xcodebuild -configuration Release
+xcodebuild \
+         && xcodebuild -configuration Release
 
 printf "${headerFormat}" "Starting package build"
 
-##printf "${headerFormat}" "Building debug package"
-##cd ${BUILD_BIN}
-##mkdir purity2d-build-debug
-##cp -R Debug/* purity2d-build-debug/
-###OSX does not support the [-p   --parents] option in [cp]
-##mkdir -p purity2d-build-debug/Purity-Engine.app/Contents/Resources
-##cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app/Contents/Resources/
-##cd purity2d-build-debug
-##zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
+printf "${headerFormat}" "Building debug package"
+cd ${BUILD_BIN}
+mkdir purity2d-build-debug
+cp -R Debug/* purity2d-build-debug/
+#OSX does not support the [-p   --parents] option in [cp]
+mkdir -p purity2d-build-debug/Purity-Engine.app/Contents/Resources
+cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app/Contents/Resources/
+cd purity2d-build-debug
+zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
 
 printf "${headerFormat}" "Building relase package (ZIP)"
 cd ${BUILD_BIN}
@@ -57,6 +57,7 @@ cp -R ${BUILD_ASSETS}/* purity2d-build-release/Purity-Engine.app/Contents/Resour
 cd purity2d-build-release
 zip --recurse-paths ../purity2d-build-release.zip Purity-Engine.app
 
+printf "${messageFormat}" "Done"
 
 
 
@@ -64,49 +65,36 @@ zip --recurse-paths ../purity2d-build-release.zip Purity-Engine.app
 
 
 
+##printf "${headerFormat}" "Building relase package (PKG)"
+##cd ${BUILD_BIN}
+##cd purity2d-build-release
 
-printf "${headerFormat}" "Building relase package (PKG)"
-cd ${BUILD_BIN}
-cd purity2d-build-release
+##printf "${messageFormat}" "Copying APP to `pwd`/app.dst"
+##mkdir -p app.dst && cp -R Purity-Engine.app ./app.dst/
 
+##printf "${messageFormat}" "Running pkgbuild to analyze files for PKG"
+##pwd
+##ls -A
+##pkgbuild --analyze --root ./app.dst 'Purity-Engine.plist'
 
+##printf "${messageFormat}" "Running pkgbuild to create PKG"
+##pwd
+##ls -A
+##pkgbuild \
+##         --root ./dst \
+##         --component-plist Purity-Engine.plist \
+##         ##--scripts ###scripts-path### \
+##         --identifier Purity-Engine \
+##         #Note, currently uses a Travis-specific variable
+##         --version "${TRAVIS_JOB_NUMBER}" \
+##         --install-location /Applications \
+##         Purity-Engine.pkg
 
-printf "${messageFormat}" "Copying APP to `pwd`/app"
-mkdir -p app.dst && cp -R Purity-Engine.app ./app.dst/
-
-
-
-printf "${messageFormat}" "Running pkgbuild to analyze files for PKG"
-pwd
-ls -A
-pkgbuild --analyze --root ./app.dst 'Purity-Engine.plist'
-
-
-
-printf "${messageFormat}" "Running pkgbuild to create PKG"
-pwd
-ls -A
-pkgbuild \
-         --root ./dst \
-         --component-plist Purity-Engine.plist \
-         ##--scripts ###scripts-path### \
-         --identifier Purity-Engine \
-         #Note, currently uses a Travis-specific variable
-         --version "${TRAVIS_JOB_NUMBER}" \
-         --install-location /Applications \
-         Purity-Engine.pkg
-
-
-
-
-printf "${messageFormat}" "Making dummy files"
-pwd
-ls -A
-touch installerImage.png \
-         license.txt
-
-
-
+##printf "${messageFormat}" "Making dummy files"
+##pwd
+##ls -A
+##touch installerImage.png \
+##         license.txt
 
 ##printf "${messageFormat}" "Running productbuild synthesize"
 ##cd ..
@@ -116,72 +104,55 @@ touch installerImage.png \
 ##--package 'Purity-Engine.pkg' \
 ##Distribution.xml
 
-
-
-
-printf "${messageFormat}" "listing files"
-pwd
-ls -A
+##printf "${messageFormat}" "listing files"
+##pwd
+##ls -A
 ##mkdir resources
 #cp ./installerImage.png /resources
 #cp ./license.txt /resources
 
+##mkdir helper_scripts
+##cp ./postinstall 
 
- 
-#mkdir helper_scripts
-#cp ./postinstall 
-
-
- 
-#cp $(SRC)/*.plist .
-#cp $(SRC)/Distribution.xml
-
-
-
+##cp $(SRC)/*.plist .
+##cp $(SRC)/Distribution.xml
 
 #chmod -R a+xr 'Purity-Engine.app'
 #chmod -R a+xr examples
 
-
-
 #printf "${messageFormat}" "Moving APP"
 #cp -Rfp 'Purity-Engine.app' app/'Purity-Engine.app'
 
-
-
-
-printf "${messageFormat}" "Done"
-
-
-
-
-
-
-
-
-
-
-printf "${headerFormat}" "Gathering test files"
-cd ${BUILD_BIN}
-printf "${messageFormat}" "Contents of ${BUILD_BIN}"
-ls -A
-printf "${messageFormat}" "Exporting release files"
-cp -R * ${BUILD_RELEASE} \
-         && printf "${messageFormat}" "Copied test files to ${BUILD_RELEASE}"
-
-
-
-
-##printf "${headerFormat}" "Gathering final release files"
+##printf "${headerFormat}" "Gathering test files"
 ##cd ${BUILD_BIN}
 ##printf "${messageFormat}" "Contents of ${BUILD_BIN}"
 ##ls -A
 ##printf "${messageFormat}" "Exporting release files"
-##cp *.zip ${BUILD_RELEASE} \
-##         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
+##cp -R * ${BUILD_RELEASE} \
+##         && printf "${messageFormat}" "Copied test files to ${BUILD_RELEASE}"
 
 
-##printf "${headerFormat}" "Available packages:"
-##cd ${BUILD_RELEASE}
-##ls -1
-###ls | cat
+
+
+
+
+
+
+
+printf "${headerFormat}" "Gathering final release files"
+cd ${BUILD_BIN}
+printf "${messageFormat}" "Contents of ${BUILD_BIN}"
+ls -A
+printf "${messageFormat}" "Exporting release files"
+cp *.zip ${BUILD_RELEASE} \
+         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
+
+
+printf "${headerFormat}" "Available packages:"
+cd ${BUILD_RELEASE}
+ls -1
+#ls | cat
+
+
+
+
