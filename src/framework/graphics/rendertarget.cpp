@@ -51,7 +51,7 @@ void Purity::RenderTarget::draw(const SpriteSheet* spriteSheet, unsigned short a
         texture->createInternalTexture(mRenderer);
     }
 
-    auto sdlTexture = static_cast<SDL_Texture*>(*spriteSheet->getTexture());
+    auto sdlTexture = static_cast<SDL_Texture*>(*texture);
     auto textureSubRect = static_cast<SDL_Rect>(spriteSheet->getTileSubRect(animationFrame));
 
     SDL_Rect drawRect;
