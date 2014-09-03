@@ -46,6 +46,7 @@ xcodebuild
 printf "${headerFormat}" "Building release binary"
 # Build archive
 printf "${messageFormat}" "Building archive"
+xcodebuild -scheme Purity-Engine build
 xcodebuild archive \
          -scheme Purity-Engine
          CODE_SIGN_IDENTITY="" \
