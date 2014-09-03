@@ -35,20 +35,24 @@ mkdir -p release \
 
 
 
-
+printf "${headerFormat}" "Building binaries"
 mkdir build
 cd build 
 cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULATOR -G Xcode ..
+
+printf "${headerFormat}" "Building debug binary"
 xcodebuild
 
-
-
+printf "${headerFormat}" "Building release binary"
 # Build archive
+printf "${messageFormat}" "Building archive"
 xcodebuild archive \
+         -scheme Purity-Engine
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -archivePath Purity-Engine.xcarchive
 # Export it to an IPA
+printf "${messageFormat}" "Creating package"
 xcodebuild \
          -exportArchive \
          -exportFormat ipa \
