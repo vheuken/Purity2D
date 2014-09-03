@@ -45,10 +45,11 @@ xcodebuild
 
 printf "${headerFormat}" "Building release binary"
 # Build archive
-printf "${messageFormat}" "Building archive"
+printf "${messageFormat}" "Building scheme"
 xcodebuild -scheme Purity-Engine build
+printf "${messageFormat}" "Building archive"
 xcodebuild archive \
-         -scheme Purity-Engine
+         -scheme Purity-Engine \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -archivePath Purity-Engine.xcarchive
