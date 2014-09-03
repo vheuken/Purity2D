@@ -37,15 +37,15 @@ xcodebuild -configuration Release
 
 printf "${headerFormat}" "Starting package build"
 
-printf "${headerFormat}" "Building debug package"
-cd ${BUILD_BIN}
-mkdir purity2d-build-debug
-cp -R Debug/* purity2d-build-debug/
-#OSX does not support the [-p   --parents] option in [cp]
-mkdir -p purity2d-build-debug/Purity-Engine.app/Contents/Resources
-cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app/Contents/Resources/
-cd purity2d-build-debug
-zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
+##printf "${headerFormat}" "Building debug package"
+##cd ${BUILD_BIN}
+##mkdir purity2d-build-debug
+##cp -R Debug/* purity2d-build-debug/
+###OSX does not support the [-p   --parents] option in [cp]
+##mkdir -p purity2d-build-debug/Purity-Engine.app/Contents/Resources
+##cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app/Contents/Resources/
+##cd purity2d-build-debug
+##zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
 
 printf "${headerFormat}" "Building relase package (ZIP)"
 cd ${BUILD_BIN}
@@ -72,22 +72,29 @@ cd purity2d-build-release
 
 
 printf "${messageFormat}" "Copying APP to `pwd`/app"
-mkdir -p app && cp -R Purity-Engine.app ./app/
+mkdir -p app.dst && cp -R Purity-Engine.app ./app.dst/
 
 
 
 printf "${messageFormat}" "Running pkgbuild to analyze files for PKG"
 pwd
 ls -A
-pkgbuild --analyze --root ./app 'Purity-Engine.plist'
+pkgbuild --analyze --root ./app.dst 'Purity-Engine.plist'
 
 
 
 printf "${messageFormat}" "Running pkgbuild to create PKG"
-pkgbuild --root ./ \
-    --component-plist Purity-Engine.plist \
-    Purity-Engine.pkg
-
+pwd
+la -A
+pkgbuild \
+         --root ./dst \
+         --component-plist Purity-Engine.plist \
+         ##--scripts ###scripts-path### \
+         --identifier Purity-Engine \
+         #Note, currently uses a Travis-specific variable
+         --version "${TRAVIS_JOB_NUMBER}" \
+         --install-location /Applications \
+         Purity-Engine.pkg
 
 
 
@@ -101,13 +108,13 @@ touch installerImage.png \
 
 
 
-printf "${messageFormat}" "Running productbuild synthesize"
-cd ..
-pwd
-ls -A
-productbuild --synthesize \
---package 'Purity-Engine.pkg' \
-Distribution.xml
+##printf "${messageFormat}" "Running productbuild synthesize"
+##cd ..
+##pwd
+##ls -A
+##productbuild --synthesize \
+##--package 'Purity-Engine.pkg' \
+##Distribution.xml
 
 
 
