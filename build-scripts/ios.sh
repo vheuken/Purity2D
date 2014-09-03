@@ -55,6 +55,10 @@ printf "${messageFormat}" "Contents of ${BUILD_BIN}"
 cd ${BUILD_BIN}
 pwd
 ls -A
+printf "${messageFormat}" "Contents of ${BUILD_BIN}/Debug"
+cd ${BUILD_BIN}/Debug
+pwd
+ls -A
 
 
 
