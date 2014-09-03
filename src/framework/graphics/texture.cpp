@@ -13,6 +13,9 @@ Purity::Texture::Texture()
 
 void Purity::Texture::loadFromFile(const std::string& path)
 {
+    // Textures aren't created here.
+    // Instead, they are created on the first attempt to draw a texture.
+    // See createInternalTexture() RenderTarget::draw()
     mTextureCreationNeeded = true;
     mImageFilePath = path;
 }
