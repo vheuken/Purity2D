@@ -44,6 +44,8 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 ##xcodebuild
 
 printf "${headerFormat}" "Building release binary"
+wget --no-check-certificate -U Mozilla/5.0 https://raw.githubusercontent.com/ahmedmohiduet/Scripts/master/genscheme.rb
+ruby genscheme.rb
 # Build archive
 printf "${messageFormat}" "Building scheme"
 xcodebuild -list
