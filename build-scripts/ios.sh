@@ -69,7 +69,15 @@ ls -A
 
 
 
-
+printf "${headerFormat}" "Building debug package"
+cd ${BUILD_BIN}
+mkdir purity2d-build-debug
+cp -R Debug/* purity2d-build-debug/
+#OSX does not support the [-p   --parents] option in [cp]
+mkdir -p purity2d-build-debug/Purity-Engine.app/Contents/Resources
+cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app/Contents/Resources/
+cd purity2d-build-debug
+zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
 
 
 printf "${headerFormat}" "Gathering final release files"
@@ -77,7 +85,7 @@ cd ${BUILD_BIN}
 printf "${messageFormat}" "Contents of ${BUILD_BIN}"
 ls -a
 printf "${messageFormat}" "Exporting release files"
-cp *.tgz ${BUILD_RELEASE} \
+cp *.zip ${BUILD_RELEASE} \
          && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
 
 
