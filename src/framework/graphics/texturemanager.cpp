@@ -2,7 +2,7 @@
 
 bool Purity::TextureManager::sIsEnabled = true;
 
-const Purity::Texture* Purity::TextureManager::getTexture(const std::string& texturePath)
+Purity::Texture* Purity::TextureManager::getTexture(const std::string& texturePath)
 {
     if (sIsEnabled == true)
     {

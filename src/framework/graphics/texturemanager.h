@@ -12,7 +12,7 @@ namespace Purity
     class TextureManager
     {
     public:
-        const Texture* getTexture(const std::string& texturePath);
+        Texture* getTexture(const std::string& texturePath);
         static bool sIsEnabled;
 
     private:

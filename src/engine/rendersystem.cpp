@@ -8,8 +8,7 @@
 
 Purity::RenderSystem::RenderSystem(Purity::Window* window)
     : AbstractSystem(),
-      mWindow(window),
-      mRenderThread(&RenderSystem::run, this)
+      mWindow(window)
 {
 }
 
@@ -24,19 +23,16 @@ void Purity::RenderSystem::update(Scene* scene)
     {
         mCurrentScene = scene;
     }
+
+    run();
 }
 
 void Purity::RenderSystem::run()
 {
-    while (mWindow->isOpen())
+    if (mCurrentScene)
     {
-        std::cout << "window is open!" << std::endl;
-        if (mCurrentScene)
-        {
-            std::cout << "Scene exists!" << std::endl;
-            mWindow->clear();
-            mWindow->draw(*mCurrentScene);
-            mWindow->display();
-        }
+        mWindow->clear();
+        mWindow->draw(*mCurrentScene);
+        mWindow->display();
     }
 }

@@ -1,6 +1,6 @@
 #include "spritesheet.h"
 
-Purity::SpriteSheet::SpriteSheet(const Texture* texture,
+Purity::SpriteSheet::SpriteSheet(Texture* texture,
                                  int tileWidth,
                                  int tileHeight)
 {
@@ -23,7 +23,7 @@ Purity::Rect Purity::SpriteSheet::getTileSubRect(int tileId) const
     return tileRect;
 }
 
-const Purity::Texture* Purity::SpriteSheet::getTexture() const
+Purity::Texture* Purity::SpriteSheet::getTexture() const
 {
     return mTexture;
 }

@@ -2,14 +2,15 @@
 #define PURITY_RENDER_TARGET_H
 
 #include "vertexarray.h"
-#include "renderer.h"
 #include "../spritesheet.h"
+
+struct SDL_Renderer;
 
 namespace Purity
 {
     class Drawable;
 
-    class RenderTarget : protected Renderer
+    class RenderTarget
     {
     public:
         void clear();
@@ -18,6 +19,9 @@ namespace Purity
         void draw(const Drawable& drawable);
         void draw(const Purity::Rect& rectToDraw);
         void draw(const SpriteSheet* spriteSheet, unsigned short animationFrame, const Purity::Vector2f& position);
+
+    protected:
+        SDL_Renderer* mRenderer;
     };
 }
 

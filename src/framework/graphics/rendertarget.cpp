@@ -6,12 +6,12 @@
 
 void Purity::RenderTarget::clear()
 {
-    if (SDL_SetRenderDrawColor(sRenderer, 0, 0, 0, 255) < 0)
+    if (SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255) < 0)
     {
         std::cout << SDL_GetError() << std::endl;
     }
 
-    if(SDL_RenderClear(sRenderer)  < 0)
+    if(SDL_RenderClear(mRenderer)  < 0)
     {
         std::cout << SDL_GetError() << std::endl;
     }
@@ -19,7 +19,7 @@ void Purity::RenderTarget::clear()
 
 void Purity::RenderTarget::display()
 {
-    SDL_RenderPresent(sRenderer);
+    SDL_RenderPresent(mRenderer);
 }
 
 void Purity::RenderTarget::draw(const Drawable& drawable)
@@ -31,12 +31,12 @@ void Purity::RenderTarget::draw(const Purity::Rect& rectToDraw)
 {
     SDL_Rect rect = static_cast<SDL_Rect>(rectToDraw);
 
-    if (SDL_SetRenderDrawColor(sRenderer, 255, 0, 0, 255) != 0)
+    if (SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255) != 0)
     {
         std::cerr << SDL_GetError() << std::endl;
     }
 
-    if (SDL_RenderDrawRect(sRenderer, &rect) != 0)
+    if (SDL_RenderDrawRect(mRenderer, &rect) != 0)
     {
         std::cerr << SDL_GetError() << std::endl;
     }
@@ -44,8 +44,15 @@ void Purity::RenderTarget::draw(const Purity::Rect& rectToDraw)
 
 void Purity::RenderTarget::draw(const SpriteSheet* spriteSheet, unsigned short animationFrame, const Purity::Vector2f& position)
 {
-    SDL_Texture* texture = static_cast<SDL_Texture*>(*spriteSheet->getTexture());
-    SDL_Rect textureSubRect = static_cast<SDL_Rect>(spriteSheet->getTileSubRect(animationFrame));
+    auto texture = spriteSheet->getTexture();
+
+    if (texture->mTextureCreationNeeded == true)
+    {
+        texture->createInternalTexture(mRenderer);
+    }
+
+    auto sdlTexture = static_cast<SDL_Texture*>(*spriteSheet->getTexture());
+    auto textureSubRect = static_cast<SDL_Rect>(spriteSheet->getTileSubRect(animationFrame));
 
     SDL_Rect drawRect;
 
@@ -54,7 +61,7 @@ void Purity::RenderTarget::draw(const SpriteSheet* spriteSheet, unsigned short a
     drawRect.w = textureSubRect.w;
     drawRect.h = textureSubRect.h;
 
-    if (SDL_RenderCopy(sRenderer, texture, &textureSubRect, &drawRect) != 0)
+    if (SDL_RenderCopy(mRenderer, sdlTexture, &textureSubRect, &drawRect) != 0)
     {
         std::cerr << SDL_GetError() << std::endl;
     }
