@@ -40,13 +40,13 @@ mkdir build
 cd build 
 cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULATOR -G Xcode ..
 
-printf "${headerFormat}" "Building debug binary"
-xcodebuild
+##printf "${headerFormat}" "Building debug binary"
+##xcodebuild
 
 printf "${headerFormat}" "Building release binary"
 # Build archive
 printf "${messageFormat}" "Building scheme"
-xcodebuild -scheme Purity-Engine build
+xcodebuild -list
 printf "${messageFormat}" "Building archive"
 xcodebuild archive \
          -scheme Purity-Engine \
@@ -93,13 +93,13 @@ ls -A
 
 
 
-printf "${headerFormat}" "Building debug package"
-cd ${BUILD_BIN}
-mkdir purity2d-build-debug
-cp -R Debug/* purity2d-build-debug/
-cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app
-cd purity2d-build-debug
-zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
+##printf "${headerFormat}" "Building debug package"
+##cd ${BUILD_BIN}
+##mkdir purity2d-build-debug
+##cp -R Debug/* purity2d-build-debug/
+##cp -R ${BUILD_ASSETS}/* purity2d-build-debug/Purity-Engine.app
+##cd purity2d-build-debug
+##zip --recurse-paths ../purity2d-build-debug.zip Purity-Engine.app
 
 
 printf "${headerFormat}" "Gathering final release files"
