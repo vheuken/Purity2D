@@ -14,7 +14,7 @@ Purity::RenderSystem::RenderSystem(Purity::Window* window)
 
 Purity::RenderSystem::~RenderSystem()
 {
-    mRenderThread.join();
+    //mRenderThread.join();
 }
 
 void Purity::RenderSystem::update(Scene* scene)
