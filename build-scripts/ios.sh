@@ -46,8 +46,15 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 
 printf "${headerFormat}" "Building release binary"
 
+printf "${messageFormat}" "Checking Ruby"
+rvm get head
+rvm reload
+rvm repair all
+rvm use 1.9.3
+ruby -v
+
 printf "${messageFormat}" "Checking versions"
-gem --version
+gem -v
 
 printf "${messageFormat}" "Building scheme"
 sudo gem install xcodeproj
