@@ -10,7 +10,7 @@ compiler:
 
 env:
    matrix:
-##     - IOS_ANDROID=false
+     - IOS_ANDROID=false
      - IOS_ANDROID=true
     
    global:
@@ -19,13 +19,13 @@ env:
 
 script:
    # Generic GNU/Linux build
-##   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
    
    # OSX build
-##   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
    
    # Android build
-##   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
    
    # iOS build
    - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
