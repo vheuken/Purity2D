@@ -69,11 +69,11 @@ environment:
 #---------------------------------#
 
 # Build platform can be set to "x86", "x64", and "Any CPU". Multiple lines will add builds to the matrix.
-platform:
-  - Any CPU
+#platform:
+#  - Any CPU
 
-configuration:
-  - Debug
+#configuration:
+#  - Debug
 
 before_build:
   - echo "Before Build"
