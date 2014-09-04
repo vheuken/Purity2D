@@ -76,8 +76,6 @@ configuration:
 before_build:
   - echo "Before Build"
 
-build:
-  - off
 build_script:
   - ./build-scripts/windows.bat
 
