@@ -48,7 +48,7 @@ printf "${headerFormat}" "Building release binary"
 
 printf "${messageFormat}" "Building scheme"
 sudo gem install xcodeproj
-ruby ${BUILD_HOME}/createscheme.rb
+ruby ${BUILD_HOME}/.generatescheme.rb
 xcodebuild -list
 
 # Build archive
