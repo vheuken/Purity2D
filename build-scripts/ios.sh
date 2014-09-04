@@ -61,14 +61,14 @@ xcodebuild -list
 # Build archive
 printf "${messageFormat}" "Building archive"
 xcodebuild \
-         -target Purity-Engine \
-         -configuration Debug \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -scheme "Purity-Engine"
 #         -exportArchive \
 #         -archivePath Purity-Engine.xcarchive \
 #         -exportPath Purity-Engine.xcarchive
+#         -target Purity-Engine \
+#         -configuration Debug \
 pwd
 ls -A
 
