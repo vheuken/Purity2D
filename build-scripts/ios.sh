@@ -46,23 +46,25 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 
 printf "${headerFormat}" "Building release binary"
 
-printf "${messageFormat}" "Checking Ruby"
-rvm get head
-rvm reload
-rvm repair all
-source ~/.rvm/scripts/rvm
-type rvm | head -n 1
-rvm install ruby-1.9.3-p547
-rvm use 1.9.3
-ruby -v
+cp ${BUILD_HOME}/.Purity-Engine.xcscheme .
 
-printf "${messageFormat}" "Checking versions"
-gem -v
+##printf "${messageFormat}" "Checking Ruby"
+##rvm get head
+##rvm reload
+##rvm repair all
+##source ~/.rvm/scripts/rvm
+##type rvm | head -n 1
+##rvm install ruby-1.9.3-p547
+##rvm use 1.9.3
+##ruby -v
 
-printf "${messageFormat}" "Building scheme"
-sudo gem install xcodeproj
-sudo ruby ${BUILD_HOME}/.generatescheme.rb
-xcodebuild -list
+##printf "${messageFormat}" "Checking versions"
+##gem -v
+
+##printf "${messageFormat}" "Building scheme"
+##sudo gem install xcodeproj
+##sudo ruby ${BUILD_HOME}/.generatescheme.rb
+##xcodebuild -list
 
 # Build archive
 printf "${messageFormat}" "Building archive"
