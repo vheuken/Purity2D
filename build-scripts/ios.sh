@@ -52,6 +52,7 @@ rvm reload
 rvm repair all
 source ~/.rvm/scripts/rvm
 type rvm | head -n 1
+rvm install ruby-1.9.3-p547
 rvm use 1.9.3
 ruby -v
 
