@@ -48,8 +48,7 @@ printf "${headerFormat}" "Building release binary"
 
 printf "${messageFormat}" "Building scheme"
 sudo gem install xcodeproj
-wget --no-check-certificate -U Mozilla/5.0 https://raw.githubusercontent.com/ahmedmohiduet/Scripts/master/genscheme.rb
-ruby genscheme.rb
+ruby ${BUILD_HOME}/createscheme.rb
 xcodebuild -list
 
 # Build archive
