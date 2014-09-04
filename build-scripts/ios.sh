@@ -46,8 +46,10 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 
 printf "${headerFormat}" "Building release binary"
 
+ls -A ./Purity2D.xcodeproj
+
 cp ${BUILD_HOME}/.Purity-Engine.xcscheme .
-cp ${BUILD_HOME}/.Purity-Engine.xcscheme ./Purity2D.xcodeproj
+cp ${BUILD_HOME}/.Purity-Engine.xcscheme ./Purity2D.xcodeproj/xcshareddata/xcschemes
 
 ##printf "${messageFormat}" "Checking Ruby"
 ##rvm get head
