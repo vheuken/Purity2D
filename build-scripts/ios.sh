@@ -60,7 +60,7 @@ xcodebuild -list
 
 # Build archive
 printf "${messageFormat}" "Building archive"
-xcodebuild archive \
+xcodebuild \
          -target Purity-Engine \
          -configuration Debug \
          CODE_SIGN_IDENTITY="" \
@@ -69,7 +69,8 @@ xcodebuild archive \
 #         -exportArchive \
 #         -archivePath Purity-Engine.xcarchive \
 #         -exportPath Purity-Engine.xcarchive
-
+pwd
+ls -A
 
 
 # Export it to an IPA
