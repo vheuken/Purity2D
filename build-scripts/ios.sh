@@ -75,7 +75,9 @@ xcodebuild -list
 # Build archive
 printf "${messageFormat}" "Building archive"
 xcodebuild archive \
-         -scheme "Purity-Engine" \
+#         -scheme "Purity-Engine" \
+         -target Purity-Engine \
+         -configuration Debug
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -archivePath Purity-Engine.xcarchive
@@ -90,7 +92,7 @@ xcodebuild \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -alltargets \
-         -configuration Release
+         -configuration Debug
 
 
 
