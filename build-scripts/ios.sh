@@ -46,9 +46,11 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 
 printf "${headerFormat}" "Building release binary"
 
-printf "${messageFormat}" "Building scheme"
+printf "${messageFormat}" "Checking versions"
 ruby -v
 gem -v
+
+printf "${messageFormat}" "Building scheme"
 sudo gem install xcodeproj
 sudo ruby ${BUILD_HOME}/.generatescheme.rb
 xcodebuild -list
