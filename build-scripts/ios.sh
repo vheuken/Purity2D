@@ -48,6 +48,7 @@ printf "${headerFormat}" "Building release binary"
 
 ls -A ./Purity2D.xcodeproj
 
+mkdir -p ./Purity2D.xcodeproj/xcshareddata/xcschemes
 cp ${BUILD_HOME}/.Purity-Engine.xcscheme .
 cp ${BUILD_HOME}/.Purity-Engine.xcscheme ./Purity2D.xcodeproj/xcshareddata/xcschemes
 
