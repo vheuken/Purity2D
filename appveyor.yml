@@ -29,7 +29,7 @@ os: Windows Server 2012 R2
 init:
   - git config --global core.autocrlf input
 
-clone_folder: c:\projects\${APPVEYOR_PROJECT_SLUG}
+clone_folder: c:\projects\%APPVEYOR_PROJECT_SLUG%
 
 hosts:
   queue-server: 127.0.0.1
