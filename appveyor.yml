@@ -29,6 +29,8 @@ os: Windows Server 2012 R2
 init:
   - git config --global core.autocrlf input
 
+clone_depth: 50
+
 clone_folder: c:\projects\purity2d
 
 hosts:
