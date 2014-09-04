@@ -65,10 +65,11 @@ xcodebuild archive \
          -configuration Debug \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
-         -exportArchive \
-         -archivePath Purity-Engine.xcarchive \
-         -exportPath Purity-Engine.xcarchive
-#         -scheme "Purity-Engine" \
+         -scheme "Purity-Engine"
+#         -exportArchive \
+#         -archivePath Purity-Engine.xcarchive \
+#         -exportPath Purity-Engine.xcarchive
+
 
 
 # Export it to an IPA
