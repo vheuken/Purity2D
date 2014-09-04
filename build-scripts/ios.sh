@@ -43,12 +43,16 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULA
 ##printf "${headerFormat}" "Building debug binary"
 ##xcodebuild
 
+
 printf "${headerFormat}" "Building release binary"
+
+printf "${messageFormat}" "Building scheme"
+sudo gem install xcodeproj
 wget --no-check-certificate -U Mozilla/5.0 https://raw.githubusercontent.com/ahmedmohiduet/Scripts/master/genscheme.rb
 ruby genscheme.rb
-# Build archive
-printf "${messageFormat}" "Building scheme"
 xcodebuild -list
+
+# Build archive
 printf "${messageFormat}" "Building archive"
 xcodebuild archive \
          -scheme Purity-Engine \
@@ -56,6 +60,7 @@ xcodebuild archive \
          CODE_SIGNING_REQUIRED=NO \
          -archivePath Purity-Engine.xcarchive
 # Export it to an IPA
+
 printf "${messageFormat}" "Creating package"
 xcodebuild \
          -exportArchive \
