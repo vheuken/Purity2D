@@ -62,13 +62,13 @@ xcodebuild -list
 printf "${messageFormat}" "Building archive"
 xcodebuild archive \
          -scheme "Purity-Engine" \
-         -target Purity-Engine \
-         -configuration Debug \
+#         -target Purity-Engine \
+#         -configuration Debug \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -archivePath Purity-Engine.xcarchive
-# Export it to an IPA
 
+# Export it to an IPA
 printf "${messageFormat}" "Creating package"
 xcodebuild \
          -exportArchive \
