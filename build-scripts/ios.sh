@@ -50,8 +50,8 @@ printf "${messageFormat}" "Checking Ruby"
 rvm get head
 rvm reload
 rvm repair all
-user$ source ~/.rvm/scripts/rvm
-user$ type rvm | head -n 1
+source ~/.rvm/scripts/rvm
+type rvm | head -n 1
 rvm use 1.9.3
 ruby -v
 
