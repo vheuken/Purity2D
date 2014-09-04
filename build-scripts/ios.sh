@@ -48,28 +48,14 @@ printf "${headerFormat}" "Building release binary"
 
 ls -A ./Purity2D.xcodeproj
 
+printf "${messageFormat}" "Copying XCSCHEME file"
 mkdir -p ./Purity2D.xcodeproj/xcshareddata/xcschemes
 cp ${BUILD_HOME}/.Purity-Engine.xcscheme ./Purity-Engine.xcscheme
 cp ${BUILD_HOME}/.Purity-Engine.xcscheme ./Purity2D.xcodeproj/xcshareddata/xcschemes/Purity-Engine.xcscheme
 printf "${messageFormat}" "Directory: `pwd`/Purity2D.xcodeproj/xcshareddata/xcschemes/Purity-Engine.xcscheme"
 ls -A ./Purity2D.xcodeproj/xcshareddata/xcschemes
 
-##printf "${messageFormat}" "Checking Ruby"
-##rvm get head
-##rvm reload
-##rvm repair all
-##source ~/.rvm/scripts/rvm
-##type rvm | head -n 1
-##rvm install ruby-1.9.3-p547
-##rvm use 1.9.3
-##ruby -v
-
-##printf "${messageFormat}" "Checking versions"
-##gem -v
-
-##printf "${messageFormat}" "Building scheme"
-##sudo gem install xcodeproj
-##sudo ruby ${BUILD_HOME}/.generatescheme.rb
+printf "${messageFormat}" "Listing XCode options"
 xcodebuild -list
 
 # Build archive
@@ -77,7 +63,7 @@ printf "${messageFormat}" "Building archive"
 xcodebuild archive \
 #         -scheme "Purity-Engine" \
          -target Purity-Engine \
-         -configuration Debug
+         -configuration Debug \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -archivePath Purity-Engine.xcarchive
