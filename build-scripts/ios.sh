@@ -64,12 +64,12 @@ cp ${BUILD_HOME}/.Purity-Engine.xcscheme .
 ##printf "${messageFormat}" "Building scheme"
 ##sudo gem install xcodeproj
 ##sudo ruby ${BUILD_HOME}/.generatescheme.rb
-##xcodebuild -list
+xcodebuild -list
 
 # Build archive
 printf "${messageFormat}" "Building archive"
 xcodebuild archive \
-         -scheme Purity-Engine \
+         -scheme Purity-Engine.xcscheme \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
          -archivePath Purity-Engine.xcarchive
