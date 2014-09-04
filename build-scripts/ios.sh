@@ -65,6 +65,7 @@ xcodebuild archive \
          -configuration Debug \
          CODE_SIGN_IDENTITY="" \
          CODE_SIGNING_REQUIRED=NO \
+         -exportArchive \
          -archivePath Purity-Engine.xcarchive
 #         -scheme "Purity-Engine" \
 
