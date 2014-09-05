@@ -1,7 +1,7 @@
-SET DXSDK_DIR=C:\Program^ Files^ (x86)\Windows^ Kits
+SET DXSDK_DIR=C:\Program^ Files^ x86\Windows^ Kits
 
 :: Workaround for sh.exe in PATH
-ren C:/Program^ Files^ (x86)/Git/bin/sh.exe shworkaround
+ren C:/Program^ Files^ x86/Git/bin/sh.exe shworkaround
 
 mkdir build
 cd build
@@ -10,7 +10,7 @@ echo Is MinGW pathed?
 mingw32-make.exe all
 
 :: Undoing workaround
-ren C:/Program^ Files^ (x86)/Git/bin/shworkaround sh.exe
+ren C:/Program^ Files^ x86/Git/bin/shworkaround sh.exe
 
 
 :: MSBuild Purity2D.sln
