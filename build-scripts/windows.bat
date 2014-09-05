@@ -1,6 +1,8 @@
+echo Setting DXSDK path
 SET DXSDK_DIR=%ProgramFiles(x86)%\Windows Kits
 
 :: Workaround for sh.exe in PATH
+echo Using workaround for sh.exe
 ren "C:/Program Files (x86)/Git/bin/sh.exe" shworkaround
 
 mkdir build
@@ -10,6 +12,7 @@ echo Is MinGW pathed?
 mingw32-make.exe all
 
 :: Undoing workaround
+echo Correcting workaround for sh.exe
 ren "C:/Program Files (x86)/Git/bin/shworkaround" sh.exe
 
 
