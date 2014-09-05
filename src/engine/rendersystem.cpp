@@ -12,11 +12,6 @@ Purity::RenderSystem::RenderSystem(Purity::Window* window)
 {
 }
 
-Purity::RenderSystem::~RenderSystem()
-{
-    //mRenderThread.join();
-}
-
 void Purity::RenderSystem::update(Scene* scene)
 {
     if (scene != mCurrentScene)

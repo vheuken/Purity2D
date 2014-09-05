@@ -102,36 +102,6 @@ bool Purity::Window::pollEvent(Purity::Event& event)
     return ret;
 }
 
-bool Purity::Window::setActive(bool active)
-{
-    auto context = SDL_GL_GetCurrentContext();
-
-    if (context == nullptr)
-    {
-        std::cerr << SDL_GetError() << std::endl;
-        return false;
-    }
-
-    int code = 0;
-
-    if (active == true)
-    {
-        code = SDL_GL_MakeCurrent(mInternalWindow, context);
-    }
-    else
-    {
-        code = SDL_GL_MakeCurrent(mInternalWindow, nullptr);
-    }
-
-    if (code < 0)
-    {
-        std::cerr << SDL_GetError() << std::endl;
-        return false;
-    }
-
-    return true;
-}
-
 bool Purity::Window::isOpen() const
 {
     return mInternalWindow;
