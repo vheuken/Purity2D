@@ -3,6 +3,7 @@ echo.
 SET DXSDK_DIR=%ProgramFiles(x86)%\Windows Kits
 SET(CMAKE_C_COMPILER C:/MinGW/bin/gcc)
 SET(CMAKE_CXX_COMPILER C:/MinGW/bin/g++)
+SET PATH=%PATH%;C:\MinGW\bin\
 echo.
 
 :: Workaround for sh.exe in PATH
