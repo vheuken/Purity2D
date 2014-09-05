@@ -11,9 +11,11 @@ echo.
 :: Workaround for sh.exe in PATH
 echo Using workaround for sh.exe
 echo.
+dir "C:/Program Files (x86)/Git/bin/"
+echo.
 rename "C:/Program Files (x86)/Git/bin/sh.exe" shworkaround
 echo.
-dir "C:/Program Files (x86)/Git/bin/sh.exe"
+dir "C:/Program Files (x86)/Git/bin/"
 echo.
 
 echo Building
