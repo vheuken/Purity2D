@@ -6,6 +6,10 @@ SET(CMAKE_CXX_COMPILER C:/MinGW/bin/g++)
 SET PATH=%PATH%;C:\MinGW\bin\
 echo.
 
+echo Checking directories.
+dir C:\MinGW\bin\
+echo.
+
 echo Using workaround for SDL bug
 echo.
 copy "C:\projects\purity2d\Bugfix_SDL_platform.h" "C:\projects\purity2d\extlibs\SDL2-2.0.3\include\SDL_platform.h"
@@ -22,7 +26,7 @@ echo Building
 mkdir build
 cd build
 cmake -G "MinGW Makefiles" ..
-mingw64-make.exe all
+mingw32-make.exe all
 
 :: Undoing workaround
 ::echo Correcting workaround for sh.exe
