@@ -22,12 +22,12 @@ echo Building
 mkdir build
 cd build
 cmake -G "MinGW Makefiles" ..
-echo Is MinGW pathed?
-mingw32-make.exe all
+mingw64-make.exe all
 
 :: Undoing workaround
-echo Correcting workaround for sh.exe
-rename "C:\Program Files (x86)\Git\bin\shworkaround" sh.exe
+::echo Correcting workaround for sh.exe
+::rename "C:\Program Files (x86)\Git\bin\shworkaround" sh.exe
+::echo.
 
-
+:: cmake ..
 :: MSBuild Purity2D.sln
