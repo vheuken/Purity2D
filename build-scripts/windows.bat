@@ -1,21 +1,15 @@
 echo Adding DXSDK to PATH
 echo.
 SET DXSDK_DIR=%ProgramFiles(x86)%\Windows Kits
-echo.
-
-echo Showing PATH
-echo.
-set
+SET(CMAKE_C_COMPILER C:/MinGW/bin/gcc)
+SET(CMAKE_CXX_COMPILER C:/MinGW/bin/g++)
 echo.
 
 :: Workaround for sh.exe in PATH
 echo Using workaround for sh.exe
 echo.
-dir "C:\Program Files (x86)\Git\bin"
-echo.
+
 rename "C:\Program Files (x86)\Git\bin\sh.exe" shworkaround
-echo.
-dir "C:\Program Files (x86)\Git\bin"
 echo.
 
 echo Building
