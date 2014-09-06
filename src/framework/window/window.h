@@ -49,6 +49,8 @@ namespace Purity
 
         void loseFocus();
 
+        void display();
+
     private:
         SDL_Window* mInternalWindow;
 

@@ -130,3 +130,22 @@ void Purity::Window::loseFocus()
 {
     mIsInputFocused = false;
 }
+
+void Purity::Window::display()
+{
+    if (mIsInputFocused == false)
+    {
+        SDL_Rect rect;
+
+        rect.w = getSize().x;
+        rect.h = getSize().y;
+        rect.x = 0;
+        rect.y = 0;
+
+        SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(mRenderer, 128, 128, 128, 200);
+        SDL_RenderFillRect(mRenderer, &rect);
+    }
+
+    SDL_RenderPresent(mRenderer);
+}
