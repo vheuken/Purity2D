@@ -5,27 +5,19 @@
 #include <SDL.h>
 #include <stb_image.h>
 
-bool Purity::Texture::loadFromFile(const std::string& path)
+Purity::Texture::Texture()
+: mInternalTexture(nullptr),
+  mTextureCreationNeeded(false)
 {
-    SDL_Surface* surface = loadImage(path);
+}
 
-    if (surface == nullptr)
-    {
-        std::cerr << "Error loading image" << std::endl;
-        return false;
-    }
-
-    mInternalTexture = SDL_CreateTextureFromSurface(sRenderer, surface);
-
-    SDL_FreeSurface(surface);
-
-    if (mInternalTexture == nullptr)
-    {
-        std::cerr << SDL_GetError() << std::endl;
-        return false;
-    }
-
-    return true;
+void Purity::Texture::loadFromFile(const std::string& path)
+{
+    // Textures aren't created here.
+    // Instead, they are created on the first attempt to draw a texture.
+    // See createInternalTexture() RenderTarget::draw()
+    mTextureCreationNeeded = true;
+    mImageFilePath = path;
 }
 
 Purity::Vector2u Purity::Texture::getSize() const
@@ -50,6 +42,31 @@ Purity::Texture::~Texture()
 Purity::Texture::operator SDL_Texture*() const
 {
     return mInternalTexture;
+}
+
+bool Purity::Texture::createInternalTexture(SDL_Renderer* renderer)
+{
+    auto surface = loadImage(mImageFilePath);
+
+    if (surface == nullptr)
+    {
+        std::cerr << "Error loading image" << std::endl;
+        return false;
+    }
+
+    mInternalTexture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    SDL_FreeSurface(surface);
+
+    if (mInternalTexture == nullptr)
+    {
+        std::cerr << SDL_GetError() << std::endl;
+        return false;
+    }
+
+    mTextureCreationNeeded = false;
+
+    return true;
 }
 
 SDL_Surface* Purity::Texture::loadImage(const std::string& path)

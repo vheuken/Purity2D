@@ -14,6 +14,7 @@ namespace Purity
     {
     public:
         RenderSystem(Window* window);
+
         void update(Scene* scene);
 
     private:

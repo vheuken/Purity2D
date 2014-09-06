@@ -10,7 +10,6 @@ set( GRAPHICS_HEADER_FILES
      rendertarget.h
      texture.h
      texturemanager.h
-     renderer.h
      rect.h
      transformable.h
      view.h
@@ -22,7 +21,6 @@ set( GRAPHICS_SOURCE_FILES
      vertex.cpp
      texture.cpp
      texturemanager.cpp
-     renderer.cpp
      rect.cpp
      transformable.cpp
      view.cpp

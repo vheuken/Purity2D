@@ -42,7 +42,7 @@ namespace Purity
     {
     public:
         Entity();
-        Entity(const Tmx::Object* object, b2World* world, const Texture * texture);
+        Entity(const Tmx::Object* object, b2World* world, Texture * texture);
 
         virtual void createBody(b2World* world);
         void setName(std::string name);
@@ -67,7 +67,7 @@ namespace Purity
         b2Body* mHitboxBody;
         Rect mHitboxRect;
 
-        const Texture* mTexture;
+        Texture* mTexture;
         std::unique_ptr<SpriteSheet> mSpriteSheet;
         unsigned short mAnimationFrame;
 

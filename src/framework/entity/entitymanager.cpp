@@ -82,7 +82,7 @@ void Purity::EntityManager::initializeObjects()
                 if (currentObject->GetProperties().GetSize() > 0)
                 {
                     std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
-                    const Texture * t = mTextureManager.getTexture("scenes/init/" + p);
+                    Texture * t = mTextureManager.getTexture("scenes/init/" + p);
                     MovableEntity object(currentObject, mWorld, t);
                     mMovableEntityList.push_back(std::move(object));
                 }

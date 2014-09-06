@@ -17,6 +17,16 @@ Purity::Event& Purity::Event::operator=(const SDL_Event& sdlEvent)
         {
             this->type = Event::Closed;
         }
+        switch (sdlEvent.window.event)
+        {
+        case SDL_WINDOWEVENT_FOCUS_GAINED:
+            this->type = Event::FocusGained;
+            break;
+
+        case SDL_WINDOWEVENT_FOCUS_LOST:
+            this->type = Event::FocusLost;
+            break;
+        }
         break;
 
     case SDL_FINGERDOWN:

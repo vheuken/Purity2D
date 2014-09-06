@@ -38,9 +38,9 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
         std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
     }
 
-    sRenderer = SDL_CreateRenderer(mInternalWindow, -1, SDL_RENDERER_ACCELERATED);
+    mRenderer = SDL_CreateRenderer(mInternalWindow, -1, SDL_RENDERER_ACCELERATED);
 
-    if (sRenderer == nullptr)
+    if (mRenderer == nullptr)
     {
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
@@ -119,4 +119,33 @@ void Purity::Window::manipulateWindow()
     {
         mWindowManipulator.manipulateWindow();
     }
+}
+
+void Purity::Window::gainFocus()
+{
+    mIsInputFocused = true;
+}
+
+void Purity::Window::loseFocus()
+{
+    mIsInputFocused = false;
+}
+
+void Purity::Window::display()
+{
+    if (mIsInputFocused == false)
+    {
+        SDL_Rect rect;
+
+        rect.w = getSize().x;
+        rect.h = getSize().y;
+        rect.x = 0;
+        rect.y = 0;
+
+        SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(mRenderer, 128, 128, 128, 200);
+        SDL_RenderFillRect(mRenderer, &rect);
+    }
+
+    SDL_RenderPresent(mRenderer);
 }

@@ -45,6 +45,12 @@ namespace Purity
 
         void manipulateWindow();
 
+        void gainFocus();
+
+        void loseFocus();
+
+        void display();
+
     private:
         SDL_Window* mInternalWindow;
 
@@ -55,6 +61,8 @@ namespace Purity
         ViewportType mViewportType;
 
         bool mIsBorderless;
+
+        bool mIsInputFocused;
     };
 }
 

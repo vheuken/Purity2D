@@ -1,6 +1,6 @@
 #include "movableentity.h"
 #include <LuaBridge.h>
-Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world, const Purity::Texture * texture)
+Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world, Purity::Texture * texture)
     : Entity(object, world, texture)
 {
     mHitboxBody->SetType(b2_dynamicBody);

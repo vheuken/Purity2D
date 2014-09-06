@@ -2,22 +2,21 @@
 #define PURITY_TEXTURE_H
 
 #include <string>
-
-#include "renderer.h"
-
 #include "../system/vector2.h"
 
 struct SDL_Texture;
 struct SDL_Surface;
+struct SDL_Renderer;
 
 namespace Purity
 {
-    class Texture : protected Renderer
+    class Texture
     {
     public:
+        Texture();
         ~Texture();
 
-        bool loadFromFile(const std::string& path);
+        void loadFromFile(const std::string& path);
 
         Vector2u getSize() const;
 
@@ -25,8 +24,14 @@ namespace Purity
 
     private:
         SDL_Texture* mInternalTexture;
+        std::string mImageFilePath;
+        bool mTextureCreationNeeded;
+
+        bool createInternalTexture(SDL_Renderer* renderer);
 
         SDL_Surface* loadImage(const std::string& path);
+
+        friend class RenderTarget;
     };
 }
 

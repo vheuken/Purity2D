@@ -12,7 +12,7 @@ Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  Text
 
 void Purity::Layer::processTiles()
 {
-    const Texture * tileTexture;
+    Texture * tileTexture;
     Tmx::MapTile tmxTile;
 
     int layerHeight = mTmxLayer->GetHeight();

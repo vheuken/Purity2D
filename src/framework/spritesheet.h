@@ -12,17 +12,17 @@ namespace Purity
     class SpriteSheet
     {
     public:
-        SpriteSheet(const Texture* texture, int tileWidth, int tileHeight);
+        SpriteSheet(Texture* texture, int tileWidth, int tileHeight);
 
         Rect getTileSubRect(int tileId) const;
 
-        const Texture* getTexture() const;
+        Texture* getTexture() const;
 
         int getTileWidth()  const;
         int getTileHeight() const;
 
     private:
-        const Texture* mTexture;
+        Texture* mTexture;
 
         int mTileWidth;
         int mTileHeight;
