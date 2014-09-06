@@ -120,3 +120,13 @@ void Purity::Window::manipulateWindow()
         mWindowManipulator.manipulateWindow();
     }
 }
+
+void Purity::Window::gainFocus()
+{
+    mIsInputFocused = true;
+}
+
+void Purity::Window::loseFocus()
+{
+    mIsInputFocused = false;
+}

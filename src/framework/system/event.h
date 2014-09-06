@@ -30,7 +30,10 @@ namespace Purity
             TouchMoved             = SDL_FINGERMOTION,     // TODO: Implement
             TouchEnded             = SDL_FINGERUP,         // TODO: Implement
 
-            Closed                 = SDL_WINDOWEVENT_CLOSE
+            Closed                 = SDL_WINDOWEVENT_CLOSE,
+
+            FocusGained            = SDL_WINDOWEVENT_FOCUS_GAINED,
+            FocusLost              = SDL_WINDOWEVENT_FOCUS_LOST
         };
 
         struct KeyEvent
@@ -45,10 +48,16 @@ namespace Purity
             float pressure;
         };
 
+        struct WindowEvent
+        {
+
+        };
+
         union
         {
             KeyEvent keyEvent;
             TouchEvent touchEvent;
+            WindowEvent windowEvent;
         };
 
         int type;

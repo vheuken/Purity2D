@@ -32,5 +32,13 @@ void Purity::InputManager::update()
                 mWindow->close();
             }
         }
+        else if (event.type == Event::FocusGained)
+        {
+            mWindow->gainFocus();
+        }
+        else if (event.type == Event::FocusLost)
+        {
+            mWindow->loseFocus();
+        }
     }
 }
