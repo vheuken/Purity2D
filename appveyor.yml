@@ -1,0 +1,99 @@
+# Notes from Appveyor:
+#   - Minimal appveyor.yml file is an empty file. All sections are optional.
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+#   - Section names should be unique on each level.
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+# Version formatting
+version: 1.0.{build}
+
+# Black/whitelist
+branches:
+  only:
+    - master
+  except:
+    - gh-pages
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Operating system
+os: Windows Server 2012 R2
+
+# Scripts to be run before repository cloning.
+init:
+  - git config --global core.autocrlf input
+
+clone_depth: 50
+
+clone_folder: c:\projects\purity2d
+
+hosts:
+  queue-server: 127.0.0.1
+  db.server.com: 127.0.0.2
+
+environment:
+  my_secure_var1:
+    secure: PxqZetar1APSMbdo7Rjqvh0qIecY2HcqTWTj5DMJOe5QTfyFCNG22I/F8Ik5zX9X
+
+# The "services" section starts services to be used by the build environment.
+# Example:
+###services:
+###  - mssql2012sp1        # start SQL Server 2012 SP1 Express
+###  - mssql2012sp1rs      # start SQL Server 2012 SP1 Express and Reporting Services
+###  - mssql2008r2sp2      # start SQL Server 2008 R2 SP2 Express
+###  - mssql2008r2sp2rs    # start SQL Server 2008 R2 SP2 Express and Reporting Services
+###  - mysql               # start MySQL 5.6 service
+###  - postgresql          # start PostgreSQL 9.3 service
+###  - iis                 # start IIS
+###  - msmq                # start Queuing services
+
+# Scripts under "install" are run after cloning repository but before running build scripts
+# Examples:
+#### By default, all script lines are interpreted as batch/CMD
+### - echo This is batch
+#### To run script as a PowerShell command it must be prepended with "ps:"
+### - ps: Write-Host 'This is PowerShell'
+#### To explicitly call batch/CMD, a command can be prepended with "cmd:"
+### - cmd: echo This is batch again
+### - cmd: set MY_VAR=12345
+
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+# Build platform can be set to "x86", "x64", and "Any CPU". Multiple lines will add builds to the matrix.
+#platform:
+#  - Any CPU
+
+#configuration:
+#  - Debug
+
+before_build:
+  - echo "Before Build"
+
+build_script:
+  - ./build-scripts/windows.bat
+
+after_build:
+  - echo "After Build"
+
+
+
+
+#---------------------------------#
+#        global handlers          #
+#---------------------------------#
+
+on_success:
+  - echo "Success"
+
+
+
+
