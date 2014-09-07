@@ -1,6 +1,6 @@
 isServer = true
 
-playerName = "Player-Linux"
+playerName = "Player-Windows"
 
 port = 54000
-server = "vincentheuken.com"
+server = "192.168.1.111"
