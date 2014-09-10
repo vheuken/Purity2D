@@ -21,7 +21,10 @@ void Purity::InputManager::update()
     {
         if (event.type == Event::Closed)
         {
-            mWindow->close();
+            if (!mWindow->isContentMode())
+            {
+                mWindow->close();
+            }
         }
         else if (event.type == Event::KeyPressed)
         {

@@ -68,6 +68,8 @@ namespace Purity
 
         bool mIsInputFocused;
 
+        bool mCursorLock;
+
         bool mContentMode;
     };
 }
