@@ -167,7 +167,7 @@ void Purity::Window::loseFocus()
 
 void Purity::Window::display()
 {
-    if (mIsInputFocused == false)
+    if (mContentMode == false)
     {
         SDL_Rect rect;
 
