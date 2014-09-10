@@ -41,6 +41,10 @@ namespace Purity
 
         bool isOpen() const;
 
+        bool isContentMode() const;
+
+        void toggleMode();
+
         void close();
 
         void manipulateWindow();
@@ -63,6 +67,8 @@ namespace Purity
         bool mIsBorderless;
 
         bool mIsInputFocused;
+
+        bool mContentMode;
     };
 }
 
