@@ -8,7 +8,9 @@
 Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
 : mWindowManipulator(this),
   mViewportType(viewportType),
-  mIsBorderless(Configuration::getInstance()->getBool("window", "borderless", false))
+  mIsBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
+  mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
+  mContentMode(true)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -43,6 +45,11 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     if (mRenderer == nullptr)
     {
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
+    }
+
+    if (mCursorLock)
+    {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
     }
 }
 
@@ -107,6 +114,33 @@ bool Purity::Window::isOpen() const
     return mInternalWindow;
 }
 
+bool Purity::Window::isContentMode() const
+{
+    return mContentMode;
+}
+
+void Purity::Window::toggleMode()
+{
+    if (isContentMode())
+    {
+        mContentMode = false;
+
+        if (mCursorLock)
+        {
+            SDL_SetRelativeMouseMode(SDL_FALSE);
+        }
+    }
+    else
+    {
+        mContentMode = true;
+
+        if (mCursorLock)
+        {
+            SDL_SetRelativeMouseMode(SDL_TRUE);
+        }
+    }
+}
+
 void Purity::Window::close()
 {
     SDL_DestroyWindow(mInternalWindow);
@@ -115,7 +149,7 @@ void Purity::Window::close()
 
 void Purity::Window::manipulateWindow()
 {
-    if (mIsBorderless == true)
+    if (mIsBorderless && !isContentMode())
     {
         mWindowManipulator.manipulateWindow();
     }
@@ -133,7 +167,7 @@ void Purity::Window::loseFocus()
 
 void Purity::Window::display()
 {
-    if (mIsInputFocused == false)
+    if (mContentMode == false)
     {
         SDL_Rect rect;
 

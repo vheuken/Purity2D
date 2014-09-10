@@ -19,17 +19,22 @@ void Purity::InputManager::update()
 
     while (mWindow->pollEvent(event))
     {
-        mInputQueue->push(event);
-
         if (event.type == Event::Closed)
         {
-            mWindow->close();
+            if (!mWindow->isContentMode())
+            {
+                mWindow->close();
+            }
         }
         else if (event.type == Event::KeyPressed)
         {
             if (event.keyEvent.code == SDLK_ESCAPE)
             {
                 mWindow->close();
+            }
+            else if (event.keyEvent.code == SDLK_BACKSPACE)
+            {
+                mWindow->toggleMode();
             }
         }
         else if (event.type == Event::FocusGained)
@@ -40,5 +45,11 @@ void Purity::InputManager::update()
         {
             mWindow->loseFocus();
         }
+
+        if (mWindow->isContentMode())
+        {
+            mInputQueue->push(event);
+        }
+
     }
 }
