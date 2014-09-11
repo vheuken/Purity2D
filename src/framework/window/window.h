@@ -44,6 +44,10 @@ namespace Purity
         bool isContentMode() const;
 
         void toggleMode();
+        void setWindowMode();
+        void setContentMode();
+
+        bool isBorderless() const;
 
         void close();
 
@@ -64,7 +68,7 @@ namespace Purity
 
         ViewportType mViewportType;
 
-        bool mIsBorderless;
+        bool mBorderless;
 
         bool mIsInputFocused;
 

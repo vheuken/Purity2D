@@ -24,7 +24,7 @@ void Purity::WindowManipulator::manipulateWindow()
     {
         dragWindow();
     }
-    else if (mWindowResize)
+    else if (mWindowResize && mWindow->isBorderless())
     {
         resizeWindow();
     }

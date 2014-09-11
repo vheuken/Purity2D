@@ -8,7 +8,7 @@
 Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
 : mWindowManipulator(this),
   mViewportType(viewportType),
-  mIsBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
+  mBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
   mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
   mContentMode(true)
 {
@@ -19,7 +19,7 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
 
     int flags = 0;
 
-    if (mIsBorderless)
+    if (isBorderless())
     {
         flags = SDL_WINDOW_BORDERLESS;
     }
@@ -123,22 +123,37 @@ void Purity::Window::toggleMode()
 {
     if (isContentMode())
     {
-        mContentMode = false;
-
-        if (mCursorLock)
-        {
-            SDL_SetRelativeMouseMode(SDL_FALSE);
-        }
+        setWindowMode();
     }
     else
     {
-        mContentMode = true;
-
-        if (mCursorLock)
-        {
-            SDL_SetRelativeMouseMode(SDL_TRUE);
-        }
+        setContentMode();
     }
+}
+
+void Purity::Window::setWindowMode()
+{
+    mContentMode = false;
+
+    if (mCursorLock)
+    {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+}
+
+void Purity::Window::setContentMode()
+{
+    mContentMode = true;
+
+    if (mCursorLock)
+    {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+    }
+}
+
+bool Purity::Window::isBorderless() const
+{
+    return mBorderless;
 }
 
 void Purity::Window::close()
@@ -149,7 +164,7 @@ void Purity::Window::close()
 
 void Purity::Window::manipulateWindow()
 {
-    if (mIsBorderless && !isContentMode())
+    if (isBorderless() || !isContentMode())
     {
         mWindowManipulator.manipulateWindow();
     }
