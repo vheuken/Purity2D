@@ -31,7 +31,10 @@ void Purity::InputManager::update()
         {
             if (event.keyEvent.code == SDLK_ESCAPE)
             {
-                mWindow->close();
+                if (!mWindow->isContentMode())
+                {
+                    mWindow->close();
+                }
             }
             else if (event.keyEvent.code == SDLK_BACKSPACE)
             {
