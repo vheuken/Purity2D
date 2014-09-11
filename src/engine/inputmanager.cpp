@@ -62,7 +62,7 @@ void Purity::InputManager::update()
             mWindow->setWindowMode();
         }
 
-        if (mWindow->isContentMode())
+        if (mWindow->isContentMode() && !mModeLock)
         {
             mInputQueue->push(event);
         }
