@@ -59,6 +59,7 @@ void Purity::InputManager::update()
         else if (event.type == Event::FocusLost)
         {
             mWindow->loseFocus();
+            mWindow->setWindowMode();
         }
 
         if (mWindow->isContentMode())

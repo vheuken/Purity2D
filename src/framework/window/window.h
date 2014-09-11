@@ -44,6 +44,8 @@ namespace Purity
         bool isContentMode() const;
 
         void toggleMode();
+        void setWindowMode();
+        void setContentMode();
 
         void close();
 

@@ -123,21 +123,31 @@ void Purity::Window::toggleMode()
 {
     if (isContentMode())
     {
-        mContentMode = false;
-
-        if (mCursorLock)
-        {
-            SDL_SetRelativeMouseMode(SDL_FALSE);
-        }
+        setWindowMode();
     }
     else
     {
-        mContentMode = true;
+        setContentMode();
+    }
+}
 
-        if (mCursorLock)
-        {
-            SDL_SetRelativeMouseMode(SDL_TRUE);
-        }
+void Purity::Window::setWindowMode()
+{
+    mContentMode = false;
+
+    if (mCursorLock)
+    {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+}
+
+void Purity::Window::setContentMode()
+{
+    mContentMode = true;
+
+    if (mCursorLock)
+    {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
     }
 }
 
