@@ -5,12 +5,18 @@
 
 #include "../system/configuration.h"
 
+#ifdef __ANDROID__ ||  TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+const bool CONTENT_MODE_DEFAULT = true;
+#else
+const bool CONTENT_MODE_DEFAULT = false;
+#endif
+
 Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
 : mWindowManipulator(this),
   mViewportType(viewportType),
   mBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
   mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
-  mContentMode(false)
+  mContentMode(CONTENT_MODE_DEFAULT)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
