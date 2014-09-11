@@ -19,6 +19,8 @@ namespace Purity
     private:
         Window* mWindow;
         std::queue<Event>* mInputQueue;
+
+        bool mModeLock;
     };
 }
 
