@@ -10,7 +10,7 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mViewportType(viewportType),
   mBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
   mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
-  mContentMode(true)
+  mContentMode(false)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -45,11 +45,6 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     if (mRenderer == nullptr)
     {
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
-    }
-
-    if (mCursorLock)
-    {
-        SDL_SetRelativeMouseMode(SDL_TRUE);
     }
 }
 
