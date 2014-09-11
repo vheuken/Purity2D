@@ -34,7 +34,7 @@ void Purity::WindowManipulator::setWindowFlags()
 {
     if (Mouse::isButtonPressed(Mouse::Left))
     {
-        if (mWindowResize == false && isMouseOnBorder())
+        if (mWindowResize == false && isMouseOnBorder() && mWindow->isBorderless())
         {
             mWindowResize = true;
             setBorderGrabbedFlags();
