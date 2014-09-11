@@ -149,7 +149,7 @@ void Purity::Window::close()
 
 void Purity::Window::manipulateWindow()
 {
-    if (mIsBorderless && !isContentMode())
+    if (mIsBorderless || !isContentMode())
     {
         mWindowManipulator.manipulateWindow();
     }
