@@ -13,10 +13,10 @@ version: 1.0.{build}
 
 # Black/whitelist
 branches:
+#Using "only" whitelists branches
   only:
     - master
-  except:
-    - gh-pages
+# Using "except" blacklists branches
 
 #---------------------------------#
 #    environment configuration    #
@@ -76,13 +76,13 @@ environment:
 #  - Debug
 
 before_build:
-  - echo "Before Build"
+  - cmd: echo "Before Build"
 
 build_script:
-  - ./build-scripts/windows.bat
+  - ps: ./build-scripts/windows.ps1
 
 after_build:
-  - echo "After Build"
+  - cmd: echo "After Build"
 
 
 
@@ -92,7 +92,7 @@ after_build:
 #---------------------------------#
 
 on_success:
-  - echo "Success"
+  - cmd: echo "Success"
 
 
 
