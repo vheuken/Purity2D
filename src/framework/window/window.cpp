@@ -16,7 +16,9 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mViewportType(viewportType),
   mBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
   mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
-  mContentMode(CONTENT_MODE_DEFAULT)
+  mContentMode(CONTENT_MODE_DEFAULT),
+  minimumSize(Configuration::getInstance()->getInteger("window", "minimum_size_x", 75),
+              Configuration::getInstance()->getInteger("window", "minimum_size_y", 75))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -40,6 +42,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
                                        width,
                                        height,
                                        flags);
+
+    SDL_SetWindowMinimumSize(mInternalWindow, minimumSize.x, minimumSize.y);
 
     if (mInternalWindow == nullptr)
     {

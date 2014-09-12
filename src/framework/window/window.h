@@ -75,6 +75,8 @@ namespace Purity
         bool mCursorLock;
 
         bool mContentMode;
+
+        Vector2i minimumSize;
     };
 }
 
