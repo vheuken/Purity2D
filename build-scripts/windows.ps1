@@ -27,7 +27,7 @@ Invoke-Webrequest `
          -Outfile "${Env:BUILD_HOME}\DXSDK_Jun10.exe"
 
 Write-Output "Installing DX SDK"
-${Env:BUILD_HOME}\DXSDK_Jun10.exe `
+.\DXSDK_Jun10.exe `
          /S ` # Skips preinstallation checks
          /O ` # Skips operating system checks
          /U ` # Silent install
