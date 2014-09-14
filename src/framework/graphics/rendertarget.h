@@ -2,6 +2,7 @@
 #define PURITY_RENDER_TARGET_H
 
 #include "vertexarray.h"
+#include "view.h"
 #include "../spritesheet.h"
 
 struct SDL_Renderer;
@@ -13,6 +14,9 @@ namespace Purity
     class RenderTarget
     {
     public:
+        void setView(const View& view);
+        const View& getView() const;
+
         void clear();
         void display();
 
@@ -22,6 +26,7 @@ namespace Purity
 
     protected:
         SDL_Renderer* mRenderer;
+        View mView;
     };
 }
 

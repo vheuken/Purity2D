@@ -4,6 +4,9 @@ Purity::View::View(const Vector2f& center, const Vector2f& size)
 : mCenter(center),
   mSize(size)
 {
+    mViewport.height = 1;
+    mViewport.width = 1;
+    mViewport.position = Vector2i(0, 0);
 }
 
 void Purity::View::setCenter(const Vector2f& center)
@@ -14,6 +17,11 @@ void Purity::View::setCenter(const Vector2f& center)
 void Purity::View::setSize(const Vector2f& size)
 {
     mSize = size;
+}
+
+const Purity::Vector2f& Purity::View::getSize() const
+{
+    return mSize;
 }
 
 void Purity::View::setViewport(const Purity::Rect& viewportRect)

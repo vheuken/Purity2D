@@ -1,3 +1,6 @@
+#ifndef PURITY_VIEW_H
+#define PURITY_VIEW_H
+
 #include <SDL.h>
 
 #include "rect.h"
@@ -12,6 +15,7 @@ namespace Purity
 
 		void setCenter(const Vector2f& center);
 		void setSize(const Vector2f& size);
+        const Vector2f& getSize() const;
 		
 		void setViewport(const Rect& viewportRect);
 		Rect getViewport() const;
@@ -23,3 +27,5 @@ namespace Purity
         Vector2f mSize;
     };
 }
+
+#endif // PURITY_VIEW_H

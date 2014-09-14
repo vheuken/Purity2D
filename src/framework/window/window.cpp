@@ -16,7 +16,9 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mViewportType(viewportType),
   mBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
   mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
-  mContentMode(CONTENT_MODE_DEFAULT)
+  mContentMode(CONTENT_MODE_DEFAULT),
+  minimumSize(Configuration::getInstance()->getInteger("window", "minimum_size_x", 160),
+              Configuration::getInstance()->getInteger("window", "minimum_size_y", 144))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -41,6 +43,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
                                        height,
                                        flags);
 
+    SDL_SetWindowMinimumSize(mInternalWindow, minimumSize.x, minimumSize.y);
+
     if (mInternalWindow == nullptr)
     {
         std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
@@ -52,25 +56,30 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     {
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
+
+    mView.setSize(static_cast<Vector2f>(getSize()));
+
+    auto viewportTypeStr = Configuration::getInstance()->getString("window", "viewport_type", "letterbox");
+
+
+    if (viewportTypeStr == "stretch")
+    {
+        mViewportType = ViewportType::STRETCH;
+    }
+    else if (viewportTypeStr == "center")
+    {
+        mViewportType = ViewportType::CENTER;
+    }
+    else // default to "letterbox"
+    {
+        mViewportType = ViewportType::LETTERBOX;
+    }
 }
 
 Purity::Window::~Window()
 {
     SDL_Quit();
 }
-
-
-void Purity::Window::setView(const Purity::View& view)
-{
-    mView = view;
-}
-
-
-const Purity::View& Purity::Window::getView() const
-{
-    return mView;
-}
-
 
 void Purity::Window::setSize(const Vector2u& size)
 {
@@ -186,9 +195,20 @@ void Purity::Window::display()
     if (mContentMode == false)
     {
         SDL_Rect rect;
+        Vector2i size;
 
-        rect.w = getSize().x;
-        rect.h = getSize().y;
+        if (mViewportType == ViewportType::LETTERBOX)
+        {
+            size = static_cast<Vector2i>(getSize());
+            SDL_RenderSetLogicalSize(mRenderer, getSize().x, getSize().y);
+        }
+        else
+        {
+            size = static_cast<Vector2i>(mView.getSize());
+        }
+
+        rect.w = size.x;
+        rect.h = size.y;
         rect.x = 0;
         rect.y = 0;
 
@@ -197,5 +217,38 @@ void Purity::Window::display()
         SDL_RenderFillRect(mRenderer, &rect);
     }
 
+    setResizeHandling();
+
     SDL_RenderPresent(mRenderer);
+}
+
+void Purity::Window::setResizeHandling()
+{
+    if (mViewportType == ViewportType::STRETCH)
+    {
+        setRenderScale();
+    }
+    else if (mViewportType == ViewportType::LETTERBOX)
+    {
+        setRenderMaintainAspectRatio();
+    }
+
+    // TODO: implement center
+}
+
+void Purity::Window::setRenderScale()
+{
+    auto windowSize = static_cast<Vector2f>(getSize());
+    auto viewSize = mView.getSize();
+
+    Vector2f scale;
+    scale.x = windowSize.x / viewSize.x;
+    scale.y = windowSize.y / viewSize.y;
+
+    SDL_RenderSetScale(mRenderer, scale.x, scale.y);
+}
+
+void Purity::Window::setRenderMaintainAspectRatio()
+{
+    SDL_RenderSetLogicalSize(mRenderer, mView.getSize().x, mView.getSize().y);
 }
