@@ -181,8 +181,8 @@ void Purity::Window::display()
     {
         SDL_Rect rect;
 
-        rect.w = getSize().x;
-        rect.h = getSize().y;
+        rect.w = mView.getSize().x;
+        rect.h = mView.getSize().y;
         rect.x = 0;
         rect.y = 0;
 
