@@ -73,6 +73,7 @@ namespace Purity
 
         Vector2i minimumSize;
 
+        void setResizeHandling();
         void setRenderScale();
         void setRenderMaintainAspectRatio();
     };

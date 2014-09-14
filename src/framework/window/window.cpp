@@ -58,6 +58,22 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     }
 
     mView.setSize(static_cast<Vector2f>(getSize()));
+
+    auto viewportTypeStr = Configuration::getInstance()->getString("window", "viewport_type", "letterbox");
+
+
+    if (viewportTypeStr == "stretch")
+    {
+        mViewportType = ViewportType::STRETCH;
+    }
+    else if (viewportTypeStr == "center")
+    {
+        mViewportType = ViewportType::CENTER;
+    }
+    else // default to "letterbox"
+    {
+        mViewportType = ViewportType::LETTERBOX;
+    }
 }
 
 Purity::Window::~Window()
@@ -176,8 +192,8 @@ void Purity::Window::loseFocus()
 
 void Purity::Window::display()
 {
-    //setRenderScale();
-    //setRenderMaintainAspectRatio();
+    setResizeHandling();
+
     if (mContentMode == false)
     {
         SDL_Rect rect;
@@ -193,6 +209,20 @@ void Purity::Window::display()
     }
 
     SDL_RenderPresent(mRenderer);
+}
+
+void Purity::Window::setResizeHandling()
+{
+    if (mViewportType == ViewportType::STRETCH)
+    {
+        setRenderScale();
+    }
+    else if (mViewportType == ViewportType::LETTERBOX)
+    {
+        setRenderMaintainAspectRatio();
+    }
+
+    // TODO: implement center
 }
 
 void Purity::Window::setRenderScale()
