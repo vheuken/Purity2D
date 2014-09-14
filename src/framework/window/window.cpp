@@ -192,14 +192,23 @@ void Purity::Window::loseFocus()
 
 void Purity::Window::display()
 {
-    setResizeHandling();
-
     if (mContentMode == false)
     {
         SDL_Rect rect;
+        Vector2i size;
 
-        rect.w = mView.getSize().x;
-        rect.h = mView.getSize().y;
+        if (mViewportType == ViewportType::LETTERBOX)
+        {
+            size = static_cast<Vector2i>(getSize());
+            SDL_RenderSetLogicalSize(mRenderer, getSize().x, getSize().y);
+        }
+        else
+        {
+            size = static_cast<Vector2i>(mView.getSize());
+        }
+
+        rect.w = size.x;
+        rect.h = size.y;
         rect.x = 0;
         rect.y = 0;
 
@@ -207,6 +216,8 @@ void Purity::Window::display()
         SDL_SetRenderDrawColor(mRenderer, 128, 128, 128, 200);
         SDL_RenderFillRect(mRenderer, &rect);
     }
+
+    setResizeHandling();
 
     SDL_RenderPresent(mRenderer);
 }
