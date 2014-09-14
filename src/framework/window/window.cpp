@@ -176,7 +176,8 @@ void Purity::Window::loseFocus()
 
 void Purity::Window::display()
 {
-    setRenderScale();
+    //setRenderScale();
+    //setRenderMaintainAspectRatio();
     if (mContentMode == false)
     {
         SDL_Rect rect;
@@ -204,4 +205,9 @@ void Purity::Window::setRenderScale()
     scale.y = windowSize.y / viewSize.y;
 
     SDL_RenderSetScale(mRenderer, scale.x, scale.y);
+}
+
+void Purity::Window::setRenderMaintainAspectRatio()
+{
+    SDL_RenderSetLogicalSize(mRenderer, mView.getSize().x, mView.getSize().y);
 }
