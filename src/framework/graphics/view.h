@@ -1,3 +1,6 @@
+#ifndef PURITY_VIEW_H
+#define PURITY_VIEW_H
+
 #include <SDL.h>
 
 #include "rect.h"
@@ -23,3 +26,5 @@ namespace Purity
         Vector2f mSize;
     };
 }
+
+#endif // PURITY_VIEW_H
