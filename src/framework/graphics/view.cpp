@@ -19,6 +19,11 @@ void Purity::View::setSize(const Vector2f& size)
     mSize = size;
 }
 
+const Purity::Vector2f& Purity::View::getSize() const
+{
+    return mSize;
+}
+
 void Purity::View::setViewport(const Purity::Rect& viewportRect)
 {
 	mViewport = viewportRect;

@@ -9,7 +9,6 @@ void Purity::RenderTarget::setView(const Purity::View& view)
     mView = view;
 }
 
-
 const Purity::View& Purity::RenderTarget::getView() const
 {
     return mView;

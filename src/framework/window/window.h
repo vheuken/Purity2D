@@ -72,6 +72,8 @@ namespace Purity
         bool mContentMode;
 
         Vector2i minimumSize;
+
+        void setRenderScale();
     };
 }
 

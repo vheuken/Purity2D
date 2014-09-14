@@ -15,6 +15,7 @@ namespace Purity
 
 		void setCenter(const Vector2f& center);
 		void setSize(const Vector2f& size);
+        const Vector2f& getSize() const;
 		
 		void setViewport(const Rect& viewportRect);
 		Rect getViewport() const;

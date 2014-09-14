@@ -26,8 +26,6 @@ namespace Purity
 
     protected:
         SDL_Renderer* mRenderer;
-
-    private:
         View mView;
     };
 }

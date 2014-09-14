@@ -56,6 +56,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     {
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
+
+    mView.setSize(static_cast<Vector2f>(getSize()));
 }
 
 Purity::Window::~Window()
@@ -174,6 +176,7 @@ void Purity::Window::loseFocus()
 
 void Purity::Window::display()
 {
+    setRenderScale();
     if (mContentMode == false)
     {
         SDL_Rect rect;
@@ -189,4 +192,16 @@ void Purity::Window::display()
     }
 
     SDL_RenderPresent(mRenderer);
+}
+
+void Purity::Window::setRenderScale()
+{
+    auto windowSize = static_cast<Vector2f>(getSize());
+    auto viewSize = mView.getSize();
+
+    Vector2f scale;
+    scale.x = windowSize.x / viewSize.x;
+    scale.y = windowSize.y / viewSize.y;
+
+    SDL_RenderSetScale(mRenderer, scale.x, scale.y);
 }
