@@ -28,9 +28,6 @@ namespace Purity
         Window(int width, int height, std::string title, ViewportType viewportType = ViewportType::CENTER);
         ~Window();
 
-        void setView(const View& view);
-        const View& getView() const;
-
         void setSize(const Vector2u& size);
         Vector2u getSize() const;
 
@@ -63,8 +60,6 @@ namespace Purity
         SDL_Window* mInternalWindow;
 
         WindowManipulator mWindowManipulator;
-
-        View mView;
 
         ViewportType mViewportType;
 

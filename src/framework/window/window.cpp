@@ -63,19 +63,6 @@ Purity::Window::~Window()
     SDL_Quit();
 }
 
-
-void Purity::Window::setView(const Purity::View& view)
-{
-    mView = view;
-}
-
-
-const Purity::View& Purity::Window::getView() const
-{
-    return mView;
-}
-
-
 void Purity::Window::setSize(const Vector2u& size)
 {
     SDL_SetWindowSize(mInternalWindow, size.x, size.y);
