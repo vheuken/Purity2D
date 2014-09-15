@@ -37,7 +37,7 @@ Set-Variable `
          -Name "DXSDK_DIR" `
          -Value "${Env:ProgramFiles(x86)}\Microsoft DirectX SDK" `
          ; Write-Host "DXSDK_DIR at ${Env:DXSDK_DIR}" `
-         ; Get-ChildItem -Path ${Env:DXSDK_DIR}
+         ; Get-ChildItem -Path "${Env:DXSDK_DIR}\*"
 
 Write-Host "Starting build"
 New-Item "${Env:BUILD_HOME}\build" `
