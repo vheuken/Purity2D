@@ -21,22 +21,23 @@ New-Item "${Env:BUILD_HOME}\release" `
          -Force `
          ; ${Env:BUILD_RELEASE} = "${Env:BUILD_HOME}\release"
 
-Write-Host "Downlading DX SDK"
-Invoke-Webrequest `
-         -Uri "http://download.microsoft.com/download/A/E/7/AE743F1F-632B-4809-87A9-AA1BB3458E31/DXSDK_Jun10.exe" `
-         -Outfile "${Env:BUILD_HOME}\DXSDK_Jun10.exe"
+#Write-Host "Downlading DX SDK"
+#Invoke-Webrequest `
+#         -Uri "http://download.microsoft.com/download/A/E/7/AE743F1F-632B-4809-87A9-AA1BB3458E31/DXSDK_Jun10.exe" `
+#         -Outfile "${Env:BUILD_HOME}\DXSDK_Jun10.exe"
 
-Write-Host "Installing DX SDK"
-# /S skips prinstallation checks
-# /O skips operating system checks
-# /U does a silent install
-# /P sets the installation path, default "${env:Programfiles}\DirectX SDK (June 2010)"
-.\DXSDK_Jun10.exe /S /O /U /P "${Env:SystemDrive}\DXSDK"
+#Write-Host "Installing DX SDK"
+## /S skips prinstallation checks
+## /O skips operating system checks
+## /U does a silent install
+## /P sets the installation path, default "${Env:Programfiles(x86)}\DirectX SDK (June 2010)"
+#.\DXSDK_Jun10.exe /S /O /U /P "${Env:SystemDrive}\DXSDK"
 
 Set-Variable `
          -Name "DXSDK_DIR" `
-         -Value "{$Env:SystemDrive}\DXSDK" `
-         ; Write-Host "DXSDK_DIR at ${DXSDK_DIR}"
+         -Value "${Env:ProgramFiles(x86)}\Microsoft DirectX SDK" `
+         ; Write-Host "DXSDK_DIR at ${Env:DXSDK_DIR}" `
+         ; Get-ChildItem ${Env:DXSDK_DIR}
 
 Write-Host "Starting build"
 New-Item "${Env:BUILD_HOME}\build" `
