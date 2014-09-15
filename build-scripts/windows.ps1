@@ -33,9 +33,10 @@ Write-Host "Installing DX SDK"
 # /P sets the installation path, default "${env:Programfiles}\DirectX SDK (June 2010)"
 .\DXSDK_Jun10.exe /S /O /U /P "${Env:SystemDrive}\DXSDK"
 
-Set-Variable ${DXSDK_DIR} = ${Env:ProgramFiles}\DXSDK
-
-Write-Host "DXSDK_DIR at ${DXSDK_DIR}"
+Set-Variable `
+         -Name "DXSDK_DIR" `
+         -Value "{$Env:SystemDrive}\DXSDK" `
+         ; Write-Host "DXSDK_DIR at ${DXSDK_DIR}"
 
 Write-Host "Starting build"
 New-Item "${Env:BUILD_HOME}\build" `
