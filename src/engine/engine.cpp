@@ -61,7 +61,10 @@ void Purity::Engine::run()
 
 void Purity::Engine::initializeWindow()
 {
-    mWindow = std::unique_ptr<Purity::Window>(new Purity::Window(960, 720, "Purity2D"));
+    Vector2i windowSize(Configuration::getInstance()->getInteger("window", "window_size_x", 800),
+                        Configuration::getInstance()->getInteger("window", "window_size_y", 400));
+
+    mWindow = std::unique_ptr<Purity::Window>(new Purity::Window(windowSize.x, windowSize.y, "Purity2D"));
 }
 
 void Purity::Engine::initializeRenderSystem()
