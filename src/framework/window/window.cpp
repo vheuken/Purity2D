@@ -72,7 +72,10 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
 
-    mView.setSize(Vector2f(width, height));
+    Vector2i viewSize(Configuration::getInstance()->getInteger("window", "view_size_x", 800),
+                      Configuration::getInstance()->getInteger("window", "view_size_y", 400));
+
+    mView.setSize(static_cast<Vector2f>(viewSize));
 
     auto viewportTypeStr = Configuration::getInstance()->getString("window", "viewport_type", "letterbox");
 
