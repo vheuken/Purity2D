@@ -30,7 +30,7 @@ New-Item "${Env:BUILD_HOME}\release" `
 ## /S skips prinstallation checks
 ## /O skips operating system checks
 ## /U does a silent install
-## /P sets the installation path, default "${Env:Programfiles(x86)}\DirectX SDK (June 2010)"
+## /P sets the installation path, default folder "DirectX SDK (June 2010)" in x86 Program Files folder
 #.\DXSDK_Jun10.exe /S /O /U /P "${Env:SystemDrive}\DXSDK"
 
 Set-Variable `
