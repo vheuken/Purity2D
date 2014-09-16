@@ -36,13 +36,28 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
         flags = SDL_WINDOW_RESIZABLE;
     }
 
+#ifdef __ANDROID__ ||  TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+    SDL_DisplayMode mode;
+
+    if (SDL_GetDesktopDisplayMode(0, &mode) != 0)
+    {
+        std::cerr << "SDL_GetDesktopDisplayMode failed: " << SDL_GetError() << std::endl;
+    }
+
+    mInternalWindow = SDL_CreateWindow(title.c_str(),
+                                       SDL_WINDOWPOS_CENTERED,
+                                       SDL_WINDOWPOS_CENTERED,
+                                       mode.w,
+                                       mode.h,
+                                       flags);
+#else
     mInternalWindow = SDL_CreateWindow(title.c_str(),
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
                                        width,
                                        height,
                                        flags);
-
+#endif
     SDL_SetWindowMinimumSize(mInternalWindow, minimumSize.x, minimumSize.y);
 
     if (mInternalWindow == nullptr)
@@ -57,7 +72,7 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
         std::cerr << "Could not create renderer: " << SDL_GetError() << std::endl;
     }
 
-    mView.setSize(static_cast<Vector2f>(getSize()));
+    mView.setSize(Vector2f(width, height));
 
     auto viewportTypeStr = Configuration::getInstance()->getString("window", "viewport_type", "letterbox");
 
