@@ -184,6 +184,11 @@ bool Purity::Window::isBorderless() const
     return mBorderless;
 }
 
+bool Purity::Window::isMaximized() const
+{
+    return (SDL_WINDOW_MAXIMIZED & SDL_GetWindowFlags(mInternalWindow));
+}
+
 void Purity::Window::close()
 {
     SDL_DestroyWindow(mInternalWindow);
@@ -192,7 +197,7 @@ void Purity::Window::close()
 
 void Purity::Window::manipulateWindow()
 {
-    if (!isContentMode())
+    if (!isContentMode() && !isMaximized())
     {
         mWindowManipulator.manipulateWindow();
     }

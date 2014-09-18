@@ -46,6 +46,8 @@ namespace Purity
 
         bool isBorderless() const;
 
+        bool isMaximized() const;
+
         void close();
 
         void manipulateWindow();
