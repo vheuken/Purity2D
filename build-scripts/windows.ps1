@@ -17,9 +17,12 @@ Write-Host "Installing MinGW"
 Invoke-WebRequest `
          -Uri "http://iweb.dl.sourceforge.net/project/mingwbuilds/host-windows/releases/4.8.1/32-bit/threads-posix/sjlj/x32-4.8.1-release-posix-sjlj-rev5.7z" `
          -Outfile x32-4.8.1-release-posix-sjlj-rev5.7z
-7z `
+7z x `
+         -t7z `
          "x32-4.8.1-release-posix-sjlj-rev5.7z" `
-         -o"${Env:ProgramFiles(x86)}\mingw-builds\x32-4.8.1-release-posix-sjlj-rev5\"
+         -o"${Env:ProgramFiles(x86)}\mingw-builds\x32-4.8.1-release-posix-sjlj-rev5\" `
+         | Find /V "Extracting " # 7z.exe does not have a quiet mode
+
 
 Write-Host "Adding MinGW to `${Env:Path}"
 ${Env:Path} = ${Env:Path} + ";${Env:ProgramFiles(x86)}\mingw-builds\x32-4.8.1-release-posix-sjlj-rev5\mingw32\bin"
