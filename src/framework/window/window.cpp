@@ -18,7 +18,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
   mContentMode(CONTENT_MODE_DEFAULT),
   minimumSize(Configuration::getInstance()->getInteger("window", "minimum_size_x", 160),
-              Configuration::getInstance()->getInteger("window", "minimum_size_y", 144))
+              Configuration::getInstance()->getInteger("window", "minimum_size_y", 144)),
+  mForceAspectRatio(true)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -88,10 +89,17 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     {
         mViewportType = ViewportType::CENTER;
     }
+    else if (viewportTypeStr == "force")
+    {
+        // "force" uses letterbox
+        mViewportType = ViewportType::STRETCH;
+        mForceAspectRatio = true;
+    }
     else // default to "letterbox"
     {
         mViewportType = ViewportType::LETTERBOX;
     }
+
 }
 
 Purity::Window::~Window()
@@ -182,6 +190,11 @@ void Purity::Window::setContentMode()
 bool Purity::Window::isBorderless() const
 {
     return mBorderless;
+}
+
+bool Purity::Window::forceAspectRatio() const
+{
+    return mForceAspectRatio;
 }
 
 void Purity::Window::close()
