@@ -93,7 +93,6 @@ void Purity::InputManager::handleWindowResize()
 {
     auto newWindowSize = mWindow->getSize();
     auto newWindowPos = mWindow->getPosition();
-    std::cout << newWindowSize.x << std::endl;
 
     // right
     if ((newWindowSize.x != mWindowSize.x) && (mWindowPos == newWindowPos))
@@ -115,8 +114,6 @@ void Purity::InputManager::handleWindowResize()
     {
         newWindowSize.x += (newWindowSize.y - mWindowSize.y);
     }
-
-    std::cout << newWindowSize.x << std::endl;
 
     mWindow->setSize(newWindowSize);
 }
