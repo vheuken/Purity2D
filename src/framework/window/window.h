@@ -45,7 +45,6 @@ namespace Purity
         void setContentMode();
 
         bool isBorderless() const;
-        bool forceAspectRatio() const;
 
         void close();
 
@@ -71,8 +70,6 @@ namespace Purity
         bool mCursorLock;
 
         bool mContentMode;
-
-        bool mForceAspectRatio;
 
         Vector2i minimumSize;
 
