@@ -44,6 +44,9 @@ namespace Purity
         void setWindowMode();
         void setContentMode();
 
+        void maximize();
+        void minimize();
+
         bool isBorderless() const;
 
         bool isMaximized() const;

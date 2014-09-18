@@ -179,6 +179,16 @@ void Purity::Window::setContentMode()
     }
 }
 
+void Purity::Window::maximize()
+{
+    SDL_MaximizeWindow(mInternalWindow);
+}
+
+void Purity::Window::minimize()
+{
+    SDL_MinimizeWindow(mInternalWindow);
+}
+
 bool Purity::Window::isBorderless() const
 {
     return mBorderless;
