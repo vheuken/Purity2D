@@ -32,8 +32,8 @@ script:
 
 after_success:
    # Permissions error workaround for script
-   - chmod a+x ./.travis-update-gh-pages.sh
-   - ./.travis-update-gh-pages.sh
+   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
+   - ./build-scripts/ci/travis/update-gh-pages.sh
 
 
 
