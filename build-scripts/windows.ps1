@@ -1,5 +1,11 @@
 #Requires -Version 3
 
+# Issue present on Appveyor
+Write-Host "Using workaround for CMake sh.exe error"
+Rename-Item `
+         "C:\Program Files (x86)\Git\bin\sh.exe" `
+         "shworkaround"
+
 Write-Host Creating "`${Env:BUILD_HOME}" in (Get-Location)
 ${Env:BUILD_HOME} = Get-Location
 
