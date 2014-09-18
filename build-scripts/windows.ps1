@@ -88,7 +88,7 @@ Get-ChildItem
 Write-Host "Exporting release (ZIP) files"
 Copy-Item `
          -Path ".\*.zip" `
-         -Destination "${BUILD_RELEASE}\"
+         -Destination "${Env:BUILD_RELEASE}\"
 
 
 Write-Host "Available releases:"
