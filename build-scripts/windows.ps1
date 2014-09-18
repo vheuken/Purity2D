@@ -102,7 +102,9 @@ Rename-Item `
          "C:\Program Files (x86)\Git\bin\shworkaround" `
          "sh.exe"
 
-sh.exe -login -i "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh" | Write-Output
+sh.exe --login --verbose -i "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh" > test.txt
+
+Get-Content test.txt
 
 
 
