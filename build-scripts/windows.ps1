@@ -1,5 +1,7 @@
 #Requires -Version 3
 
+${Env:BUILD_OS} = "Windows"
+
 # Issue present on Appveyor
 Write-Host "Using workarounds for CMake errors"
 Rename-Item `
