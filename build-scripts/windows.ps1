@@ -7,7 +7,7 @@ Write-Host "Installing MinGW"
 Invoke-WebRequest `
          -Uri "http://iweb.dl.sourceforge.net/project/mingwbuilds/host-windows/releases/4.8.1/32-bit/threads-posix/sjlj/x32-4.8.1-release-posix-sjlj-rev5.7z" `
          -Outfile x32-4.8.1-release-posix-sjlj-rev5.7z
-7z 
+7z `
          -t7z `
          "x32-4.8.1-release-posix-sjlj-rev5.7z" `
          -o"${Env:ProgramFiles(x86)}\mingw-builds\x32-4.8.1-release-posix-sjlj-rev5\" `
