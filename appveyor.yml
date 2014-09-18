@@ -38,8 +38,8 @@ hosts:
   db.server.com: 127.0.0.2
 
 environment:
-  my_secure_var1:
-    secure: PxqZetar1APSMbdo7Rjqvh0qIecY2HcqTWTj5DMJOe5QTfyFCNG22I/F8Ik5zX9X
+  GH_TOKEN:
+    secure: f7EYwpCLSy7CL9K8yO/8t7+ByJNxaX+HikoQn538n8irfZnpc0MTqg3sBoNcNbuW
 
 # The "services" section starts services to be used by the build environment.
 # Example:
@@ -76,13 +76,13 @@ environment:
 #  - Debug
 
 before_build:
-  - cmd: echo "Before Build"
+  - ps: Write-Host "Before Build"
 
 build_script:
   - ps: ./build-scripts/windows.ps1
 
 after_build:
-  - cmd: echo "After Build"
+  - ps: Write-Host "After Build"
 
 
 
@@ -92,7 +92,7 @@ after_build:
 #---------------------------------#
 
 on_success:
-  - cmd: echo "Success"
+  - ps: sh.exe .\build-scripts\ci\appveyor\update-gh-pages.sh
 
 
 
