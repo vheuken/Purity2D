@@ -61,7 +61,7 @@ New-Item "${Env:BUILD_HOME}\build" `
          -ItemType directory `
          -Force
 Set-Location "${Env:BUILD_HOME}\build"
-cmake -G "MinGW Makefiles" ..
+cmake.exe -G "MinGW Makefiles" ..
 mingw32-make.exe all
 
 
@@ -102,6 +102,7 @@ Rename-Item `
          "C:\Program Files (x86)\Git\bin\shworkaround" `
          "sh.exe"
 
+sh.exe -login -i "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh" | Write-Output
 
 
 
