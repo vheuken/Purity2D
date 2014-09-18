@@ -26,6 +26,10 @@ Purity::Event& Purity::Event::operator=(const SDL_Event& sdlEvent)
         case SDL_WINDOWEVENT_FOCUS_LOST:
             this->type = Event::FocusLost;
             break;
+
+        case SDL_WINDOWEVENT_RESIZED:
+            this->type = Event::Resized;
+            break;
         }
         break;
 

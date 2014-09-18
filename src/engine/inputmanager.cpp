@@ -64,6 +64,10 @@ void Purity::InputManager::update()
             mWindow->loseFocus();
             mWindow->setWindowMode();
         }
+        else if (event.type == Event::Resized)
+        {
+            std::cout << "HI" << std::endl;
+        }
 
         if (mWindow->isContentMode() && !mModeLock)
         {
