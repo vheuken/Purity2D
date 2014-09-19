@@ -79,7 +79,7 @@ environment:
 #  - ps: Write-Host "Before Build"
 
 build_script:
-  - ps: '${Env:APPVEYOR_BUILD_FOLDER}/build-scripts/windows.ps1'
+  - ps: '${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\windows.ps1'
 
 #after_build:
 #  - ps: Write-Host "After Build"
