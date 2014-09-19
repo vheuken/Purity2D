@@ -82,6 +82,7 @@ build_script:
 #  - ps: ./build-scripts/windows.ps1
   - ps: 'cmd.exe "/Q /C .\appveyortest.bat"'
   - cmd: '.\appveyortest.bat'
+  - ps: 'sh.exe -login ".\appveyortest.sh"'
   - cmd: 'sh.exe -login ".\appveyortest.sh"'
 
 after_build:
