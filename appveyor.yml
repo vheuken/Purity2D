@@ -75,20 +75,14 @@ environment:
 #configuration:
 #  - Debug
 
-before_build:
-  - ps: Write-Host "Before Build"
+#before_build:
+#  - ps: Write-Host "Before Build"
 
 build_script:
-#  - ps: ./build-scripts/windows.ps1
-  - ps: 'cmd.exe "/Q /C .\appveyortest.bat"'
-  - cmd: '.\appveyortest.bat'
-  - ps: 'sh.exe ".\appveyortest.sh"'
-  - cmd: 'sh.exe ".\appveyortest.sh"'
-  - ps: '.\appveyortest.ps1'
-  - cmd: 'powershell.exe ".\appveyortest.ps1"'
+  - ps: '${Env:APPVEYOR_BUILD_FOLDER}/build-scripts/windows.ps1'
 
-after_build:
-  - ps: Write-Host "After Build"
+#after_build:
+#  - ps: Write-Host "After Build"
 
 
 
@@ -98,7 +92,7 @@ after_build:
 #---------------------------------#
 
 on_success:
-  - ps: 'sh.exe -login "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
+  - ps: 'sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
 
 
 
