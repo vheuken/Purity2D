@@ -84,8 +84,8 @@ build_script:
   - cmd: '.\appveyortest.bat'
   - ps: 'sh.exe -login ".\appveyortest.sh"'
   - cmd: 'sh.exe -login ".\appveyortest.sh"'
-  - ps: '.\appveyortest.ps1'
-  - cmd: 'powershell.exe "\appveyortest.ps1"'
+  - ps: '..\appveyortest.ps1'
+  - cmd: 'powershell.exe ".\appveyortest.ps1"'
 
 after_build:
   - ps: Write-Host "After Build"
