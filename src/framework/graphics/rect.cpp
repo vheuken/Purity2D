@@ -1,5 +1,16 @@
 #include "rect.h"
 
+Purity::Rect::Rect()
+{
+}
+
+Purity::Rect::Rect(Vector2i p, int w, int h)
+    : position(p),
+      width(w),
+      height(h)
+{
+}
+
 Purity::Rect::operator SDL_Rect() const
 {
     SDL_Rect rect;

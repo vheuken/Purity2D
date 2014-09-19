@@ -8,6 +8,7 @@
 #include "../graphics/rendertarget.h"
 #include "../graphics/view.h"
 #include "../system/event.h"
+#include "../gui/button.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -55,6 +56,8 @@ namespace Purity
 
         void manipulateWindow();
 
+        void handleUIButtons();
+
         void gainFocus();
 
         void loseFocus();
@@ -77,6 +80,8 @@ namespace Purity
         bool mContentMode;
 
         Vector2i minimumSize;
+
+        Button mCloseButton;
 
         void setResizeHandling();
         void setRenderScale();

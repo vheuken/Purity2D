@@ -8,6 +8,7 @@ add_subdirectory(window/)
 add_subdirectory(system/)
 add_subdirectory(input/)
 add_subdirectory(graphics/)
+add_subdirectory(gui/)
 
 set(MODULES_FOLDER "Purity Framework")
 
@@ -17,6 +18,7 @@ set_target_properties("Purity-Window" PROPERTIES FOLDER ${MODULES_FOLDER})
 set_target_properties("Purity-Graphics" PROPERTIES FOLDER ${MODULES_FOLDER})
 set_target_properties("Purity-System" PROPERTIES FOLDER ${MODULES_FOLDER})
 set_target_properties("Purity-Input" PROPERTIES FOLDER ${MODULES_FOLDER})
+set_target_properties("Purity-GUI" PROPERTIES FOLDER ${MODULES_FOLDER})
 
 
 
@@ -50,4 +52,5 @@ target_link_libraries(
     Purity-System
     Purity-Input
     Purity-Graphics
+	Purity-GUI
 )
