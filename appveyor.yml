@@ -79,7 +79,8 @@ before_build:
   - ps: Write-Host "Before Build"
 
 build_script:
-  - ps: ./build-scripts/windows.ps1
+#  - ps: ./build-scripts/windows.ps1
+  - ps: "cmd.exe" "/c .\appveyortest.bat"
 
 after_build:
   - ps: Write-Host "After Build"
