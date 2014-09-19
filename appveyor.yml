@@ -79,7 +79,7 @@ environment:
 #  - ps: Write-Host "Before Build"
 
 build_script:
-  - ps: '.\appveyortest.ps1'
+  - ps: '.\build-scripts\windows.ps1'
 
 #after_build:
 #  - ps: Write-Host "After Build"
