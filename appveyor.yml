@@ -92,8 +92,7 @@ after_build:
 #---------------------------------#
 
 on_success:
-  - ps: 'sh.exe -login "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"' 
-  - ps: 'Get-Content test.txt'
+  - ps: 'sh.exe -login "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
 
 
 
