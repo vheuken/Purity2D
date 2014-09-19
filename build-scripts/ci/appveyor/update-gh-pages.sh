@@ -2,8 +2,7 @@
 # Currently makes the following assumptions:
          # The Appveyor YML file has the secure variable ${GH_TOKEN} to connect to Github
          # All desired files are located in ${TRAVIS_BUILD_DIR}/release/
-
-printf "Script starting"
+printf "${APPVEYOR_PULL_REQUEST_NUMBER}"
 
 if [ "${APPVEYOR_PULL_REQUEST_NUMBER}" == "false" ]; then
          printf "Starting gh-pages update\n"
