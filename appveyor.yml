@@ -39,7 +39,7 @@ hosts:
 
 environment:
   GH_TOKEN:
-    secure: f7EYwpCLSy7CL9K8yO/8t7+ByJNxaX+HikoQn538n8irfZnpc0MTqg3sBoNcNbuW
+    secure: VzIMNgIGxHkGT1ws7GM1MmX63XyXG2URy+Y9rTWxYq8C5JDJhrhYuazcZXHtPn3f
 
 # The "services" section starts services to be used by the build environment.
 # Example:
