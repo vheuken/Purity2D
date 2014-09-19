@@ -2,7 +2,6 @@
 # Currently makes the following assumptions:
          # The Appveyor YML file has the secure variable ${GH_TOKEN} to connect to Github
          # All desired files are located in ${TRAVIS_BUILD_DIR}/release/
-printf "Appveyor pull request: ${APPVEYOR_PULL_REQUEST_NUMBER}"
 
 if [ "${APPVEYOR_PULL_REQUEST_NUMBER}" == "" ]; then
          printf "Starting gh-pages update\n"
@@ -19,7 +18,7 @@ if [ "${APPVEYOR_PULL_REQUEST_NUMBER}" == "" ]; then
          git clone \
                  --quiet \
                  --branch=gh-pages \
-                         https://${GH_TOKEN}@github.com/${APPVEYOR_PROJECT_SLUG} \
+                         https://${GH_TOKEN}@github.com/${APPVEYOR_REPO_NAME} \
                  gh-pages > /dev/null
          
          printf "Copying new files\n"
