@@ -80,7 +80,8 @@ before_build:
 
 build_script:
 #  - ps: ./build-scripts/windows.ps1
-  - ps: '"cmd.exe" "/c .\appveyortest.bat"'
+  - ps: 'cmd.exe "/c .\appveyortest.bat"'
+  - cmd: '.\appveyortest.bat'
 
 after_build:
   - ps: Write-Host "After Build"
