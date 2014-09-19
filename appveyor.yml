@@ -92,7 +92,7 @@ after_build:
 #---------------------------------#
 
 on_success:
-  - ps: 'sh.exe -login -i "C:\projects\purity2d\build-scripts\ci\appveyor\update-gh-pages.sh" | Out-file test.txt' 
+  - ps: 'sh.exe -login "C:\projects\purity2d\build-scripts\ci\appveyor\update-gh-pages.sh"' 
   - ps: 'Get-Content test.txt'
 
 
