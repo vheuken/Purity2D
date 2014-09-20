@@ -31,7 +31,6 @@ namespace Purity
             TouchEnded             = SDL_FINGERUP,         // TODO: Implement
 
             Closed                 = SDL_WINDOWEVENT_CLOSE,
-            Resized                = SDL_WINDOWEVENT_RESIZED,
 
             FocusGained            = SDL_WINDOWEVENT_FOCUS_GAINED,
             FocusLost              = SDL_WINDOWEVENT_FOCUS_LOST

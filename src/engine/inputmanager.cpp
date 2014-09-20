@@ -18,9 +18,6 @@ void Purity::InputManager::update()
 {
     Event event;
 
-    mWindowPos = mWindow->getPosition();
-    mWindowSize = mWindow->getSize();
-
     while (mWindow->pollEvent(event))
     {
         if (event.type == Event::Closed)
@@ -67,53 +64,10 @@ void Purity::InputManager::update()
             mWindow->loseFocus();
             mWindow->setWindowMode();
         }
-        else if (event.type == Event::Resized)
-        {
-            if (mWindow->forceAspectRatio())
-            {
-                mMustHandleWindowResize = true;
-            }
-        }
-
 
         if (mWindow->isContentMode() && !mModeLock)
         {
             mInputQueue->push(event);
         }
     }
-
-    if (mMustHandleWindowResize)
-    {
-        handleWindowResize();
-        mMustHandleWindowResize = false;
-    }
-}
-
-void Purity::InputManager::handleWindowResize()
-{
-    auto newWindowSize = mWindow->getSize();
-    auto newWindowPos = mWindow->getPosition();
-
-    // right
-    if ((newWindowSize.x != mWindowSize.x) && (mWindowPos == newWindowPos))
-    {
-        newWindowSize.y += (newWindowSize.x - mWindowSize.x);
-    }
-    //bottom
-    else if ((newWindowSize.y != mWindowSize.y) && (mWindowPos == newWindowPos))
-    {
-        newWindowSize.x += (newWindowSize.y - mWindowSize.y);
-    }
-    //left
-    else if ((newWindowSize.x != mWindowSize.x) && (mWindowPos != newWindowPos))
-    {
-        newWindowSize.y += (newWindowSize.x - mWindowSize.x);
-    }
-    //top
-    else
-    {
-        newWindowSize.x += (newWindowSize.y - mWindowSize.y);
-    }
-
-    mWindow->setSize(newWindowSize);
 }

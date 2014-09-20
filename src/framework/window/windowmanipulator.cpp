@@ -138,12 +138,6 @@ void Purity::WindowManipulator::resizeWindow()
         {
             newWindowSize.x += 1;
         }
-
-        if (mWindow->forceAspectRatio())
-        {
-            newWindowSize.y += (newWindowSize.x - windowSize.x);
-        }
-
     }
 
     // bottom
@@ -156,11 +150,6 @@ void Purity::WindowManipulator::resizeWindow()
         {
             newWindowSize.y += 1;
         }
-
-        if (mWindow->forceAspectRatio())
-        {
-            newWindowSize.x += (newWindowSize.y - windowSize.y);
-        }
     }
 
     // left
@@ -168,11 +157,6 @@ void Purity::WindowManipulator::resizeWindow()
     {
         newWindowPos.x = mousePos.x - mWindowResizeOffsetLeftTop.x;
         newWindowSize.x += windowPos.x - newWindowPos.x;
-
-        if (mWindow->forceAspectRatio())
-        {
-            newWindowSize.y += (newWindowSize.x - windowSize.x);
-        }
     }
 
     // top
@@ -180,11 +164,6 @@ void Purity::WindowManipulator::resizeWindow()
     {
         newWindowPos.y = mousePos.y - mWindowResizeOffsetLeftTop.y;
         newWindowSize.y += windowPos.y - newWindowPos.y;
-
-        if (mWindow->forceAspectRatio())
-        {
-            newWindowSize.x += (newWindowSize.y - windowSize.y);
-        }
     }
     
     mWindow->setSize(newWindowSize);
