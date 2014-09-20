@@ -14,8 +14,8 @@ version: 1.0.{build}
 # Black/whitelist
 branches:
 #Using "only" whitelists branches
-  only:
-    - master
+   only:
+     - master
 
 #---------------------------------#
 #    environment configuration    #
@@ -26,19 +26,19 @@ os: Windows Server 2012 R2
 
 # Scripts to be run before repository cloning.
 init:
-  - git config --global core.autocrlf input
+   - git config --global core.autocrlf input
 
 clone_depth: 50
 
 clone_folder: c:\projects\purity2d
 
 hosts:
-  queue-server: 127.0.0.1
-  db.server.com: 127.0.0.2
+   queue-server: 127.0.0.1
+   db.server.com: 127.0.0.2
 
 environment:
-  GH_TOKEN:
-    secure: VzIMNgIGxHkGT1ws7GM1MmX63XyXG2URy+Y9rTWxYq8C5JDJhrhYuazcZXHtPn3f
+   GH_TOKEN:
+     - secure: VzIMNgIGxHkGT1ws7GM1MmX63XyXG2URy+Y9rTWxYq8C5JDJhrhYuazcZXHtPn3f
 
 #install:
 
@@ -49,7 +49,7 @@ environment:
 
 
 build_script:
-  - ps: '.\build-scripts\windows.ps1'
+   - ps: '.\build-scripts\windows.ps1'
 
 
 #---------------------------------#
@@ -57,4 +57,4 @@ build_script:
 #---------------------------------#
 
 on_success:
-  - ps: 'sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
+   - ps: 'sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
