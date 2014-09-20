@@ -80,9 +80,6 @@ environment:
 
 build_script:
   - ps: '.\build-scripts\windows.ps1'
-  - ps: Get-Childitem "${Env:APPVEYOR_BUILD_FOLDER}"
-  - ps: Get-Childitem "${Env:APPVEYOR_BUILD_FOLDER}\release"
-  - ps: 'sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
 
 #after_build:
 #  - ps: Write-Host "After Build"
@@ -95,7 +92,7 @@ build_script:
 #---------------------------------#
 
 on_success:
-  - ps: Get-Childitem "${Env:APPVEYOR_BUILD_FOLDER}"
+  - ps: 'sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
 
 
 
