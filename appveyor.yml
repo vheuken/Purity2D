@@ -38,7 +38,7 @@ hosts:
 
 environment:
    GH_TOKEN:
-     - secure: VzIMNgIGxHkGT1ws7GM1MmX63XyXG2URy+Y9rTWxYq8C5JDJhrhYuazcZXHtPn3f
+     secure: VzIMNgIGxHkGT1ws7GM1MmX63XyXG2URy+Y9rTWxYq8C5JDJhrhYuazcZXHtPn3f
 
 #install:
 
