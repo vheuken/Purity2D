@@ -25,7 +25,7 @@ if [ "${APPVEYOR_PULL_REQUEST_NUMBER}" == "" ]; then
          cd ./gh-pages
          test ! -d ./${APPVEYOR_REPO_BRANCH}/${BUILD_OS} \
                  && mkdir -p ./${APPVEYOR_REPO_BRANCH}/${BUILD_OS}
-         cp -Rf "${APPVEYOR_BUILD_FOLDER}/release/*.*" "./${APPVEYOR_REPO_BRANCH}/${BUILD_OS}/"
+         cp -Rf "${APPVEYOR_BUILD_FOLDER}/release/purity2d-build.zip" "./${APPVEYOR_REPO_BRANCH}/${BUILD_OS}/"
          
          printf "Committing and pushing files\n"
          git add -f .
