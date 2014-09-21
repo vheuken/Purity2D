@@ -50,6 +50,7 @@ environment:
 
 
 build_script:
+   - ps: Write-Host "${Env:APPVEYOR_BUILD_FOLDER}"
    - ps: '.\build-scripts\windows.ps1'
 
 
