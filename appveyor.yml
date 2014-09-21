@@ -50,37 +50,37 @@ install: echo "install_script"
 #   - ps: Write-Host "${Env:APPVEYOR_BUILD_FOLDER}"
 #   - ps: '.\build-scripts\windows.ps1'
 
-#build: off
+build: off
 
-before_build: echo "before_build"
+#before_build: echo "before_build"
 
-build_script: echo "build_script"
+#build_script: echo "build_script"
 
-after_build: echo "after_build"
+#after_build: echo "after_build"
 
 #---------------------------------#
 #       tests configuration       #
 #---------------------------------#
 
-#test: off
+test: off
 
-before_test: echo "before_test"
+#before_test: echo "before_test"
 
-test_script: echo "test_script"
+#test_script: echo "test_script"
 
-after_test: echo "after_test"
+#after_test: echo "after_test"
 
 #---------------------------------#
 #     deployment configuration    #
 #---------------------------------#
 
-#deploy: off
+deploy: off
 
-before_deploy: echo "before_deploy"
+#before_deploy:
 
-deploy_script: echo "deploy_script"
+#deploy_script:
 
-after_deploy: echo "after_deploy"
+#after_deploy:
 
 #---------------------------------#
 #        global handlers          #
