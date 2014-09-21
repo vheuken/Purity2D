@@ -185,7 +185,14 @@ void Purity::Window::setContentMode()
 
 void Purity::Window::maximize()
 {
-    SDL_MaximizeWindow(mInternalWindow);
+    if (!isMaximized())
+    {
+        SDL_MaximizeWindow(mInternalWindow);
+    }
+    else
+    {
+        SDL_RestoreWindow(mInternalWindow);
+    }
 }
 
 void Purity::Window::minimize()
