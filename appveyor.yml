@@ -27,32 +27,60 @@ os: Windows Server 2012 R2
 # Scripts to be run before repository cloning.
 init:
    - git config --global core.autocrlf input
+   - echo "init_script"
 
 clone_depth: 50
 
 # The clone folder defaults to c:\projects\<APPVEYOR_PROJECT_SLUG>
 #clone_folder:
 
-hosts:
-   queue-server: 127.0.0.1
-   db.server.com: 127.0.0.2
-
 environment:
    GH_TOKEN:
      secure: VzIMNgIGxHkGT1ws7GM1MmX63XyXG2URy+Y9rTWxYq8C5JDJhrhYuazcZXHtPn3f
 
-#install:
-
+# Scripts to be run before build scripts
+install: echo "install_script"
 
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
 
+# Build scripts
+#build_script:
+#   - ps: Write-Host "${Env:APPVEYOR_BUILD_FOLDER}"
+#   - ps: '.\build-scripts\windows.ps1'
 
-build_script:
-   - ps: Write-Host "${Env:APPVEYOR_BUILD_FOLDER}"
-   - ps: '.\build-scripts\windows.ps1'
+#build: off
 
+before_build: echo "before_build"
+
+build_script: echo "build_script"
+
+after_build: echo "after_build"
+
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
+
+#test: off
+
+before_test: echo "before_test"
+
+test_script: echo "test_script"
+
+after_test: echo "after_test"
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+#deploy: off
+
+before_deploy: echo "before_deploy"
+
+deploy_script: echo "deploy_script"
+
+after_deploy: echo "after_deploy"
 
 #---------------------------------#
 #        global handlers          #
@@ -60,3 +88,7 @@ build_script:
 
 on_success:
    - ps: 'sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
+
+on_failure: echo "on_failure"
+
+on_finish: echo "on_finish"
