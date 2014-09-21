@@ -31,7 +31,7 @@ init:
 clone_depth: 50
 
 # The clone folder defaults to c:\projects\<APPVEYOR_PROJECT_SLUG>
-clone_folder: C:\projects\<APPVEYOR_REPO_NAME>
+clone_folder: C:\projects\<project-slug>
 
 hosts:
    queue-server: 127.0.0.1
