@@ -20,7 +20,9 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mContentMode(CONTENT_MODE_DEFAULT),
   minimumSize(Configuration::getInstance()->getInteger("window", "minimum_size_x", 160),
               Configuration::getInstance()->getInteger("window", "minimum_size_y", 144)),
-  mCloseButton(Rect(Vector2i(5, 5), 25, 25))
+  mCloseButton(Rect(Vector2i(width-30, 5), 25, 25)),
+  mMaximizeButton(Rect(Vector2i(width-60, 5), 25, 25)),
+  mMinimizeButton(Rect(Vector2i(width-90, 5), 25, 25))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -225,6 +227,9 @@ void Purity::Window::handleUIButtons()
     if (Mouse::isButtonPressed(Mouse::Left))
     {
         mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
+        mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
+        mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
+
     }
 }
 
@@ -266,6 +271,8 @@ void Purity::Window::display()
         SDL_RenderFillRect(mRenderer, &rect);
 
         mCloseButton.draw(*this);
+        mMaximizeButton.draw(*this);
+        mMinimizeButton.draw(*this);
     }
 
     setResizeHandling();

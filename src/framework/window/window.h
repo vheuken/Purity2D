@@ -82,6 +82,8 @@ namespace Purity
         Vector2i minimumSize;
 
         Button mCloseButton;
+        Button mMaximizeButton;
+        Button mMinimizeButton;
 
         void setResizeHandling();
         void setRenderScale();
