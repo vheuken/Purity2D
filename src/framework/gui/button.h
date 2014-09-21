@@ -2,6 +2,7 @@
 #define PURITY_BUTTON_H
 
 #include <functional>
+#include "../input/mouse.h"
 #include "../graphics/drawable.h"
 #include "../graphics/rect.h"
 
@@ -12,6 +13,8 @@ namespace Purity
     public:
         Button(const Rect& rect);
 
+        void setRect(const Rect& rect);
+
         template <typename Functor>
         bool isMouseOver(const Vector2i& mousePos, Functor onClick);
 
@@ -19,6 +22,8 @@ namespace Purity
 
     private:
         Rect mRect;
+
+        bool mMouseDown = false;
     };
 
     template <typename Functor>
@@ -29,9 +34,22 @@ namespace Purity
             mousePos.x <= (mRect.position.x + mRect.width) &&
             mousePos.y <= (mRect.position.y + mRect.height))
         {
-            onClick();
+            if (Mouse::isButtonPressed(Mouse::Left))
+            {
+                mMouseDown = true;
+            }
+            else if (!Mouse::isButtonPressed(Mouse::Left))
+            {
+                if (mMouseDown == true)
+                {
+                    onClick();
+                    mMouseDown = false;
+                }
+            }
             return true;
         }
+
+        mMouseDown = false;
         return false;
     }
 }

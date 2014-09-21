@@ -5,6 +5,11 @@ Purity::Button::Button(const Purity::Rect& rect)
 {
 }
 
+void Purity::Button::setRect(const Purity::Rect & rect)
+{
+    mRect = rect;
+}
+
 void Purity::Button::draw(Purity::RenderTarget& target) const
 {
     target.draw(mRect);

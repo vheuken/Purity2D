@@ -4,14 +4,15 @@
 #include <SDL.h>
 
 #include "../system/vector2.h"
-#include "../window/window.h"
 
 namespace Purity
 {
+    class Window;
+
     class Mouse
     {
     public:
-        enum Button
+        enum MouseButton
         {
             Left = SDL_BUTTON_LEFT,
             Middle = SDL_BUTTON_MIDDLE,
@@ -22,7 +23,7 @@ namespace Purity
 
         static Vector2i getPosition();
         static Vector2i getPosition(const Window& relativeTo);
-        static bool isButtonPressed(Button button);
+        static bool isButtonPressed(MouseButton button);
     };
 }
 

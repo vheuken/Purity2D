@@ -224,13 +224,16 @@ void Purity::Window::manipulateWindow()
 
 void Purity::Window::handleUIButtons()
 {
-    if (Mouse::isButtonPressed(Mouse::Left))
-    {
-        mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
-        mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
-        mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
+    // handle clicks
+    mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
+    mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
+    mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
 
-    }
+    // window resizes
+    auto size = getSize();
+    mCloseButton.setRect(Rect(Vector2i(size.x-30, 5), 25, 25));
+    mMaximizeButton.setRect(Rect(Vector2i(size.x-60, 5), 25, 25));
+    mMinimizeButton.setRect(Rect(Vector2i(size.x-90, 5), 25, 25));
 }
 
 void Purity::Window::gainFocus()
