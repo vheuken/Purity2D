@@ -10,6 +10,9 @@
 
 #include <SDL_events.h>
 
+
+#include "../window/window.h"
+
 Purity::Vector2i Purity::Mouse::getPosition()
 {
     Vector2i ret(0,0);
@@ -63,7 +66,7 @@ Purity::Vector2i Purity::Mouse::getPosition(const Purity::Window& relativeTo)
     return Vector2i(x, y);
 }
 
-bool Purity::Mouse::isButtonPressed(Button button)
+bool Purity::Mouse::isButtonPressed(MouseButton button)
 {
     SDL_PumpEvents();
 

@@ -2,12 +2,11 @@ set(PURITY_GUI_PROJECT_NAME "Purity-GUI")
 project(${PURITY_GUI_PROJECT_NAME})
 
 set (SOURCE_FILES
-     gui.cpp
+     button.cpp
 )
 
 set (HEADER_FILES
-     gui.h
-     input.h
+     button.h
 )
      
 

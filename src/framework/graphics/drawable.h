@@ -7,8 +7,6 @@
 
 namespace Purity
 {
-    //class RenderTarget;
-
     class Drawable
     {
     protected:

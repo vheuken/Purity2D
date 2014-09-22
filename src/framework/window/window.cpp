@@ -1,9 +1,10 @@
 #include "window.h"
 #include <iostream>
-
+#include <functional>
 #include <SDL.h>
 
 #include "../system/configuration.h"
+#include "../input/mouse.h"
 
 #ifdef __ANDROID__ ||  TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 const bool CONTENT_MODE_DEFAULT = true;
@@ -18,7 +19,10 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
   mContentMode(CONTENT_MODE_DEFAULT),
   minimumSize(Configuration::getInstance()->getInteger("window", "minimum_size_x", 160),
-              Configuration::getInstance()->getInteger("window", "minimum_size_y", 144))
+              Configuration::getInstance()->getInteger("window", "minimum_size_y", 144)),
+  mCloseButton(Rect(Vector2i(width-30, 5), 25, 25)),
+  mMaximizeButton(Rect(Vector2i(width-60, 5), 25, 25)),
+  mMinimizeButton(Rect(Vector2i(width-90, 5), 25, 25))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -179,6 +183,23 @@ void Purity::Window::setContentMode()
     }
 }
 
+void Purity::Window::maximize()
+{
+    if (!isMaximized())
+    {
+        SDL_MaximizeWindow(mInternalWindow);
+    }
+    else
+    {
+        SDL_RestoreWindow(mInternalWindow);
+    }
+}
+
+void Purity::Window::minimize()
+{
+    SDL_MinimizeWindow(mInternalWindow);
+}
+
 bool Purity::Window::isBorderless() const
 {
     return mBorderless;
@@ -197,10 +218,29 @@ void Purity::Window::close()
 
 void Purity::Window::manipulateWindow()
 {
-    if (!isContentMode() && !isMaximized())
+    if (!isContentMode())
     {
-        mWindowManipulator.manipulateWindow();
+        handleUIButtons();
+
+        if (!isMaximized())
+        {
+            mWindowManipulator.manipulateWindow();
+        }
     }
+}
+
+void Purity::Window::handleUIButtons()
+{
+    // handle clicks
+    mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
+    mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
+    mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
+
+    // window resizes
+    auto size = getSize();
+    mCloseButton.setRect(Rect(Vector2i(size.x-30, 5), 25, 25));
+    mMaximizeButton.setRect(Rect(Vector2i(size.x-60, 5), 25, 25));
+    mMinimizeButton.setRect(Rect(Vector2i(size.x-90, 5), 25, 25));
 }
 
 void Purity::Window::gainFocus()
@@ -235,9 +275,14 @@ void Purity::Window::display()
         rect.x = 0;
         rect.y = 0;
 
+
         SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(mRenderer, 128, 128, 128, 200);
         SDL_RenderFillRect(mRenderer, &rect);
+
+        mCloseButton.draw(*this);
+        mMaximizeButton.draw(*this);
+        mMinimizeButton.draw(*this);
     }
 
     setResizeHandling();

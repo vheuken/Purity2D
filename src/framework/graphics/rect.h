@@ -10,6 +10,9 @@ namespace Purity
     class Rect
     {
     public:
+        Rect();
+        Rect(Vector2i p, int w, int h);
+
         Vector2i position;
 
         int height;

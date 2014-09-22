@@ -44,6 +44,16 @@ void Purity::InputManager::update()
                     mModeLock = true;
                 }
             }
+#ifdef __ANDROID__
+            else if (event.keyEvent.code == SDLK_AC_BACK)
+            {
+                mWindow->close();
+            }
+            else if (event.keyEvent.code == SDLK_MENU)
+            {
+                mWindow->toggleMode();
+            }
+#endif
         }
         else if (event.type == Event::KeyReleased)
         {
