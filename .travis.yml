@@ -79,7 +79,7 @@ after_success:
 #   - bash ./build-scripts/ci/travis/update-gh-pages.sh
 
 after_failure:
-   - printf "after_script"
+   - printf "after_failure"
 
 after_script:
    - printf "after_script"
