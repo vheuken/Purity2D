@@ -49,6 +49,10 @@ void Purity::InputManager::update()
             {
                 std::terminate();
             }
+            else if (event.keyEvent.code == SDLK_MENU)
+            {
+                mWindow->toggleMode();
+            }
 #endif
         }
         else if (event.type == Event::KeyReleased)
