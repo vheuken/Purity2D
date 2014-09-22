@@ -39,18 +39,17 @@ before_script:
    - printf "before_script"
 
 script:
-   - printf "script"
-#   # Generic GNU/Linux build
-#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
-#   
-#   # OSX build
-#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
-#   
-#   # Android build
-#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
-#   
-#   # iOS build
-#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
+   # Generic GNU/Linux build
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
+   
+   # OSX build
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
+   
+   # Android build
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
+   
+   # iOS build
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
 
 
 
@@ -58,11 +57,12 @@ script:
 #     postbuild configuration     #
 #---------------------------------#
 
+
+
 after_success:
-   - printf "after_success"
-#   # Permissions error workaround for script
-#   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
-#   - bash ./build-scripts/ci/travis/update-gh-pages.sh
+   # Permissions error workaround for script
+   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
+   - bash ./build-scripts/ci/travis/update-gh-pages.sh
 
 after_failure:
    - printf "after_failure"
@@ -75,11 +75,12 @@ after_script:
 #---------------------------------#
 #     deployment configuration    #
 #---------------------------------#
+# The sections "before_deploy" and "after_deploy" are ignored if no deployment is invoked by the "deploy" section. Travis does not currently support custom deploy scripts or explicit deployment enable/disable.
 
 before_deploy:
    - printf "before_deploy"
 
-deploy:
+##deploy:
 
 after_deploy:
    - printf "after_deploy"
