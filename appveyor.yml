@@ -56,7 +56,7 @@ before_build:
    - ps: Write-Host "before_build"
 
 build_script:
-   - ps: powershell.exe ".\build-scripts\windows.ps1"
+   - ps: .\build-scripts\windows.ps1
 
 after_build:
    - ps: Write-Host "after_build"
@@ -87,8 +87,7 @@ deploy: off
 before_deploy:
    - ps: Write-Host "before_deploy"
 
-deploy_script:
-   - ps: Write-Host "deploy_script"
+deploy:
 
 after_deploy:
    - ps: Write-Host "after_deploy"
