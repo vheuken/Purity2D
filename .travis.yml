@@ -55,21 +55,7 @@ script:
 
 
 #---------------------------------#
-#     deployment configuration    #
-#---------------------------------#
-
-before_deploy:
-   - printf "before_deploy"
-
-deploy:
-
-after_deploy:
-   - printf "after_deploy"
-
-
-
-#---------------------------------#
-#        global handlers          #
+#     postbuild configuration     #
 #---------------------------------#
 
 after_success:
@@ -84,5 +70,20 @@ after_failure:
 after_script:
    - printf "after_script"
 
-after_finish:
-  - printf "after_finish"
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+before_deploy:
+   - printf "before_deploy"
+
+deploy:
+
+after_deploy:
+   - printf "after_deploy"
+
+
+
+
