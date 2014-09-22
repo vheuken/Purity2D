@@ -55,8 +55,11 @@ build: on
 before_build:
    - ps: Write-Host "before_build"
 
+#build_script:
+#   - ps: .\build-scripts\windows.ps1
+
 build_script:
-   - ps: .\build-scripts\windows.ps1
+  - ps: Write-Host "build_script"
 
 after_build:
    - ps: Write-Host "after_build"
@@ -65,7 +68,7 @@ after_build:
 #        test configuration       #
 #---------------------------------#
 
-test: off
+test: on
 
 before_test:
    - ps: Write-Host "before_test"
@@ -82,7 +85,7 @@ after_test:
 #     deployment configuration    #
 #---------------------------------#
 
-deploy: off
+deploy: on
 
 before_deploy:
    - ps: Write-Host "before_deploy"
