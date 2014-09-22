@@ -61,8 +61,7 @@ script:
 before_deploy:
    - printf "before_deploy"
 
-deploy_script:
-   - printf "deploy_script"
+deploy:
 
 after_deploy:
    - printf "after_deploy"
