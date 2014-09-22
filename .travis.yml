@@ -52,8 +52,20 @@ script:
 #   # iOS build
 #   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
 
-after_script:
-   - printf "after_script"
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+before_deploy:
+   - printf "before_deploy"
+
+deploy_script:
+   - printf "deploy_script"
+
+after_deploy:
+   - printf "after_deploy"
 
 
 
@@ -71,6 +83,6 @@ after_failure:
    - printf "after_script"
 
 after_script:
-   - ps: printf "after_script"
+   - printf "after_script"
 
 
