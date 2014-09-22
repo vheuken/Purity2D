@@ -65,7 +65,7 @@ after_build:
 #        test configuration       #
 #---------------------------------#
 
-test: off
+test: on
 
 before_test:
    - ps: Write-Host "before_test"
@@ -87,7 +87,7 @@ deploy: off
 before_deploy:
    - ps: Write-Host "before_deploy"
 
-deploy:
+#deploy_script:
 
 after_deploy:
    - ps: Write-Host "after_deploy"
