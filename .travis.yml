@@ -1,3 +1,8 @@
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Operating system
 os:
    - linux
    - osx
@@ -17,24 +22,55 @@ env:
      # The secure string !{GH_TOKEN} is specific to a single repository and needs to be generated for each user/project
      - secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
 
+before_install:
+   - printf "before_install"
+
+# Scripts to be run before build scripts
+install:
+   - printf "install"
+
+
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+before_script:
+   - printf "before_script"
+
 script:
-   # Generic GNU/Linux build
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
-   
-   # OSX build
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
-   
-   # Android build
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
-   
-   # iOS build
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
+   - printf "script"
+#   # Generic GNU/Linux build
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
+#   
+#   # OSX build
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
+#   
+#   # Android build
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
+#   
+#   # iOS build
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
+
+after_script:
+   - printf "after_script"
+
+
+
+#---------------------------------#
+#        global handlers          #
+#---------------------------------#
 
 after_success:
-   # Permissions error workaround for script
-   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
-   - bash ./build-scripts/ci/travis/update-gh-pages.sh
+   - printf "after_success"
+#   # Permissions error workaround for script
+#   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
+#   - bash ./build-scripts/ci/travis/update-gh-pages.sh
 
+after_failure:
+   - printf "after_script"
 
+after_script:
+   - ps: printf "after_script"
 
 
