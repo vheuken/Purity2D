@@ -62,7 +62,6 @@ before_deploy:
    - printf "before_deploy"
 
 deploy:
-   - provider: heroku
 
 after_deploy:
    - printf "after_deploy"
