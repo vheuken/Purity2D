@@ -50,7 +50,7 @@ install: echo "install_script"
 #   - ps: Write-Host "${Env:APPVEYOR_BUILD_FOLDER}"
 #   - ps: '.\build-scripts\windows.ps1'
 
-build: off
+build: on
 
 before_build: echo "before_build"
 
