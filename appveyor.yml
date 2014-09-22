@@ -55,11 +55,8 @@ build: on
 before_build:
    - ps: Write-Host "before_build"
 
-#build_script:
-#   - ps: .\build-scripts\windows.ps1
-
 build_script:
-  - ps: Write-Host "build_script"
+   - ps: .\build-scripts\windows.ps1
 
 after_build:
    - ps: Write-Host "after_build"
@@ -68,7 +65,7 @@ after_build:
 #        test configuration       #
 #---------------------------------#
 
-test: on
+test: off
 
 before_test:
    - ps: Write-Host "before_test"
@@ -85,7 +82,7 @@ after_test:
 #     deployment configuration    #
 #---------------------------------#
 
-deploy: on
+deploy: off
 
 before_deploy:
    - ps: Write-Host "before_deploy"
@@ -101,6 +98,7 @@ after_deploy:
 #---------------------------------#
 #        global handlers          #
 #---------------------------------#
+# If the "on_success" section returns a failure, the "on_failure" section begins automatically.
 
 on_success:
    - ps: sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"
