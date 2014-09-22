@@ -17,6 +17,8 @@ branches:
    only:
      - master
 
+
+
 #---------------------------------#
 #    environment configuration    #
 #---------------------------------#
@@ -39,24 +41,25 @@ environment:
      secure: VzIMNgIGxHkGT1ws7GM1MmX63XyXG2URy+Y9rTWxYq8C5JDJhrhYuazcZXHtPn3f
 
 # Scripts to be run before build scripts
-install: echo "install_script"
+install:
+   - ps: Write-Host "install"
+
+
 
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
 
-# Build scripts
-#build_script:
-#   - ps: Write-Host "${Env:APPVEYOR_BUILD_FOLDER}"
-#   - ps: '.\build-scripts\windows.ps1'
-
 build: on
 
-before_build: echo "before_build"
+before_build:
+   - ps: Write-Host "before_build"
 
-build_script: echo "build_script"
+build_script:
+   - ps: & ".\build-scripts\windows.ps1"
 
-after_build: echo "after_build"
+after_build:
+   - ps: Write-Host "after_build"
 
 #---------------------------------#
 #        test configuration       #
@@ -64,11 +67,16 @@ after_build: echo "after_build"
 
 test: off
 
-before_test: echo "before_test"
+before_test:
+   - ps: Write-Host "before_test"
 
-test_script: echo "test_script"
+test_script:
+   - ps: Write-Host "test_script"
 
-after_test: echo "after_test"
+after_test:
+   - ps: Write-Host "after_test"
+
+
 
 #---------------------------------#
 #     deployment configuration    #
@@ -77,20 +85,29 @@ after_test: echo "after_test"
 deploy: off
 
 before_deploy:
+   - ps: Write-Host "before_deploy"
 
 deploy_script:
+   - ps: Write-Host "deploy_script"
 
 after_deploy:
+   - ps: Write-Host "after_deploy"
+
+
 
 #---------------------------------#
 #        global handlers          #
 #---------------------------------#
 
-#on_success:
-#   - ps: 'sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"'
+on_success:
+   - ps: sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"
 
-on_success: echo "on_success"
+on_failure:
+   - ps: Write-Host "on_failure"
 
-on_failure: echo "on_failure"
+on_finish:
+   - ps: Write-Host "on_finish"
 
-on_finish: echo "on_finish"
+
+
+
