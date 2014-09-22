@@ -85,12 +85,10 @@ after_test:
 #     deployment configuration    #
 #---------------------------------#
 
+deploy: on
 
 before_deploy:
    - ps: Write-Host "before_deploy"
-
-deploy:
-   - provider: no
 
 deploy_script:
    - ps: Write-Host "deploy_script"
