@@ -37,6 +37,7 @@ install:
 
 before_script:
    - printf "before_script"
+   - ./build-scripts/ci/travis/travistest.sh
 
 script:
    # Generic GNU/Linux build
