@@ -54,6 +54,7 @@ build: on
 
 before_build:
    - ps: Write-Host "before_build"
+   - ps: .\build-scripts\ci\appveyor\appveyortest.ps1
 
 build_script:
    - ps: .\build-scripts\windows.ps1
