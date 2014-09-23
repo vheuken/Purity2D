@@ -75,15 +75,6 @@ printf "TRAVIS_XCODE_PROJECT\n"
 printenv "TRAVIS_XCODE_PROJECT"
 printf "TRAVIS_XCODE_WORKSPACE\n"
 printenv "TRAVIS_XCODE_WORKSPACE"
-printf "\n"
-printenv ""
-printf "\n"
-printenv ""
-
-printf "\n"
-
-printf "All environment variables"
-printenv
 
 
 
