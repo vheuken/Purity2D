@@ -6,14 +6,16 @@ set( SYSTEM_HEADER_FILES
      vector2.h
      timer.h
      event.h
-	 configuration.h
+     configuration.h
+     actionmanager.h
 )
 
 set( SYSTEM_SOURCE_FILES     
      vector2.inl
      timer.cpp
      event.cpp
-	 configuration.cpp
+     configuration.cpp
+     actionmanager.cpp
 )
 
 add_library( ${SYSTEM_PROJECT_NAME} STATIC 
