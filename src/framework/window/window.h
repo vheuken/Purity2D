@@ -85,6 +85,8 @@ namespace Purity
         Button mMaximizeButton;
         Button mMinimizeButton;
 
+        bool mMouseOnButtons = false;
+
         void setResizeHandling();
         void setRenderScale();
         void setRenderMaintainAspectRatio();

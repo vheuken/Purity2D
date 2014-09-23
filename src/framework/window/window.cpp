@@ -1,6 +1,7 @@
 #include "window.h"
 #include <iostream>
 #include <functional>
+#include <bitset>
 #include <SDL.h>
 
 #include "../system/configuration.h"
@@ -225,7 +226,7 @@ void Purity::Window::manipulateWindow()
             handleUIButtons();
         }
 
-        if (!isMaximized())
+        if (!isMaximized() && !mMouseOnButtons)
         {
             mWindowManipulator.manipulateWindow();
         }
@@ -234,10 +235,26 @@ void Purity::Window::manipulateWindow()
 
 void Purity::Window::handleUIButtons()
 {
+    std::bitset<3> mask;
+
     // handle clicks
-    mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
-    mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
-    mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
+    mask[0] = mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
+    mask[1] = mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
+    mask[2] = mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
+
+    if (mask.any())
+    {
+        std::cout << "ON" << std::endl;
+        mMouseOnButtons = true;
+    }
+    else
+    {
+        std::cout << "OFF" << std::endl;
+        if (!Mouse::isButtonPressed(Mouse::Left))
+        {
+            mMouseOnButtons = false;
+        }
+    }
 
     // window resizes
     auto size = getSize();
