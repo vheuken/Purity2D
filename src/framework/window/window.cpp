@@ -244,12 +244,10 @@ void Purity::Window::handleUIButtons()
 
     if (mask.any())
     {
-        std::cout << "ON" << std::endl;
         mMouseOnButtons = true;
     }
     else
     {
-        std::cout << "OFF" << std::endl;
         if (!Mouse::isButtonPressed(Mouse::Left))
         {
             mMouseOnButtons = false;
