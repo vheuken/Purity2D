@@ -1,3 +1,4 @@
+"Exected Appveyor environment variables"
 "APPVEYOR"
 "$Env:APPVEYOR"
 "CI"
@@ -50,3 +51,6 @@
 "$Env:PLATFORM"
 "CONFIGURATION"
 "$Env:CONFIGURATION"
+""
+"All environment variables"
+Get-ChildItem "Env:"
