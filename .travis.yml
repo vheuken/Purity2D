@@ -18,7 +18,8 @@ env:
      - IOS_ANDROID=false
      - IOS_ANDROID=true
    global:
-     # The secure string !{GH_TOKEN} is specific to a single repository and needs to be generated for each user/project
+     # Secure strings are specific to a single repository and need to be generated for each user/project
+     # ${GH_TOKEN}
      - secure: nZhcYqB9uBZz4NU6u0nB9ofp8XCLfuKzDDuFMfzudpaFyb1lCkDnobMSGI4HLW/EPe1H9pi375PmvAM/pwSy8Dw5DtMdsuPoBhUWgauK9TYLbYnCh4jY8oEdmUOnO1ntF70BdluZL994qmBjgJQlX8/e/J8LGDvGrD/XmaK/TiE=
 
 before_install:
