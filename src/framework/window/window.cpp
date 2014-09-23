@@ -220,7 +220,10 @@ void Purity::Window::manipulateWindow()
 {
     if (!isContentMode())
     {
-        handleUIButtons();
+        if (isBorderless())
+        {
+            handleUIButtons();
+        }
 
         if (!isMaximized())
         {
@@ -280,9 +283,12 @@ void Purity::Window::display()
         SDL_SetRenderDrawColor(mRenderer, 128, 128, 128, 200);
         SDL_RenderFillRect(mRenderer, &rect);
 
-        mCloseButton.draw(*this);
-        mMaximizeButton.draw(*this);
-        mMinimizeButton.draw(*this);
+        if (isBorderless())
+        {
+            mCloseButton.draw(*this);
+            mMaximizeButton.draw(*this);
+            mMinimizeButton.draw(*this);
+        }
     }
 
     setResizeHandling();
