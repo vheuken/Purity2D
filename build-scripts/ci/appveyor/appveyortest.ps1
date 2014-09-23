@@ -51,6 +51,7 @@
 "$Env:PLATFORM"
 "CONFIGURATION"
 "$Env:CONFIGURATION"
-""
-"All environment variables"
-Get-ChildItem "Env:"
+
+
+
+
