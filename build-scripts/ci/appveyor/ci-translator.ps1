@@ -1,8 +1,3 @@
-
-
-
-
-
 # See if this is a CI environment.
 # Appveyor has CI set to "true"
 if ( "${Env:CI}" -eq "true" )
@@ -231,51 +226,6 @@ Set-Item `
 Set-Item `
      -Path "Env:CI_PULL_REQUEST_BOOLEAN_ALLOWED" `
      -Value "${`"true`" `"false`" `"no data`"}"
-
-
-"${Env:CI_HOST}"
-"${Env:CI_API_URL}"
-"${Env:CI_PROJECT_ID}"
-"${Env:CI_PROJECT_NAME}"
-"${Env:CI_PROJECT_SLUG}"
-"${Env:CI_BUILD_DIRECTORY}"
-"${Env:CI_BIULD_ID}"
-"${Env:CI_BUILD_NUMBER}"
-"${Env:CI_BUILD_VERSION}"
-"${Env:CI_PULL_REQUEST_BOOLEAN}"
-"${Env:CI_PULL_REQUEST_NUMBER}"
-"${Env:CI_PULL_REQUEST_TITLE}"
-"${Env:CI_JOB_ID}"
-"${Env:CI_REPOSITORY_PROVIDER}"
-"${Env:CI_REPOSITORY_SCM}"
-"${Env:CI_REPOSITORY_NAME}"
-"${Env:CI_REPOSITORY_BRANCH}"
-"${Env:CI_REPOSITORY_PULL_ID}"
-"${Env:CI_REPOSITORY_PULL_AUTHOR}"
-"${Env:CI_REPOSITORY_PULL_EMAIL}"
-"${Env:CI_REPOSITORY_PULL_TIMESTAMP}"
-"${Env:CI_REPOSITORY_PULL_MESSAGE_SHORT}"
-"${Env:CI_REPOSITORY_PULL_MESSAGE_FULL}"
-"${Env:CI_BUILD_SCHEDULE_BOOLEAN}"
-"${Env:CI_BUILD_COMPILER_PLATFORM}"
-"${Env:CI_BUILD_COMPILER_CONFIGURATION}"
-"${Env:CI_REPOSITORY_PUSH_AUTHOR}"
-"${Env:CI_REPOSITORY_PUSH_EMAIL}"
-"${Env:CI_BUILD_OS}"
-"${Env:CI_PULL_REQUEST_BOOLEAN_ALLOWED}"
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
