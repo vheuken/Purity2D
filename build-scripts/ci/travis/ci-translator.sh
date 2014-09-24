@@ -3,17 +3,20 @@ printf "test\n"
 # See if this is a CI environment.
 # Travis has both CI and CONTINUOUS_INTEGRATION set to "true"
 if [[ "${CI}" == "true" || "${CONTINUOUS_INTEGRATION}" == "true" ]]; then
-     printf "This is a continuous integration environment."
+     printf "This is a continuous integration environment.\n"
 else
-     printf "This is not a continuous integration environment."
+     printf "This is not a continuous integration environment.\n"
 fi
+
+
+printf "test\n"
 
 
 # CI_HOST
 if [[ "${TRAVIS}" == "true" ]]; then
      export CI_HOST="travis"
 else
-     printf "Unable to determine CI host."
+     printf "Unable to determine CI host.\n"
 fi
 
 # 
@@ -58,7 +61,7 @@ if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
 elif [[ "${TRAVIS_PULL_REQUEST}" =~ ^-?[0-9]+$ ]]; then
      export CI_PULL_REQUEST_BOOLEAN="true"
 else
-     printf "Unable to determine pull request status."
+     printf "Unable to determine pull request status.\n"
 fi
 
 
@@ -68,7 +71,7 @@ if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
 elif [[ "${TRAVIS_PULL_REQUEST}" =~ ^-?[0-9]+$ ]]; then
      export CI_PULL_REQUEST_NUMBER="${APPVEYOR_PULL_REQUEST_NUMBER}"
 else
-     printf "Unable to determine pull request number."
+     printf "Unable to determine pull request number.\n"
 fi
 
 
