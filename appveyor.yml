@@ -108,10 +108,7 @@ after_deploy:
 
 on_success:
    - ps: Write-Host "on_success"
-   - cmd: echo breaking up ps
-   - ps: .\build-scripts\ci\appveyor\vartest.ps1
-   - ps: sh.exe ".\build-scripts\ci\appveyor\vartest.sh"
-   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: bash.exe "${Env:CI_BUILD_DIRECTORY}\build-scripts\ci\general\update-gh-pages.sh"
 
 on_failure:
    - ps: Write-Host "on_failure"
