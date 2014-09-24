@@ -225,7 +225,7 @@ Set-Item `
 # Temporary variable
 Set-Item `
      -Path "Env:CI_PULL_REQUEST_BOOLEAN_ALLOWED" `
-     -Value "${`"true`" `"false`" `"no data`"}"
+     -Value "`"true`" `"false`" `"no data`""
 
 
 
