@@ -24,7 +24,7 @@ if [[ "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" =~ "\"${CI_PULL_REQUEST_BOOLEAN}\"" ]
          cd ./gh-pages
          test ! -d ./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS} \
              && mkdir -p ./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS}
-         cp -Rf ${CI_BUILD_DIRECTORY}/release/* ./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS}
+         cp -Rf "${CI_BUILD_DIRECTORY}/release/test.txt" "./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS}"
          
          printf "Committing and pushing files\n"
          git add -f .
