@@ -1,6 +1,6 @@
 # See if this is a CI environment.
 # Appveyor has CI set to "true"
-if ( "${Env:CI}" -eq "true" )
+if ( "${Env:CI}" -eq "True" )
 {
      Write-Host "This is a continuous integration environment."
 }
