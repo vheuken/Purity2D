@@ -46,8 +46,6 @@ install:
    - ps: Set-Item -Path "Env:BUILD_OS" -Value "test"
    - ps: New-Item ".\release" -ItemType directory -Force
    - ps: New-Item ".\release\test.txt" -ItemType file -Force
-   - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
-   - ps: .\build-scripts\ci\appveyor\vartest.ps1
    - ps: sh.exe ".\build-scripts\ci\appveyor\vartest.sh"
 
 #---------------------------------#
@@ -106,10 +104,9 @@ after_deploy:
 
 on_success:
    - ps: Write-Host "on_success"
-   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
-   - ps: Write-Host "No variable set"
-   - ps: Get-ChildItem "Env:CI_PULL_REQUEST_BOOLEAN"
-   - ps: Remove-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN"
+   - cmd: echo breaking up ps
+   - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
+   - ps: .\build-scripts\ci\appveyor\vartest.ps1
    - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
 
 on_failure:
