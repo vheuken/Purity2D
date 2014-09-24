@@ -28,6 +28,14 @@ before_install:
 # Scripts to be run before build scripts
 install:
    - printf "install"
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux; fi
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX; fi
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android;fi
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS; fi
+   - chmod a+x ./build-scripts/ci/travis/tests/travisvartest.sh
+   - ./build-scripts/ci/travis/tests/travisvartest.sh
+   - chmod a+x ./build-scripts/ci/travis/tests/gluevartest.sh
+   - ./build-scripts/ci/travis/tests/gluevartest.sh
 
 
 
@@ -39,17 +47,18 @@ before_script:
    - printf "before_script"
 
 script:
-   # Generic GNU/Linux build
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
-   
-   # OSX build
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
-   
-   # Android build
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
-   
-   # iOS build
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
+#   # Generic GNU/Linux build
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
+#   
+#   # OSX build
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
+#   
+#   # Android build
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
+#   
+#   # iOS build
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
+   - printf "script"
 
 
 
@@ -60,9 +69,10 @@ script:
 
 
 after_success:
-   # Permissions error workaround for script
-   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
-   - ./build-scripts/ci/travis/update-gh-pages.sh
+#   # Permissions error workaround for script
+#   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
+#   - ./build-scripts/ci/travis/update-gh-pages.sh
+   - printf "success"
 
 after_failure:
    - printf "after_failure"
