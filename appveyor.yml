@@ -48,6 +48,7 @@ install:
    - ps: New-Item ".\release" -ItemType directory -Force
    - ps: New-Item ".\release\test.txt" -ItemType file -Force
    - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
+   - ps: sh.exe ".\build-scripts\ci\appveyor\vartest.sh"
 
 #---------------------------------#
 #       build configuration       #
