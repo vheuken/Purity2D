@@ -106,6 +106,8 @@ after_deploy:
 
 on_success:
    - ps: Write-Host "on_success"
+   - ps: Get-Variable BUILD_OS
+   - ps: powershell.exe "Get-Variable BUILD_OS"
 
 on_failure:
    - ps: Write-Host "on_failure"
