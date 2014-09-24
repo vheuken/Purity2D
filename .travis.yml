@@ -27,7 +27,7 @@ env:
 
 matrix:
    exclude:
-    - OS: OSX
+    - os: osx
     - env: BUILD_OS=test
     - env: BUILD_OS=osx
     - env: BUILD_OS=android
