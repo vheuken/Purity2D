@@ -20,20 +20,24 @@ env:
      - BUILD_OS=osx
      - BUILD_OS=ios
      - BUILD_OS=android
-     - BUILD_OS=test
    global:
      # ${GH_TOKEN}
      - secure: nZhcYqB9uBZz4NU6u0nB9ofp8XCLfuKzDDuFMfzudpaFyb1lCkDnobMSGI4HLW/EPe1H9pi375PmvAM/pwSy8Dw5DtMdsuPoBhUWgauK9TYLbYnCh4jY8oEdmUOnO1ntF70BdluZL994qmBjgJQlX8/e/J8LGDvGrD/XmaK/TiE=
 
 matrix:
+   # Inclusion workaround, excludes all builds
    exclude:
     - os: osx
     - os: linux
    include:
     - os: linux
       env: BUILD_OS=linux
+    - os: linux
+      env: BUILD_OS=android
     - os: osx
       env: BUILD_OS=osx
+    - os: osx
+      env: BUILD_OS=ios
 
 #---------------------------------#
 #      prebuild configuration     #
