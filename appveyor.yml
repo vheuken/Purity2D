@@ -96,7 +96,6 @@ after_deploy:
 # If an item in the "on_success" section returns a failure, the "on_failure" section begins automatically.
 
 on_success:
-#   - ps: Write-Host "on_success"
    - ps: bash.exe "${Env:CI_BUILD_DIRECTORY}\build-scripts\ci\general\update-gh-pages.sh"
 
 on_failure:
