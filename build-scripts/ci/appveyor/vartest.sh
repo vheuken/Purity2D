@@ -1,7 +1,7 @@
 
 
 
-printf "Testing inbuild environment variable\n"
+printf "Testing inbuilt environment variable\n"
 printf "${CI}\n"
 
 
