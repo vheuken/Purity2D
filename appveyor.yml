@@ -43,9 +43,7 @@ environment:
 # Scripts to be run before build scripts
 install:
    - ps: Write-Host "install"
-   - ps: Set-Item -Path "Env:BUILD_OS" -Value "test"
-   - ps: New-Item ".\release" -ItemType directory -Force
-   - ps: New-Item ".\release\test.txt" -ItemType file -Force
+   - ps: Set-Item -Path "Env:BUILD_OS" -Value "Windows"
    - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
 
 
@@ -61,6 +59,7 @@ before_build:
 
 build_script:
    - ps: Write-Host "build_script"
+   - ps: .\build-scripts\windows.ps1
 
 after_build:
    - ps: Write-Host "after_build"
