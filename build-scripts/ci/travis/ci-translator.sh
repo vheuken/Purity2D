@@ -99,7 +99,7 @@ export CI_REPOSITORY_PUSH_EMAIL="travis@travis.com"
 
 
 # ${BUILD_OS} is supplied by the YAML file.
-export CI_BIULD_OS="${BUILD_OS}"
+export CI_BUILD_OS="${BUILD_OS}"
 
 # Temporary variable
 export CI_PULL_REQUEST_BOOLEAN_ALLOWED="\"true\" \"false\" \"no data\""
