@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+# Requires Bash minimum version 3.1.0
+
+
 if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_BOOLEAN}\"" > /dev/null; then
     if [ "${CI_PULL_REQUEST_BOOLEAN}" == "true" ]; then
          printf "Pull request\n"
@@ -44,7 +48,7 @@ elif [ -z "${CI_PULL_REQUEST_BOOLEAN}" ]
      printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: ${CI_PULL_REQUEST_BOOLEAN_ALLOWED}.\n"
      exit 1
 else
-     printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} not set.\n"
+     printf "test"
      exit 1
 fi
 
