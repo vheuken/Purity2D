@@ -102,7 +102,7 @@ after_deploy:
 #---------------------------------#
 #        global handlers          #
 #---------------------------------#
-# If the "on_success" section returns a failure, the "on_failure" section begins automatically.
+# If an item in the "on_success" section returns a failure, the "on_failure" section begins automatically.
 
 on_success:
    - ps: Write-Host "on_success"
@@ -130,8 +130,6 @@ on_success:
    - ps: Write-Host "No variable set"
    - ps: Remove-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN"
    - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
-
-
 
 on_failure:
    - ps: Write-Host "on_failure"
