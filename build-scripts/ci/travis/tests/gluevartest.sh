@@ -25,7 +25,7 @@ printf "${CI_HOST_OS_NAME}\n"
 printf "${CI_TAG}\n"
 printf "${CI_REPOSITORY_PUSH_AUTHOR}\n"
 printf "${CI_REPOSITORY_PUSH_EMAIL}\n"
-printf "${CI_BIULD_OS}\n"
+printf "${CI_BUILD_OS}\n"
 printf "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}\n"
 
 printf "Done\n"
