@@ -44,6 +44,7 @@ environment:
 install:
    - ps: Write-Host "install"
    - ps: .\build-scripts\ci\appveyor\appveyortest.ps1
+   - ps: sh.exe ".\build-scripts\ci\appveyor\appveyortest.sh"
 
 
 #---------------------------------#
