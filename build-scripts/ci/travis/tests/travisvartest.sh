@@ -3,7 +3,7 @@ printf "CI\n"
 printenv "CI"
 
 printf "TRAVIS\n"
-printenv "TAVIS"
+printenv "TRAVIS"
 
 printf "CONTINUOUS_INTEGRATION\n"
 printenv "CONTINUOUS_INTEGRATION"
