@@ -15,15 +15,19 @@ compiler:
 
 # "Secure" environment variables are specific to a single repository and need to be generated for each user/project
 env:
-   - BUILD_OS=linux
-   - BUILD_OS=osx
-   - BUILD_OS=ios
-   - BUILD_OS=android
-   - BUILD_OS=test
+   matrix:
+     - BUILD_OS=linux
+     - BUILD_OS=osx
+     - BUILD_OS=ios
+     - BUILD_OS=android
+     - BUILD_OS=test
    global:
      # ${GH_TOKEN}
      - secure: nZhcYqB9uBZz4NU6u0nB9ofp8XCLfuKzDDuFMfzudpaFyb1lCkDnobMSGI4HLW/EPe1H9pi375PmvAM/pwSy8Dw5DtMdsuPoBhUWgauK9TYLbYnCh4jY8oEdmUOnO1ntF70BdluZL994qmBjgJQlX8/e/J8LGDvGrD/XmaK/TiE=
 
+matrix:
+   exclude:
+    - env: BUILD_OS=test
 
 
 #---------------------------------#
