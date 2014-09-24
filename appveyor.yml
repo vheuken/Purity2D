@@ -46,7 +46,9 @@ install:
    - ps: Set-Item -Path "Env:BUILD_OS" -Value "test"
    - ps: New-Item ".\release" -ItemType directory -Force
    - ps: New-Item ".\release\test.txt" -ItemType file -Force
-   - ps: sh.exe ".\build-scripts\ci\appveyor\vartest.sh"
+   - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
+
+
 
 #---------------------------------#
 #       build configuration       #
@@ -62,6 +64,8 @@ build_script:
 
 after_build:
    - ps: Write-Host "after_build"
+
+
 
 #---------------------------------#
 #        test configuration       #
@@ -105,8 +109,8 @@ after_deploy:
 on_success:
    - ps: Write-Host "on_success"
    - cmd: echo breaking up ps
-   - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
    - ps: .\build-scripts\ci\appveyor\vartest.ps1
+   - ps: sh.exe ".\build-scripts\ci\appveyor\vartest.sh"
    - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
 
 on_failure:
