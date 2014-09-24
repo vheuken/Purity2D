@@ -106,7 +106,32 @@ after_deploy:
 
 on_success:
    - ps: Write-Host "on_success"
+   - ps: Write-Host "Value: true"
+   - ps: ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "true"
    - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: Write-Host "Value: false"
+   - ps: ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "false"
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: Write-Host "Value: no data"
+   - ps: ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "no data"
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: Write-Host "Value: TRUE"
+   - ps: ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "TRUE"
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: Write-Host "Value: test 1"
+   - ps: ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "test"
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: Write-Host "Value: test 2"
+   - ps: ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "234`nio2testTESTtest230\njsd"
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: Write-Host "Value: null"
+   - ps: ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value ""
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+   - ps: Write-Host "No variable set"
+   - ps: ps: Remove-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN"
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
+
+
 
 on_failure:
    - ps: Write-Host "on_failure"
