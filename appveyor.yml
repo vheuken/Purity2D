@@ -106,7 +106,7 @@ after_deploy:
 
 on_success:
    - ps: Write-Host "on_success"
-
+   - ps: Write-Host "Value: true"
 
 
 
