@@ -2,7 +2,7 @@
 #    environment configuration    #
 #---------------------------------#
 
-# Operating system
+# Travis VM image selection
 os:
    - linux
    - osx
@@ -13,31 +13,45 @@ language:
 compiler:
    - gcc
 
+# "Secure" environment variables are specific to a single repository and need to be generated for each user/project
 env:
    matrix:
-     - IOS_ANDROID=false
-     - IOS_ANDROID=true
+     - BUILD_OS=linux
+     - BUILD_OS=osx
+     - BUILD_OS=ios
+     - BUILD_OS=android
+     - BUILD_OS=test
+   
    global:
-     # Secure strings are specific to a single repository and need to be generated for each user/project
      # ${GH_TOKEN}
      - secure: nZhcYqB9uBZz4NU6u0nB9ofp8XCLfuKzDDuFMfzudpaFyb1lCkDnobMSGI4HLW/EPe1H9pi375PmvAM/pwSy8Dw5DtMdsuPoBhUWgauK9TYLbYnCh4jY8oEdmUOnO1ntF70BdluZL994qmBjgJQlX8/e/J8LGDvGrD/XmaK/TiE=
+   
+   include:
+     - env: BUILD_OS=linux
+       os: linux
+     - env: BUILD_OS=osx
+       os: osx
+     - env: BUILD_OS=ios
+       os: osx
+     - env: BUILD_OS=android
+       os: linux
+
+
+#---------------------------------#
+#      prebuild configuration     #
+#---------------------------------#
 
 before_install:
 
-# Scripts to be run before build scripts
 install:
    - printf "install"
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=linux; fi
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=osx; fi
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=android;fi
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=ios; fi
-#   - printf "BUILD_OS is set to \"${BUILD_OS}\"\n"
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=linux; fi
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=osx; fi
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=android;fi
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=ios; fi
+   - printf "BUILD_OS set to \"${BUILD_OS}\"\n"
    - chmod a+x ./build-scripts/ci/travis/ci-translator.sh
    - source ./build-scripts/ci/travis/ci-translator.sh
-#   - chmod a+x ./build-scripts/ci/travis/tests/travisvartest.sh
-#   - ./build-scripts/ci/travis/tests/travisvartest.sh
-#   - chmod a+x ./build-scripts/ci/travis/tests/gluevartest.sh
-#   - ./build-scripts/ci/travis/tests/gluevartest.sh
 
 
 
@@ -48,7 +62,6 @@ install:
 before_script:
 
 script:
-   # Generic GNU/Linux build
    - bash "${CI_BUILD_DIRECTORY}/build-scripts/${CI_BUILD_OS}.sh"
 
 
