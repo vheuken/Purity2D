@@ -26,6 +26,9 @@ env:
      - secure: nZhcYqB9uBZz4NU6u0nB9ofp8XCLfuKzDDuFMfzudpaFyb1lCkDnobMSGI4HLW/EPe1H9pi375PmvAM/pwSy8Dw5DtMdsuPoBhUWgauK9TYLbYnCh4jY8oEdmUOnO1ntF70BdluZL994qmBjgJQlX8/e/J8LGDvGrD/XmaK/TiE=
 
 matrix:
+   exclude:
+    - os: osx
+    - os: linux
    include:
     - os: linux
       env: BUILD_OS=linux
