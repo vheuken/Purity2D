@@ -49,7 +49,7 @@ before_script:
 
 script:
    # Generic GNU/Linux build
-   - bash "${CI_BUILD_DIRECTORY}/build-scripts/${CI_BUILD_OS}"
+   - bash "${CI_BUILD_DIRECTORY}/build-scripts/${CI_BUILD_OS}.sh"
 
 
 
