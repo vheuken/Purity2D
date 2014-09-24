@@ -1,4 +1,7 @@
-printf "test\n"
+
+
+
+
 
 # See if this is a CI environment.
 # Travis has both CI and CONTINUOUS_INTEGRATION set to "true"
@@ -7,10 +10,6 @@ if [[ "${CI}" == "true" || "${CONTINUOUS_INTEGRATION}" == "true" ]]; then
 else
      printf "This is not a continuous integration environment.\n"
 fi
-
-
-printf "test\n"
-
 
 # CI_HOST
 if [[ "${TRAVIS}" == "true" ]]; then
@@ -104,8 +103,6 @@ export CI_BIULD_OS="${BUILD_OS}"
 
 # Temporary variable
 export CI_PULL_REQUEST_BOOLEAN_ALLOWED="\"true\" \"false\" \"no data\""
-
-printf "Done\n"
 
 
 
