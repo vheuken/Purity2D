@@ -50,6 +50,8 @@ printenv "TRAVIS_OS_NAME"
 printf "TRAVIS_TAG\n"
 printenv "TRAVIS_TAG"
 
+exit 0
+
 
 
 
