@@ -33,7 +33,7 @@ install:
    - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android-test;fi
    - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS-test; fi
    - chmod a+x ./build-scripts/ci/travis/ci-translator.sh
-   - ./build-scripts/ci/travis/ci-translator.sh
+   - source ./build-scripts/ci/travis/ci-translator.sh
    - chmod a+x ./build-scripts/ci/travis/tests/travisvartest.sh
    - ./build-scripts/ci/travis/tests/travisvartest.sh
    - chmod a+x ./build-scripts/ci/travis/tests/gluevartest.sh
