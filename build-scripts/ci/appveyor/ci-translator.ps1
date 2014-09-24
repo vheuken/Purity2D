@@ -223,14 +223,14 @@ Set-Variable `
 
 # ${BUILD_OS} is supplied by the YAML file.
 Set-Variable `
-     -Name "CI_BIULD_OS" `
-     -Value "${Env:BUILD_OS}"
+     -Name "CI_BUILD_OS" `
+     -Value "${BUILD_OS}"
 
 
 # Temporary variable
 Set-Variable `
      -Name "CI_PULL_REQUEST_BOOLEAN_ALLOWED" `
-     -Value "${Env:`"true`" `"false`" `"no data`"}"
+     -Value "${`"true`" `"false`" `"no data`"}"
 
 
 "${CI_HOST}"
@@ -261,7 +261,7 @@ Set-Variable `
 "${CI_BUILD_COMPILER_CONFIGURATION}"
 "${CI_REPOSITORY_PUSH_AUTHOR}"
 "${CI_REPOSITORY_PUSH_EMAIL}"
-"${CI_BIULD_OS}"
+"${CI_BUILD_OS}"
 "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}"
 
 
