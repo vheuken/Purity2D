@@ -43,7 +43,7 @@ environment:
 # Scripts to be run before build scripts
 install:
    - ps: Write-Host "install"
-
+   - ps: .\build-scripts\ci\appveyor\appveyortest.ps1
 
 
 #---------------------------------#
@@ -54,10 +54,11 @@ build: on
 
 before_build:
    - ps: Write-Host "before_build"
-   - ps: .\build-scripts\ci\appveyor\appveyortest.ps1
 
 build_script:
-   - ps: .\build-scripts\windows.ps1
+   - ps: Set-Variable -Name "BUILD_OS" -Value "test"
+   - ps: New-Item ".\release" -ItemType directory -Force
+   - ps: New-Item ".\release\test.txt" -ItemType file -Force
 
 after_build:
    - ps: Write-Host "after_build"
@@ -102,7 +103,7 @@ after_deploy:
 # If the "on_success" section returns a failure, the "on_failure" section begins automatically.
 
 on_success:
-   - ps: sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\update-gh-pages.sh"
+   - ps: sh.exe "${Env:APPVEYOR_BUILD_FOLDER}\build-scripts\ci\appveyor\gh-pages-test.sh"
 
 on_failure:
    - ps: Write-Host "on_failure"
