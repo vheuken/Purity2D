@@ -1,7 +1,14 @@
 
 
 
+printf "Testing inbuild environment variable\n"
+printf "${CI}\n"
 
+
+printf "\n"
+
+
+printf "Testing set variables\n"
 
 printf "${CI_HOST}\n"
 printf "${CI_API_URL}\n"
@@ -33,6 +40,8 @@ printf "${CI_REPOSITORY_PUSH_AUTHOR}\n"
 printf "${CI_REPOSITORY_PUSH_EMAIL}\n"
 printf "${CI_BUILD_OS}\n"
 printf "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}\n"
+
+printf "Done\n"
 
 
 
