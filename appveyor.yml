@@ -122,7 +122,7 @@ on_success:
    - ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "test"
    - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
    - ps: Write-Host "Value: test 2"
-   - ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "234`nio2testTESTtest230\njsd"
+   - ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value "234nio2testTESTtest230njsd"
    - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
    - ps: Write-Host "Value: null"
    - ps: Set-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN" -Value ""
