@@ -29,7 +29,7 @@ os: Windows Server 2012 R2
 # Scripts to be run before repository cloning.
 init:
    - git config --global core.autocrlf input
-   - echo "init_script"
+
 
 clone_depth: 50
 
@@ -42,7 +42,6 @@ environment:
 
 # Scripts to be run before build scripts
 install:
-   - ps: Write-Host "install"
    - ps: Set-Item -Path "Env:BUILD_OS" -Value "Windows"
    - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
 
@@ -55,14 +54,11 @@ install:
 build: on
 
 before_build:
-   - ps: Write-Host "before_build"
 
 build_script:
-   - ps: Write-Host "build_script"
    - ps: .\build-scripts\windows.ps1
 
 after_build:
-   - ps: Write-Host "after_build"
 
 
 
@@ -73,13 +69,10 @@ after_build:
 test: off
 
 before_test:
-   - ps: Write-Host "before_test"
 
 test_script:
-   - ps: Write-Host "test_script"
 
 after_test:
-   - ps: Write-Host "after_test"
 
 
 
@@ -90,13 +83,10 @@ after_test:
 deploy: off
 
 before_deploy:
-   - ps: Write-Host "before_deploy"
 
 deploy_script:
-   - ps: Write-Host "deploy_script"
 
 after_deploy:
-   - ps: Write-Host "after_deploy"
 
 
 
@@ -106,14 +96,13 @@ after_deploy:
 # If an item in the "on_success" section returns a failure, the "on_failure" section begins automatically.
 
 on_success:
-   - ps: Write-Host "on_success"
+#   - ps: Write-Host "on_success"
    - ps: bash.exe "${Env:CI_BUILD_DIRECTORY}\build-scripts\ci\general\update-gh-pages.sh"
 
 on_failure:
    - ps: Write-Host "on_failure"
 
 on_finish:
-   - ps: Write-Host "on_finish"
 
 
 
