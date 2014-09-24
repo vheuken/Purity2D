@@ -42,14 +42,14 @@ if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_B
          exit 0
     else
          printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: \"true\" \"false\" \"no data\". This script is unprepared to handle \"${CI_PULL_REQUEST_BOOLEAN}\" but has determined that \"${CI_PULL_REQUEST_BOOLEAN}\" is an allowed value.\n"
-         exit 1
+         exit 0
     fi
 elif env | grep -E "CI_PULL_REQUEST_BOOLEAN" > /dev/null; then
      printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: ${CI_PULL_REQUEST_BOOLEAN_ALLOWED}.\n"
-     exit 1
+     exit 0
 else
      printf "Error: Environment variable \${CI_PULL_REQUEST_BOOLEAN} not set.\n"
-     exit 1
+     exit 0
 fi
 
 
