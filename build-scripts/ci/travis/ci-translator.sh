@@ -1,7 +1,4 @@
-
-
-
-
+printf "test\n"
 
 # See if this is a CI environment.
 # Travis has both CI and CONTINUOUS_INTEGRATION set to "true"
