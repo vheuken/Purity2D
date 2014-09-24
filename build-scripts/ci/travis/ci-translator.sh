@@ -105,6 +105,8 @@ export CI_BIULD_OS="{BUILD_OS}"
 # Temporary variable
 export CI_PULL_REQUEST_BOOLEAN_ALLOWED="\"true\" \"false\" \"no data\""
 
+printf "Done\n"
+
 
 
 
