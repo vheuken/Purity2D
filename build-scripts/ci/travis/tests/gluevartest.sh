@@ -29,5 +29,5 @@ printf "${CI_BIULD_OS}\n"
 printf "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}\n"
 
 printf "Done\n"
-
+exit 0
 
