@@ -5,162 +5,105 @@
 
 # See if this is a CI environment.
 # Travis has both CI and CONTINUOUS_INTEGRATION set to "true"
-# Appveyor has CI set to "true"
 if [[ "${CI}" == "true" || "${CONTINUOUS_INTEGRATION}" == "true" ]]; then
-     printf "Continuous integration environment"
+     printf "This is a continuous integration environment."
+else
+     printf "This is not a continuous integration environment."
 fi
 
 
-#==========#
-# Appveyor #
-#==========#
+# CI_HOST
+if [[ "${TRAVIS}" == "true" ]]; then
+     export CI_HOST="travis"
+else
+     printf "Unable to determine CI host."
+fi
 
-## CI_HOST
-#if [[ "${APPVEYOR}" == "true" ]]; then
-#     CI_HOST="appveyor"
-#else
-#     printf "Unable to determine CI host."
-#fi
-
-CI_API_URL="${APPVEYOR_API_URL}"
-
-CI_PROJECT_ID="${APPVEYOR_PROJECT_ID}"
-
-CI_PROJECT_NAME="${APPVEYOR_PROJECT_NAME}"
-
-CI_PROJECT_SLUG="${APPVEYOR_PROJECT_SLUG}"
-
-#CI_BUILD_DIRECTORY="${APPVEYOR_BUILD_FOLDER}"
-
-#CI_BIULD_ID="${APPVEYOR_BUILD_ID}"
-
-#CI_BUILD_NUMBER="${APPVEYOR_BUILD_NUMBER}"
-
-CI_BUILD_VERSION="${APPVEYOR_BUILD_VERSION}"
-
-## CI_PULL_REQUEST_BOOLEAN
-#if [[ "${APPVEYOR_PULL_REQUEST_NUMBER}" == "" ]]; then
-#     CI_PULL_REQUEST_BOOLEAN="false"
-#elif [[ "${APPVEYOR_PULL_REQUEST_NUMBER}" =~ ^-?[0-9]+$ ]]; then
-#     CI_PULL_REQUEST_BOOLEAN="true"
-#else
-#     printf "Unable to determine pull request status."
-#fi
-
-## CI_PULL_REQUEST_NUMBER
-#if [[ "${APPVEYOR_PULL_REQUEST_NUMBER}" == "" ]]; then
-#     CI_PULL_REQUEST_NUMBER="N/A"
-#elif [[ "${APPVEYOR_PULL_REQUEST_NUMBER}" =~ ^-?[0-9]+$ ]]; then
-#     CI_PULL_REQUEST_NUMBER="${APPVEYOR_PULL_REQUEST_NUMBER}"
-#else
-#     printf "Unable to determine pull request number."
-#fi
-
-CI_PULL_REQUEST_TITLE="${APPVEYOR_PULL_REQUEST_TITLE}"
-
-#CI_JOB_ID="${APPVEYOR_JOB_ID}"
-
-CI_REPOSITORY_PROVIDER="${APPVEYOR_REPO_PROVIDER}"
-
-CI_REPOSITORY_SCM="${APPVEYOR_REPO_SCM}"
-
-#CI_REPOSITORY_NAME="${APPVEYOR_REPO_NAME}"
-
-#CI_REPOSITORY_BRANCH="${APPVEYOR_REPO_BRANCH}"
-
-#CI_REPOSITORY_PULL_ID="${APPVEYOR_REPO_COMMIT}"
-
-CI_REPOSITORY_PULL_AUTHOR="${APPVEYOR_REPO_COMMIT_AUTHOR}"
-
-CI_REPOSITORY_PULL_EMAIL="${APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL}"
-
-CI_REPOSITORY_PULL_TIMESTAMP="${PPVEYOR_REPO_COMMIT_TIMESTAMP}"
-
-CI_REPOSITORY_PULL_MESSAGE_SHORT="${APPVEYOR_REPO_COMMIT_MESSAGE}"
-
-CI_REPOSITORY_PULL_MESSAGE_FULL="${APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED}"
-
-CI_BUILD_SCHEDULE_BOOLEAN="${APPVEYOR_SCHEDULED_BUILD}"
-
-CI_BUILD_COMPILER_PLATFORM="${PLATFORM}"
-
-CI_BUILD_COMPILER_CONFIGURATION="${CONFIGURATION}"
-
-CI_REPOSITORY_PUSH_AUTHOR="AppVeyor"
-
-CI_REPOSITORY_PUSH_EMAIL="appveyor@appveyor.com"
+# 
+export CI_HAS_JOSH_K_SEAL_OF_APPROVAL="${HAS_JOSH_K_SEAL_OF_APPROVAL}"
 
 
+# 
+export CI_REPOSITORY_BRANCH="${_TRAVIS_BRANCH}"
 
 
-#==========#
-#  Travis  #
-#==========#
-
-## CI_HOST
-#if [[ "${TRAVIS}" == "true" ]]; then
-#     CI_HOST="travis"
-#else
-#     printf "Unable to determine CI host."
-#fi
-
-CI_HAS_JOSH_K_SEAL_OF_APPROVAL="${HAS_JOSH_K_SEAL_OF_APPROVAL}"
-
-#CI_REPOSITORY_BRANCH="${_TRAVIS_BRANCH}"
-
-#CI_BUILD_DIRECTORY="${TRAVIS_BUILD_DIR}"
-
-#CI_BIULD_ID="${TRAVIS_BUILD_ID}"
-
-#CI_BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
-
-#CI_REPOSITORY_PULL_ID="${TRAVIS_COMMIT}"
-
-CI_REPOSITORY_PULL_RANGE="${TRAVIS_COMMIT_RANGE}"
-
-#CI_JOB_ID="${TRAVIS_JOB_ID}"
-
-CI_JOB_NUMBER="${TRAVIS_JOB_NUMBER}"
-
-## CI_PULL_REQUEST_BOOLEAN
-#if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
-#     CI_PULL_REQUEST_BOOLEAN="false"
-#elif [[ "${TRAVIS_PULL_REQUEST}" =~ ^-?[0-9]+$ ]]; then
-#     CI_PULL_REQUEST_BOOLEAN="true"
-#else
-#     printf "Unable to determine pull request status."
-#fi
-
-## CI_PULL_REQUEST_NUMBER
-#if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
-#     CI_PULL_REQUEST_NUMBER="N/A"
-#elif [[ "${TRAVIS_PULL_REQUEST}" =~ ^-?[0-9]+$ ]]; then
-#     CI_PULL_REQUEST_NUMBER="${APPVEYOR_PULL_REQUEST_NUMBER}"
-#else
-#     printf "Unable to determine pull request number."
-#fi
-
-CI_SECURE_ENVIRONMENT_VARIABLE_TEST_BOOLEAN="${TRAVIS_SECURE_ENV_VARS}"
-
-#CI_REPOSITORY_NAME="${TRAVIS_REPO_SLUG}"
-
-CI_HOST_OS_NAME="${TRAVIS_OS_NAME}"
-
-CI_TAG="${TRAVIS_TAG}"
-
-CI_REPOSITORY_PUSH_AUTHOR="Travis"
-
-CI_REPOSITORY_PUSH_EMAIL="travis@travis.com"
+# 
+export CI_BUILD_DIRECTORY="${TRAVIS_BUILD_DIR}"
 
 
+# 
+export CI_BIULD_ID="${TRAVIS_BUILD_ID}"
+
+
+# 
+export CI_BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
+
+
+# 
+export CI_REPOSITORY_PULL_ID="${TRAVIS_COMMIT}"
+
+
+# 
+export CI_REPOSITORY_PULL_RANGE="${TRAVIS_COMMIT_RANGE}"
+
+
+# 
+export CI_JOB_ID="${TRAVIS_JOB_ID}"
+
+
+# 
+export CI_JOB_NUMBER="${TRAVIS_JOB_NUMBER}"
+
+
+# CI_PULL_REQUEST_BOOLEAN
+if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
+     export CI_PULL_REQUEST_BOOLEAN="false"
+elif [[ "${TRAVIS_PULL_REQUEST}" =~ ^-?[0-9]+$ ]]; then
+     export CI_PULL_REQUEST_BOOLEAN="true"
+else
+     printf "Unable to determine pull request status."
+fi
+
+
+# CI_PULL_REQUEST_NUMBER
+if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
+     export CI_PULL_REQUEST_NUMBER="N/A"
+elif [[ "${TRAVIS_PULL_REQUEST}" =~ ^-?[0-9]+$ ]]; then
+     export CI_PULL_REQUEST_NUMBER="${APPVEYOR_PULL_REQUEST_NUMBER}"
+else
+     printf "Unable to determine pull request number."
+fi
+
+
+# 
+export CI_SECURE_ENVIRONMENT_VARIABLE_TEST_BOOLEAN="${TRAVIS_SECURE_ENV_VARS}"
+
+
+# 
+export CI_REPOSITORY_NAME="${TRAVIS_REPO_SLUG}"
+
+
+# 
+export CI_HOST_OS_NAME="${TRAVIS_OS_NAME}"
+
+
+# 
+export CI_TAG="${TRAVIS_TAG}"
+
+
+# 
+export CI_REPOSITORY_PUSH_AUTHOR="Travis"
+
+
+# 
+export CI_REPOSITORY_PUSH_EMAIL="travis@travis.com"
 
 
 # ${BUILD_OS} is supplied by the YAML file.
-CI_BIULD_OS="{BUILD_OS}"
+export CI_BIULD_OS="{BUILD_OS}"
 
-# ${GH_TOKEN} is supplied by the YAML file.
-
-CI_PULL_REQUEST_BOOLEAN_ALLOWED="\"true\" \"false\" \"no data\""
+# Temporary variable
+export CI_PULL_REQUEST_BOOLEAN_ALLOWED="\"true\" \"false\" \"no data\""
 
 
 
