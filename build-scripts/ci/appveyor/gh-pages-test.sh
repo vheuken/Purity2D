@@ -48,7 +48,7 @@ elif [ -z "${CI_PULL_REQUEST_BOOLEAN}" ]
      printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: ${CI_PULL_REQUEST_BOOLEAN_ALLOWED}.\n"
      exit 1
 else
-     printf "test"
+     printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} not set.\n"
      exit 1
 fi
 
