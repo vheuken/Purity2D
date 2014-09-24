@@ -28,10 +28,10 @@ before_install:
 # Scripts to be run before build scripts
 install:
    - printf "install"
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux; fi
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX; fi
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android;fi
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS; fi
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux-test; fi
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX-test; fi
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android-test;fi
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS-test; fi
    - chmod a+x ./build-scripts/ci/travis/tests/travisvartest.sh
    - ./build-scripts/ci/travis/tests/travisvartest.sh
    - chmod a+x ./build-scripts/ci/travis/tests/gluevartest.sh
@@ -59,6 +59,8 @@ script:
 #   # iOS build
 #   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
    - printf "script"
+   - mkdir ./release
+   - touch ./release/test.txt
 
 
 
@@ -73,6 +75,8 @@ after_success:
 #   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
 #   - ./build-scripts/ci/travis/update-gh-pages.sh
    - printf "success"
+   - chmod a+x ./build-scripts/ci/general/update-gh-pages.sh
+   - ./build-scripts/ci/general/update-gh-pages.sh
 
 after_failure:
    - printf "after_failure"
