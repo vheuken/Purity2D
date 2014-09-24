@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 # Requires Bash minimum version 3.1.0
 
-printf "Testing CI_PULL_REQUEST_BOOLEAN\n"
-env | grep -E "CI_PULL_REQUEST_BOOLEAN"
-printf "\n"
 
 if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_BOOLEAN}\"" > /dev/null; then
     if [ "${CI_PULL_REQUEST_BOOLEAN}" == "true" ]; then
