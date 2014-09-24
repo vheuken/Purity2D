@@ -1,4 +1,4 @@
-if [[ "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" =~ "\"${CI_PULL_REQUEST_BOOLEAN}\"" ]]; then
+if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_BOOLEAN}\"" > /dev/null;; then
     if [ "${CI_PULL_REQUEST_BOOLEAN}" == "true" ]; then
          printf "Pull request\n"
          exit 0
