@@ -106,6 +106,7 @@ after_deploy:
 
 on_success:
    - ps: Write-Host "on_success"
+   - ps: sh.exe ".\build-scripts\ci\appveyor\gh-pages-test.sh"
    - ps: Write-Host "No variable set"
    - ps: Get-ChildItem "Env:CI_PULL_REQUEST_BOOLEAN"
    - ps: Remove-Item -Path "Env:CI_PULL_REQUEST_BOOLEAN"
