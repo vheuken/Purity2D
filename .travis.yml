@@ -23,22 +23,21 @@ env:
      - secure: nZhcYqB9uBZz4NU6u0nB9ofp8XCLfuKzDDuFMfzudpaFyb1lCkDnobMSGI4HLW/EPe1H9pi375PmvAM/pwSy8Dw5DtMdsuPoBhUWgauK9TYLbYnCh4jY8oEdmUOnO1ntF70BdluZL994qmBjgJQlX8/e/J8LGDvGrD/XmaK/TiE=
 
 before_install:
-   - printf "before_install"
 
 # Scripts to be run before build scripts
 install:
    - printf "install"
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux-test; fi
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX-test; fi
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android-test;fi
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS-test; fi
-   - printf "BUILD_OS is set to \"${BUILD_OS}\"\n"
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=linux; fi
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=osx; fi
+   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=android;fi
+   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=ios; fi
+#   - printf "BUILD_OS is set to \"${BUILD_OS}\"\n"
    - chmod a+x ./build-scripts/ci/travis/ci-translator.sh
    - source ./build-scripts/ci/travis/ci-translator.sh
-   - chmod a+x ./build-scripts/ci/travis/tests/travisvartest.sh
-   - ./build-scripts/ci/travis/tests/travisvartest.sh
-   - chmod a+x ./build-scripts/ci/travis/tests/gluevartest.sh
-   - ./build-scripts/ci/travis/tests/gluevartest.sh
+#   - chmod a+x ./build-scripts/ci/travis/tests/travisvartest.sh
+#   - ./build-scripts/ci/travis/tests/travisvartest.sh
+#   - chmod a+x ./build-scripts/ci/travis/tests/gluevartest.sh
+#   - ./build-scripts/ci/travis/tests/gluevartest.sh
 
 
 
@@ -47,23 +46,10 @@ install:
 #---------------------------------#
 
 before_script:
-   - printf "before_script"
 
 script:
-#   # Generic GNU/Linux build
-#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
-#   
-#   # OSX build
-#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
-#   
-#   # Android build
-#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
-#   
-#   # iOS build
-#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
-   - printf "script"
-   - mkdir ./release
-   - touch ./release/test.txt
+   # Generic GNU/Linux build
+   - bash "${CI_BUILD_DIRECTORY}/build-scripts/${CI_BUILD_OS}"
 
 
 
@@ -71,21 +57,13 @@ script:
 #     postbuild configuration     #
 #---------------------------------#
 
-
-
 after_success:
-#   # Permissions error workaround for script
-#   - chmod a+x ./build-scripts/ci/travis/update-gh-pages.sh
-#   - ./build-scripts/ci/travis/update-gh-pages.sh
-   - printf "success"
-   - chmod a+x ./build-scripts/ci/general/update-gh-pages.sh
-   - ./build-scripts/ci/general/update-gh-pages.sh
+   - chmod a+x "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
+   - bash "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
 
 after_failure:
-   - printf "after_failure"
 
 after_script:
-   - printf "after_script"
 
 
 
@@ -95,12 +73,10 @@ after_script:
 # The sections "before_deploy" and "after_deploy" are ignored if no deployment is invoked by the "deploy" section. Travis does not currently support custom deploy scripts or explicit deployment enable/disable.
 
 before_deploy:
-   - printf "before_deploy"
 
 ##deploy:
 
 after_deploy:
-   - printf "after_deploy"
 
 
 
