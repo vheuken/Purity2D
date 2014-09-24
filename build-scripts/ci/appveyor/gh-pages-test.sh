@@ -31,7 +31,7 @@ if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_B
          cd ./gh-pages
          test ! -d ./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS} \
              && mkdir -p ./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS}
-         cp -Rf "${CI_BUILD_DIRECTORY}/release/test.txt" "./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS}"
+         cp -Rf ${CI_BUILD_DIRECTORY}/release/* "./${CI_REPOSITORY_BRANCH}/${CI_BUILD_OS}"
          
          printf "Committing and pushing files\n"
          git add -f .
@@ -47,7 +47,7 @@ if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_B
          printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: \"true\" \"false\" \"no data\". This script is unprepared to handle \"${CI_PULL_REQUEST_BOOLEAN}\" but has determined that \"${CI_PULL_REQUEST_BOOLEAN}\" is an allowed value.\n"
          exit 1
     fi
-elif env | grep -E "CI_PULL_REQUEST_BOOLEAN" > /dev/null; then
+elif env | grep -E "CI_PULL_REQUEST_BOOLEAN=" > /dev/null; then
      printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: ${CI_PULL_REQUEST_BOOLEAN_ALLOWED}.\n"
      exit 1
 else
