@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Requires Bash minimum version 3.1.0
 
+printf "Testing CI_PULL_REQUEST_BOOLEAN\n"
+env | grep -E "CI_PULL_REQUEST_BOOLEAN"
+printf "\n"
 
 if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_BOOLEAN}\"" > /dev/null; then
     if [ "${CI_PULL_REQUEST_BOOLEAN}" == "true" ]; then
@@ -38,18 +41,18 @@ if printf  "${CI_PULL_REQUEST_BOOLEAN_ALLOWED}" | grep -E "\"${CI_PULL_REQUEST_B
          printf "Done\n"
          exit 0
     elif [ "${CI_PULL_REQUEST_BOOLEAN}" == "no data" ]; then
-         printf "Warning: Unable to determine pull request status\n"
+         printf "Warning: Unable to determine pull request status. Not pushing data.\n"
          exit 0
     else
          printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: \"true\" \"false\" \"no data\". This script is unprepared to handle \"${CI_PULL_REQUEST_BOOLEAN}\" but has determined that \"${CI_PULL_REQUEST_BOOLEAN}\" is an allowed value.\n"
-         exit 0
+         exit 1
     fi
 elif env | grep -E "CI_PULL_REQUEST_BOOLEAN" > /dev/null; then
      printf "Error: Variable \${CI_PULL_REQUEST_BOOLEAN} returned \"${CI_PULL_REQUEST_BOOLEAN}\". Expected values: ${CI_PULL_REQUEST_BOOLEAN_ALLOWED}.\n"
-     exit 0
+     exit 1
 else
      printf "Error: Environment variable \${CI_PULL_REQUEST_BOOLEAN} not set.\n"
-     exit 0
+     exit 1
 fi
 
 
