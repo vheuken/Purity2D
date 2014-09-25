@@ -13,86 +13,97 @@ version: 1.0.{build}
 
 # Black/whitelist
 branches:
-  only:
-    - master
-  except:
-    - gh-pages
+#Using "only" whitelists branches
+   only:
+     - master
+
+
 
 #---------------------------------#
 #    environment configuration    #
 #---------------------------------#
 
 # Operating system
-os: Windows Server 2012 R2
+os:
+   - Windows Server 2012 R2
+   - Windows Server 2012
 
 # Scripts to be run before repository cloning.
 init:
-  - git config --global core.autocrlf input
+   - git config --global core.autocrlf input
+
 
 clone_depth: 50
 
-clone_folder: c:\projects\purity2d
-
-hosts:
-  queue-server: 127.0.0.1
-  db.server.com: 127.0.0.2
+# The clone folder defaults to c:\projects\<APPVEYOR_PROJECT_SLUG>
+#clone_folder:
 
 environment:
-  my_secure_var1:
-    secure: PxqZetar1APSMbdo7Rjqvh0qIecY2HcqTWTj5DMJOe5QTfyFCNG22I/F8Ik5zX9X
+   GH_TOKEN:
+     secure: 2OSJTHsmSnJdJeLSV9TsnetggAGUtT2gcgBlKaM8ertYVhAR34Buz5DzRNDAjuw6
 
-# The "services" section starts services to be used by the build environment.
-# Example:
-###services:
-###  - mssql2012sp1        # start SQL Server 2012 SP1 Express
-###  - mssql2012sp1rs      # start SQL Server 2012 SP1 Express and Reporting Services
-###  - mssql2008r2sp2      # start SQL Server 2008 R2 SP2 Express
-###  - mssql2008r2sp2rs    # start SQL Server 2008 R2 SP2 Express and Reporting Services
-###  - mysql               # start MySQL 5.6 service
-###  - postgresql          # start PostgreSQL 9.3 service
-###  - iis                 # start IIS
-###  - msmq                # start Queuing services
+# Scripts to be run before build scripts
+install:
+   - ps: Set-Item -Path "Env:BUILD_OS" -Value "Windows"
+   - ps: .\build-scripts\ci\appveyor\ci-translator.ps1
 
-# Scripts under "install" are run after cloning repository but before running build scripts
-# Examples:
-#### By default, all script lines are interpreted as batch/CMD
-### - echo This is batch
-#### To run script as a PowerShell command it must be prepended with "ps:"
-### - ps: Write-Host 'This is PowerShell'
-#### To explicitly call batch/CMD, a command can be prepended with "cmd:"
-### - cmd: echo This is batch again
-### - cmd: set MY_VAR=12345
 
 
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
 
-# Build platform can be set to "x86", "x64", and "Any CPU". Multiple lines will add builds to the matrix.
-#platform:
-#  - Any CPU
-
-#configuration:
-#  - Debug
+build: on
 
 before_build:
-  - echo "Before Build"
 
 build_script:
-  - ./build-scripts/windows.bat
+   - ps: .\build-scripts\windows.ps1
 
 after_build:
-  - echo "After Build"
 
+
+
+#---------------------------------#
+#        test configuration       #
+#---------------------------------#
+
+test: off
+
+before_test:
+
+test_script:
+
+after_test:
+
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+deploy: off
+
+before_deploy:
+
+deploy_script:
+
+after_deploy:
 
 
 
 #---------------------------------#
 #        global handlers          #
 #---------------------------------#
+# If an item in the "on_success" section returns a failure, the "on_failure" section begins automatically.
 
 on_success:
-  - echo "Success"
+   - ps: bash.exe "${Env:CI_BUILD_DIRECTORY}\build-scripts\ci\general\update-gh-pages.sh"
+
+on_failure:
+   - ps: Write-Host "on_failure"
+
+on_finish:
 
 
 

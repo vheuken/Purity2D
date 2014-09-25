@@ -1,3 +1,8 @@
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Travis VM image selection
 os:
    - linux
    - osx
@@ -8,31 +13,85 @@ language:
 compiler:
    - gcc
 
+# "Secure" environment variables are specific to a single repository and need to be generated for each user/project
 env:
    matrix:
-     - IOS_ANDROID=false
-     - IOS_ANDROID=true
-    
+     - BUILD_OS=linux
+     - BUILD_OS=osx
+     - BUILD_OS=ios
+     - BUILD_OS=android
    global:
-     # The secure string !{GH_TOKEN} is specific to a single repository and needs to be generated for each user/project
-     - secure: lWW+x+6fR2GqB2AQ0hihF/bROD+rtAjzGvlRxA1Dv8wls+hswnwQ/oDYr8+v64Zi8dzDQRLs0MX09pchUbjpMUigxhSu8ppRtqef/RZRMdFny/eOshAPSCcjP/Qf+St8BIfy5phA9JlYeMb0Fpn9jPsEOfpuoCmYwv109H8ulbg=
+     # ${GH_TOKEN}
+     - secure: nZhcYqB9uBZz4NU6u0nB9ofp8XCLfuKzDDuFMfzudpaFyb1lCkDnobMSGI4HLW/EPe1H9pi375PmvAM/pwSy8Dw5DtMdsuPoBhUWgauK9TYLbYnCh4jY8oEdmUOnO1ntF70BdluZL994qmBjgJQlX8/e/J8LGDvGrD/XmaK/TiE=
+
+matrix:
+   # Inclusion workaround, excludes all builds
+   exclude:
+    - os: osx
+    - os: linux
+   include:
+    - os: linux
+      env: BUILD_OS=linux
+    - os: linux
+      env: BUILD_OS=android
+    - os: osx
+      env: BUILD_OS=osx
+    - os: osx
+      env: BUILD_OS=ios
+
+#---------------------------------#
+#      prebuild configuration     #
+#---------------------------------#
+
+before_install:
+
+install:
+   - printf "install"
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=linux; fi
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=osx; fi
+#   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=android;fi
+#   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=ios; fi
+   - printf "BUILD_OS set to \"${BUILD_OS}\"\n"
+   - chmod a+x ./build-scripts/ci/travis/ci-translator.sh
+   - source ./build-scripts/ci/travis/ci-translator.sh
+
+
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+before_script:
 
 script:
-   # Generic GNU/Linux build
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == false  ]]; then export BUILD_OS=Linux && bash build-scripts/linux.sh; fi
-   
-   # OSX build
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == false ]]; then export BUILD_OS=OSX && bash build-scripts/osx.sh; fi
-   
-   # Android build
-   - if [[ $TRAVIS_OS_NAME == "linux" && $IOS_ANDROID == true  ]]; then export BUILD_OS=Android && bash build-scripts/android.sh;fi
-   
-   # iOS build
-   - if [[ $TRAVIS_OS_NAME == "osx" && $IOS_ANDROID == true ]]; then export BUILD_OS=iOS && bash build-scripts/ios.sh; fi
+   - bash "${CI_BUILD_DIRECTORY}/build-scripts/${CI_BUILD_OS}.sh"
+
+
+
+#---------------------------------#
+#     postbuild configuration     #
+#---------------------------------#
 
 after_success:
-   # Permissions error workaround for script
-   - chmod a+x ./.travis-update-gh-pages.sh && ./.travis-update-gh-pages.sh
+   - chmod a+x "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
+   - bash "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
+
+after_failure:
+
+after_script:
+
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+# The sections "before_deploy" and "after_deploy" are ignored if no deployment is invoked by the "deploy" section. Travis does not currently support custom deploy scripts or explicit deployment enable/disable.
+
+before_deploy:
+
+##deploy:
+
+after_deploy:
 
 
 
