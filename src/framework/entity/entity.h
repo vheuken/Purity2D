@@ -50,6 +50,8 @@ namespace Purity
 
         const unsigned int getId() const;
 
+        void setAnimationFrame(int frame);
+
         EntityState getState() const;
 
         virtual void update();

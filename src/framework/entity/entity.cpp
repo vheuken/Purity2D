@@ -93,6 +93,11 @@ Purity::EntityState Purity::Entity::getState() const
     return mState;
 }
 
+void Purity::Entity::setAnimationFrame(int frame)
+{
+    mAnimationFrame = frame;
+}
+
 void Purity::Entity::update()
 {
     float x = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mWidthPixels/2);
