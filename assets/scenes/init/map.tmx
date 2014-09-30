@@ -5,8 +5,12 @@
  </tileset>
  <objectgroup name="Entities">
   <object name="Player-Android" type="Movable" x="212" y="157" width="24" height="63"/>
-  <object name="Player-Windows" type="Movable" x="59" y="73" width="83" height="82">
+  <object name="Player-Windows" type="Movable" x="59" y="73" width="30" height="50">
    <properties>
+    <property name="AnimationFrameHeight" value="85"/>
+    <property name="AnimationFrameOffsetX" value="-25"/>
+    <property name="AnimationFrameOffsetY" value="-20"/>
+    <property name="AnimationFrameWidth" value="85"/>
     <property name="StartingAnimationFrame" value="0"/>
     <property name="Texture" value="spelunky_man.png"/>
    </properties>
