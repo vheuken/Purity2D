@@ -16,12 +16,6 @@
 
 #include "../system/configuration.h"
 
-
-namespace luabind
-{
-    struct scope;
-}
-
 namespace Tmx
 {
     class Object;

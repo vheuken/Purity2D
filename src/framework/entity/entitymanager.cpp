@@ -14,7 +14,6 @@ Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
 
     initializeObjects();
 
-    //luabind::globals(LuaManager::getManager()->getState())["GEntityManager"] = this;
     luabridge::setGlobal(LuaManager::getManager()->getState(), this, "GEntityManager");
 }
 

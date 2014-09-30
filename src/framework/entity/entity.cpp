@@ -26,7 +26,14 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world, Purity::Textur
     setPosition(x, y);
     setBodyPosition(x, y);
     setSize(width, height);
+
+    if (mTexture != nullptr)
+    {
+        mSpriteSheet = std::unique_ptr<SpriteSheet>(new SpriteSheet(mTexture, width, height));
+        mAnimationFrame = object->GetProperties().GetNumericProperty("StartingAnimationFrame");
+    }
 }
+
 void Purity::Entity::setBodyPosition(float x, float y)
 {
     b2Vec2 pos;
@@ -71,7 +78,7 @@ void Purity::Entity::setSize(float width, float height)
 
     mHitboxBody->CreateFixture(&hitboxFixtureDef);
 
-    mHitboxBody->SetUserData( this );
+    mHitboxBody->SetUserData(this);
 
     initializeHitboxShape();
 }
@@ -118,6 +125,7 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
     if (mSpriteSheet)
     {
         target.draw(mSpriteSheet.get(), mAnimationFrame, Vector2f(getPosition().x, getPosition().y));
+        target.draw(mHitboxRect);
     }
     else
     {
