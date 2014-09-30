@@ -137,7 +137,6 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
         target.draw(mSpriteSheet.get(),
                     mAnimationFrame,
                     Vector2f(getPosition().x+mFrameOffsetX, getPosition().y+mFrameOffsetY));
-        target.draw(mHitboxRect);
     }
     else
     {

@@ -1,5 +1,6 @@
 #include "movableentity.h"
 #include <LuaBridge.h>
+
 Purity::MovableEntity::MovableEntity(const Tmx::Object* object, b2World* world, Purity::Texture * texture)
     : Entity(object, world, texture)
 {
@@ -36,7 +37,7 @@ void Purity::MovableEntity::luaBindings(lua_State* state)
 {
     luabridge::getGlobalNamespace(state)
         .beginNamespace("Purity")
-	    .beginClass <Entity> ("Entity")
+            .beginClass <Entity> ("Entity")
                 .addFunction("getName", &Entity::getName)
                 .addFunction("getX", &Entity::getX)
                 .addFunction("getY", &Entity::getY)

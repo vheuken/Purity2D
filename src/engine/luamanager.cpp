@@ -7,6 +7,7 @@
 #include "../framework/entity/movableentity.h"
 #include "../framework/entity/entitymanager.h"
 #include "../framework/system/event.h"
+#include "../framework/system/timer.h"
 #include "engine.h"
 
 Purity::LuaManager::LuaManager()
@@ -62,6 +63,7 @@ void Purity::LuaManager::initializeBindings()
     EntityManager::luaBindings(mLuaState);
     Entity::luaBindings(mLuaState);
     MovableEntity::luaBindings(mLuaState);
+    Timer::luaBindings(mLuaState);
     initializeMiscBindings();
 }
 
