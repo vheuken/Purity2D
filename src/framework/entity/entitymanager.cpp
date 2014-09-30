@@ -130,13 +130,13 @@ void Purity::EntityManager::updatePhysics()
 
 void Purity::EntityManager::draw(Purity::RenderTarget& target) const
 {
-    for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
+    for (auto& entity : mEntityList)
     {
-        target.draw(*it);
+        target.draw(entity);
     }
-    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
+    for (auto& entity : mMovableEntityList)
     {
-        target.draw(*it);
+        target.draw(entity);
     }
 }
 
