@@ -29,8 +29,13 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world, Purity::Textur
 
     if (mTexture != nullptr)
     {
-        mSpriteSheet = std::unique_ptr<SpriteSheet>(new SpriteSheet(mTexture, width, height));
+        mSpriteSheet = std::unique_ptr<SpriteSheet>(new SpriteSheet(mTexture,
+                                                                    object->GetProperties().GetNumericProperty("AnimationFrameWidth"),
+                                                                    object->GetProperties().GetNumericProperty("AnimationFrameWidth")));
+
         mAnimationFrame = object->GetProperties().GetNumericProperty("StartingAnimationFrame");
+        mFrameOffsetX = object->GetProperties().GetNumericProperty("AnimationFrameOffsetX");
+        mFrameOffsetY = object->GetProperties().GetNumericProperty("AnimationFrameOffsetY");
     }
 }
 
@@ -124,7 +129,9 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
 {
     if (mSpriteSheet)
     {
-        target.draw(mSpriteSheet.get(), mAnimationFrame, Vector2f(getPosition().x, getPosition().y));
+        target.draw(mSpriteSheet.get(),
+                    mAnimationFrame,
+                    Vector2f(getPosition().x+mFrameOffsetX, getPosition().y+mFrameOffsetY));
         target.draw(mHitboxRect);
     }
     else

@@ -68,6 +68,9 @@ namespace Purity
         float mWidthPixels;
         float mHeightPixels;
 
+        float mFrameOffsetX = 0;
+        float mFrameOffsetY = 0;
+
         void initializeHitboxShape();
 
     private:
