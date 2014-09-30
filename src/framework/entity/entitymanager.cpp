@@ -118,13 +118,13 @@ Purity::MovableEntity* const Purity::EntityManager::getMovableEntityById(const u
 
 void Purity::EntityManager::updatePhysics()
 {
-    for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
+    for (auto& entity : mEntityList)
     {
-        it->update();
+        entity.update();
     }
-    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
+    for (auto& entity : mMovableEntityList)
     {
-        it->update();
+        entity.update();
     }
 }
 
