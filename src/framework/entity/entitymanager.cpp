@@ -50,9 +50,9 @@ std::vector<Purity::EntityState> Purity::EntityManager::getEntityStates() const
 
     states.reserve(mMovableEntityList.size());
 
-    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
+    for (auto& entity : mMovableEntityList)
     {
-        states.push_back(it->getState());
+        states.push_back(entity.getState());
     }
 
     return states;
