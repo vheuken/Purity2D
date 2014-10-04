@@ -90,5 +90,9 @@ void Purity::InputManager::update()
         {
             mInputQueue->push(event);
         }
+        else if (!mWindow->isContentMode())
+        {
+            mActionManager.disableAll();
+        }
     }
 }

@@ -25,13 +25,13 @@ function onPhysicsUpdate()
 	
     player = GEntityManager:getMovableEntityByName(playerName)
 
-	if LEFT == true then
+	if GPurityActionManager:getActionState("MOVE_LEFT") then
 		moveLeft(player)
 	end
-	if RIGHT == true then
+	if GPurityActionManager:getActionState("MOVE_RIGHT") then
 		moveRight(player)
 	end
-	if UP == true then
+	if GPurityActionManager:getActionState("MOVE_UP") then
 		jump(player)
 	end
 end
