@@ -7,7 +7,7 @@
 #include "../system/configuration.h"
 #include "../input/mouse.h"
 
-#ifdef __ANDROID__ ||  TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if defined(__ANDROID__) ||  defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
 const bool CONTENT_MODE_DEFAULT = true;
 #else
 const bool CONTENT_MODE_DEFAULT = false;
@@ -41,7 +41,7 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
         flags = SDL_WINDOW_RESIZABLE;
     }
 
-#ifdef __ANDROID__ ||  TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if defined(__ANDROID__) ||  defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
     SDL_DisplayMode mode;
 
     if (SDL_GetDesktopDisplayMode(0, &mode) != 0)
