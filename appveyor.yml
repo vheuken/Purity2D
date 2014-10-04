@@ -40,7 +40,7 @@ clone_depth: 50
 
 environment:
    GH_TOKEN:
-     secure: 2OSJTHsmSnJdJeLSV9TsnetggAGUtT2gcgBlKaM8ertYVhAR34Buz5DzRNDAjuw6
+     secure: PtpLwQUPOm2GFKCJMUVIpzDpS8dl3n8TgoPArzvdUEKLvGjHU8HmvMXFLko3kDJ7
 
 # Scripts to be run before build scripts
 install:
