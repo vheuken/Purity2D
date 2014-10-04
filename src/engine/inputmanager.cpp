@@ -59,10 +59,7 @@ void Purity::InputManager::update()
             }
             else if (event.keyEvent.code == SDLK_MENU)
             {
-                if (!mWindow->isContentMode())
-                {
-                    mWindow->toggleMode();
-                }
+                mWindow->toggleMode();
             }
 #endif
         }
