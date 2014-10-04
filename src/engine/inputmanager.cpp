@@ -55,7 +55,10 @@ void Purity::InputManager::update()
 #ifdef __ANDROID__
             else if (event.keyEvent.code == SDLK_AC_BACK)
             {
-                mWindow->close();
+                if (!mWindow->isContentMode())
+                {
+                    mWindow->close();
+                }
             }
             else if (event.keyEvent.code == SDLK_MENU)
             {
