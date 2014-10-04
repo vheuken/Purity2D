@@ -97,6 +97,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
     {
         mViewportType = ViewportType::LETTERBOX;
     }
+
+    setWindowMode();
 }
 
 Purity::Window::~Window()
