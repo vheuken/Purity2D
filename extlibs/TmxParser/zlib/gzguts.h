@@ -2,7 +2,13 @@
  * Copyright (C) 2004, 2005, 2010 Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
+
+// Hacky fix for iOS
+#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
 #include <unistd.h>
+#endif
+// end hacky fix for iOS
+
 #ifdef _LARGEFILE64_SOURCE
 #  ifndef _LARGEFILE_SOURCE
 #    define _LARGEFILE_SOURCE 1
