@@ -34,7 +34,7 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
 
     if (isBorderless())
     {
-        flags = SDL_WINDOW_BORDERLESS;
+        flags = SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE;
     }
     else
     {
