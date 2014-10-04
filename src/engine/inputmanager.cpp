@@ -3,6 +3,10 @@
 #include <iostream>
 #include <queue>
 
+#include <lua.hpp>
+#include <LuaBridge.h>
+#include "luamanager.h"
+
 #include "../framework/window/window.h"
 #include "../framework/input/mouse.h"
 #include "../framework/system/event.h"
@@ -12,6 +16,10 @@ Purity::InputManager::InputManager(Purity::Window* window, std::queue<Event>* in
 {
     mWindow = window;
     mInputQueue = inputQueue;
+
+    luabridge::setGlobal(LuaManager::getManager()->getState(),
+                         &mActionManager,
+                         "GPurityActionManager");
 }
 
 void Purity::InputManager::update()
@@ -51,7 +59,10 @@ void Purity::InputManager::update()
             }
             else if (event.keyEvent.code == SDLK_MENU)
             {
-                mWindow->toggleMode();
+                if (!mWindow->isContentMode())
+                {
+                    mWindow->toggleMode();
+                }
             }
 #endif
         }
@@ -78,6 +89,10 @@ void Purity::InputManager::update()
         if (mWindow->isContentMode() && !mModeLock)
         {
             mInputQueue->push(event);
+        }
+        else if (!mWindow->isContentMode())
+        {
+            mActionManager.disableAll();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Purity
             Closed                 = SDL_WINDOWEVENT_CLOSE,
 
             FocusGained            = SDL_WINDOWEVENT_FOCUS_GAINED,
-            FocusLost              = SDL_WINDOWEVENT_FOCUS_LOST
+            FocusLost              = SDL_WINDOWEVENT_FOCUS_LOST,
         };
 
         struct KeyEvent

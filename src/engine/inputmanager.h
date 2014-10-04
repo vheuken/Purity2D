@@ -4,6 +4,7 @@
 #include <queue>
 
 #include "../framework/system/event.h"
+#include "../framework/system/actionmanager.h"
 
 namespace Purity
 {
@@ -21,6 +22,7 @@ namespace Purity
         std::queue<Event>* mInputQueue;
 
         bool mModeLock;
+        ActionManager mActionManager;
     };
 }
 

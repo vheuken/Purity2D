@@ -8,6 +8,7 @@
 #include "../framework/entity/entitymanager.h"
 #include "../framework/system/event.h"
 #include "../framework/system/timer.h"
+#include "../framework/system/actionmanager.h"
 #include "engine.h"
 
 Purity::LuaManager::LuaManager()
@@ -107,6 +108,13 @@ void Purity::LuaManager::initializeMiscBindings()
                 .addData("entityId", &EntityState::entityId)
                 .addData("position", &EntityState::position)
                 .addData("angle", &EntityState::angle)
+            .endClass()
+
+            .beginClass<ActionManager>("ActionManager")
+                .addFunction("getActionState", &ActionManager::getActionState)
+                .addFunction("enableAction", &ActionManager::enableAction)
+                .addFunction("disableAction", &ActionManager::disableAction)
+                .addFunction("disableAll", &ActionManager::disableAll)
             .endClass()
         .endNamespace();
 }
