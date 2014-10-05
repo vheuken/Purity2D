@@ -26,7 +26,9 @@
 // Author: Tamir Atias
 //-----------------------------------------------------------------------------
 #include <stdlib.h>
-#include <zlib.h>
+
+#define MINIZ_HEADER_FILE_ONLY
+#include "miniz.c"
 
 #include "TmxUtil.h"
 #include "base64/base64.h"

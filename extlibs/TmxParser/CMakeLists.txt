@@ -2,7 +2,7 @@ set (PROJECT_NAME "TMX-Parser")
 
 add_definitions(-DUSE_SDL2_LOAD)
 
-include_directories(tinyxml zlib ../SDL2-2.0.3/include)
+include_directories(tinyxml ../SDL2-2.0.3/include)
 
 set ( HEADER_FILES
 	 Tmx.h
@@ -44,9 +44,6 @@ set ( SOURCE_FILES
 	 
 )
 
-file (GLOB zlib_src
-	"zlib/*.h" "zlib/*.c"
-)
 
 file (GLOB tinyxml_src
 	"tinyxml/*.cpp" "tinyxml/*.h"
@@ -54,6 +51,6 @@ file (GLOB tinyxml_src
 
 add_library( "${PROJECT_NAME}" STATIC 
 ${HEADER_FILES} ${SOURCE_FILES} 
-${zlib_src}
 ${tinyxml_src}
+miniz.c
 )
