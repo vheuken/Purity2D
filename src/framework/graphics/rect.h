@@ -15,8 +15,8 @@ namespace Purity
 
         Vector2i position;
 
-        int height;
         int width;
+        int height;
 
         explicit operator SDL_Rect() const;
     };
