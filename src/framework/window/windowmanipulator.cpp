@@ -73,21 +73,18 @@ void Purity::WindowManipulator::setWindowFlags()
 
 void Purity::WindowManipulator::setBorderGrabbedFlags()
 {
-    Vector2u windowSize = mWindow->getSize();
+    auto windowSize = static_cast<Vector2i>(mWindow->getSize());
 
-    Vector2u mousePos;
-
-    mousePos.x = static_cast<unsigned int>(Mouse::getPosition(*mWindow).x);
-    mousePos.y = static_cast<unsigned int>(Mouse::getPosition(*mWindow).y);
+    auto mousePos = Mouse::getPosition(*mWindow);
 
     // right
-    if (mousePos.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS)
+    if (mousePos.x >= (windowSize.x - STRETCHABLE_BORDER_PIXELS))
     {
         mRightBorderGrabbed = true;
     }
 
     // bottom
-    if (mousePos.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS)
+    if (mousePos.y >= (windowSize.y - STRETCHABLE_BORDER_PIXELS))
     {
         mBottomBorderGrabbed = true;
     }
