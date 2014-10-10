@@ -5,6 +5,10 @@
 #include "../framework/graphics/texturemanager.h"
 #include <LuaBridge.h>
 
+#ifdef _WIN32
+#include "../framework/window/win32/window.h"
+#endif
+
 Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     : mProgramOptions(commandLineArguments)
 {
@@ -64,7 +68,11 @@ void Purity::Engine::initializeWindow()
     Vector2i windowSize(Configuration::getInstance()->getInteger("window", "window_size_x", 800),
                         Configuration::getInstance()->getInteger("window", "window_size_y", 400));
 
+#ifdef _WIN32
+    mWindow = std::unique_ptr<Purity::Window>(new Purity::Win32Window(windowSize.x, windowSize.y, "Purity2D"));
+#else
     mWindow = std::unique_ptr<Purity::Window>(new Purity::Window(windowSize.x, windowSize.y, "Purity2D"));
+#endif
 }
 
 void Purity::Engine::initializeRenderSystem()

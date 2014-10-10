@@ -45,12 +45,12 @@ namespace Purity
         void setWindowMode();
         void setContentMode();
 
-        void maximize();
+        virtual void maximize();
         void minimize();
 
         bool isBorderless() const;
 
-        bool isMaximized() const;
+        virtual bool isMaximized() const;
 
         void close();
 
@@ -64,9 +64,10 @@ namespace Purity
 
         void display();
 
-    private:
+    protected:
         SDL_Window* mInternalWindow;
 
+    private:
         WindowManipulator mWindowManipulator;
 
         ViewportType mViewportType;
