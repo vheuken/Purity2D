@@ -24,7 +24,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mCloseButton(Rect(Vector2i(width-30, 5), 25, 25)),
   mMaximizeButton(Rect(Vector2i(width-60, 5), 25, 25)),
   mMinimizeButton(Rect(Vector2i(width-90, 5), 25, 25)),
-  mFullscreenButton(Rect(Vector2i(width-150, 5), 25, 25))
+  mFullscreenButton(Rect(Vector2i(width-150, 5), 25, 25)),
+  mFullscreenDesktopButton(Rect(Vector2i(width-180, 5), 25, 25))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -223,6 +224,21 @@ void Purity::Window::fullscreen()
     }
 }
 
+void Purity::Window::fullscreenDesktop()
+{
+    if (!isFullscreen())
+    {
+        if (SDL_SetWindowFullscreen(mInternalWindow, SDL_WINDOW_FULLSCREEN_DESKTOP) < 0)
+        {
+            std::cerr << "Error entering fullscreen desktop: " << SDL_GetError() << std::endl;
+        }
+    }
+    else
+    {
+        SDL_SetWindowFullscreen(mInternalWindow, 0);
+    }
+}
+
 bool Purity::Window::isBorderless() const
 {
     return mBorderless;
@@ -262,13 +278,14 @@ void Purity::Window::manipulateWindow()
 
 void Purity::Window::handleUIButtons()
 {
-    std::bitset<4> mask;
+    std::bitset<5> mask;
 
     // handle clicks
     mask[0] = mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
     mask[1] = mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
     mask[2] = mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
     mask[3] = mFullscreenButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::fullscreen, this));
+    mask[4] = mFullscreenDesktopButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::fullscreenDesktop, this));
 
     if (mask.any())
     {
@@ -287,6 +304,8 @@ void Purity::Window::handleUIButtons()
     mCloseButton.setRect(Rect(Vector2i(size.x-30, 5), 25, 25));
     mMaximizeButton.setRect(Rect(Vector2i(size.x-60, 5), 25, 25));
     mMinimizeButton.setRect(Rect(Vector2i(size.x-90, 5), 25, 25));
+    mFullscreenButton.setRect(Rect(Vector2i(size.x-150, 5), 25, 25));
+    mFullscreenDesktopButton.setRect(Rect(Vector2i(size.x-180, 5), 25, 25));
 }
 
 void Purity::Window::gainFocus()
@@ -332,6 +351,7 @@ void Purity::Window::display()
             mMaximizeButton.draw(*this);
             mMinimizeButton.draw(*this);
             mFullscreenButton.draw(*this);
+            mFullscreenDesktopButton.draw(*this);
         }
     }
 

@@ -48,6 +48,7 @@ namespace Purity
         virtual void maximize();
         void minimize();
         void fullscreen();
+        void fullscreenDesktop();
 
         bool isBorderless() const;
         virtual bool isMaximized() const;
@@ -87,6 +88,7 @@ namespace Purity
         Button mMaximizeButton;
         Button mMinimizeButton;
         Button mFullscreenButton;
+        Button mFullscreenDesktopButton;
 
         bool mMouseOnButtons = false;
 
