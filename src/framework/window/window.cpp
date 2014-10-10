@@ -23,7 +23,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
               Configuration::getInstance()->getInteger("window", "minimum_size_y", 144)),
   mCloseButton(Rect(Vector2i(width-30, 5), 25, 25)),
   mMaximizeButton(Rect(Vector2i(width-60, 5), 25, 25)),
-  mMinimizeButton(Rect(Vector2i(width-90, 5), 25, 25))
+  mMinimizeButton(Rect(Vector2i(width-90, 5), 25, 25)),
+  mFullscreenButton(Rect(Vector2i(width-150, 5), 25, 25))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -207,6 +208,21 @@ void Purity::Window::minimize()
     SDL_MinimizeWindow(mInternalWindow);
 }
 
+void Purity::Window::fullscreen()
+{
+    if (!isFullscreen())
+    {
+        if (SDL_SetWindowFullscreen(mInternalWindow, SDL_WINDOW_FULLSCREEN) < 0)
+        {
+            std::cerr << "Error entering fullscreen: " << SDL_GetError() << std::endl;
+        }
+    }
+    else
+    {
+        SDL_SetWindowFullscreen(mInternalWindow, 0);
+    }
+}
+
 bool Purity::Window::isBorderless() const
 {
     return mBorderless;
@@ -215,6 +231,11 @@ bool Purity::Window::isBorderless() const
 bool Purity::Window::isMaximized() const
 {
     return (SDL_WINDOW_MAXIMIZED & SDL_GetWindowFlags(mInternalWindow));
+}
+
+bool Purity::Window::isFullscreen() const
+{
+    return (SDL_WINDOW_FULLSCREEN & SDL_GetWindowFlags(mInternalWindow));
 }
 
 void Purity::Window::close()
@@ -241,12 +262,13 @@ void Purity::Window::manipulateWindow()
 
 void Purity::Window::handleUIButtons()
 {
-    std::bitset<3> mask;
+    std::bitset<4> mask;
 
     // handle clicks
     mask[0] = mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
     mask[1] = mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
     mask[2] = mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
+    mask[3] = mFullscreenButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::fullscreen, this));
 
     if (mask.any())
     {
@@ -309,6 +331,7 @@ void Purity::Window::display()
             mCloseButton.draw(*this);
             mMaximizeButton.draw(*this);
             mMinimizeButton.draw(*this);
+            mFullscreenButton.draw(*this);
         }
     }
 
