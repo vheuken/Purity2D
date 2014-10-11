@@ -14,11 +14,6 @@
 #include "networksystem.h"
 #include "commandlinearguments.h"
 
-namespace luabind
-{
-    struct scope;
-}
-
 namespace Purity
 {
     class Engine
