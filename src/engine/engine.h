@@ -33,7 +33,7 @@ namespace Purity
         std::unique_ptr<RenderSystem> mRenderSystem;
         std::unique_ptr<SceneManager> mSceneManager;
         std::unique_ptr<PhysicsSystem> mPhysicsSystem;
-        std::unique_ptr<InputManager> mInputManager;
+        std::unique_ptr<InputSystem> mInputSystem;
         std::unique_ptr<NetworkSystem> mNetworkSystem;
 
         std::unique_ptr<std::queue<Event> > mInputQueue;

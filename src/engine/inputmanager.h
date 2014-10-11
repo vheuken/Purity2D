@@ -3,6 +3,7 @@
 
 #include <queue>
 
+#include "abstractsystem.h"
 #include "../framework/system/event.h"
 #include "../framework/system/actionmanager.h"
 
@@ -10,12 +11,12 @@ namespace Purity
 {
     class Window;
 
-    class InputManager
+    class InputSystem : public AbstractSystem
     {
     public:
-        InputManager(Window* window, std::queue<Event>* inputQueue);
+        InputSystem(Window* window, std::queue<Event>* inputQueue);
 
-        void update();
+        void update(Scene* scene);
 
     private:
         Window* mWindow;

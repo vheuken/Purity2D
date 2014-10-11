@@ -57,7 +57,7 @@ void Purity::Engine::run()
         if (mProgramOptions.headless == false)
         {
             mRenderSystem->update(currentScene);
-            mInputManager->update();
+            mInputSystem->update(currentScene);
             mWindow->manipulateWindow();
         }
     }
@@ -92,7 +92,7 @@ void Purity::Engine::initializePhysicsSystem()
 
 void Purity::Engine::initializeInputManager()
 {
-    mInputManager = std::unique_ptr<InputManager>(new InputManager(mWindow.get(), mInputQueue.get()));
+    mInputSystem = std::unique_ptr<InputSystem>(new InputSystem(mWindow.get(), mInputQueue.get()));
 }
 
 void Purity::Engine::initializeNetworkSystem()

@@ -7,11 +7,12 @@
 #include <LuaBridge.h>
 #include "luamanager.h"
 
+#include "../framework/scene.h"
 #include "../framework/window/window.h"
 #include "../framework/input/mouse.h"
 #include "../framework/system/event.h"
 
-Purity::InputManager::InputManager(Purity::Window* window, std::queue<Event>* inputQueue)
+Purity::InputSystem::InputSystem(Purity::Window* window, std::queue<Event>* inputQueue)
     : mModeLock(false)
 {
     mWindow = window;
@@ -22,8 +23,13 @@ Purity::InputManager::InputManager(Purity::Window* window, std::queue<Event>* in
                          "GPurityActionManager");
 }
 
-void Purity::InputManager::update()
+void Purity::InputSystem::update(Scene* scene)
 {
+    if (mCurrentScene != scene)
+    {
+        mCurrentScene = scene;
+    }
+
     Event event;
 
     while (mWindow->pollEvent(event))
