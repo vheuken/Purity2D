@@ -25,7 +25,8 @@ Purity::Window::Window(int width, int height, std::string title, ViewportType vi
   mMaximizeButton(Rect(Vector2i(width-60, 5), 25, 25)),
   mMinimizeButton(Rect(Vector2i(width-90, 5), 25, 25)),
   mFullscreenButton(Rect(Vector2i(width-150, 5), 25, 25)),
-  mFullscreenDesktopButton(Rect(Vector2i(width-180, 5), 25, 25))
+  mFullscreenDesktopButton(Rect(Vector2i(width-180, 5), 25, 25)),
+  mUIButtonsOnBordered(Configuration::getInstance()->getBool("window", "ui_buttons_on_bordered", false))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -264,7 +265,7 @@ void Purity::Window::manipulateWindow()
 {
     if (!isContentMode())
     {
-        if (isBorderless())
+        if (isBorderless() || mUIButtonsOnBordered)
         {
             handleUIButtons();
         }
@@ -345,7 +346,7 @@ void Purity::Window::display()
         SDL_SetRenderDrawColor(mRenderer, 128, 128, 128, 200);
         SDL_RenderFillRect(mRenderer, &rect);
 
-        if (isBorderless())
+        if (isBorderless() || mUIButtonsOnBordered)
         {
             mCloseButton.draw(*this);
             mMaximizeButton.draw(*this);

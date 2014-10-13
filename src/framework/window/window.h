@@ -84,6 +84,7 @@ namespace Purity
 
         Vector2i minimumSize;
 
+        bool mUIButtonsOnBordered = false;
         Button mCloseButton;
         Button mMaximizeButton;
         Button mMinimizeButton;
