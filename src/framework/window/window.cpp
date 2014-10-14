@@ -13,7 +13,10 @@ const bool CONTENT_MODE_DEFAULT = true;
 const bool CONTENT_MODE_DEFAULT = false;
 #endif
 
-Purity::Window::Window(int width, int height, std::string title, ViewportType viewportType)
+Purity::Window::Window(int width,
+                       int height,
+                       const std::string& title,
+                       ViewportType viewportType)
 : mWindowManipulator(this),
   mViewportType(viewportType),
   mBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
@@ -195,13 +198,23 @@ void Purity::Window::setContentMode()
 
 void Purity::Window::maximize()
 {
+    SDL_MaximizeWindow(mInternalWindow);
+}
+
+void Purity::Window::restore()
+{
+    SDL_RestoreWindow(mInternalWindow);
+}
+
+void Purity::Window::toggleMaximize()
+{
     if (!isMaximized())
     {
-        SDL_MaximizeWindow(mInternalWindow);
+        maximize();
     }
     else
     {
-        SDL_RestoreWindow(mInternalWindow);
+        restore();
     }
 }
 
@@ -283,7 +296,7 @@ void Purity::Window::handleUIButtons()
 
     // handle clicks
     mask[0] = mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
-    mask[1] = mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::maximize, this));
+    mask[1] = mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::toggleMaximize, this));
     mask[2] = mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
     mask[3] = mFullscreenButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::fullscreen, this));
     mask[4] = mFullscreenDesktopButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::fullscreenDesktop, this));
@@ -321,6 +334,9 @@ void Purity::Window::loseFocus()
 
 void Purity::Window::display()
 {
+#ifdef _WIN32
+
+#endif
     if (mContentMode == false)
     {
         SDL_Rect rect;

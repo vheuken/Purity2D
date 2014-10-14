@@ -26,7 +26,11 @@ namespace Purity
     class Window : public RenderTarget
     {
     public:
-        Window(int width, int height, std::string title, ViewportType viewportType = ViewportType::CENTER);
+        Window(int width,
+               int height,
+               const std::string& title,
+               ViewportType viewportType = ViewportType::CENTER);
+
         ~Window();
 
         void setSize(const Vector2u& size);
@@ -46,6 +50,8 @@ namespace Purity
         void setContentMode();
 
         virtual void maximize();
+        virtual void restore();
+        void toggleMaximize();
         void minimize();
         void fullscreen();
         void fullscreenDesktop();
