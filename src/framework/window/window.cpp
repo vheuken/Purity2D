@@ -335,7 +335,12 @@ void Purity::Window::loseFocus()
 void Purity::Window::display()
 {
 #ifdef _WIN32
-
+    // this fixes the issue of maximized windows
+    // not reacting to changes in taskbar size/position
+    if (isMaximized())
+    {
+        maximize();
+    }
 #endif
     if (mContentMode == false)
     {
