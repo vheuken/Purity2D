@@ -1,5 +1,6 @@
 ---
 # BasedOnStyle:  WebKit
+Language: cpp
 AccessModifierOffset: -4
 ConstructorInitializerIndentWidth: 4
 AlignEscapedNewlinesLeft: false
@@ -34,7 +35,7 @@ Standard:        Cpp11
 IndentWidth:     4
 TabWidth:        8
 UseTab:          Never
-BreakBeforeBraces: Stroustrup
+BreakBeforeBraces: Allman
 IndentFunctionDeclarationAfterType: false
 SpacesInParentheses: false
 SpacesInAngles:  false
