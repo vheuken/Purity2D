@@ -1,6 +1,5 @@
 ---
 # BasedOnStyle:  WebKit
-Language: cpp
 AccessModifierOffset: -4
 ConstructorInitializerIndentWidth: 4
 AlignEscapedNewlinesLeft: false
