@@ -10,13 +10,12 @@
 
 #include <SDL_events.h>
 
-
 #include "../window/window.h"
 
 Purity::Vector2i Purity::Mouse::getPosition()
 {
-    Vector2i ret(0,0);
-    
+    Vector2i ret(0, 0);
+
 #ifdef __gnu_linux__
     // Open a connection with the X server
     Display* display = XOpenDisplay(NULL);
@@ -39,22 +38,21 @@ Purity::Vector2i Purity::Mouse::getPosition()
 #elif defined _WIN32
     POINT point;
     GetCursorPos(&point);
-    
+
     ret.x = point.x;
     ret.y = point.y;
 #elif defined __APPLE__ && !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     auto event = CGEventCreate(nullptr);
     auto cursor = CGEventGetLocation(event);
-    
+
     ret.x = cursor.x;
     ret.y = cursor.y;
-    
+
     CFRelease(event);
 #endif
-    
+
     return ret;
 }
-
 
 Purity::Vector2i Purity::Mouse::getPosition(const Purity::Window& relativeTo)
 {
