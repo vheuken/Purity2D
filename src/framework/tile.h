@@ -5,21 +5,21 @@
 
 namespace Purity
 {
-    class Tile : public Entity
-    {
-    public:
-        Tile(int x, int y, int width, int height, Texture * texture, int id);
+class Tile : public Entity
+{
+public:
+    Tile(int x, int y, int width, int height, Texture* texture, int id);
 
-        void initializePhysics(b2World * world);
-        void initializeStatic();
+    void initializePhysics(b2World* world);
+    void initializeStatic();
 
-    private:
-        const int mTileId;
+private:
+    const int mTileId;
 
-        void setTextureSubrect();
+    void setTextureSubrect();
 
-        void createBody(b2World* world);
-    };
+    void createBody(b2World* world);
+};
 }
 
 #endif // TILE_H

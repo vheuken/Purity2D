@@ -1,10 +1,8 @@
 #include "spritesheet.h"
 
-Purity::SpriteSheet::SpriteSheet(Texture* texture,
-                                 int tileWidth,
-                                 int tileHeight)
+Purity::SpriteSheet::SpriteSheet(Texture* texture, int tileWidth, int tileHeight)
 {
-    mTileWidth  = tileWidth;
+    mTileWidth = tileWidth;
     mTileHeight = tileHeight;
 
     mTexture = texture;
@@ -17,7 +15,7 @@ Purity::Rect Purity::SpriteSheet::getTileSubRect(int tileId) const
     tileRect.position.x = ((tileId) % getNumOfRows()) * getTileWidth();
     tileRect.position.y = ((tileId) / getNumOfRows()) * getTileHeight();
 
-    tileRect.width  = getTileWidth();
+    tileRect.width = getTileWidth();
     tileRect.height = getTileHeight();
 
     return tileRect;
@@ -47,4 +45,3 @@ int Purity::SpriteSheet::getNumOfCols() const
 {
     return mTexture->getSize().x / getTileWidth();
 }
-

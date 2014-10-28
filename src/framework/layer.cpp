@@ -4,15 +4,21 @@
 
 #include "graphics/texturemanager.h"
 
-Purity::Layer::Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer,  TextureManager * textureManager, std::string sceneDir )
-: mTmxMap(tmxMap), mTmxLayer(tmxLayer), mTextureManager(textureManager), mSceneDir(sceneDir)
+Purity::Layer::Layer(const Tmx::Map* tmxMap,
+                     const Tmx::Layer* tmxLayer,
+                     TextureManager* textureManager,
+                     std::string sceneDir)
+    : mTmxMap(tmxMap)
+    , mTmxLayer(tmxLayer)
+    , mTextureManager(textureManager)
+    , mSceneDir(sceneDir)
 {
     processTiles();
 }
 
 void Purity::Layer::processTiles()
 {
-    Texture * tileTexture;
+    Texture* tileTexture;
     Tmx::MapTile tmxTile;
 
     int layerHeight = mTmxLayer->GetHeight();
@@ -28,12 +34,14 @@ void Purity::Layer::processTiles()
 
             if (tmxTile.id != 0)
             {
-                std::string tilesetPathStr = mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource();
+                std::string tilesetPathStr
+                    = mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource();
                 std::string texturePathStr = mSceneDir + tilesetPathStr;
 
                 tileTexture = mTextureManager->getTexture(texturePathStr);
 
-                std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id));
+                std::unique_ptr<Tile> tile(
+                    new Tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id));
 
                 std::pair<int, int> tileCoordinates(x, y);
 
@@ -43,7 +51,7 @@ void Purity::Layer::processTiles()
     }
 }
 
-void Purity::Layer::initializePhysics(b2World * world)
+void Purity::Layer::initializePhysics(b2World* world)
 {
     if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
     {
@@ -61,13 +69,13 @@ void Purity::Layer::initializePhysics(b2World * world)
     }
 }
 
-const Purity::Tile * Purity::Layer::getTile(int x, int y) const
+const Purity::Tile* Purity::Layer::getTile(int x, int y) const
 {
-    std::pair <int, int> tileCoordinates(x, y);
+    std::pair<int, int> tileCoordinates(x, y);
 
     auto tileIterator = mTiles.find(tileCoordinates);
 
-    if ( tileIterator != mTiles.end() )
+    if (tileIterator != mTiles.end())
     {
         return tileIterator->second.get();
     }

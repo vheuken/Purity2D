@@ -9,28 +9,27 @@
 
 namespace Purity
 {
-    class SpriteSheet
-    {
-    public:
-        SpriteSheet(Texture* texture, int tileWidth, int tileHeight);
+class SpriteSheet
+{
+public:
+    SpriteSheet(Texture* texture, int tileWidth, int tileHeight);
 
-        Rect getTileSubRect(int tileId) const;
+    Rect getTileSubRect(int tileId) const;
 
-        Texture* getTexture() const;
+    Texture* getTexture() const;
 
-        int getTileWidth()  const;
-        int getTileHeight() const;
+    int getTileWidth() const;
+    int getTileHeight() const;
 
-    private:
-        Texture* mTexture;
+private:
+    Texture* mTexture;
 
-        int mTileWidth;
-        int mTileHeight;
+    int mTileWidth;
+    int mTileHeight;
 
-        int getNumOfRows() const;
-        int getNumOfCols() const;
-    };
-
+    int getNumOfRows() const;
+    int getNumOfCols() const;
+};
 }
 
 #endif // SPRITESHEET_H

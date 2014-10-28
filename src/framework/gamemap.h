@@ -16,36 +16,36 @@ class b2World;
 
 namespace Tmx
 {
-    class Map;
+class Map;
 }
 
 namespace Purity
 {
-    class GameMap : public Drawable
-    {
-    public:
-        GameMap(const Tmx::Map* tmxMap, const std::string& sceneDir);
+class GameMap : public Drawable
+{
+public:
+    GameMap(const Tmx::Map* tmxMap, const std::string& sceneDir);
 
-        void initializeTilePhysics(b2World * world);
+    void initializeTilePhysics(b2World* world);
 
-    private:
-        const std::string mSceneDir;
-        const Tmx::Map * mTmxMap;
+private:
+    const std::string mSceneDir;
+    const Tmx::Map* mTmxMap;
 
-        std::map<int, std::map<int, std::unique_ptr<Tile> > > mPhysicsTileList;
-        std::map<int, std::map<int, std::unique_ptr<Tile> > > mStaticTileList;
+    std::map<int, std::map<int, std::unique_ptr<Tile>>> mPhysicsTileList;
+    std::map<int, std::map<int, std::unique_ptr<Tile>>> mStaticTileList;
 
-        std::vector<std::unique_ptr<Layer> > mLayersList;
+    std::vector<std::unique_ptr<Layer>> mLayersList;
 
-        std::unique_ptr<TextureManager> mTextureManager;
+    std::unique_ptr<TextureManager> mTextureManager;
 
-        void processTilesetsFromTMXMap();
-        void processLayers();
-        void addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile> > >& tileList, int layerNum);
+    void processTilesetsFromTMXMap();
+    void processLayers();
+    void addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile>>>& tileList,
+                        int layerNum);
 
-        virtual void draw(RenderTarget& target) const;
-    };
-
+    virtual void draw(RenderTarget& target) const;
+};
 }
 
 #endif // GAME_MAP_H

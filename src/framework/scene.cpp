@@ -14,7 +14,7 @@ Purity::Scene::Scene(const std::string& sceneDir)
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), sceneDir));
 }
 
-void Purity::Scene::initializePhysics(b2World * world)
+void Purity::Scene::initializePhysics(b2World* world)
 {
     mMutex.lock();
 
@@ -26,7 +26,8 @@ void Purity::Scene::initializePhysics(b2World * world)
 
 void Purity::Scene::setEntityState(const EntityState& state)
 {
-    mObjectManager->getMovableEntityById(state.entityId)->setBodyPosition(state.position.x, state.position.y);
+    mObjectManager->getMovableEntityById(state.entityId)
+        ->setBodyPosition(state.position.x, state.position.y);
 }
 
 std::vector<Purity::EntityState> Purity::Scene::getEntityStates() const
@@ -49,15 +50,13 @@ std::string Purity::Scene::getLuaPhysicsUpdatePath() const
     return mLuaPhysicsUpdateFile;
 }
 
-
-void Purity::Scene::initializeTiles(b2World * world)
+void Purity::Scene::initializeTiles(b2World* world)
 {
     mMap->initializeTilePhysics(world);
 }
 
 void Purity::Scene::initializeObjects(b2World* world)
 {
-
 }
 
 void Purity::Scene::updatePhysics()

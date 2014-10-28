@@ -13,36 +13,39 @@ class b2World;
 
 namespace Tmx
 {
-    class Map;
-    class Layer;
+class Map;
+class Layer;
 }
 
 namespace Purity
 {
-    class TextureManager;
+class TextureManager;
 
-    class Layer : public Drawable
-    {
-    public:
-        Layer(const Tmx::Map * tmxMap, const Tmx::Layer * tmxLayer, TextureManager * textureManager, std::string sceneDir);
+class Layer : public Drawable
+{
+public:
+    Layer(const Tmx::Map* tmxMap,
+          const Tmx::Layer* tmxLayer,
+          TextureManager* textureManager,
+          std::string sceneDir);
 
-        void initializePhysics(b2World * world);
+    void initializePhysics(b2World* world);
 
-    private:
-        std::map<std::pair<int, int>, std::unique_ptr<Tile> > mTiles;
+private:
+    std::map<std::pair<int, int>, std::unique_ptr<Tile>> mTiles;
 
-        const Tmx::Map * mTmxMap;
-        const Tmx::Layer * mTmxLayer;
-        TextureManager * mTextureManager;
-        std::string mSceneDir;
+    const Tmx::Map* mTmxMap;
+    const Tmx::Layer* mTmxLayer;
+    TextureManager* mTextureManager;
+    std::string mSceneDir;
 
-        void processTiles();
+    void processTiles();
 
-        const Tile * getTile(int x, int y) const;
-        //std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
+    const Tile* getTile(int x, int y) const;
+    // std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
 
-        virtual void draw(RenderTarget& target) const;
-    };
+    virtual void draw(RenderTarget& target) const;
+};
 }
 
 #endif // LAYER_H
