@@ -1,8 +1,8 @@
 #include "view.h"
 
 Purity::View::View(const Vector2f& center, const Vector2f& size)
-: mCenter(center),
-  mSize(size)
+    : mCenter(center)
+    , mSize(size)
 {
     mViewport.height = 1;
     mViewport.width = 1;
@@ -26,10 +26,10 @@ const Purity::Vector2f& Purity::View::getSize() const
 
 void Purity::View::setViewport(const Purity::Rect& viewportRect)
 {
-	mViewport = viewportRect;
+    mViewport = viewportRect;
 }
 
 Purity::Rect Purity::View::getViewport() const
 {
-	return mViewport;
+    return mViewport;
 }

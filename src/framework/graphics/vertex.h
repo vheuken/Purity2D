@@ -5,15 +5,15 @@
 
 namespace Purity
 {
-    class Vertex
-    {
-    public:
-        Vertex() = default;
-        Vertex(const Vector2i& pos);
+class Vertex
+{
+public:
+    Vertex() = default;
+    Vertex(const Vector2i& pos);
 
-        Vector2i position;
-        Vector2i texCoords;
-    };
+    Vector2i position;
+    Vector2i texCoords;
+};
 }
 
 #endif // PURITY_VERTEX_H

@@ -7,25 +7,25 @@
 
 namespace Purity
 {
-	class View
-	{
-	public:
-		View() = default;
-		View(const Vector2f& center, const Vector2f& size);
+class View
+{
+public:
+    View() = default;
+    View(const Vector2f& center, const Vector2f& size);
 
-		void setCenter(const Vector2f& center);
-		void setSize(const Vector2f& size);
-        const Vector2f& getSize() const;
-		
-		void setViewport(const Rect& viewportRect);
-		Rect getViewport() const;
+    void setCenter(const Vector2f& center);
+    void setSize(const Vector2f& size);
+    const Vector2f& getSize() const;
 
-	private:
-		Rect mViewport;
+    void setViewport(const Rect& viewportRect);
+    Rect getViewport() const;
 
-        Vector2f mCenter;
-        Vector2f mSize;
-    };
+private:
+    Rect mViewport;
+
+    Vector2f mCenter;
+    Vector2f mSize;
+};
 }
 
 #endif // PURITY_VIEW_H
