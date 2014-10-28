@@ -6,7 +6,6 @@ void Purity::Transformable::setPosition(int x, int y)
     mPosition.y = y;
 }
 
-
 void Purity::Transformable::setPosition(const Vector2i& position)
 {
     mPosition = position;

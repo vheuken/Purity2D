@@ -8,7 +8,6 @@
 
 #include "entitystate.h"
 #include "../graphics/drawable.h"
-#include "../graphics/vertexarray.h"
 #include "../graphics/texture.h"
 #include "../graphics/rect.h"
 #include "../graphics/transformable.h"

@@ -7,12 +7,12 @@
 
 namespace Purity
 {
-    class Drawable
-    {
-    protected:
-        friend class RenderTarget;
-        virtual void draw(RenderTarget& target) const = 0;
-    };
+class Drawable
+{
+protected:
+    friend class RenderTarget;
+    virtual void draw(RenderTarget& target) const = 0;
+};
 }
 
 #endif // PURITY_DRAWABLE_H

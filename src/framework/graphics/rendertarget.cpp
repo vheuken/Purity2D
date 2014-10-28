@@ -21,7 +21,7 @@ void Purity::RenderTarget::clear()
         std::cout << SDL_GetError() << std::endl;
     }
 
-    if(SDL_RenderClear(mRenderer)  < 0)
+    if (SDL_RenderClear(mRenderer) < 0)
     {
         std::cout << SDL_GetError() << std::endl;
     }
@@ -52,7 +52,9 @@ void Purity::RenderTarget::draw(const Purity::Rect& rectToDraw)
     }
 }
 
-void Purity::RenderTarget::draw(const SpriteSheet* spriteSheet, unsigned short animationFrame, const Purity::Vector2f& position)
+void Purity::RenderTarget::draw(const SpriteSheet* spriteSheet,
+                                unsigned short animationFrame,
+                                const Purity::Vector2f& position)
 {
     auto texture = spriteSheet->getTexture();
 

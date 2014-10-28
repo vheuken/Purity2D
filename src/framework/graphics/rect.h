@@ -7,19 +7,19 @@
 
 namespace Purity
 {
-    class Rect
-    {
-    public:
-        Rect();
-        Rect(Vector2i p, int w, int h);
+class Rect
+{
+public:
+    Rect();
+    Rect(Vector2i p, int w, int h);
 
-        Vector2i position;
+    Vector2i position;
 
-        int width;
-        int height;
+    int width;
+    int height;
 
-        explicit operator SDL_Rect() const;
-    };
+    explicit operator SDL_Rect() const;
+};
 }
 
 #endif // PURITY_RECT_H

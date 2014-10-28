@@ -5,17 +5,17 @@
 
 namespace Purity
 {
-    class Transformable
-    {
-    public:
-        void setPosition(int x, int y);
-        void setPosition(const Vector2i& position);
+class Transformable
+{
+public:
+    void setPosition(int x, int y);
+    void setPosition(const Vector2i& position);
 
-        Vector2i getPosition() const;
+    Vector2i getPosition() const;
 
-    private:
-        Vector2i mPosition;
-    };
+private:
+    Vector2i mPosition;
+};
 }
 
 #endif // PURITY_TRANSFORMABLE_H

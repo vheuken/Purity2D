@@ -5,7 +5,7 @@ Purity::Button::Button(const Purity::Rect& rect)
 {
 }
 
-void Purity::Button::setRect(const Purity::Rect & rect)
+void Purity::Button::setRect(const Purity::Rect& rect)
 {
     mRect = rect;
 }

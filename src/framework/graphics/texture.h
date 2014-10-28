@@ -10,29 +10,29 @@ struct SDL_Renderer;
 
 namespace Purity
 {
-    class Texture
-    {
-    public:
-        Texture();
-        ~Texture();
+class Texture
+{
+public:
+    Texture();
+    ~Texture();
 
-        void loadFromFile(const std::string& path);
+    void loadFromFile(const std::string& path);
 
-        Vector2u getSize() const;
+    Vector2u getSize() const;
 
-        explicit operator SDL_Texture*() const;
+    explicit operator SDL_Texture*() const;
 
-    private:
-        SDL_Texture* mInternalTexture;
-        std::string mImageFilePath;
-        bool mTextureCreationNeeded;
+private:
+    SDL_Texture* mInternalTexture;
+    std::string mImageFilePath;
+    bool mTextureCreationNeeded;
 
-        bool createInternalTexture(SDL_Renderer* renderer);
+    bool createInternalTexture(SDL_Renderer* renderer);
 
-        SDL_Surface* loadImage(const std::string& path);
+    SDL_Surface* loadImage(const std::string& path);
 
-        friend class RenderTarget;
-    };
+    friend class RenderTarget;
+};
 }
 
 #endif // PURITY_TEXTURE_H

@@ -5,9 +5,9 @@ Purity::Rect::Rect()
 }
 
 Purity::Rect::Rect(Vector2i p, int w, int h)
-    : position(p),
-      width(w),
-      height(h)
+    : position(p)
+    , width(w)
+    , height(h)
 {
 }
 

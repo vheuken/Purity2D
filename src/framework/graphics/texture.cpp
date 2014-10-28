@@ -6,8 +6,8 @@
 #include <stb_image.h>
 
 Purity::Texture::Texture()
-: mInternalTexture(nullptr),
-  mTextureCreationNeeded(false)
+    : mInternalTexture(nullptr)
+    , mTextureCreationNeeded(false)
 {
 }
 
@@ -30,8 +30,7 @@ Purity::Vector2u Purity::Texture::getSize() const
         return Vector2u(0, 0);
     }
 
-    return Vector2u(static_cast<unsigned int>(width),
-                    static_cast<unsigned int>(height));
+    return Vector2u(static_cast<unsigned int>(width), static_cast<unsigned int>(height));
 }
 
 Purity::Texture::~Texture()
@@ -72,9 +71,9 @@ bool Purity::Texture::createInternalTexture(SDL_Renderer* renderer)
 SDL_Surface* Purity::Texture::loadImage(const std::string& path)
 {
     int x, y, comp;
-    unsigned char *data;
+    unsigned char* data;
     uint32_t rmask, gmask, bmask, amask;
-    SDL_Surface *rv;
+    SDL_Surface* rv;
 
     SDL_RWops* file = SDL_RWFromFile(path.c_str(), "rb");
 
@@ -102,11 +101,16 @@ SDL_Surface* Purity::Texture::loadImage(const std::string& path)
     amask = 0xff000000;
 #endif
 
-    if (comp == 4) {
+    if (comp == 4)
+    {
         rv = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-    } else if (comp == 3) {
+    }
+    else if (comp == 3)
+    {
         rv = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-    } else {
+    }
+    else
+    {
         stbi_image_free(data);
         return 0;
     }
@@ -114,7 +118,7 @@ SDL_Surface* Purity::Texture::loadImage(const std::string& path)
     memcpy(rv->pixels, data, comp * x * y);
 
     stbi_image_free(data);
-    delete [] fileData;
+    delete[] fileData;
 
     return rv;
 }

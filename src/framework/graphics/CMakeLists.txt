@@ -6,7 +6,6 @@ set( GRAPHICS_HEADER_FILES
      drawable.h
 
      vertex.h
-     vertexarray.h
      rendertarget.h
      texture.h
      texturemanager.h
@@ -17,7 +16,6 @@ set( GRAPHICS_HEADER_FILES
 
 set( GRAPHICS_SOURCE_FILES
      rendertarget.cpp
-     vertexarray.cpp
      vertex.cpp
      texture.cpp
      texturemanager.cpp
