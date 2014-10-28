@@ -7,7 +7,7 @@
 #include <memory>
 #include <enet/enet.h>
 
-#include "abstractsystem.h"
+#include "subsystemable.h"
 #include "../framework/network/networkaction.h"
 #include "../framework/scene.h"
 #include "../framework/network/server.h"
@@ -17,7 +17,7 @@ struct lua_State;
 
 namespace Purity
 {
-class NetworkSystem : public AbstractSystem
+class NetworkSystem : public SubSystemable
 {
 public:
     NetworkSystem(std::queue<NetworkAction>* serverActionQueue);

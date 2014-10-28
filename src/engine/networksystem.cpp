@@ -5,7 +5,7 @@
 
 Purity::NetworkSystem::NetworkSystem(
     std::queue<NetworkAction>* serverActionQueue)
-    : AbstractSystem()
+    : SubSystemable()
     , mIsServer(false)
     , mServerActionQueue(serverActionQueue)
 {

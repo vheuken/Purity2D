@@ -1,14 +1,14 @@
-#ifndef ABSTRACT_SYSTEM_H
-#define ABSTRACT_SYSTEM_H
+#ifndef SUB_SYSTEMABLE_H
+#define SUB_SYSTEMABLE_H
 
 namespace Purity
 {
 class Scene;
 
-class AbstractSystem
+class SubSystemable
 {
 public:
-    AbstractSystem();
+    SubSystemable();
 
     virtual void update(Scene* scene) = 0;
 
@@ -17,4 +17,4 @@ protected:
 };
 }
 
-#endif // ABSTRACT_SYSTEM_H
+#endif // SUB_SYSTEMABLE_H

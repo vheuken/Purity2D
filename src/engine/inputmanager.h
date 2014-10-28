@@ -3,7 +3,7 @@
 
 #include <queue>
 
-#include "abstractsystem.h"
+#include "subsystemable.h"
 #include "../framework/system/event.h"
 #include "../framework/system/actionmanager.h"
 
@@ -11,7 +11,7 @@ namespace Purity
 {
 class Window;
 
-class InputSystem : public AbstractSystem
+class InputSystem : public SubSystemable
 {
 public:
     InputSystem(Window* window, std::queue<Event>* inputQueue);

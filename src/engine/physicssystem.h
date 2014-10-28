@@ -5,7 +5,7 @@
 #include <memory>
 #include <Box2D/Box2D.h>
 
-#include "abstractsystem.h"
+#include "subsystemable.h"
 #include "../framework/network/networkaction.h"
 #include "../framework/system/timer.h"
 #include "../framework/system/event.h"
@@ -18,7 +18,7 @@ const int32 POSITION_ITERATIONS = 2;
 
 const b2Vec2 GRAVITY(0.0, 15);
 
-class PhysicsSystem : public AbstractSystem
+class PhysicsSystem : public SubSystemable
 {
 public:
     PhysicsSystem(std::queue<Event>* inputQueue,

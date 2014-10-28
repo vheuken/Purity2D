@@ -7,7 +7,7 @@
 #include "../framework/scene.h"
 
 Purity::RenderSystem::RenderSystem(Purity::Window* window)
-    : AbstractSystem()
+    : SubSystemable()
     , mWindow(window)
 {
 }

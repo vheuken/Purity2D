@@ -9,7 +9,7 @@ set( HEADER_FILES
     luamanager.h
     networksystem.h
     commandlinearguments.h
-    abstractsystem.h
+    subsystemable.h
 )
 
 set( SOURCE_FILES     
@@ -21,7 +21,7 @@ set( SOURCE_FILES
      luamanager.cpp 
      networksystem.cpp
      commandlinearguments.cpp
-     abstractsystem.cpp
+     subsystemable.cpp
 )
 
 if (ANDROID)

@@ -4,13 +4,13 @@
 #include <thread>
 #include <mutex>
 
-#include "abstractsystem.h"
+#include "subsystemable.h"
 
 namespace Purity
 {
 class Window;
 
-class RenderSystem : public AbstractSystem
+class RenderSystem : public SubSystemable
 {
 public:
     RenderSystem(Window* window);
