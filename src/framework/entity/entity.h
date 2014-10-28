@@ -18,75 +18,75 @@
 
 namespace Tmx
 {
-    class Object;
+class Object;
 }
 
 namespace Purity
 {
-    const float32 PIXELS_PER_METER = 30.f;//= Configuration::getInstance()->getReal("physics", "pixels_per_meter", 30.0);
-    const float32 DEFAULT_HITBOX_WIDTH_METERS = 0.5;
-    const float32 DEFAULT_HITBOX_HEIGHT_METERS = 1.5;
+const float32 PIXELS_PER_METER
+    = 30.f; //= Configuration::getInstance()->getReal("physics", "pixels_per_meter", 30.0);
+const float32 DEFAULT_HITBOX_WIDTH_METERS = 0.5;
+const float32 DEFAULT_HITBOX_HEIGHT_METERS = 1.5;
 
-    const float32 DEFAULT_HITBOX_WIDTH_PIXELS  = PIXELS_PER_METER * DEFAULT_HITBOX_WIDTH_METERS;
-    const float32 DEFAULT_HITBOX_HEIGHT_PIXELS = PIXELS_PER_METER * DEFAULT_HITBOX_HEIGHT_METERS;
+const float32 DEFAULT_HITBOX_WIDTH_PIXELS = PIXELS_PER_METER * DEFAULT_HITBOX_WIDTH_METERS;
+const float32 DEFAULT_HITBOX_HEIGHT_PIXELS = PIXELS_PER_METER * DEFAULT_HITBOX_HEIGHT_METERS;
 
-    const float DEFAULT_HITBOX_OUTLINE_THICKNESS = 2.0;
+const float DEFAULT_HITBOX_OUTLINE_THICKNESS = 2.0;
 
-    class Entity : public Drawable, protected Transformable
-    {
-    public:
-        Entity();
-        Entity(const Tmx::Object* object, b2World* world, Texture * texture);
+class Entity : public Drawable, protected Transformable
+{
+public:
+    Entity();
+    Entity(const Tmx::Object* object, b2World* world, Texture* texture);
 
-        virtual void createBody(b2World* world);
-        void setName(std::string name);
-        std::string getName() const;
+    virtual void createBody(b2World* world);
+    void setName(std::string name);
+    std::string getName() const;
 
-        void setBodyPosition(float x, float y);
-        void setSize(float width, float height);
+    void setBodyPosition(float x, float y);
+    void setSize(float width, float height);
 
-        float getX() const;
-        float getY() const;
+    float getX() const;
+    float getY() const;
 
-        const unsigned int getId() const;
+    const unsigned int getId() const;
 
-        void setAnimationFrame(int frame);
+    void setAnimationFrame(int frame);
 
-        EntityState getState() const;
+    EntityState getState() const;
 
-        virtual void update();
+    virtual void update();
 
-        static void luaBindings(lua_State* state);
+    static void luaBindings(lua_State* state);
 
-    protected:
-        b2BodyDef mHitboxBodyDef;
-        b2Body* mHitboxBody;
-        Rect mHitboxRect;
+protected:
+    b2BodyDef mHitboxBodyDef;
+    b2Body* mHitboxBody;
+    Rect mHitboxRect;
 
-        Texture* mTexture;
-        std::unique_ptr<SpriteSheet> mSpriteSheet;
-        unsigned short mAnimationFrame;
+    Texture* mTexture;
+    std::unique_ptr<SpriteSheet> mSpriteSheet;
+    unsigned short mAnimationFrame;
 
-        float mWidthPixels;
-        float mHeightPixels;
+    float mWidthPixels;
+    float mHeightPixels;
 
-        float mFrameOffsetX = 0;
-        float mFrameOffsetY = 0;
+    float mFrameOffsetX = 0;
+    float mFrameOffsetY = 0;
 
-        void initializeHitboxShape();
+    void initializeHitboxShape();
 
-    private:
-        static unsigned int sNumOfEntities;
-        const unsigned int mId;
-        std::string mName;
+private:
+    static unsigned int sNumOfEntities;
+    const unsigned int mId;
+    std::string mName;
 
-        EntityState mState;
+    EntityState mState;
 
-        void updateState();
+    void updateState();
 
-        virtual void draw(RenderTarget& target) const;
-    };
-
+    virtual void draw(RenderTarget& target) const;
+};
 }
 
 #endif // ENTITY_H

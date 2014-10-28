@@ -5,12 +5,12 @@
 
 namespace Purity
 {
-    struct EntityState
-    {
-        unsigned int entityId;
-        b2Vec2 position;
-        float32 angle;
-    };
+struct EntityState
+{
+    unsigned int entityId;
+    b2Vec2 position;
+    float32 angle;
+};
 }
 
 #endif // ENTITY_STATE_H

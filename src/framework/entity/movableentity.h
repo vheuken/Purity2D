@@ -7,23 +7,23 @@
 
 namespace luabind
 {
-    struct scope;
+struct scope;
 }
 
 namespace Purity
 {
-    class MovableEntity : public Entity
-    {
-    public:
-        MovableEntity(const Tmx::Object* object, b2World* world, Texture * texture);
+class MovableEntity : public Entity
+{
+public:
+    MovableEntity(const Tmx::Object* object, b2World* world, Texture* texture);
 
-        void applyLinearImpulse(float x, float y);
-        void setLinearVelocity(float x, float y);
-        float getLinearVelocityX() const;
-        float getLinearVelocityY() const;
+    void applyLinearImpulse(float x, float y);
+    void setLinearVelocity(float x, float y);
+    float getLinearVelocityX() const;
+    float getLinearVelocityY() const;
 
-        static void luaBindings(lua_State* state);
-    };
+    static void luaBindings(lua_State* state);
+};
 }
 
 #endif // MOVABLE_ENTITY_H

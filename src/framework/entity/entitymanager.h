@@ -13,43 +13,43 @@ class b2World;
 
 namespace luabind
 {
-    struct scope;
+struct scope;
 }
 
 namespace Tmx
 {
-    class Map;
+class Map;
 }
 
 namespace Purity
 {
-    class EntityManager : public Drawable
-    {
-    public:
-        EntityManager(const Tmx::Map* tmxMap, b2World* world);
+class EntityManager : public Drawable
+{
+public:
+    EntityManager(const Tmx::Map* tmxMap, b2World* world);
 
-        Entity* const getEntityByName(const std::string& objectName);
-        MovableEntity* const getMovableEntityByName(const std::string& objectName);
-        MovableEntity* const getMovableEntityById(unsigned int id);
+    Entity* const getEntityByName(const std::string& objectName);
+    MovableEntity* const getMovableEntityByName(const std::string& objectName);
+    MovableEntity* const getMovableEntityById(unsigned int id);
 
-        void updatePhysics();
+    void updatePhysics();
 
-        std::vector<EntityState> getEntityStates() const;
+    std::vector<EntityState> getEntityStates() const;
 
-        static void luaBindings(lua_State* state);
+    static void luaBindings(lua_State* state);
 
-    private:
-        const Tmx::Map* mTmxMap;
-        b2World* mWorld;
-        std::vector<Entity> mEntityList;
-        std::vector<MovableEntity> mMovableEntityList;
+private:
+    const Tmx::Map* mTmxMap;
+    b2World* mWorld;
+    std::vector<Entity> mEntityList;
+    std::vector<MovableEntity> mMovableEntityList;
 
-        TextureManager mTextureManager;
+    TextureManager mTextureManager;
 
-        void initializeObjects();
+    void initializeObjects();
 
-        virtual void draw(RenderTarget& target) const;
-    };
+    virtual void draw(RenderTarget& target) const;
+};
 }
 
 #endif // OBJECT_MANAGER_H

@@ -11,7 +11,7 @@ Purity::Entity::Entity()
     mState.entityId = mId;
 }
 
-Purity::Entity::Entity(const Tmx::Object* object, b2World* world, Purity::Texture * texture)
+Purity::Entity::Entity(const Tmx::Object* object, b2World* world, Purity::Texture* texture)
     : Entity()
 {
     mTexture = texture;
@@ -29,9 +29,10 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world, Purity::Textur
 
     if (mTexture != nullptr)
     {
-        mSpriteSheet = std::unique_ptr<SpriteSheet>(new SpriteSheet(mTexture,
-                                                                    object->GetProperties().GetNumericProperty("AnimationFrameWidth"),
-                                                                    object->GetProperties().GetNumericProperty("AnimationFrameWidth")));
+        mSpriteSheet = std::unique_ptr<SpriteSheet>(
+            new SpriteSheet(mTexture,
+                            object->GetProperties().GetNumericProperty("AnimationFrameWidth"),
+                            object->GetProperties().GetNumericProperty("AnimationFrameWidth")));
 
         mAnimationFrame = object->GetProperties().GetNumericProperty("StartingAnimationFrame");
         mFrameOffsetX = object->GetProperties().GetNumericProperty("AnimationFrameOffsetX");
@@ -75,7 +76,7 @@ void Purity::Entity::setSize(float width, float height)
     b2PolygonShape hitboxBox;
     b2FixtureDef hitboxFixtureDef;
 
-    hitboxBox.SetAsBox(mWidthPixels / PIXELS_PER_METER /2, mHeightPixels / PIXELS_PER_METER /2);
+    hitboxBox.SetAsBox(mWidthPixels / PIXELS_PER_METER / 2, mHeightPixels / PIXELS_PER_METER / 2);
 
     hitboxFixtureDef.shape = &hitboxBox;
 
@@ -100,8 +101,8 @@ void Purity::Entity::setAnimationFrame(int frame)
 
 void Purity::Entity::update()
 {
-    float x = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mWidthPixels/2);
-    float y = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHeightPixels/2);
+    float x = (mHitboxBody->GetPosition().x * PIXELS_PER_METER) - (mWidthPixels / 2);
+    float y = (mHitboxBody->GetPosition().y * PIXELS_PER_METER) - (mHeightPixels / 2);
 
     setPosition(x, y);
 
@@ -126,7 +127,7 @@ void Purity::Entity::initializeHitboxShape()
 {
     mHitboxRect.position.x = getPosition().x;
     mHitboxRect.position.y = getPosition().y;
-    mHitboxRect.width  = mWidthPixels;
+    mHitboxRect.width = mWidthPixels;
     mHitboxRect.height = mHeightPixels;
 }
 
@@ -136,7 +137,7 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
     {
         target.draw(mSpriteSheet.get(),
                     mAnimationFrame,
-                    Vector2f(getPosition().x+mFrameOffsetX, getPosition().y+mFrameOffsetY));
+                    Vector2f(getPosition().x + mFrameOffsetX, getPosition().y + mFrameOffsetY));
     }
     else
     {
@@ -146,12 +147,11 @@ void Purity::Entity::draw(Purity::RenderTarget& target) const
 
 void Purity::Entity::luaBindings(lua_State* state)
 {
-/*
-    luabridge::getGlobalNamespace(state)
-        .beginNamespace("Purity")
-            .beginClass<Entity>("Entity")
-                .addFunction("getName", &Entity::getName)
-            .endClass()
-        .endNamespace();*/
+    /*
+        luabridge::getGlobalNamespace(state)
+            .beginNamespace("Purity")
+                .beginClass<Entity>("Entity")
+                    .addFunction("getName", &Entity::getName)
+                .endClass()
+            .endNamespace();*/
 }
-

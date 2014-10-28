@@ -30,7 +30,8 @@ Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& 
     return nullptr;
 }
 
-Purity::MovableEntity* const Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
+Purity::MovableEntity* const
+Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
 {
 
     for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
@@ -81,7 +82,7 @@ void Purity::EntityManager::initializeObjects()
                 if (currentObject->GetProperties().GetSize() > 0)
                 {
                     std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
-                    Texture * t = mTextureManager.getTexture("scenes/init/" + p);
+                    Texture* t = mTextureManager.getTexture("scenes/init/" + p);
                     MovableEntity object(currentObject, mWorld, t);
                     mMovableEntityList.push_back(std::move(object));
                 }
@@ -90,15 +91,12 @@ void Purity::EntityManager::initializeObjects()
                     MovableEntity object(currentObject, mWorld, nullptr);
                     mMovableEntityList.push_back(std::move(object));
                 }
-
             }
             else
             {
                 Entity entity(currentObject, mWorld, nullptr);
                 mEntityList.push_back(std::move(entity));
-
             }
-
         }
     }
 }
@@ -140,15 +138,13 @@ void Purity::EntityManager::draw(Purity::RenderTarget& target) const
     }
 }
 
-
 void Purity::EntityManager::luaBindings(lua_State* state)
 {
     luabridge::getGlobalNamespace(state)
-            .beginNamespace("Purity")
-                .beginClass <EntityManager> ("EntityManager")
-                    .addFunction("getEntityByName", &EntityManager::getEntityByName)
-                    .addFunction("getMovableEntityByName", &EntityManager::getMovableEntityByName)
-                .endClass()
-            .endNamespace();
+        .beginNamespace("Purity")
+        .beginClass<EntityManager>("EntityManager")
+        .addFunction("getEntityByName", &EntityManager::getEntityByName)
+        .addFunction("getMovableEntityByName", &EntityManager::getMovableEntityByName)
+        .endClass()
+        .endNamespace();
 }
-
