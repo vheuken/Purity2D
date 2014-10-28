@@ -12,97 +12,97 @@
 
 struct SDL_Window;
 struct SDL_Renderer;
-union  SDL_Event;
+union SDL_Event;
 
 namespace Purity
 {
-    enum class ViewportType 
-    {
-        LETTERBOX,
-        CENTER,
-        STRETCH
-    };
+enum class ViewportType
+{
+    LETTERBOX,
+    CENTER,
+    STRETCH
+};
 
-    class Window : public RenderTarget
-    {
-    public:
-        Window(int width,
-               int height,
-               const std::string& title,
-               ViewportType viewportType = ViewportType::CENTER);
+class Window : public RenderTarget
+{
+public:
+    Window(int width,
+           int height,
+           const std::string& title,
+           ViewportType viewportType = ViewportType::CENTER);
 
-        ~Window();
+    ~Window();
 
-        void setSize(const Vector2u& size);
-        Vector2u getSize() const;
+    void setSize(const Vector2u& size);
+    Vector2u getSize() const;
 
-        void setPosition(const Vector2i& position);
-        Vector2i getPosition() const;
+    void setPosition(const Vector2i& position);
+    Vector2i getPosition() const;
 
-        bool pollEvent(Event& event);
+    bool pollEvent(Event& event);
 
-        bool isOpen() const;
+    bool isOpen() const;
 
-        bool isContentMode() const;
+    bool isContentMode() const;
 
-        void toggleMode();
-        void setWindowMode();
-        void setContentMode();
+    void toggleMode();
+    void setWindowMode();
+    void setContentMode();
 
-        virtual void maximize();
-        virtual void restore();
-        void toggleMaximize();
-        void minimize();
-        void fullscreen();
-        void fullscreenDesktop();
+    virtual void maximize();
+    virtual void restore();
+    void toggleMaximize();
+    void minimize();
+    void fullscreen();
+    void fullscreenDesktop();
 
-        bool isBorderless() const;
-        virtual bool isMaximized() const;
-        bool isFullscreen() const;
+    bool isBorderless() const;
+    virtual bool isMaximized() const;
+    bool isFullscreen() const;
 
-        void close();
+    void close();
 
-        void manipulateWindow();
+    void manipulateWindow();
 
-        void handleUIButtons();
+    void handleUIButtons();
 
-        void gainFocus();
+    void gainFocus();
 
-        void loseFocus();
+    void loseFocus();
 
-        void display();
+    void display();
 
-    protected:
-        SDL_Window* mInternalWindow;
+protected:
+    SDL_Window* mInternalWindow;
 
-    private:
-        WindowManipulator mWindowManipulator;
+private:
+    WindowManipulator mWindowManipulator;
 
-        ViewportType mViewportType;
+    ViewportType mViewportType;
 
-        bool mBorderless;
+    bool mBorderless;
 
-        bool mIsInputFocused;
+    bool mIsInputFocused;
 
-        bool mCursorLock;
+    bool mCursorLock;
 
-        bool mContentMode;
+    bool mContentMode;
 
-        Vector2i minimumSize;
+    Vector2i minimumSize;
 
-        bool mUIButtonsOnBordered = false;
-        Button mCloseButton;
-        Button mMaximizeButton;
-        Button mMinimizeButton;
-        Button mFullscreenButton;
-        Button mFullscreenDesktopButton;
+    bool mUIButtonsOnBordered = false;
+    Button mCloseButton;
+    Button mMaximizeButton;
+    Button mMinimizeButton;
+    Button mFullscreenButton;
+    Button mFullscreenDesktopButton;
 
-        bool mMouseOnButtons = false;
+    bool mMouseOnButtons = false;
 
-        void setResizeHandling();
-        void setRenderScale();
-        void setRenderMaintainAspectRatio();
-    };
+    void setResizeHandling();
+    void setRenderScale();
+    void setRenderMaintainAspectRatio();
+};
 }
 
 #endif // PURITY_WINDOW_H

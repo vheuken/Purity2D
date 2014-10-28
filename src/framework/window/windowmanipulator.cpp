@@ -6,13 +6,13 @@
 #include <iostream>
 
 Purity::WindowManipulator::WindowManipulator(Window* window)
-: mWindow(window),
-  mWindowDrag(false),
-  mWindowResize(false),
-  mRightBorderGrabbed(false),
-  mLeftBorderGrabbed(false),
-  mBottomBorderGrabbed(false),
-  mTopBorderGrabbed(false)
+    : mWindow(window)
+    , mWindowDrag(false)
+    , mWindowResize(false)
+    , mRightBorderGrabbed(false)
+    , mLeftBorderGrabbed(false)
+    , mBottomBorderGrabbed(false)
+    , mTopBorderGrabbed(false)
 {
 }
 
@@ -40,7 +40,9 @@ void Purity::WindowManipulator::setWindowFlags()
             setBorderGrabbedFlags();
             std::cout << "Border grabbed!" << std::endl;
 
-            mWindowResizeOffsetRightBottom = static_cast<Vector2i>(mWindow->getSize()) - Mouse::getPosition(*mWindow);;
+            mWindowResizeOffsetRightBottom = static_cast<Vector2i>(mWindow->getSize())
+                                             - Mouse::getPosition(*mWindow);
+            ;
 
             mWindowResizeOffsetLeftTop = Mouse::getPosition(*mWindow);
         }
@@ -162,7 +164,7 @@ void Purity::WindowManipulator::resizeWindow()
         newWindowPos.y = mousePos.y - mWindowResizeOffsetLeftTop.y;
         newWindowSize.y += windowPos.y - newWindowPos.y;
     }
-    
+
     mWindow->setSize(newWindowSize);
     mWindow->setPosition(newWindowPos);
 }
@@ -172,10 +174,12 @@ bool Purity::WindowManipulator::isMouseOnBorder() const
     Vector2i mousePositionRelativeToWindow = Mouse::getPosition(*mWindow);
     Vector2i windowSize = static_cast<Vector2i>(mWindow->getSize());
 
-    if ((mousePositionRelativeToWindow.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS && mousePositionRelativeToWindow.x <= windowSize.x) ||
-        (mousePositionRelativeToWindow.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS && mousePositionRelativeToWindow.y <= windowSize.y) ||
-        mousePositionRelativeToWindow.x <= STRETCHABLE_BORDER_PIXELS ||
-        mousePositionRelativeToWindow.y <= STRETCHABLE_BORDER_PIXELS)
+    if ((mousePositionRelativeToWindow.x >= windowSize.x - STRETCHABLE_BORDER_PIXELS
+         && mousePositionRelativeToWindow.x <= windowSize.x)
+        || (mousePositionRelativeToWindow.y >= windowSize.y - STRETCHABLE_BORDER_PIXELS
+            && mousePositionRelativeToWindow.y <= windowSize.y)
+        || mousePositionRelativeToWindow.x <= STRETCHABLE_BORDER_PIXELS
+        || mousePositionRelativeToWindow.y <= STRETCHABLE_BORDER_PIXELS)
     {
         return true;
     }

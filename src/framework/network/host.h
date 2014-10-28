@@ -5,17 +5,17 @@
 
 namespace Purity
 {
-    class Host
-    {
-    public:
-        ~Host();
+class Host
+{
+public:
+    ~Host();
 
-        virtual void handleEvents() = 0;
+    virtual void handleEvents() = 0;
 
-    protected:
-        ENetHost* mHost;
-        ENetAddress mAddress;
-    };
+protected:
+    ENetHost* mHost;
+    ENetAddress mAddress;
+};
 }
 
 #endif // HOST_H

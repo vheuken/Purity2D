@@ -1,11 +1,12 @@
 #include "client.h"
 #include <iostream>
 
-Purity::Client::Client(std::map<unsigned int, EntityState>* receivedStates) 
-: mServerPeer(nullptr), mReceivedStates(receivedStates)
+Purity::Client::Client(std::map<unsigned int, EntityState>* receivedStates)
+    : mServerPeer(nullptr)
+    , mReceivedStates(receivedStates)
 {
     mHost = enet_host_create(NULL, 1, 2, 0, 0);
-    
+
     if (mHost == NULL)
     {
         std::cerr << "Error occured while trying to create an ENet client host\n";
@@ -33,7 +34,7 @@ void Purity::Client::handleEvents()
 
 void Purity::Client::sendAction(NetworkAction action)
 {
-    ENetPacket * enetPacket;
+    ENetPacket* enetPacket;
 
     enetPacket = enet_packet_create(&action, sizeof(NetworkAction), ENET_PACKET_FLAG_RELIABLE);
 
@@ -44,7 +45,7 @@ void Purity::Client::connectToServer(std::string serverAddressStr, unsigned shor
 {
     ENetAddress address;
     ENetEvent event;
-    ENetPeer *peer = nullptr;
+    ENetPeer* peer = nullptr;
 
     enet_address_set_host(&address, serverAddressStr.c_str());
     address.port = port;
@@ -56,8 +57,7 @@ void Purity::Client::connectToServer(std::string serverAddressStr, unsigned shor
         std::cerr << "No available peers for initiating connection\n";
     }
 
-    if (enet_host_service(mHost, &event, 5000) > 0 &&
-        event.type == ENET_EVENT_TYPE_CONNECT)
+    if (enet_host_service(mHost, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
     {
         std::cout << "Connected to " << serverAddressStr << std::endl;
         mServerPeer = peer;

@@ -10,23 +10,23 @@
 
 namespace Purity
 {
-    class Client : public Host
-    {
-    public:
-        Client(std::map<unsigned int, EntityState>* receivedStates);
+class Client : public Host
+{
+public:
+    Client(std::map<unsigned int, EntityState>* receivedStates);
 
-        void handleEvents();
+    void handleEvents();
 
-        void sendAction(NetworkAction action);
+    void sendAction(NetworkAction action);
 
-        void connectToServer(std::string serverAddressStr, unsigned short port);
+    void connectToServer(std::string serverAddressStr, unsigned short port);
 
-    private:
-        ENetPeer * mServerPeer;
-        std::map<unsigned int, EntityState>* mReceivedStates;
+private:
+    ENetPeer* mServerPeer;
+    std::map<unsigned int, EntityState>* mReceivedStates;
 
-        void addState(const EntityState& state);
-    };
+    void addState(const EntityState& state);
+};
 }
 
 #endif // CLIENT_H

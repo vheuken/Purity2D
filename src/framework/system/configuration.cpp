@@ -11,7 +11,8 @@ Purity::Configuration* Purity::Configuration::getInstance()
     return &instance;
 }
 
-std::string Purity::Configuration::getString(std::string section, std::string name, std::string defaultValue)
+std::string
+Purity::Configuration::getString(std::string section, std::string name, std::string defaultValue)
 {
     return mConfigFile->Get(section, name, defaultValue);
 }

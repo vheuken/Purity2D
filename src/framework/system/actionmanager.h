@@ -6,19 +6,19 @@
 
 namespace Purity
 {
-    class ActionManager
-    {
-    public:
-        bool getActionState(const std::string& actionName) const;
+class ActionManager
+{
+public:
+    bool getActionState(const std::string& actionName) const;
 
-        void enableAction(const std::string& actionName);
-        void disableAction(const std::string& actionName);
+    void enableAction(const std::string& actionName);
+    void disableAction(const std::string& actionName);
 
-        void disableAll();
+    void disableAll();
 
-    private:
-        std::map<std::string, bool> mActionMap;
-    };
+private:
+    std::map<std::string, bool> mActionMap;
+};
 }
 
 #endif // PURITY_ACTION_H

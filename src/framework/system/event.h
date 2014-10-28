@@ -8,67 +8,65 @@
 
 namespace Purity
 {
-    struct Event
+struct Event
+{
+    enum EventType
     {
-        enum EventType
-        {
-            KeyPressed             = SDL_KEYDOWN,          // TODO: Implement
-            KeyReleased            = SDL_KEYUP,            // TODO: Implement
+        KeyPressed = SDL_KEYDOWN, // TODO: Implement
+        KeyReleased = SDL_KEYUP, // TODO: Implement
 
-            MouseMoved             = SDL_MOUSEMOTION,      // TODO: Implement
-            MouseWheelMoved        = SDL_MOUSEWHEEL,       // TODO: Implement
-            MouseButtonPressed     = SDL_MOUSEBUTTONDOWN,  // TODO: Implement
-            MouseButtonReleased    = SDL_MOUSEBUTTONUP,    // TODO: Implement
+        MouseMoved = SDL_MOUSEMOTION, // TODO: Implement
+        MouseWheelMoved = SDL_MOUSEWHEEL, // TODO: Implement
+        MouseButtonPressed = SDL_MOUSEBUTTONDOWN, // TODO: Implement
+        MouseButtonReleased = SDL_MOUSEBUTTONUP, // TODO: Implement
 
-            JoystickButtonPressed  = SDL_JOYBUTTONDOWN,    // TODO: Implement
-            JoystickButtonReleased = SDL_JOYBUTTONUP,      // TODO: Implement
-            JoystickMoved          = SDL_JOYAXISMOTION,    // TODO: Implement
-            JoystickConnected      = SDL_JOYDEVICEADDED,   // TODO: Implement
-            JoystickDisconnected   = SDL_JOYDEVICEREMOVED, // TODO: Implement
+        JoystickButtonPressed = SDL_JOYBUTTONDOWN, // TODO: Implement
+        JoystickButtonReleased = SDL_JOYBUTTONUP, // TODO: Implement
+        JoystickMoved = SDL_JOYAXISMOTION, // TODO: Implement
+        JoystickConnected = SDL_JOYDEVICEADDED, // TODO: Implement
+        JoystickDisconnected = SDL_JOYDEVICEREMOVED, // TODO: Implement
 
-            TouchBegan             = SDL_FINGERDOWN,       // TODO: Implement
-            TouchMoved             = SDL_FINGERMOTION,     // TODO: Implement
-            TouchEnded             = SDL_FINGERUP,         // TODO: Implement
+        TouchBegan = SDL_FINGERDOWN, // TODO: Implement
+        TouchMoved = SDL_FINGERMOTION, // TODO: Implement
+        TouchEnded = SDL_FINGERUP, // TODO: Implement
 
-            Closed                 = SDL_WINDOWEVENT_CLOSE,
+        Closed = SDL_WINDOWEVENT_CLOSE,
 
-            FocusGained            = SDL_WINDOWEVENT_FOCUS_GAINED,
-            FocusLost              = SDL_WINDOWEVENT_FOCUS_LOST,
-        };
-
-        struct KeyEvent
-        {
-            SDL_Keycode code;
-        };
-
-        struct TouchEvent
-        {
-            float x, y;
-            float dx, dy;
-            float pressure;
-        };
-
-        struct WindowEvent
-        {
-
-        };
-
-        union
-        {
-            KeyEvent keyEvent;
-            TouchEvent touchEvent;
-            WindowEvent windowEvent;
-        };
-
-        int type;
-
-        Event& operator=(const SDL_Event& event);
+        FocusGained = SDL_WINDOWEVENT_FOCUS_GAINED,
+        FocusLost = SDL_WINDOWEVENT_FOCUS_LOST,
     };
 
+    struct KeyEvent
+    {
+        SDL_Keycode code;
+    };
 
-    void convertKeyPressedEvent(Purity::Event& event, const SDL_Event& sdlEvent);
-    void convertKeyReleasedEvent(Purity::Event& event, const SDL_Event& sdlEvent);
-    void convertTouchEvent(Purity::Event& event, const SDL_Event& sdlEvent);
+    struct TouchEvent
+    {
+        float x, y;
+        float dx, dy;
+        float pressure;
+    };
+
+    struct WindowEvent
+    {
+    };
+
+    union
+    {
+        KeyEvent keyEvent;
+        TouchEvent touchEvent;
+        WindowEvent windowEvent;
+    };
+
+    int type;
+
+    Event& operator=(const SDL_Event& event);
+};
+
+void convertKeyPressedEvent(Purity::Event& event, const SDL_Event& sdlEvent);
+void convertKeyReleasedEvent(Purity::Event& event, const SDL_Event& sdlEvent);
+void convertTouchEvent(Purity::Event& event, const SDL_Event& sdlEvent);
 }
 
 #endif // PURITY_EVENT_H

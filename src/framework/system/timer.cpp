@@ -24,11 +24,11 @@ void Purity::Timer::restart()
 void Purity::Timer::luaBindings(lua_State* state)
 {
     luabridge::getGlobalNamespace(state)
-            .beginNamespace("Purity")
-                .beginClass <Timer> ("Timer")
-                    .addConstructor <void (*) (void)> ()
-                    .addFunction("getElapsedTime", &Timer::getElapsedTime)
-                    .addFunction("restart", &Timer::restart)
-                .endClass()
-            .endNamespace();
+        .beginNamespace("Purity")
+        .beginClass<Timer>("Timer")
+        .addConstructor<void (*)(void)>()
+        .addFunction("getElapsedTime", &Timer::getElapsedTime)
+        .addFunction("restart", &Timer::restart)
+        .endClass()
+        .endNamespace();
 }

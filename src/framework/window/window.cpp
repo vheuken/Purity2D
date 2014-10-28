@@ -7,29 +7,27 @@
 #include "../system/configuration.h"
 #include "../input/mouse.h"
 
-#if defined(__ANDROID__) ||  defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if defined(__ANDROID__) || defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
 const bool CONTENT_MODE_DEFAULT = true;
 #else
 const bool CONTENT_MODE_DEFAULT = false;
 #endif
 
-Purity::Window::Window(int width,
-                       int height,
-                       const std::string& title,
-                       ViewportType viewportType)
-: mWindowManipulator(this),
-  mViewportType(viewportType),
-  mBorderless(Configuration::getInstance()->getBool("window", "borderless", false)),
-  mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true)),
-  mContentMode(CONTENT_MODE_DEFAULT),
-  minimumSize(Configuration::getInstance()->getInteger("window", "minimum_size_x", 160),
-              Configuration::getInstance()->getInteger("window", "minimum_size_y", 144)),
-  mCloseButton(Rect(Vector2i(width-30, 5), 25, 25)),
-  mMaximizeButton(Rect(Vector2i(width-60, 5), 25, 25)),
-  mMinimizeButton(Rect(Vector2i(width-90, 5), 25, 25)),
-  mFullscreenButton(Rect(Vector2i(width-150, 5), 25, 25)),
-  mFullscreenDesktopButton(Rect(Vector2i(width-180, 5), 25, 25)),
-  mUIButtonsOnBordered(Configuration::getInstance()->getBool("window", "ui_buttons_on_bordered", false))
+Purity::Window::Window(int width, int height, const std::string& title, ViewportType viewportType)
+    : mWindowManipulator(this)
+    , mViewportType(viewportType)
+    , mBorderless(Configuration::getInstance()->getBool("window", "borderless", false))
+    , mCursorLock(Configuration::getInstance()->getBool("window", "cursor_lock", true))
+    , mContentMode(CONTENT_MODE_DEFAULT)
+    , minimumSize(Configuration::getInstance()->getInteger("window", "minimum_size_x", 160),
+                  Configuration::getInstance()->getInteger("window", "minimum_size_y", 144))
+    , mCloseButton(Rect(Vector2i(width - 30, 5), 25, 25))
+    , mMaximizeButton(Rect(Vector2i(width - 60, 5), 25, 25))
+    , mMinimizeButton(Rect(Vector2i(width - 90, 5), 25, 25))
+    , mFullscreenButton(Rect(Vector2i(width - 150, 5), 25, 25))
+    , mFullscreenDesktopButton(Rect(Vector2i(width - 180, 5), 25, 25))
+    , mUIButtonsOnBordered(
+          Configuration::getInstance()->getBool("window", "ui_buttons_on_bordered", false))
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -51,7 +49,7 @@ Purity::Window::Window(int width,
         flags = SDL_WINDOW_RESIZABLE;
     }
 
-#if defined(__ANDROID__) ||  defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if defined(__ANDROID__) || defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
     SDL_DisplayMode mode;
 
     if (SDL_GetDesktopDisplayMode(0, &mode) != 0)
@@ -59,19 +57,11 @@ Purity::Window::Window(int width,
         std::cerr << "SDL_GetDesktopDisplayMode failed: " << SDL_GetError() << std::endl;
     }
 
-    mInternalWindow = SDL_CreateWindow(title.c_str(),
-                                       SDL_WINDOWPOS_CENTERED,
-                                       SDL_WINDOWPOS_CENTERED,
-                                       mode.w,
-                                       mode.h,
-                                       flags);
+    mInternalWindow = SDL_CreateWindow(
+        title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mode.w, mode.h, flags);
 #else
-    mInternalWindow = SDL_CreateWindow(title.c_str(),
-                                       SDL_WINDOWPOS_CENTERED,
-                                       SDL_WINDOWPOS_CENTERED,
-                                       width,
-                                       height,
-                                       flags);
+    mInternalWindow = SDL_CreateWindow(
+        title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
 #endif
     SDL_SetWindowMinimumSize(mInternalWindow, minimumSize.x, minimumSize.y);
 
@@ -92,8 +82,8 @@ Purity::Window::Window(int width,
 
     mView.setSize(static_cast<Vector2f>(viewSize));
 
-    auto viewportTypeStr = Configuration::getInstance()->getString("window", "viewport_type", "letterbox");
-
+    auto viewportTypeStr
+        = Configuration::getInstance()->getString("window", "viewport_type", "letterbox");
 
     if (viewportTypeStr == "stretch")
     {
@@ -296,10 +286,14 @@ void Purity::Window::handleUIButtons()
 
     // handle clicks
     mask[0] = mCloseButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::close, this));
-    mask[1] = mMaximizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::toggleMaximize, this));
-    mask[2] = mMinimizeButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::minimize, this));
-    mask[3] = mFullscreenButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::fullscreen, this));
-    mask[4] = mFullscreenDesktopButton.isMouseOver(Mouse::getPosition(*this), std::bind(&Window::fullscreenDesktop, this));
+    mask[1] = mMaximizeButton.isMouseOver(Mouse::getPosition(*this),
+                                          std::bind(&Window::toggleMaximize, this));
+    mask[2] = mMinimizeButton.isMouseOver(Mouse::getPosition(*this),
+                                          std::bind(&Window::minimize, this));
+    mask[3] = mFullscreenButton.isMouseOver(Mouse::getPosition(*this),
+                                            std::bind(&Window::fullscreen, this));
+    mask[4] = mFullscreenDesktopButton.isMouseOver(Mouse::getPosition(*this),
+                                                   std::bind(&Window::fullscreenDesktop, this));
 
     if (mask.any())
     {
@@ -315,11 +309,11 @@ void Purity::Window::handleUIButtons()
 
     // window resizes
     auto size = getSize();
-    mCloseButton.setRect(Rect(Vector2i(size.x-30, 5), 25, 25));
-    mMaximizeButton.setRect(Rect(Vector2i(size.x-60, 5), 25, 25));
-    mMinimizeButton.setRect(Rect(Vector2i(size.x-90, 5), 25, 25));
-    mFullscreenButton.setRect(Rect(Vector2i(size.x-150, 5), 25, 25));
-    mFullscreenDesktopButton.setRect(Rect(Vector2i(size.x-180, 5), 25, 25));
+    mCloseButton.setRect(Rect(Vector2i(size.x - 30, 5), 25, 25));
+    mMaximizeButton.setRect(Rect(Vector2i(size.x - 60, 5), 25, 25));
+    mMinimizeButton.setRect(Rect(Vector2i(size.x - 90, 5), 25, 25));
+    mFullscreenButton.setRect(Rect(Vector2i(size.x - 150, 5), 25, 25));
+    mFullscreenDesktopButton.setRect(Rect(Vector2i(size.x - 180, 5), 25, 25));
 }
 
 void Purity::Window::gainFocus()
@@ -361,7 +355,6 @@ void Purity::Window::display()
         rect.h = size.y;
         rect.x = 0;
         rect.y = 0;
-
 
         SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(mRenderer, 128, 128, 128, 200);

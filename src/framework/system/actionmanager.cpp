@@ -12,7 +12,7 @@ bool Purity::ActionManager::getActionState(const std::string& actionName) const
     return mActionMap.at(actionName);
 }
 
-void Purity::ActionManager::enableAction(const std::string &actionName)
+void Purity::ActionManager::enableAction(const std::string& actionName)
 {
     if (mActionMap.find(actionName) == mActionMap.end())
     {
@@ -22,7 +22,7 @@ void Purity::ActionManager::enableAction(const std::string &actionName)
     mActionMap.at(actionName) = true;
 }
 
-void Purity::ActionManager::disableAction(const std::string &actionName)
+void Purity::ActionManager::disableAction(const std::string& actionName)
 {
     if (mActionMap.find(actionName) == mActionMap.end())
     {

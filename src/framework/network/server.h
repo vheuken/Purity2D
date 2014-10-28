@@ -12,21 +12,20 @@
 
 namespace Purity
 {
-    class Server : public Host
-    {
-    public:
-        Server(const unsigned short port, std::queue<NetworkAction>* actionQueue);
+class Server : public Host
+{
+public:
+    Server(const unsigned short port, std::queue<NetworkAction>* actionQueue);
 
-        void handleEvents();
+    void handleEvents();
 
-        void sendDataToClients(const std::vector<EntityState>& entityStates);
+    void sendDataToClients(const std::vector<EntityState>& entityStates);
 
-    private:
-        std::queue<NetworkAction>* mReceivedActionQueue;
+private:
+    std::queue<NetworkAction>* mReceivedActionQueue;
 
-        Timer mSendRateTimer;
-
-    };
+    Timer mSendRateTimer;
+};
 }
 
 #endif // SERVER_H

@@ -5,20 +5,20 @@ struct lua_State;
 
 namespace Purity
 {
-    class Timer
-    {
-    public:
-        Timer();
+class Timer
+{
+public:
+    Timer();
 
-        unsigned int getElapsedTime() const;
+    unsigned int getElapsedTime() const;
 
-        void restart();
+    void restart();
 
-        static void luaBindings(lua_State* state);
+    static void luaBindings(lua_State* state);
 
-    private:
-        unsigned int mStartingTick;
-    };
+private:
+    unsigned int mStartingTick;
+};
 }
 
 #endif // PURITY_TIMER_H

@@ -2,7 +2,7 @@
 
 Purity::Event& Purity::Event::operator=(const SDL_Event& sdlEvent)
 {
-    switch(sdlEvent.type)
+    switch (sdlEvent.type)
     {
     case SDL_KEYDOWN:
         convertKeyPressedEvent(*this, sdlEvent);
@@ -68,4 +68,3 @@ void Purity::convertTouchEvent(Purity::Event& event, const SDL_Event& sdlEvent)
     event.touchEvent.dy = sdlEvent.tfinger.dy;
     event.touchEvent.pressure = sdlEvent.tfinger.pressure;
 }
-

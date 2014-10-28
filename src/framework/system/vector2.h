@@ -6,61 +6,47 @@
 
 namespace Purity
 {
-    template <typename T>
-    class Vector2
-    {
-    public:
-        Vector2();
-        Vector2(T x, T y);
+template <typename T> class Vector2
+{
+public:
+    Vector2();
+    Vector2(T x, T y);
 
-        template <typename U>
-        explicit Vector2(const Vector2<U>& vector);
+    template <typename U> explicit Vector2(const Vector2<U>& vector);
 
-        T x;
-        T y;
-    };
+    T x;
+    T y;
+};
 
-    typedef Vector2<int>          Vector2i;
-    typedef Vector2<unsigned int> Vector2u;
-    typedef Vector2<float>        Vector2f;
+typedef Vector2<int> Vector2i;
+typedef Vector2<unsigned int> Vector2u;
+typedef Vector2<float> Vector2f;
 
-    template <typename T>
-    Vector2<T> operator -(const Vector2<T>& right);
+template <typename T> Vector2<T> operator-(const Vector2<T>& right);
 
-    template <typename T>
-    Vector2<T>& operator +=(Vector2<T>& left, const Vector2<T>& right);
+template <typename T> Vector2<T>& operator+=(Vector2<T>& left, const Vector2<T>& right);
 
-    template <typename T>
-    Vector2<T>& operator -=(Vector2<T>& left, const Vector2<T>& right);
+template <typename T> Vector2<T>& operator-=(Vector2<T>& left, const Vector2<T>& right);
 
-    template <typename T>
-    Vector2<T> operator +(const Vector2<T>& left, const Vector2<T>& right);
+template <typename T> Vector2<T> operator+(const Vector2<T>& left, const Vector2<T>& right);
 
-    template <typename T>
-    Vector2<T> operator -(const Vector2<T>& left, const Vector2<T>& right);
+template <typename T> Vector2<T> operator-(const Vector2<T>& left, const Vector2<T>& right);
 
-    template <typename T>
-    Vector2<T> operator *(const Vector2<T>& left, T right);
+template <typename T> Vector2<T> operator*(const Vector2<T>& left, T right);
 
-    template <typename T>
-    Vector2<T> operator *(T left, const Vector2<T>& right);
+template <typename T> Vector2<T> operator*(T left, const Vector2<T>& right);
 
-    template <typename T>
-    Vector2<T>& operator *=(Vector2<T>& left, T right);
+template <typename T> Vector2<T>& operator*=(Vector2<T>& left, T right);
 
-    template <typename T>
-    Vector2<T> operator /(const Vector2<T>& left, T right);
+template <typename T> Vector2<T> operator/(const Vector2<T>& left, T right);
 
-    template <typename T>
-    Vector2<T>& operator /=(Vector2<T>& left, T right);
+template <typename T> Vector2<T>& operator/=(Vector2<T>& left, T right);
 
-    template <typename T>
-    bool operator ==(const Vector2<T>& left, const Vector2<T>& right);
+template <typename T> bool operator==(const Vector2<T>& left, const Vector2<T>& right);
 
-    template <typename T>
-    bool operator !=(const Vector2<T>& left, const Vector2<T>& right);
+template <typename T> bool operator!=(const Vector2<T>& left, const Vector2<T>& right);
 
-    #include "vector2.inl"
+#include "vector2.inl"
 }
 
 #endif // PURITY_VECTOR_2_H
