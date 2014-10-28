@@ -3,15 +3,15 @@
 
 namespace Purity
 {
-    struct CommandLineArguments
-    {
-        CommandLineArguments();
-        CommandLineArguments(const CommandLineArguments& copy) = default; 
+struct CommandLineArguments
+{
+    CommandLineArguments();
+    CommandLineArguments(const CommandLineArguments& copy) = default;
 
-        CommandLineArguments(int argc, char* argv[]);
+    CommandLineArguments(int argc, char* argv[]);
 
-        bool headless;
-    };
+    bool headless;
+};
 }
 
 #endif // COMMAND_LINE_ARGUMENTS

@@ -17,42 +17,42 @@ struct lua_State;
 
 namespace Purity
 {
-    class NetworkSystem : public AbstractSystem
-    {
-    public:
-        NetworkSystem(std::queue<NetworkAction> * serverActionQueue);
+class NetworkSystem : public AbstractSystem
+{
+public:
+    NetworkSystem(std::queue<NetworkAction>* serverActionQueue);
 
-        ~NetworkSystem();
+    ~NetworkSystem();
 
-        std::string getLocalAddress();
-        std::string getPublicAddress();
+    std::string getLocalAddress();
+    std::string getPublicAddress();
 
-        void update(Scene* scene);
+    void update(Scene* scene);
 
-        void setPort(unsigned short port);
+    void setPort(unsigned short port);
 
-        void sendAction(std::string objectName, std::string actionName);
+    void sendAction(std::string objectName, std::string actionName);
 
-        void connectToServer(std::string serverAddress);
-        
-        void initializeServer(unsigned short port);
-        void initializeClient();
+    void connectToServer(std::string serverAddress);
 
-        void setServer(bool isServer);
-        bool isServer() const;
+    void initializeServer(unsigned short port);
+    void initializeClient();
 
-        void static luaBindings(lua_State* state);
+    void setServer(bool isServer);
+    bool isServer() const;
 
-    private:
-        unsigned short mPort;
-        bool mIsServer;
+    void static luaBindings(lua_State* state);
 
-        std::queue<NetworkAction>* mServerActionQueue;
-        std::queue<NetworkAction>  mClientActionQueue;
-        std::unique_ptr<Client> mClient;
-        std::unique_ptr<Server> mServer;
-        std::unique_ptr<std::map<unsigned int, EntityState> > mClientReceievdStates;
-    };
+private:
+    unsigned short mPort;
+    bool mIsServer;
+
+    std::queue<NetworkAction>* mServerActionQueue;
+    std::queue<NetworkAction> mClientActionQueue;
+    std::unique_ptr<Client> mClient;
+    std::unique_ptr<Server> mServer;
+    std::unique_ptr<std::map<unsigned int, EntityState>> mClientReceievdStates;
+};
 }
 
 #endif // NETWORK_SYSTEM_H

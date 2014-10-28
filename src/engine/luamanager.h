@@ -7,24 +7,25 @@ struct lua_State;
 
 namespace Purity
 {
-    class LuaManager
-    {
-    public:
-        ~LuaManager();
-        static LuaManager* getManager();
+class LuaManager
+{
+public:
+    ~LuaManager();
+    static LuaManager* getManager();
 
-        lua_State* getState();
+    lua_State* getState();
 
-        void doFile(const std::string& luaFileName);
-        void loadFile(const std::string& luaFileName);
-    private:
-        LuaManager();
+    void doFile(const std::string& luaFileName);
+    void loadFile(const std::string& luaFileName);
 
-        lua_State* mLuaState;
+private:
+    LuaManager();
 
-        void initializeBindings();
-        void initializeMiscBindings();
-    };
+    lua_State* mLuaState;
+
+    void initializeBindings();
+    void initializeMiscBindings();
+};
 }
 
 #endif // LUA_MANAGER_H

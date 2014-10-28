@@ -3,18 +3,18 @@
 
 namespace Purity
 {
-    class Scene;
+class Scene;
 
-    class AbstractSystem
-    {
-    public:
-        AbstractSystem();
+class AbstractSystem
+{
+public:
+    AbstractSystem();
 
-        virtual void update(Scene* scene) = 0;
-    
-    protected:
-        Scene* mCurrentScene;
-    };
+    virtual void update(Scene* scene) = 0;
+
+protected:
+    Scene* mCurrentScene;
+};
 }
 
 #endif // ABSTRACT_SYSTEM_H

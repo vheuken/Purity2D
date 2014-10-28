@@ -8,19 +8,19 @@
 
 namespace Purity
 {
-    const std::string DEFAULT_SCENE_DIR = "scenes/";
-    const std::string DEFAULT_STARTING_SCENE = "init";
-    
-    class SceneManager
-    {
-    public:
-        SceneManager();
-        Scene* getCurrentScene() const;
+const std::string DEFAULT_SCENE_DIR = "scenes/";
+const std::string DEFAULT_STARTING_SCENE = "init";
 
-    private:
-        std::unique_ptr<Scene> mScene;
-        Scene* mCurrentScene;
-    };
+class SceneManager
+{
+public:
+    SceneManager();
+    Scene* getCurrentScene() const;
+
+private:
+    std::unique_ptr<Scene> mScene;
+    Scene* mCurrentScene;
+};
 }
 
 #endif // SCENE_MANAGER_H

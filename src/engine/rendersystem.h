@@ -8,20 +8,20 @@
 
 namespace Purity
 {
-    class Window;
+class Window;
 
-    class RenderSystem : public AbstractSystem
-    {
-    public:
-        RenderSystem(Window* window);
+class RenderSystem : public AbstractSystem
+{
+public:
+    RenderSystem(Window* window);
 
-        void update(Scene* scene);
+    void update(Scene* scene);
 
-    private:
-        Window* mWindow;
+private:
+    Window* mWindow;
 
-        void run();
-    };
+    void run();
+};
 }
 
 #endif // RENDER_SYSTEM_H

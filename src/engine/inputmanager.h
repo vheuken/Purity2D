@@ -9,22 +9,22 @@
 
 namespace Purity
 {
-    class Window;
+class Window;
 
-    class InputSystem : public AbstractSystem
-    {
-    public:
-        InputSystem(Window* window, std::queue<Event>* inputQueue);
+class InputSystem : public AbstractSystem
+{
+public:
+    InputSystem(Window* window, std::queue<Event>* inputQueue);
 
-        void update(Scene* scene);
+    void update(Scene* scene);
 
-    private:
-        Window* mWindow;
-        std::queue<Event>* mInputQueue;
+private:
+    Window* mWindow;
+    std::queue<Event>* mInputQueue;
 
-        bool mModeLock;
-        ActionManager mActionManager;
-    };
+    bool mModeLock;
+    ActionManager mActionManager;
+};
 }
 
 #endif // INPUT_MANAGER_H

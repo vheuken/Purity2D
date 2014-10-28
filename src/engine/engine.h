@@ -16,34 +16,33 @@
 
 namespace Purity
 {
-    class Engine
-    {
-    public:
-        Engine(const CommandLineArguments& commandLineArguments);
+class Engine
+{
+public:
+    Engine(const CommandLineArguments& commandLineArguments);
 
-        void run();
+    void run();
 
-    private:
-        std::unique_ptr<Window> mWindow;
-        std::unique_ptr<RenderSystem> mRenderSystem;
-        std::unique_ptr<SceneManager> mSceneManager;
-        std::unique_ptr<PhysicsSystem> mPhysicsSystem;
-        std::unique_ptr<InputSystem> mInputSystem;
-        std::unique_ptr<NetworkSystem> mNetworkSystem;
+private:
+    std::unique_ptr<Window> mWindow;
+    std::unique_ptr<RenderSystem> mRenderSystem;
+    std::unique_ptr<SceneManager> mSceneManager;
+    std::unique_ptr<PhysicsSystem> mPhysicsSystem;
+    std::unique_ptr<InputSystem> mInputSystem;
+    std::unique_ptr<NetworkSystem> mNetworkSystem;
 
-        std::unique_ptr<std::queue<Event> > mInputQueue;
-        std::unique_ptr<std::queue<NetworkAction> > mServerActionQueue;
+    std::unique_ptr<std::queue<Event>> mInputQueue;
+    std::unique_ptr<std::queue<NetworkAction>> mServerActionQueue;
 
-        const CommandLineArguments mProgramOptions;
+    const CommandLineArguments mProgramOptions;
 
-        void initializeWindow();
-        void initializeRenderSystem();
-        void initializeSceneManager();
-        void initializePhysicsSystem();
-        void initializeInputManager();
-        void initializeNetworkSystem();
-    };
-
+    void initializeWindow();
+    void initializeRenderSystem();
+    void initializeSceneManager();
+    void initializePhysicsSystem();
+    void initializeInputManager();
+    void initializeNetworkSystem();
+};
 }
 
 #endif // ENGINE_H

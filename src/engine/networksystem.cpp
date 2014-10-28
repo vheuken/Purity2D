@@ -3,25 +3,26 @@
 #include <iostream>
 #include <LuaBridge.h>
 
-Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction> * serverActionQueue)
-: AbstractSystem(),
-  mIsServer(false),
-  mServerActionQueue(serverActionQueue)
+Purity::NetworkSystem::NetworkSystem(
+    std::queue<NetworkAction>* serverActionQueue)
+    : AbstractSystem()
+    , mIsServer(false)
+    , mServerActionQueue(serverActionQueue)
 {
     if (enet_initialize() != 0)
     {
         std::cerr << "Error initializing enet!" << std::endl;
     }
 
-    mClientReceievdStates = std::unique_ptr<std::map<unsigned int, EntityState> >(new std::map<unsigned int, EntityState>);
+    mClientReceievdStates
+        = std::unique_ptr<std::map<unsigned int, EntityState>>(
+            new std::map<unsigned int, EntityState>);
 
-    luabridge::setGlobal(LuaManager::getManager()->getState(), this, "GPurityNetwork");
+    luabridge::setGlobal(LuaManager::getManager()->getState(), this,
+                         "GPurityNetwork");
 }
 
-Purity::NetworkSystem::~NetworkSystem()
-{
-    enet_deinitialize();
-}
+Purity::NetworkSystem::~NetworkSystem() { enet_deinitialize(); }
 
 void Purity::NetworkSystem::update(Scene* scene)
 {
@@ -46,7 +47,8 @@ void Purity::NetworkSystem::update(Scene* scene)
             mClientActionQueue.pop();
         }
 
-        for (auto it = mClientReceievdStates->begin(); it != mClientReceievdStates->end(); ++it)
+        for (auto it = mClientReceievdStates->begin();
+             it != mClientReceievdStates->end(); ++it)
         {
             mCurrentScene->setEntityState(it->second);
         }
@@ -65,12 +67,10 @@ void Purity::NetworkSystem::initializeClient()
     mClient = std::unique_ptr<Client>(new Client(mClientReceievdStates.get()));
 }
 
-void Purity::NetworkSystem::setPort(unsigned short port)
-{
-    mPort = port;
-}
+void Purity::NetworkSystem::setPort(unsigned short port) { mPort = port; }
 
-void Purity::NetworkSystem::sendAction(std::string objectName, std::string actionName)
+void Purity::NetworkSystem::sendAction(std::string objectName,
+                                       std::string actionName)
 {
     NetworkAction action;
 
@@ -88,10 +88,7 @@ void Purity::NetworkSystem::setServer(bool isServer)
     this->mIsServer = isServer;
 }
 
-bool Purity::NetworkSystem::isServer() const
-{
-    return mIsServer;
-}
+bool Purity::NetworkSystem::isServer() const { return mIsServer; }
 
 void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
 {
@@ -101,29 +98,28 @@ void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
 std::string Purity::NetworkSystem::getLocalAddress()
 {
     return "";
-    //return sf::IpAddress::getLocalAddress().toString();
+    // return sf::IpAddress::getLocalAddress().toString();
 }
 
 std::string Purity::NetworkSystem::getPublicAddress()
 {
     return "";
-    //return sf::IpAddress::getPublicAddress().toString();
+    // return sf::IpAddress::getPublicAddress().toString();
 }
 
 void Purity::NetworkSystem::luaBindings(lua_State* state)
 {
     luabridge::getGlobalNamespace(state)
-            .beginNamespace("Purity")
-                .beginClass<NetworkSystem> ("NetworkSystem")
-                    .addFunction("getLocalAddress", &NetworkSystem::getLocalAddress)
-                    .addFunction("getPublicAddress", &NetworkSystem::getPublicAddress)
-                    .addFunction("setPort", &NetworkSystem::setPort)
-                    .addFunction("connectToServer", &NetworkSystem::connectToServer)
-                    .addFunction("setServer", &NetworkSystem::setServer)
-                    .addFunction("initializeServer", &NetworkSystem::initializeServer)
-                    .addFunction("initializeClient", &NetworkSystem::initializeClient)
-                    .addFunction("sendAction", &NetworkSystem::sendAction)
-                .endClass()
-            .endNamespace();
+        .beginNamespace("Purity")
+        .beginClass<NetworkSystem>("NetworkSystem")
+        .addFunction("getLocalAddress", &NetworkSystem::getLocalAddress)
+        .addFunction("getPublicAddress", &NetworkSystem::getPublicAddress)
+        .addFunction("setPort", &NetworkSystem::setPort)
+        .addFunction("connectToServer", &NetworkSystem::connectToServer)
+        .addFunction("setServer", &NetworkSystem::setServer)
+        .addFunction("initializeServer", &NetworkSystem::initializeServer)
+        .addFunction("initializeClient", &NetworkSystem::initializeClient)
+        .addFunction("sendAction", &NetworkSystem::sendAction)
+        .endClass()
+        .endNamespace();
 }
-

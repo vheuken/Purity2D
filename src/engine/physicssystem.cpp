@@ -6,14 +6,15 @@
 #include "luamanager.h"
 #include "../framework/scene.h"
 
-Purity::PhysicsSystem::PhysicsSystem(std::queue<Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue)
+Purity::PhysicsSystem::PhysicsSystem(
+    std::queue<Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue)
 {
     mWorld = std::unique_ptr<b2World>(new b2World(GRAVITY));
 
     mCurrentScene = nullptr;
     mLastTime = 0;
     mFrameTimeMilleseconds = 0;
-    //mFrameTimer.restart().asMicroseconds();
+    // mFrameTimer.restart().asMicroseconds();
 
     mInputQueue = inputQueue;
     mServerActionQueue = serverActionQueue;
@@ -29,12 +30,15 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
 
         mCurrentScene->initializePhysics(mWorld.get());
 
-        std::string luaEventHandlerFileName = mCurrentScene->getLuaEventHandlerPath();
-        std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
+        std::string luaEventHandlerFileName
+            = mCurrentScene->getLuaEventHandlerPath();
+        std::string luaEventHandlerFunction
+            = mCurrentScene->getLuaEventHandlerFunctionName();
 
         luaManager->doFile(luaEventHandlerFileName);
 
-        std::string physicsUpdateScript = mCurrentScene->getLuaPhysicsUpdatePath();
+        std::string physicsUpdateScript
+            = mCurrentScene->getLuaPhysicsUpdatePath();
 
         luaManager->doFile(physicsUpdateScript);
 
@@ -69,18 +73,21 @@ void Purity::PhysicsSystem::step()
 
 void Purity::PhysicsSystem::handleInput()
 {
-    std::string luaEventHandlerFileName = mCurrentScene->getLuaEventHandlerPath();
-    std::string luaEventHandlerFunction = mCurrentScene->getLuaEventHandlerFunctionName();
+    std::string luaEventHandlerFileName
+        = mCurrentScene->getLuaEventHandlerPath();
+    std::string luaEventHandlerFunction
+        = mCurrentScene->getLuaEventHandlerFunctionName();
     LuaManager* luaManager = LuaManager::getManager();
 
     while (!mInputQueue->empty())
     {
         Event event = mInputQueue->front();
-	    mInputQueue->pop();
+        mInputQueue->pop();
 
         try
         {
-            auto eventHandlerScript = luabridge::getGlobal(luaManager->getState(), luaEventHandlerFunction.c_str());
+            auto eventHandlerScript = luabridge::getGlobal(
+                luaManager->getState(), luaEventHandlerFunction.c_str());
             eventHandlerScript(event);
         }
         catch (luabridge::LuaException e)
@@ -99,8 +106,10 @@ void Purity::PhysicsSystem::handleServerActions()
         mServerActionQueue->pop();
         try
         {
-            auto serverActionHandler = luabridge::getGlobal(luaManager->getState(), "serverActionHandler");
-            serverActionHandler(std::string(action.objectName), std::string(action.actionName));
+            auto serverActionHandler = luabridge::getGlobal(
+                luaManager->getState(), "serverActionHandler");
+            serverActionHandler(std::string(action.objectName),
+                                std::string(action.actionName));
         }
         catch (luabridge::LuaException e)
         {
@@ -115,7 +124,8 @@ void Purity::PhysicsSystem::runUpdateScripts()
     {
         auto luaManager = LuaManager::getManager();
 
-        auto updateScript = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
+        auto updateScript
+            = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
         updateScript();
     }
     catch (luabridge::LuaException e)
