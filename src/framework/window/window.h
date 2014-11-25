@@ -90,12 +90,12 @@ private:
 
     Vector2i minimumSize;
 
-    bool mUIButtonsOnBordered = false;
     Button mCloseButton;
     Button mMaximizeButton;
     Button mMinimizeButton;
     Button mFullscreenButton;
     Button mFullscreenDesktopButton;
+    bool mUIButtonsOnBordered = false;
 
     bool mMouseOnButtons = false;
 
