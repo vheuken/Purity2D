@@ -83,37 +83,10 @@ const Purity::Tile* Purity::Layer::getTile(int x, int y) const
     return nullptr;
 }
 
-/*
-std::vector<std::pair<int, int> > Purity::Layer::getListOfTilesToDraw(const sf::View& view) const
-{
-    std::vector<std::pair<int, int> > listOfTilesToDraw;
-
-    int tileWidth  = mTmxMap->GetTileWidth();
-    int tileHeight = mTmxMap->GetTileHeight();
-
-    sf::Vector2f halfSize(view.getSize().x/2, view.getSize().y/2);
-
-    sf::Vector2f topLeftCorner = view.getCenter() - halfSize;
-    sf::Vector2f bottomRightCorner = view.getCenter() + halfSize;
-
-    for (int x = (int)topLeftCorner.x; x < bottomRightCorner.x; x += tileWidth)
-    {
-        for (int y = (int)topLeftCorner.y; y < bottomRightCorner.y; y += tileHeight)
-        {
-            std::pair<int, int> tile(x/tileWidth, y/tileWidth);
-
-            listOfTilesToDraw.push_back(tile);
-        }
-    }
-
-    return listOfTilesToDraw;
-}
-*/
-
 void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
-    for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
+    for (auto& it : mTiles)
     {
-        target.draw(*it->second.get());
+        target.draw(*it.second.get());
     }
 }
