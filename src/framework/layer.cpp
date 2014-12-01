@@ -85,7 +85,7 @@ const Purity::Tile* Purity::Layer::getTile(int x, int y) const
 
 void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
-    for (auto& it : mTiles)
+    for (const auto& it : mTiles)
     {
         target.draw(*it.second.get());
     }
