@@ -7,7 +7,6 @@ Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const std::string& sceneDir)
     , mTmxMap(tmxMap)
     , mTextureManager(new TextureManager())
 {
-    // processTilesetsFromTMXMap();
     processLayers();
 }
 

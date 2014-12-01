@@ -39,7 +39,6 @@ private:
 
     std::unique_ptr<TextureManager> mTextureManager;
 
-    void processTilesetsFromTMXMap();
     void processLayers();
     void addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile>>>& tileList,
                         int layerNum);
