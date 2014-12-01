@@ -8,13 +8,14 @@ namespace Purity
 class Tile : public Entity
 {
 public:
+    Tile() {}
     Tile(int x, int y, int width, int height, Texture* texture, int id);
 
     void initializePhysics(b2World* world);
     void initializeStatic();
 
 private:
-    const int mTileId;
+    int mTileId;
 
     void setTextureSubrect();
 

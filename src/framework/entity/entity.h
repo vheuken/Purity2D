@@ -32,7 +32,7 @@ const float32 DEFAULT_HITBOX_HEIGHT_PIXELS = PIXELS_PER_METER * DEFAULT_HITBOX_H
 
 const float DEFAULT_HITBOX_OUTLINE_THICKNESS = 2.0;
 
-class Entity : public Drawable, protected Transformable
+class Entity : public Drawable, public Transformable
 {
 public:
     Entity();
@@ -77,7 +77,7 @@ protected:
 
 private:
     static unsigned int sNumOfEntities;
-    const unsigned int mId;
+    unsigned int mId;
     std::string mName;
 
     EntityState mState;

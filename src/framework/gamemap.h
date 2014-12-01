@@ -28,6 +28,8 @@ public:
 
     void initializeTilePhysics(b2World* world);
 
+    Layer getLayer(int layerNum);
+
 private:
     const std::string mSceneDir;
     const Tmx::Map* mTmxMap;

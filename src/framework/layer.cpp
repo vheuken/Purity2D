@@ -40,12 +40,9 @@ void Purity::Layer::processTiles()
 
                 tileTexture = mTextureManager->getTexture(texturePathStr);
 
-                std::unique_ptr<Tile> tile(
-                    new Tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id));
+                Tile tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id);
 
-                std::pair<int, int> tileCoordinates(x, y);
-
-                mTiles[tileCoordinates] = std::move(tile);
+                addTile(tile);
             }
         }
     }
@@ -57,16 +54,23 @@ void Purity::Layer::initializePhysics(b2World* world)
     {
         for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
         {
-            it->second->initializePhysics(world);
+            it->second.initializePhysics(world);
         }
     }
     else
     {
         for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
         {
-            it->second->initializeStatic();
+            it->second.initializeStatic();
         }
     }
+}
+
+void Purity::Layer::addTile(Tile& tile)
+{
+    std::pair<int, int> tileCoordinates(tile.getPosition().x, tile.getPosition().y);
+
+    mTiles[tileCoordinates] = std::move(tile);
 }
 
 const Purity::Tile* Purity::Layer::getTile(int x, int y) const
@@ -77,7 +81,7 @@ const Purity::Tile* Purity::Layer::getTile(int x, int y) const
 
     if (tileIterator != mTiles.end())
     {
-        return tileIterator->second.get();
+        return &tileIterator->second;
     }
 
     return nullptr;
@@ -87,6 +91,6 @@ void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
     for (const auto& it : mTiles)
     {
-        target.draw(*it.second.get());
+        target.draw(it.second);
     }
 }

@@ -31,8 +31,10 @@ public:
 
     void initializePhysics(b2World* world);
 
+    void addTile(Tile& tile);
+
 private:
-    std::map<std::pair<int, int>, std::unique_ptr<Tile>> mTiles;
+    std::map<std::pair<int, int>, Tile> mTiles;
 
     const Tmx::Map* mTmxMap;
     const Tmx::Layer* mTmxLayer;
