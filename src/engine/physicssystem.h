@@ -26,6 +26,8 @@ public:
 
     void update(Scene* scene);
 
+    b2World* getWorld() const;
+
 private:
     Timer mFrameTimer;
     unsigned int mLastTime;

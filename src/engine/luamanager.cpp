@@ -142,6 +142,14 @@ void Purity::LuaManager::initializeMiscBindings()
                 .addFunction("disableAll", &ActionManager::disableAll)
             .endClass()
 
+            .beginClass<Layer>("Layer")
+                .addFunction("createTile", &Layer::createTile)
+            .endClass()
+
+            .beginClass<GameMap>("GameMap")
+                .addFunction("getLayer", &GameMap::getLayer)
+            .endClass()
+
             .beginClass<Scene>("Scene")
                 .addFunction("getMap", &Scene::getMap)
             .endClass()

@@ -26,16 +26,18 @@ class Layer : public Drawable
 public:
     Layer(const Tmx::Map* tmxMap,
           const Tmx::Layer* tmxLayer,
+          b2World* world,
           TextureManager* textureManager,
           std::string sceneDir);
 
     void initializePhysics(b2World* world);
 
-    void addTile(Tile& tile);
+    void createTile(int x, int y, int tileWidth, int tileHeight, std::string tileTexturePath, int id);
 
 private:
-    std::map<std::pair<int, int>, Tile> mTiles;
+    std::map<std::pair<int, int>, std::unique_ptr<Tile>> mTiles;
 
+    b2World* mWorld;
     const Tmx::Map* mTmxMap;
     const Tmx::Layer* mTmxLayer;
     TextureManager* mTextureManager;
@@ -44,7 +46,6 @@ private:
     void processTiles();
 
     const Tile* getTile(int x, int y) const;
-    // std::vector<std::pair<int, int> > getListOfTilesToDraw(const sf::View& view) const;
 
     virtual void draw(RenderTarget& target) const;
 };

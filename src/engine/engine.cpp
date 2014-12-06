@@ -32,9 +32,9 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
         TextureManager::sIsEnabled = false;
     }
 
-    initializeSceneManager();
     initializePhysicsSystem();
     initializeNetworkSystem();
+    initializeSceneManager();
 
     // TODO: move somewhere else?
     luabridge::setGlobal(LuaManager::getManager()->getState(),
@@ -91,7 +91,7 @@ void Purity::Engine::initializeRenderSystem()
 
 void Purity::Engine::initializeSceneManager()
 {
-    mSceneManager = std::unique_ptr<SceneManager>(new SceneManager());
+    mSceneManager = std::unique_ptr<SceneManager>(new SceneManager(mPhysicsSystem->getWorld()));
 }
 
 void Purity::Engine::initializePhysicsSystem()

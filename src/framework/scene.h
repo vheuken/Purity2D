@@ -24,7 +24,7 @@ const std::string DEFAULT_ON_PHYSICS_UPDATE_SCRIPT = "onPhysicsUpdate.lua";
 class Scene : public Drawable
 {
 public:
-    Scene(const std::string& sceneDir);
+    Scene(const std::string& sceneDir, b2World* world);
 
     void initializePhysics(b2World* world);
     void updatePhysics();
@@ -37,9 +37,10 @@ public:
     std::string getLuaEventHandlerFunctionName() const;
     std::string getLuaPhysicsUpdatePath() const;
 
-    void getMap() const;
+    GameMap* getMap() const;
 
 private:
+    b2World* mWorld;
     std::unique_ptr<Tmx::Map> mTmxMap;
     std::unique_ptr<GameMap> mMap;
     std::unique_ptr<EntityManager> mObjectManager;

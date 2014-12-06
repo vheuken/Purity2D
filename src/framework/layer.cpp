@@ -6,19 +6,21 @@
 
 Purity::Layer::Layer(const Tmx::Map* tmxMap,
                      const Tmx::Layer* tmxLayer,
+                     b2World* world,
                      TextureManager* textureManager,
                      std::string sceneDir)
     : mTmxMap(tmxMap)
     , mTmxLayer(tmxLayer)
     , mTextureManager(textureManager)
     , mSceneDir(sceneDir)
+    , mWorld(world)
 {
     processTiles();
+    std::cout << "H" << std::endl;
 }
 
 void Purity::Layer::processTiles()
 {
-    Texture* tileTexture;
     Tmx::MapTile tmxTile;
 
     int layerHeight = mTmxLayer->GetHeight();
@@ -38,11 +40,9 @@ void Purity::Layer::processTiles()
                     = mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource();
                 std::string texturePathStr = mSceneDir + tilesetPathStr;
 
-                tileTexture = mTextureManager->getTexture(texturePathStr);
-
-                Tile tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id);
-
-                addTile(tile);
+                // Tile tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id);
+                // addTile(tile)
+                createTile(x, y, tileWidth, tileHeight, texturePathStr, tmxTile.id);
             }
         }
     }
@@ -50,27 +50,39 @@ void Purity::Layer::processTiles()
 
 void Purity::Layer::initializePhysics(b2World* world)
 {
+    /*
     if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
     {
         for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
         {
-            it->second.initializePhysics(world);
+            it->second->initializePhysics(world);
         }
     }
     else
     {
         for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
         {
-            it->second.initializeStatic();
+            it->second->initializeStatic();
         }
-    }
+    }*/
 }
 
-void Purity::Layer::addTile(Tile& tile)
+void Purity::Layer::createTile(int x, int y, int tileWidth, int tileHeight, std::string tileTexturePath, int id)
 {
-    std::pair<int, int> tileCoordinates(tile.getPosition().x, tile.getPosition().y);
+    std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, mTextureManager->getTexture(tileTexturePath), id));
+
+    std::pair<int, int> tileCoordinates(tile->getPosition().x, tile->getPosition().y);
 
     mTiles[tileCoordinates] = std::move(tile);
+
+    if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
+    {
+        mTiles[tileCoordinates]->initializePhysics(mWorld);
+    }
+    else
+    {
+        mTiles[tileCoordinates]->initializeStatic();
+    }
 }
 
 const Purity::Tile* Purity::Layer::getTile(int x, int y) const
@@ -81,7 +93,7 @@ const Purity::Tile* Purity::Layer::getTile(int x, int y) const
 
     if (tileIterator != mTiles.end())
     {
-        return &tileIterator->second;
+        return tileIterator->second.get();
     }
 
     return nullptr;
@@ -89,8 +101,9 @@ const Purity::Tile* Purity::Layer::getTile(int x, int y) const
 
 void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
+    std::cout << mTiles.size() << std::endl;
     for (const auto& it : mTiles)
     {
-        target.draw(it.second);
+        target.draw(*it.second);
     }
 }

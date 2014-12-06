@@ -24,15 +24,16 @@ namespace Purity
 class GameMap : public Drawable
 {
 public:
-    GameMap(const Tmx::Map* tmxMap, const std::string& sceneDir);
+    GameMap(const Tmx::Map* tmxMap, b2World* world, const std::string& sceneDir);
 
     void initializeTilePhysics(b2World* world);
 
-    Layer getLayer(int layerNum);
+    Layer* getLayer(int layerNum) const;
 
 private:
     const std::string mSceneDir;
     const Tmx::Map* mTmxMap;
+    b2World* mWorld;
 
     std::map<int, std::map<int, std::unique_ptr<Tile>>> mPhysicsTileList;
     std::map<int, std::map<int, std::unique_ptr<Tile>>> mStaticTileList;

@@ -50,6 +50,11 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
     mCurrentScene->updatePhysics();
 }
 
+b2World* Purity::PhysicsSystem::getWorld() const
+{
+    return mWorld.get();
+}
+
 void Purity::PhysicsSystem::step()
 {
     static float acumulator = 0.0;

@@ -2,12 +2,18 @@
 
 #include <TmxParser/Tmx.h>
 
-Purity::GameMap::GameMap(const Tmx::Map* tmxMap, const std::string& sceneDir)
+Purity::GameMap::GameMap(const Tmx::Map* tmxMap, b2World* world, const std::string& sceneDir)
     : mSceneDir(sceneDir)
     , mTmxMap(tmxMap)
+    , mWorld(world)
     , mTextureManager(new TextureManager())
 {
     processLayers();
+}
+
+Purity::Layer* Purity::GameMap::getLayer(int layerNum) const
+{
+    return mLayersList[layerNum].get();
 }
 
 void Purity::GameMap::initializeTilePhysics(b2World* world)
@@ -24,7 +30,7 @@ void Purity::GameMap::processLayers()
 
     for (auto it = tmxLayers.begin(); it != tmxLayers.end(); ++it)
     {
-        std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it, mTextureManager.get(), mSceneDir));
+        std::unique_ptr<Layer> layer(new Layer(mTmxMap, *it, mWorld, mTextureManager.get(), mSceneDir));
 
         mLayersList.push_back(std::move(layer));
     }
