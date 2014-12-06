@@ -11,12 +11,11 @@ Purity::Layer::Layer(const Tmx::Map* tmxMap,
                      std::string sceneDir)
     : mTmxMap(tmxMap)
     , mTmxLayer(tmxLayer)
+    , mWorld(world)
     , mTextureManager(textureManager)
     , mSceneDir(sceneDir)
-    , mWorld(world)
 {
     processTiles();
-    std::cout << "H" << std::endl;
 }
 
 void Purity::Layer::processTiles()
@@ -25,8 +24,6 @@ void Purity::Layer::processTiles()
 
     int layerHeight = mTmxLayer->GetHeight();
     int layerWidth = mTmxLayer->GetWidth();
-    int tileWidth = mTmxMap->GetTileWidth();
-    int tileHeight = mTmxMap->GetTileHeight();
 
     for (int y = 0; y < layerHeight; ++y)
     {
@@ -42,7 +39,7 @@ void Purity::Layer::processTiles()
 
                 // Tile tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id);
                 // addTile(tile)
-                createTile(x, y, tileWidth, tileHeight, texturePathStr, tmxTile.id);
+                createTile(x, y, texturePathStr, tmxTile.id);
             }
         }
     }
@@ -67,8 +64,11 @@ void Purity::Layer::initializePhysics(b2World* world)
     }*/
 }
 
-void Purity::Layer::createTile(int x, int y, int tileWidth, int tileHeight, std::string tileTexturePath, int id)
+void Purity::Layer::createTile(int x, int y, std::string tileTexturePath, int id)
 {
+    int tileWidth = mTmxMap->GetTileWidth();
+    int tileHeight = mTmxMap->GetTileHeight();
+
     std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, mTextureManager->getTexture(tileTexturePath), id));
 
     std::pair<int, int> tileCoordinates(tile->getPosition().x, tile->getPosition().y);
@@ -101,7 +101,6 @@ const Purity::Tile* Purity::Layer::getTile(int x, int y) const
 
 void Purity::Layer::draw(Purity::RenderTarget& target) const
 {
-    std::cout << mTiles.size() << std::endl;
     for (const auto& it : mTiles)
     {
         target.draw(*it.second);

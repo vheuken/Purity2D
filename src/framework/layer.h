@@ -32,14 +32,14 @@ public:
 
     void initializePhysics(b2World* world);
 
-    void createTile(int x, int y, int tileWidth, int tileHeight, std::string tileTexturePath, int id);
+    void createTile(int x, int y, std::string tileTexturePath, int id);
 
 private:
     std::map<std::pair<int, int>, std::unique_ptr<Tile>> mTiles;
 
-    b2World* mWorld;
     const Tmx::Map* mTmxMap;
     const Tmx::Layer* mTmxLayer;
+    b2World* mWorld;
     TextureManager* mTextureManager;
     std::string mSceneDir;
 
