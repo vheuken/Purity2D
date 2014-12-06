@@ -39,6 +39,8 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     // TODO: move somewhere else?
     luabridge::setGlobal(LuaManager::getManager()->getState(),
                          LuaManager::getManager(), "GPurityLuaManager");
+    luabridge::setGlobal(LuaManager::getManager()->getState(),
+                         mSceneManager.get(), "GPuritySceneManager");
 }
 
 void Purity::Engine::run()

@@ -141,5 +141,13 @@ void Purity::LuaManager::initializeMiscBindings()
                 .addFunction("disableAction", &ActionManager::disableAction)
                 .addFunction("disableAll", &ActionManager::disableAll)
             .endClass()
+
+            .beginClass<Scene>("Scene")
+                .addFunction("getMap", &Scene::getMap)
+            .endClass()
+
+            .beginClass<SceneManager>("SceneManager")
+                .addFunction("getCurrentScene", &SceneManager::getCurrentScene)
+            .endClass()
         .endNamespace();
 }

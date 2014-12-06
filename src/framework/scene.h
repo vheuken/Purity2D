@@ -37,6 +37,8 @@ public:
     std::string getLuaEventHandlerFunctionName() const;
     std::string getLuaPhysicsUpdatePath() const;
 
+    void getMap() const;
+
 private:
     std::unique_ptr<Tmx::Map> mTmxMap;
     std::unique_ptr<GameMap> mMap;
