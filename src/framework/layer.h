@@ -34,6 +34,8 @@ public:
 
     void createTile(int x, int y, std::string tileTexturePath, int id);
 
+    void clearTiles();
+
 private:
     std::map<std::pair<int, int>, std::unique_ptr<Tile>> mTiles;
 

@@ -85,6 +85,11 @@ void Purity::Layer::createTile(int x, int y, std::string tileTexturePath, int id
     }
 }
 
+void Purity::Layer::clearTiles()
+{
+    mTiles.clear();
+}
+
 const Purity::Tile* Purity::Layer::getTile(int x, int y) const
 {
     std::pair<int, int> tileCoordinates(x, y);
