@@ -144,6 +144,7 @@ void Purity::LuaManager::initializeMiscBindings()
 
             .beginClass<Layer>("Layer")
                 .addFunction("createTile", &Layer::createTile)
+                .addFunction("clearTiles", &Layer::clearTiles)
             .endClass()
 
             .beginClass<GameMap>("GameMap")
