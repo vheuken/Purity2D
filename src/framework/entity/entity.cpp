@@ -48,8 +48,7 @@ Purity::Entity::Entity(const Purity::Entity& e)
     mName = e.getName();
 
     mHitboxBodyDef = e.mHitboxBodyDef;
-    //mHitboxBody = e.mHitboxBody;
-    mHitboxBody = world->CreateBody(&mHitboxBodyDef);
+    createBody(world);
     setPosition(e.getX(), e.getY());
     setBodyPosition(e.getX(), e.getY());
     setSize(e.mWidthPixels, e.mHeightPixels);
