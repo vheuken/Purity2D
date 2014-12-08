@@ -56,7 +56,6 @@ Purity::Entity::Entity(const Purity::Entity& e)
 
 Purity::Entity::~Entity()
 {
-    std::cout << "Destroy!" << std::endl;
     mHitboxBody->GetWorld()->DestroyBody(mHitboxBody);
 }
 
