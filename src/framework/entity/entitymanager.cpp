@@ -21,9 +21,9 @@ Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& 
 {
     for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
     {
-        if (it->getName() == objectName)
+        if (it->get()->getName() == objectName)
         {
-            return &*it;
+            return it->get();
         }
     }
 
@@ -36,9 +36,9 @@ Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
 
     for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
-        if (it->getName() == objectName)
+        if (it->get()->getName() == objectName)
         {
-            return &*it;
+            return it->get();
         }
     }
 
@@ -53,7 +53,7 @@ std::vector<Purity::EntityState> Purity::EntityManager::getEntityStates() const
 
     for (auto& entity : mMovableEntityList)
     {
-        states.push_back(entity.getState());
+        states.push_back(entity->getState());
     }
 
     return states;
@@ -83,18 +83,18 @@ void Purity::EntityManager::initializeObjects()
                 {
                     std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
                     Texture* t = mTextureManager.getTexture("scenes/init/" + p);
-                    MovableEntity object(currentObject, mWorld, t);
+                    std::unique_ptr<MovableEntity> object(new MovableEntity(currentObject, mWorld, t));
                     mMovableEntityList.push_back(std::move(object));
                 }
                 else
                 {
-                    MovableEntity object(currentObject, mWorld, nullptr);
+                    std::unique_ptr<MovableEntity> object(new MovableEntity(currentObject, mWorld, nullptr));
                     mMovableEntityList.push_back(std::move(object));
                 }
             }
             else
             {
-                Entity entity(currentObject, mWorld, nullptr);
+                std::unique_ptr<Entity> entity(new Entity(currentObject, mWorld, nullptr));
                 mEntityList.push_back(std::move(entity));
             }
         }
@@ -105,9 +105,9 @@ Purity::MovableEntity* const Purity::EntityManager::getMovableEntityById(const u
 {
     for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
-        if (it->getId() == id)
+        if (it->get()->getId() == id)
         {
-            return &*it;
+            return it->get();
         }
     }
 
@@ -118,11 +118,11 @@ void Purity::EntityManager::updatePhysics()
 {
     for (auto& entity : mEntityList)
     {
-        entity.update();
+        entity->update();
     }
     for (auto& entity : mMovableEntityList)
     {
-        entity.update();
+        entity->update();
     }
 }
 
@@ -130,11 +130,11 @@ void Purity::EntityManager::draw(Purity::RenderTarget& target) const
 {
     for (auto& entity : mEntityList)
     {
-        target.draw(entity);
+        target.draw(*entity);
     }
     for (auto& entity : mMovableEntityList)
     {
-        target.draw(entity);
+        target.draw(*entity);
     }
 }
 

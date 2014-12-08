@@ -37,6 +37,8 @@ class Entity : public Drawable, public Transformable
 public:
     Entity();
     Entity(const Tmx::Object* object, b2World* world, Texture* texture);
+    Entity(const Entity& e);
+    ~Entity();
 
     virtual void createBody(b2World* world);
     void setName(std::string name);

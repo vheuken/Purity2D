@@ -1,6 +1,7 @@
 #ifndef OBJECT_MANAGER_H
 #define OBJECT_MANAGER_H
 
+#include <memory>
 #include <lua.hpp>
 
 #include "entity.h"
@@ -41,8 +42,8 @@ public:
 private:
     const Tmx::Map* mTmxMap;
     b2World* mWorld;
-    std::vector<Entity> mEntityList;
-    std::vector<MovableEntity> mMovableEntityList;
+    std::vector<std::unique_ptr<Entity>> mEntityList;
+    std::vector<std::unique_ptr<MovableEntity>> mMovableEntityList;
 
     TextureManager mTextureManager;
 

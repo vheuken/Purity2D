@@ -40,6 +40,27 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world, Purity::Textur
     }
 }
 
+Purity::Entity::Entity(const Purity::Entity& e)
+{
+    auto world = e.mHitboxBody->GetWorld();
+
+    mId = ++sNumOfEntities;
+    mName = e.getName();
+
+    mHitboxBodyDef = e.mHitboxBodyDef;
+    //mHitboxBody = e.mHitboxBody;
+    mHitboxBody = world->CreateBody(&mHitboxBodyDef);
+    setPosition(e.getX(), e.getY());
+    setBodyPosition(e.getX(), e.getY());
+    setSize(e.mWidthPixels, e.mHeightPixels);
+}
+
+Purity::Entity::~Entity()
+{
+    std::cout << "Destroy!" << std::endl;
+    mHitboxBody->GetWorld()->DestroyBody(mHitboxBody);
+}
+
 void Purity::Entity::setBodyPosition(float x, float y)
 {
     b2Vec2 pos;
