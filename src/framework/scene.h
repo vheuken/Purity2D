@@ -43,7 +43,7 @@ private:
     b2World* mWorld;
     std::unique_ptr<Tmx::Map> mTmxMap;
     std::unique_ptr<GameMap> mMap;
-    std::unique_ptr<EntityManager> mObjectManager;
+    std::unique_ptr<EntityManager> mEntityManager;
 
     std::string mLuaEventHandlerFile;
     std::string mLuaPhysicsUpdateFile;
