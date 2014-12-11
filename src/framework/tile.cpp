@@ -31,6 +31,8 @@ void Purity::Tile::initializePhysics(b2World* world)
 
     initializeHitboxShape();
     setTextureSubrect();
+
+    mHitboxBody->SetUserData(this);
 }
 
 void Purity::Tile::initializeStatic()
@@ -77,5 +79,5 @@ void Purity::Tile::createBody(b2World* world)
     collisionTileBox.Set(lowerRight, upperRight);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
 
-    // mHitboxBody->SetUserData(new std::string("Tile"));
+    mHitboxBody->SetUserData(this);
 }
