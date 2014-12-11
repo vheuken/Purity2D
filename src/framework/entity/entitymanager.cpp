@@ -33,7 +33,6 @@ Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& 
 Purity::MovableEntity* const
 Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
 {
-
     for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
         if (it->get()->getName() == objectName)
@@ -43,6 +42,42 @@ Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
     }
 
     return nullptr;
+}
+
+void Purity::EntityManager::destroyEntity(unsigned int id)
+{
+    auto deletionIt = mEntityList.end();
+
+    for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
+    {
+        if (it->get()->getId() == id)
+        {
+            deletionIt = it;
+            it = mEntityList.end();
+        }
+    }
+
+    if (deletionIt != mEntityList.end())
+    {
+        mEntityList.erase(deletionIt);
+    }
+
+
+    auto movableDeletionIt = mMovableEntityList.end();
+
+    for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
+    {
+        if (it->get()->getId() == id)
+        {
+            movableDeletionIt = it;
+            it = mMovableEntityList.end();
+        }
+    }
+
+    if (movableDeletionIt != mMovableEntityList.end())
+    {
+        mMovableEntityList.erase(movableDeletionIt);
+    }
 }
 
 std::vector<Purity::EntityState> Purity::EntityManager::getEntityStates() const

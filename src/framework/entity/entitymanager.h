@@ -33,6 +33,8 @@ public:
     MovableEntity* const getMovableEntityByName(const std::string& objectName);
     MovableEntity* const getMovableEntityById(unsigned int id);
 
+    void destroyEntity(unsigned int id);
+
     void updatePhysics();
 
     std::vector<EntityState> getEntityStates() const;
