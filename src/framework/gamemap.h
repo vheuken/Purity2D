@@ -21,10 +21,12 @@ class Map;
 
 namespace Purity
 {
+class EntityManager;
+
 class GameMap : public Drawable
 {
 public:
-    GameMap(const Tmx::Map* tmxMap, b2World* world, const std::string& sceneDir);
+    GameMap(const Tmx::Map* tmxMap, b2World* world, const std::string& sceneDir, EntityManager* entityManager);
 
     void initializeTilePhysics(b2World* world);
 
@@ -41,6 +43,8 @@ private:
     std::vector<std::unique_ptr<Layer>> mLayersList;
 
     std::unique_ptr<TextureManager> mTextureManager;
+
+    EntityManager* mEntityManager;
 
     void processLayers();
     void addTilesToList(std::map<int, std::map<int, std::unique_ptr<Tile>>>& tileList,

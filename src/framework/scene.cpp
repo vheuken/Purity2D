@@ -12,7 +12,7 @@ Purity::Scene::Scene(const std::string& sceneDir, b2World* world)
 
     mTmxMap->ParseFile(mapFilePath);
 
-    mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), mWorld, sceneDir));
+    mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), mWorld, sceneDir, mObjectManager.get()));
 }
 
 Purity::GameMap* Purity::Scene::getMap() const

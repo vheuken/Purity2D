@@ -20,6 +20,7 @@ class Layer;
 namespace Purity
 {
 class TextureManager;
+class EntityManager;
 
 class Layer : public Drawable
 {
@@ -28,7 +29,8 @@ public:
           const Tmx::Layer* tmxLayer,
           b2World* world,
           TextureManager* textureManager,
-          std::string sceneDir);
+          std::string sceneDir,
+          EntityManager* entityManager);
 
     void initializePhysics(b2World* world);
 
@@ -44,6 +46,7 @@ private:
     b2World* mWorld;
     TextureManager* mTextureManager;
     std::string mSceneDir;
+    EntityManager* mEntityManager;
 
     void processTiles();
 
