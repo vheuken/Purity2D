@@ -14,7 +14,7 @@ class RenderTarget
 {
 public:
     void setView(const View& view);
-    const View& getView() const;
+    View getView() const;
 
     void clear();
     void display();

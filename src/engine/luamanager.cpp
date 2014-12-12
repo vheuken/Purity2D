@@ -166,13 +166,16 @@ void Purity::LuaManager::initializeMiscBindings()
             .deriveClass<Window, RenderTarget>("Window")
             .endClass()
 
-            .beginClass<View>("View")
-                .addFunction("getSize", &View::getSize)
+            .beginClass<Vector2f>("Vector2f")
+                .addConstructor<void (*) (float x, float y)>()
+                .addData("x", &Vector2f::x)
+                .addData("y", &Vector2f::y)
             .endClass()
 
-            .beginClass<Vector2f>("Vector2f")
-                .addData("x", &Vector2f::x)
-                .addData("x", &Vector2f::x)
+            .beginClass<View>("View")
+                .addFunction("setSize", &View::setSize)
+                .addFunction("setCenter", &View::setCenter)
+                .addFunction("getSize", &View::getSize)
             .endClass()
         .endNamespace();
 }
