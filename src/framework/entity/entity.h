@@ -50,7 +50,7 @@ public:
     float getX() const;
     float getY() const;
 
-    const unsigned int getId() const;
+    unsigned int getId() const;
 
     void setAnimationFrame(int frame);
 

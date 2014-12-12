@@ -77,7 +77,7 @@ float Purity::Entity::getY() const
     return getPosition().y;
 }
 
-const unsigned int Purity::Entity::getId() const
+unsigned int Purity::Entity::getId() const
 {
     return mId;
 }
