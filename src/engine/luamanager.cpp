@@ -158,5 +158,21 @@ void Purity::LuaManager::initializeMiscBindings()
             .beginClass<SceneManager>("SceneManager")
                 .addFunction("getCurrentScene", &SceneManager::getCurrentScene)
             .endClass()
+
+            .beginClass<RenderTarget>("RenderTarget")
+                .addFunction("getView", &Window::getView)
+                .addFunction("setView", &Window::setView)
+            .endClass()
+            .deriveClass<Window, RenderTarget>("Window")
+            .endClass()
+
+            .beginClass<View>("View")
+                .addFunction("getSize", &View::getSize)
+            .endClass()
+
+            .beginClass<Vector2f>("Vector2f")
+                .addData("x", &Vector2f::x)
+                .addData("x", &Vector2f::x)
+            .endClass()
         .endNamespace();
 }

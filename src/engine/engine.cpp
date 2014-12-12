@@ -41,6 +41,8 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
                          LuaManager::getManager(), "GPurityLuaManager");
     luabridge::setGlobal(LuaManager::getManager()->getState(),
                          mSceneManager.get(), "GPuritySceneManager");
+    luabridge::setGlobal(LuaManager::getManager()->getState(),
+                         mWindow.get(), "GPurityWindow");
 }
 
 void Purity::Engine::run()
