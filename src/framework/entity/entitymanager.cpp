@@ -53,7 +53,6 @@ void Purity::EntityManager::destroyEntity(unsigned int id)
         if (it->get()->getId() == id)
         {
             deletionIt = it;
-            it = mEntityList.end();
         }
     }
 
@@ -70,7 +69,6 @@ void Purity::EntityManager::destroyEntity(unsigned int id)
         if (it->get()->getId() == id)
         {
             movableDeletionIt = it;
-            it = mMovableEntityList.end();
         }
     }
 
@@ -178,6 +176,7 @@ void Purity::EntityManager::luaBindings(lua_State* state)
     luabridge::getGlobalNamespace(state)
         .beginNamespace("Purity")
         .beginClass<EntityManager>("EntityManager")
+        .addFunction("destroyEntity", &EntityManager::destroyEntity)
         .addFunction("getEntityByName", &EntityManager::getEntityByName)
         .addFunction("getMovableEntityByName", &EntityManager::getMovableEntityByName)
         .endClass()
