@@ -38,7 +38,7 @@ void Purity::PhysicsSystem::update(Purity::Scene* scene)
         luaManager->doFile(luaEventHandlerFileName);
 
         std::string physicsUpdateScript
-            = mCurrentScene->getLuaPhysicsUpdatePath();
+            = mCurrentScene->getLuaMainPath();
 
         luaManager->doFile(physicsUpdateScript);
 
@@ -130,7 +130,7 @@ void Purity::PhysicsSystem::runUpdateScripts()
         auto luaManager = LuaManager::getManager();
 
         auto updateScript
-            = luabridge::getGlobal(luaManager->getState(), "onPhysicsUpdate");
+            = luabridge::getGlobal(luaManager->getState(), "main");
         updateScript();
     }
     catch (luabridge::LuaException e)

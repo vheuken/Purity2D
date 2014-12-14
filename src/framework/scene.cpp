@@ -6,7 +6,7 @@ Purity::Scene::Scene(const std::string& sceneDir, b2World* world)
     std::string mapFilePath(sceneDir + DEFAULT_MAP_FILENAME);
 
     mLuaEventHandlerFile = sceneDir + DEFAULT_EVENT_HANDLER_FILENAME;
-    mLuaPhysicsUpdateFile = sceneDir + DEFAULT_ON_PHYSICS_UPDATE_SCRIPT;
+    mLuaPhysicsUpdateFile = sceneDir + DEFAULT_MAIN_SCRIPT;
 
     mTmxMap = std::unique_ptr<Tmx::Map>(new Tmx::Map);
 
@@ -50,7 +50,7 @@ std::string Purity::Scene::getLuaEventHandlerFunctionName() const
     return DEFAULT_EVENT_HANDLER_FUNCTION_NAME;
 }
 
-std::string Purity::Scene::getLuaPhysicsUpdatePath() const
+std::string Purity::Scene::getLuaMainPath() const
 {
     return mLuaPhysicsUpdateFile;
 }

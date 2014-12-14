@@ -19,7 +19,7 @@ namespace Purity
 const std::string DEFAULT_MAP_FILENAME = "map.tmx";
 const std::string DEFAULT_EVENT_HANDLER_FILENAME = "eventHandler.lua";
 const std::string DEFAULT_EVENT_HANDLER_FUNCTION_NAME = "eventHandler";
-const std::string DEFAULT_ON_PHYSICS_UPDATE_SCRIPT = "onPhysicsUpdate.lua";
+const std::string DEFAULT_MAIN_SCRIPT = "main.lua";
 
 class Scene : public Drawable
 {
@@ -35,7 +35,7 @@ public:
 
     std::string getLuaEventHandlerPath() const;
     std::string getLuaEventHandlerFunctionName() const;
-    std::string getLuaPhysicsUpdatePath() const;
+    std::string getLuaMainPath() const;
 
     GameMap* getMap() const;
 
