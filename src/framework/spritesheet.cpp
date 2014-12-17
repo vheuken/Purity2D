@@ -43,5 +43,5 @@ int Purity::SpriteSheet::getNumOfRows() const
 
 int Purity::SpriteSheet::getNumOfCols() const
 {
-    return mTexture->getSize().x / getTileWidth();
+    return mTexture->getSize().y / getTileHeight();
 }

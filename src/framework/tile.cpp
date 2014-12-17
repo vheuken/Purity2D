@@ -50,7 +50,7 @@ void Purity::Tile::createBody(b2World* world)
     posX = getPosition().x / PIXELS_PER_METER;
     posY = getPosition().y / PIXELS_PER_METER;
 
-    // convert SFML coordinates to Box2D compatible coordinates
+    // convert pixel coordinates to Box2D meters
     posX += mWidthPixels / PIXELS_PER_METER / 2;
     posY += mHeightPixels / PIXELS_PER_METER / 2;
 

@@ -33,7 +33,7 @@ void Purity::Layer::processTiles()
         {
             tmxTile = mTmxLayer->GetTile(x, y);
 
-            if (tmxTile.id != 0)
+            if (tmxTile.tilesetId != -1)
             {
                 std::string tilesetPathStr
                     = mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource();
