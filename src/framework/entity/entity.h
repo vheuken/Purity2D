@@ -62,7 +62,7 @@ public:
 
 protected:
     b2BodyDef mHitboxBodyDef;
-    b2Body* mHitboxBody;
+    b2Body* mHitboxBody = nullptr;
     Rect mHitboxRect;
 
     Texture* mTexture;

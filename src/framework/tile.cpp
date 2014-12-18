@@ -37,7 +37,6 @@ void Purity::Tile::initializePhysics(b2World* world)
 
 void Purity::Tile::initializeStatic()
 {
-    mHitboxBody = nullptr;
     initializeHitboxShape();
     setTextureSubrect();
 }
