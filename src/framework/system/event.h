@@ -59,7 +59,7 @@ struct Event
         WindowEvent windowEvent;
     };
 
-    int type;
+    int type = -1;
 
     Event& operator=(const SDL_Event& event);
 };
