@@ -20,6 +20,7 @@ class Engine
 {
 public:
     Engine(const CommandLineArguments& commandLineArguments);
+    ~Engine();
 
     void run();
 

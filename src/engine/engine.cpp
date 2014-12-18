@@ -45,6 +45,16 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
                          mWindow.get(), "GPurityWindow");
 }
 
+Purity::Engine::~Engine()
+{
+    mWindow.reset();
+    mSceneManager.reset();
+    mRenderSystem.reset();
+    mInputSystem.reset();
+    mNetworkSystem.reset();
+    mPhysicsSystem.reset();
+}
+
 void Purity::Engine::run()
 {
     std::cout << "Engine is starting! =D" << std::endl;
