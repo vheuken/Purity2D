@@ -28,8 +28,6 @@ class GameMap : public Drawable
 public:
     GameMap(const Tmx::Map* tmxMap, b2World* world, const std::string& sceneDir, EntityManager* entityManager);
 
-    void initializeTilePhysics(b2World* world);
-
     Layer* getLayer(int layerNum) const;
 
 private:

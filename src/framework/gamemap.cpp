@@ -17,14 +17,6 @@ Purity::Layer* Purity::GameMap::getLayer(int layerNum) const
     return mLayersList[layerNum].get();
 }
 
-void Purity::GameMap::initializeTilePhysics(b2World* world)
-{
-    for (auto it = mLayersList.begin(); it != mLayersList.end(); it++)
-    {
-        it->get()->initializePhysics(world);
-    }
-}
-
 void Purity::GameMap::processLayers()
 {
     const std::vector<Tmx::Layer*, std::allocator<Tmx::Layer*>> tmxLayers = mTmxMap->GetLayers();

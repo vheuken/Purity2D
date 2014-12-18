@@ -55,11 +55,6 @@ std::string Purity::Scene::getLuaMainPath() const
     return mLuaPhysicsUpdateFile;
 }
 
-void Purity::Scene::initializeTiles(b2World* world)
-{
-    mMap->initializeTilePhysics(world);
-}
-
 void Purity::Scene::initializeObjects(b2World* world)
 {
 }

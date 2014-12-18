@@ -32,8 +32,6 @@ public:
           std::string sceneDir,
           EntityManager* entityManager);
 
-    void initializePhysics(b2World* world);
-
     void createTile(int x, int y, std::string tileTexturePath, int id);
 
     void clearTiles();

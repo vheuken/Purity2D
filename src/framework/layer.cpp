@@ -39,31 +39,10 @@ void Purity::Layer::processTiles()
                     = mTmxMap->GetTileset(tmxTile.tilesetId)->GetImage()->GetSource();
                 std::string texturePathStr = mSceneDir + tilesetPathStr;
 
-                // Tile tile(x, y, tileWidth, tileHeight, tileTexture, tmxTile.id);
-                // addTile(tile)
                 createTile(x, y, texturePathStr, tmxTile.id);
             }
         }
     }
-}
-
-void Purity::Layer::initializePhysics(b2World* world)
-{
-    /*
-    if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
-    {
-        for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
-        {
-            it->second->initializePhysics(world);
-        }
-    }
-    else
-    {
-        for (auto it = mTiles.begin(); it != mTiles.end(); ++it)
-        {
-            it->second->initializeStatic();
-        }
-    }*/
 }
 
 void Purity::Layer::createTile(int x, int y, std::string tileTexturePath, int id)
