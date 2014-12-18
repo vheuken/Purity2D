@@ -34,6 +34,8 @@ struct Event
 
         FocusGained = SDL_WINDOWEVENT_FOCUS_GAINED,
         FocusLost = SDL_WINDOWEVENT_FOCUS_LOST,
+
+        NONE = -1
     };
 
     struct KeyEvent
@@ -59,7 +61,7 @@ struct Event
         WindowEvent windowEvent;
     };
 
-    int type = -1;
+    int type = NONE;
 
     Event& operator=(const SDL_Event& event);
 };
