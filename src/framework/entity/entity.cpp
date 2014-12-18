@@ -56,7 +56,10 @@ Purity::Entity::Entity(const Purity::Entity& e)
 
 Purity::Entity::~Entity()
 {
-    mHitboxBody->GetWorld()->DestroyBody(mHitboxBody);
+    if (mHitboxBody)
+    {
+        mHitboxBody->GetWorld()->DestroyBody(mHitboxBody);
+    }
 }
 
 void Purity::Entity::setBodyPosition(float x, float y)

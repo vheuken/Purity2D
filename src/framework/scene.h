@@ -39,8 +39,11 @@ public:
 
     GameMap* getMap() const;
 
+    void changeMap(const std::string& mapPath);
+
 private:
     b2World* mWorld;
+    std::string mSceneDir;
     std::unique_ptr<Tmx::Map> mTmxMap;
     std::unique_ptr<GameMap> mMap;
     std::unique_ptr<EntityManager> mEntityManager;

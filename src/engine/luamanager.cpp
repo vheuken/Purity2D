@@ -153,6 +153,7 @@ void Purity::LuaManager::initializeMiscBindings()
 
             .beginClass<Scene>("Scene")
                 .addFunction("getMap", &Scene::getMap)
+                .addFunction("changeMap", &Scene::changeMap)
             .endClass()
 
             .beginClass<SceneManager>("SceneManager")

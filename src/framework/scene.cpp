@@ -2,6 +2,7 @@
 
 Purity::Scene::Scene(const std::string& sceneDir, b2World* world)
     : mWorld(world)
+    , mSceneDir(sceneDir)
 {
     std::string mapFilePath(sceneDir + DEFAULT_MAP_FILENAME);
 
@@ -20,13 +21,18 @@ Purity::GameMap* Purity::Scene::getMap() const
     return mMap.get();
 }
 
+void Purity::Scene::changeMap(const std::string &mapFile)
+{
+    mTmxMap.reset(new Tmx::Map);
+
+    mTmxMap->ParseFile(mSceneDir + mapFile);
+
+    mMap.reset(new GameMap(mTmxMap.get(), mWorld, mSceneDir, mEntityManager.get()));
+}
+
 void Purity::Scene::initializePhysics(b2World* world)
 {
-    //mMutex.lock();
-
     mEntityManager = std::unique_ptr<EntityManager>(new EntityManager(mTmxMap.get(), world));
-
-    //mMutex.unlock();
 }
 
 void Purity::Scene::setEntityState(const EntityState& state)
