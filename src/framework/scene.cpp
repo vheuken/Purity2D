@@ -55,10 +55,6 @@ std::string Purity::Scene::getLuaMainPath() const
     return mLuaPhysicsUpdateFile;
 }
 
-void Purity::Scene::initializeObjects(b2World* world)
-{
-}
-
 void Purity::Scene::updatePhysics()
 {
     mMutex.lock();

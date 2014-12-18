@@ -50,7 +50,6 @@ private:
 
     mutable std::mutex mMutex;
 
-    void initializeObjects(b2World* world);
     virtual void draw(RenderTarget& target) const;
 };
 }
