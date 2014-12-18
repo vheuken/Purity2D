@@ -35,9 +35,6 @@ private:
     const Tmx::Map* mTmxMap;
     b2World* mWorld;
 
-    std::map<int, std::map<int, std::unique_ptr<Tile>>> mPhysicsTileList;
-    std::map<int, std::map<int, std::unique_ptr<Tile>>> mStaticTileList;
-
     std::vector<std::unique_ptr<Layer>> mLayersList;
 
     std::unique_ptr<TextureManager> mTextureManager;
