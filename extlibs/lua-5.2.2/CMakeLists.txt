@@ -5,36 +5,12 @@ SET( TARGET_NAME        "lua" )
 SET( TARGET_INCLUDE_DIR "src" )
 SET( TARGET_SOURCE_DIR "src" )
 
-
-if ( WIN32 AND NOT CYGWIN )
-  # Windows systems
-  option ( LUA_WIN "Windows specific build." ON )
-  option ( LUA_BUILD_WLUA "Build wLua interpretter without console output." ON )
-  option ( LUA_BUILD_AS_DLL "Build Lua library as Dll." ${BUILD_SHARED_LIBS} )
-
-  # Paths (Double escapes ne  option needed)
-  set ( LUA_DIRSEP "\\\\" )
-  string ( REPLACE " /" ${LUA_DIRSEP} LUA_DIR "${LUA_DIR}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_LDIR "${LUA_LDIR}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_CDIR "${LUA_CDIR}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_PATH_DEFAULT "${LUA_PATH_DEFAULT}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_CPATH_DEFAULT "${LUA_CPATH_DEFAULT}" )
-else ( )
-  # Posix systems (incl. Cygwin)
-  option ( LUA_USE_POSIX "Use POSIX features." ON )
-  option ( LUA_USE_DLOPEN "Use dynamic linker to load modules." ON )
-  option ( LUA_USE_MKSTEMP "Use mkstep." ON )
-  option ( LUA_USE_ISATTY "Use tty." ON )
-  option ( LUA_USE_POPEN "Use popen." ON )
-  option ( LUA_USE_ULONGJMP "Use ulongjmp" ON )
-  option ( LUA_USE_GMTIME_R "Use GTIME_R" ON )
-  # Apple and Linux specific
-  if ( LINUX OR APPLE )
-    option ( LUA_USE_STRTODHEX "Assume 'strtod' handles hexa formats" ON )
-    option ( LUA_USE_AFORMAT "Assume 'printf' handles 'aA' specifiers" ON )
-    option ( LUA_USE_LONGLONG "Assume support for long long" ON )
-  endif ( )
-endif ( )
+if ( (UNIX OR CYGWIN) AND NOT APPLE )
+  add_definitions(-DLUA_USE_LINUX)
+endif()
+if ( APPLE )
+  add_definitions(-DLUA_USE_MACOSX)
+endif()
 
 SET( HEADER_FILES
      "${TARGET_INCLUDE_DIR}/lapi.h"
