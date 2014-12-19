@@ -29,9 +29,9 @@ class EntityManager : public Drawable
 public:
     EntityManager(const Tmx::Map* tmxMap, b2World* world);
 
-    Entity* const getEntityByName(const std::string& objectName);
-    MovableEntity* const getMovableEntityByName(const std::string& objectName);
-    MovableEntity* const getMovableEntityById(unsigned int id);
+    Entity* getEntityByName(const std::string& objectName);
+    MovableEntity* getMovableEntityByName(const std::string& objectName);
+    MovableEntity* getMovableEntityById(unsigned int id);
 
     void destroyEntity(unsigned int id);
 

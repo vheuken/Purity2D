@@ -17,7 +17,7 @@ Purity::EntityManager::EntityManager(const Tmx::Map* tmxMap, b2World* world)
     luabridge::setGlobal(LuaManager::getManager()->getState(), this, "GEntityManager");
 }
 
-Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& objectName)
+Purity::Entity* Purity::EntityManager::getEntityByName(const std::string& objectName)
 {
     for (auto it = mEntityList.begin(); it != mEntityList.end(); ++it)
     {
@@ -30,7 +30,7 @@ Purity::Entity* const Purity::EntityManager::getEntityByName(const std::string& 
     return nullptr;
 }
 
-Purity::MovableEntity* const
+Purity::MovableEntity*
 Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
 {
     for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
@@ -134,7 +134,7 @@ void Purity::EntityManager::initializeObjects()
     }
 }
 
-Purity::MovableEntity* const Purity::EntityManager::getMovableEntityById(const unsigned int id)
+Purity::MovableEntity* Purity::EntityManager::getMovableEntityById(const unsigned int id)
 {
     for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
