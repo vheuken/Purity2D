@@ -36,7 +36,7 @@ add_subdirectory(extlibs)
 
 IF (NOT MSVC)
 	# C++11
-	ADD_DEFINITIONS(-std=c++11 -Wall)
+	ADD_DEFINITIONS(-std=c++11 -Wall -Wextra -pedantic)
 
     IF(NOT APPLE AND NOT ANDROID)	
                 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
