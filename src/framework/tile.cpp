@@ -17,8 +17,8 @@ void Purity::Tile::setTextureSubrect()
 {
     if (mTexture != nullptr)
     {
-        std::unique_ptr<SpriteSheet> spriteSheet(
-            new SpriteSheet(mTexture, mWidthPixels, mHeightPixels));
+        std::unique_ptr
+            <SpriteSheet> spriteSheet(new SpriteSheet(mTexture, mWidthPixels, mHeightPixels));
 
         mSpriteSheet = std::move(spriteSheet);
     }
@@ -58,14 +58,14 @@ void Purity::Tile::createBody(b2World* world)
 
     mHitboxBody = world->CreateBody(&collisionTileBodyDef);
 
-    b2Vec2 lowerLeft = b2Vec2(0 - (mWidthPixels / PIXELS_PER_METER / 2),
-                              0 - (mHeightPixels / PIXELS_PER_METER / 2));
-    b2Vec2 lowerRight
-        = b2Vec2(mWidthPixels / PIXELS_PER_METER / 2, 0 - (mHeightPixels / PIXELS_PER_METER / 2));
-    b2Vec2 upperRight
-        = b2Vec2(mWidthPixels / PIXELS_PER_METER / 2, mHeightPixels / PIXELS_PER_METER / 2);
-    b2Vec2 upperLeft
-        = b2Vec2(0 - (mWidthPixels / PIXELS_PER_METER / 2), mHeightPixels / PIXELS_PER_METER / 2);
+    b2Vec2 lowerLeft(0 - (mWidthPixels / PIXELS_PER_METER / 2),
+                     0 - (mHeightPixels / PIXELS_PER_METER / 2));
+    b2Vec2 lowerRight(mWidthPixels / PIXELS_PER_METER / 2,
+                      0 - (mHeightPixels / PIXELS_PER_METER / 2));
+    b2Vec2 upperRight(mWidthPixels / PIXELS_PER_METER / 2,
+                      mHeightPixels / PIXELS_PER_METER / 2);
+    b2Vec2 upperLeft(0 - (mWidthPixels / PIXELS_PER_METER / 2),
+                     mHeightPixels / PIXELS_PER_METER / 2);
 
     collisionTileBox.Set(lowerLeft, lowerRight);
     mHitboxBody->CreateFixture(&collisionTileBox, 0.0f);
