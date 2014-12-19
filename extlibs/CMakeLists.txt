@@ -1,3 +1,5 @@
+set(BOX2D_BUILD_STATIC 1)
+set(BOX2D_BUILD_SHARED 0)
 add_subdirectory(Box2D)
 add_subdirectory(lua-5.2.2)
 add_subdirectory(TmxParser)
