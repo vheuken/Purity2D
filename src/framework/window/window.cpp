@@ -137,9 +137,13 @@ Purity::Vector2i Purity::Window::getPosition() const
 bool Purity::Window::pollEvent(Purity::Event& event)
 {
     SDL_Event sdlEvent;
+
     bool ret = SDL_PollEvent(&sdlEvent);
 
-    event = sdlEvent;
+    if (ret)
+    {
+        event = sdlEvent;
+    }
 
     return ret;
 }
