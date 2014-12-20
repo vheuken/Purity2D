@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 #include <mutex>
-#include <TmxParser/TmxMap.h>
+#include <TmxMap.h>
 #include "gamemap.h"
 #include "entity/entitymanager.h"
 #include "entity/entitystate.h"

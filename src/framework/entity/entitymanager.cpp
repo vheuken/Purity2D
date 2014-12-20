@@ -1,7 +1,7 @@
 #include "entitymanager.h"
 
 #include <LuaBridge.h>
-#include <TmxParser/Tmx.h>
+#include <Tmx.h>
 
 #include "../graphics/texture.h"
 
@@ -114,7 +114,7 @@ void Purity::EntityManager::initializeObjects()
             {
                 if (currentObject->GetProperties().GetSize() > 0)
                 {
-                    std::string p = currentObject->GetProperties().GetLiteralProperty("Texture");
+                    std::string p = currentObject->GetProperties().GetStringProperty("Texture");
                     Texture* t = mTextureManager.getTexture("scenes/init/" + p);
                     std::unique_ptr<MovableEntity> object(new MovableEntity(currentObject, mWorld, t));
                     mMovableEntityList.push_back(std::move(object));

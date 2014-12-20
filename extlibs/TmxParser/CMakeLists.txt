@@ -1,56 +1,21 @@
-set (PROJECT_NAME "TMX-Parser")
+cmake_minimum_required(VERSION 2.8)
+project(tmxparser)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
-add_definitions(-DUSE_SDL2_LOAD)
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
+set(VERSION_PATCH 0)
 
-include_directories(tinyxml ../SDL2-2.0.3/include)
+set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+message("Configuring tmxparser version ${VERSION}")
 
-set ( HEADER_FILES
-	 Tmx.h
-	 TmxEllipse.h
-	 TmxImage.h
-	 TmxImageLayer.h
-	 TmxLayer.h
-	 TmxMap.h
-	 TmxMapTile.h
-	 TmxObject.h
-	 TmxObjectGroup.h
-	 TmxPoint.h
-	 TmxPolygon.h
-	 TmxPolyline.h
-	 TmxPropertySet.h
-	 TmxTile.h
-	 TmxTileset.h
-	 TmxUtil.h
-	 
-	 base64/base64.h
-)
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE HEADERS ${PROJECT_SOURCE_DIR}/src/*.h)
+set(miniz ${PROJECT_SOURCE_DIR}/src/miniz.c)
 
-set ( SOURCE_FILES
-	 TmxEllipse.cpp
-	 TmxImage.cpp
-	 TmxImageLayer.cpp
-	 TmxLayer.cpp
-	 TmxMap.cpp
-	 TmxObject.cpp
-	 TmxObjectGroup.cpp
-	 TmxPolygon.cpp
-	 TmxPolyline.cpp
-	 TmxPropertySet.cpp
-	 TmxTile.cpp
-	 TmxTileset.cpp
-	 TmxUtil.cpp
-	 
-	 base64/base64.cpp
-	 
-)
+set(LIB_CFLAGS "-pedantic -Werror -Wall -Werror=strict-prototypes -Werror=old-style-definition -Werror=missing-prototypes")
+set(EXAMPLE_CFLAGS "-pedantic -Werror -Wall")
+#include_directories("${PROJECT_SOURCE_DIR}/include")
 
-
-file (GLOB tinyxml_src
-	"tinyxml/*.cpp" "tinyxml/*.h"
-)
-
-add_library( "${PROJECT_NAME}" STATIC 
-${HEADER_FILES} ${SOURCE_FILES} 
-${tinyxml_src}
-miniz.c
-)
+add_library(tmxparser_static STATIC ${SOURCES} ${HEADERS} ${miniz})
+target_link_libraries(tmxparser_static tinyxml2static)

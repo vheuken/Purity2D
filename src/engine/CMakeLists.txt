@@ -56,7 +56,7 @@ target_link_libraries(
 	
     Box2D
     lua
-    TMX-Parser
+    tmxparser_static
     enet
     STB_Image
 	inih	

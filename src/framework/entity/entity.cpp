@@ -1,6 +1,6 @@
 #include "entity.h"
 
-#include <TmxParser/Tmx.h>
+#include <Tmx.h>
 #include <LuaBridge.h>
 
 unsigned int Purity::Entity::sNumOfEntities = 0;
@@ -31,12 +31,12 @@ Purity::Entity::Entity(const Tmx::Object* object, b2World* world, Purity::Textur
     {
         mSpriteSheet = std::unique_ptr<SpriteSheet>(
             new SpriteSheet(mTexture,
-                            object->GetProperties().GetNumericProperty("AnimationFrameWidth"),
-                            object->GetProperties().GetNumericProperty("AnimationFrameWidth")));
+                            object->GetProperties().GetIntProperty("AnimationFrameWidth"),
+                            object->GetProperties().GetIntProperty("AnimationFrameWidth")));
 
-        mAnimationFrame = object->GetProperties().GetNumericProperty("StartingAnimationFrame");
-        mFrameOffsetX = object->GetProperties().GetNumericProperty("AnimationFrameOffsetX");
-        mFrameOffsetY = object->GetProperties().GetNumericProperty("AnimationFrameOffsetY");
+        mAnimationFrame = object->GetProperties().GetIntProperty("StartingAnimationFrame");
+        mFrameOffsetX = object->GetProperties().GetIntProperty("AnimationFrameOffsetX");
+        mFrameOffsetY = object->GetProperties().GetIntProperty("AnimationFrameOffsetY");
     }
 }
 

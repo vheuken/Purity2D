@@ -1,6 +1,6 @@
 #include "layer.h"
 
-#include <TmxParser/Tmx.h>
+#include <Tmx.h>
 
 #include "graphics/texturemanager.h"
 
@@ -56,7 +56,7 @@ void Purity::Layer::createTile(int x, int y, std::string tileTexturePath, int id
 
     mTiles[tileCoordinates] = std::move(tile);
 
-    if (mTmxLayer->GetProperties().GetNumericProperty("Collidable") == 1)
+    if (mTmxLayer->GetProperties().GetIntProperty("Collidable") == 1)
     {
         mTiles[tileCoordinates]->initializePhysics(mWorld);
     }

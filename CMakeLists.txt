@@ -30,13 +30,15 @@ include_directories(
     ${LIBS_INCLUDE_DIR}/stb_image/
     ${LIBS_INCLUDE_DIR}/inih/
     ${LIBS_INCLUDE_DIR}/inih/cpp/
+    ${LIBS_INCLUDE_DIR}/tinyxml2-2.2.0/
+    ${LIBS_INCLUDE_DIR}/TmxParser/src/
 )
 
 add_subdirectory(extlibs)
 
 IF (NOT MSVC)
 	# C++11
-	ADD_DEFINITIONS(-std=c++11 -Wall) # -Wextra -pedantic
+	ADD_DEFINITIONS(-std=c++11 -Wall -pedantic) # -Wextra -pedantic
 
     IF(NOT APPLE AND NOT ANDROID)	
                 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")

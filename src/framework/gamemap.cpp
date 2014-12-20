@@ -1,6 +1,6 @@
 #include "gamemap.h"
 
-#include <TmxParser/Tmx.h>
+#include <Tmx.h>
 
 Purity::GameMap::GameMap(const Tmx::Map* tmxMap, b2World* world, const std::string& sceneDir, EntityManager* entityManager)
     : mSceneDir(sceneDir)
