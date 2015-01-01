@@ -6,6 +6,7 @@
 
 #include "../system/configuration.h"
 #include "../input/mouse.h"
+#include "../graphics/font.h"
 
 #if defined(__ANDROID__) || defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
 const bool CONTENT_MODE_DEFAULT = true;
@@ -99,6 +100,8 @@ Purity::Window::Window(int width, int height, const std::string& title, Viewport
     }
 
     setWindowMode();
+
+    Font font("DroidSansMono.ttf");
 }
 
 Purity::Window::~Window()
