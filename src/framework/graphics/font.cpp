@@ -9,27 +9,35 @@
 Purity::Font::Font(const std::string &fontFileName)
     : mFontFileName(fontFileName)
 {
+    loadFont();
+
+    stbtt_fontinfo font;
+
+    if(!stbtt_InitFont(&font, mFontData.get(), 0))
+    {
+        std::cerr << "Failed to initialize font" << std::endl;
+    }
+}
+
+void Purity::Font::loadFont()
+{
     SDL_RWops* fontFile = SDL_RWFromFile(mFontFileName.c_str(), "rb");
 
     if (fontFile == nullptr)
     {
-        std::cerr << "Error loading font file" << mFontFileName
+        std::cerr << "Error loading font file"
                   << ": " << SDL_GetError() << std::endl;
     }
 
     const auto fontFileSize = fontFile->size(fontFile);
-    const auto fontData = new unsigned char[fontFileSize];
+    mFontData = std::unique_ptr<unsigned char>(new unsigned char[fontFileSize]);
 
-    fontFile->read(fontFile, fontData, 1, fontFileSize);
+    fontFile->read(fontFile, mFontData.get(), 1, fontFileSize);
 
     fontFile->close(fontFile);
+}
 
-    stbtt_fontinfo font;
-
-    if(!stbtt_InitFont(&font, fontData, 0))
-    {
-        std::cerr << "Failed to initialize font" << std::endl;
-    }
-
-    delete fontData;
+SDL_Surface* Purity::Font::getSurface() const
+{
+    return mSurface;
 }
