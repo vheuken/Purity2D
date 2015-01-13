@@ -11,12 +11,19 @@ Purity::Font::Font(const std::string &fontFileName)
 {
     loadFont();
 
-    stbtt_fontinfo font;
-
-    if(!stbtt_InitFont(&font, mFontData.get(), 0))
+    if(!stbtt_InitFont(&mFontInfo, mFontData.data(), 0))
     {
         std::cerr << "Failed to initialize font" << std::endl;
     }
+
+    int w, h;
+    auto bitmap = stbtt_GetCodepointBitmap(&mFontInfo, 0,stbtt_ScaleForPixelHeight(&mFontInfo, 30), 'D', &w, &h, 0,0);
+    for (int j=0; j < h; ++j) {
+       for (int i=0; i < w; ++i)
+          putchar(" .:ioVM@"[bitmap[j*w+i]>>5]);
+       putchar('\n');
+    }
+
 }
 
 void Purity::Font::loadFont()
@@ -30,9 +37,9 @@ void Purity::Font::loadFont()
     }
 
     const auto fontFileSize = fontFile->size(fontFile);
-    mFontData = std::unique_ptr<unsigned char>(new unsigned char[fontFileSize]);
+    mFontData.reserve(fontFileSize);
 
-    fontFile->read(fontFile, mFontData.get(), 1, fontFileSize);
+    fontFile->read(fontFile, &mFontData[0], 1, fontFileSize);
 
     fontFile->close(fontFile);
 }

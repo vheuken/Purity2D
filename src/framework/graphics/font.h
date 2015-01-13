@@ -2,7 +2,8 @@
 #define PURITY_FONT_H
 
 #include <string>
-#include <memory>
+#include <vector>
+#include <stb_truetype.h>
 
 struct SDL_Surface;
 
@@ -17,11 +18,13 @@ public:
 private:
     const std::string mFontFileName;
 
-    void loadFont();
+    stbtt_fontinfo mFontInfo;
 
-    std::unique_ptr<unsigned char> mFontData;
+    std::vector<unsigned char> mFontData;
 
     SDL_Surface* mSurface;
+
+    void loadFont();
 };
 }
 
