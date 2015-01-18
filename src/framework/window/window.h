@@ -9,7 +9,7 @@
 #include "../graphics/view.h"
 #include "../system/event.h"
 #include "../gui/button.h"
-#include "../graphics/font.h"
+#include "../graphics/text.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -104,7 +104,7 @@ private:
     void setRenderScale();
     void setRenderMaintainAspectRatio();
 
-    Font mFont;
+    Text mText;
 };
 }
 

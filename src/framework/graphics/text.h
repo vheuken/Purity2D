@@ -7,7 +7,7 @@
 
 namespace Purity
 {
-class Text : public Drawable
+class Text : protected Drawable
 {
 public:
     Text();
@@ -19,7 +19,6 @@ public:
     void setFont(const Font& font);
     Font getFont() const;
 
-protected:
     void draw(RenderTarget& target) const;
 
 private:

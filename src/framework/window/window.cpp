@@ -28,7 +28,6 @@ Purity::Window::Window(int width, int height, const std::string& title, Viewport
     , mFullscreenDesktopButton(Rect(Vector2i(width - 180, 5), 25, 25))
     , mUIButtonsOnBordered(
           Configuration::getInstance()->getBool("window", "ui_buttons_on_bordered", false))
-    , mFont("DroidSansMono.ttf")
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -100,6 +99,10 @@ Purity::Window::Window(int width, int height, const std::string& title, Viewport
     }
 
     setWindowMode();
+
+    // test Text; remove later
+    mText.setText("Hello fam");
+    mText.setFont(Font("DroidSansMono.ttf"));
 }
 
 Purity::Window::~Window()
@@ -377,15 +380,7 @@ void Purity::Window::display()
 
     setResizeHandling();
 
-    auto t = SDL_CreateTextureFromSurface(mRenderer, mFont.getSurface());
-    if (t == 0)
-    {
-        std::cerr << SDL_GetError() << std::endl;
-    }
-    if(SDL_RenderCopy(mRenderer, t, NULL, NULL) != 0)
-    {
-        std::cerr << SDL_GetError() << std::endl;
-    }
+    mText.draw(*this);
 
     SDL_RenderPresent(mRenderer);
 }
