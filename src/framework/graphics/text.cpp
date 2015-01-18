@@ -29,3 +29,8 @@ Purity::Font Purity::Text::getFont() const
 {
     return mFont;
 }
+
+void Purity::Text::draw(RenderTarget& target) const
+{
+    std::cout << mTextStr << std::endl;
+}

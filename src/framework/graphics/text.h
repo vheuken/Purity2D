@@ -2,11 +2,12 @@
 #define PURITY_TEXT_H
 
 #include <string>
+#include "drawable.h"
 #include "font.h"
 
 namespace Purity
 {
-class Text
+class Text : public Drawable
 {
 public:
     Text();
@@ -17,6 +18,9 @@ public:
 
     void setFont(const Font& font);
     Font getFont() const;
+
+protected:
+    void draw(RenderTarget& target) const;
 
 private:
     std::string mTextStr;
