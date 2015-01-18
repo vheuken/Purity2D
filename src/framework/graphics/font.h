@@ -12,11 +12,12 @@ namespace Purity
 class Font
 {
 public:
+    Font();
     Font(const std::string& fontFileName);
 
     SDL_Surface* getSurface() const;
 private:
-    const std::string mFontFileName;
+    std::string mFontFileName;
 
     stbtt_fontinfo mFontInfo;
 

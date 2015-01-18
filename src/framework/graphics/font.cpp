@@ -6,6 +6,10 @@
 #include <stb_truetype.h>
 #include <SDL.h>
 
+Purity::Font::Font()
+{
+}
+
 Purity::Font::Font(const std::string &fontFileName)
     : mFontFileName(fontFileName)
 {
