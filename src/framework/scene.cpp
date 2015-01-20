@@ -11,7 +11,18 @@ Purity::Scene::Scene(const std::string& sceneDir, b2World* world)
 
     mTmxMap = std::unique_ptr<Tmx::Map>(new Tmx::Map);
 
-    mTmxMap->ParseFile(mapFilePath);
+    auto mapFile = SDL_RWFromFile(mapFilePath.c_str(), "r");
+
+    const auto mapFileSize = mapFile->size(mapFile);
+    std::string mapData;
+
+    mapData.reserve(mapFileSize);
+
+    mapFile->read(mapFile, &mapData[0], 1, mapFileSize);
+
+    mapFile->close(mapFile);
+
+    mTmxMap->ParseText(mapData);
 
     mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), mWorld, sceneDir, mEntityManager.get()));
 }
