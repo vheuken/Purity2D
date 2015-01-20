@@ -9,7 +9,7 @@
 #include "../graphics/view.h"
 #include "../system/event.h"
 #include "../gui/button.h"
-#include "../graphics/text.h"
+#include "../gui/text.h"
 
 struct SDL_Window;
 struct SDL_Renderer;

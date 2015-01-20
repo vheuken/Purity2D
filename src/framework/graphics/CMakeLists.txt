@@ -12,8 +12,6 @@ set( GRAPHICS_HEADER_FILES
      rect.h
      transformable.h
      view.h
-     font.h
-	 text.h
 )
 
 set( GRAPHICS_SOURCE_FILES
@@ -24,8 +22,6 @@ set( GRAPHICS_SOURCE_FILES
      rect.cpp
      transformable.cpp
      view.cpp
-     font.cpp
-	 text.cpp
 )
 
 add_library ( ${GRAPHICS_PROJECT_NAME} STATIC

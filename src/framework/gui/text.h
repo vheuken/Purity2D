@@ -2,7 +2,7 @@
 #define PURITY_TEXT_H
 
 #include <string>
-#include "drawable.h"
+#include "../graphics/drawable.h"
 #include "font.h"
 
 namespace Purity
