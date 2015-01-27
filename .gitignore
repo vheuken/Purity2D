@@ -181,9 +181,6 @@ PRE_BUILD/
 CMakeScripts/
 *.xcodeproj/
 
-*.dir/
-Win32/
-
 # vim swp files
 *.swp
 

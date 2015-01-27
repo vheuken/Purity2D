@@ -2,6 +2,7 @@
 #define OBJECT_MANAGER_H
 
 #include <memory>
+#include <vector>
 #include <lua.hpp>
 
 #include "entity.h"
