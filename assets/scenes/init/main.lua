@@ -4,7 +4,7 @@ local startup = true
 GPurityLuaManager:doFile("scenes/init/servercfg.lua")
 GPurityLuaManager:doFile("scenes/init/eventHandler.lua")
 
-function onPhysicsUpdate()
+function main()
     if startup == true then
         print("Local IP Address: " .. GPurityNetwork:getLocalAddress())
         print("Public IP Address: " .. GPurityNetwork:getPublicAddress())
