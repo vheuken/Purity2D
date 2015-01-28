@@ -187,3 +187,6 @@ CMakeScripts/
 # android stuff
 libs/
 gen/
+
+# random shit
+*.autosave
