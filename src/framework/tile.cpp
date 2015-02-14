@@ -13,6 +13,11 @@ Purity::Tile::Tile(int x, int y, int width, int height, Purity::Texture* texture
     setPosition(x * width, y * height);
 }
 
+int Purity::Tile::getTileId() const
+{
+    return mTileId;
+}
+
 void Purity::Tile::setTextureSubrect()
 {
     if (mTexture != nullptr)

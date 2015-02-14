@@ -17,6 +17,8 @@ public:
 private:
     int mTileId;
 
+    int getTileId() const;
+
     void setTextureSubrect();
 
     void createBody(b2World* world);
