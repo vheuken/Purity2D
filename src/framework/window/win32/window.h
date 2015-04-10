@@ -12,6 +12,8 @@ public:
         int height,
         const std::string& title,
         ViewportType viewportType = ViewportType::CENTER);
+        
+    void Maximize();
 };
 }
 
