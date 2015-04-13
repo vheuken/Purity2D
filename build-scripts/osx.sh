@@ -1,3 +1,5 @@
+set -e
+
 #Formatting
 clearFormat="\e[0m"
 black="\e[1;30m"
@@ -112,7 +114,7 @@ printf "${messageFormat}" "Done"
 #cp ./license.txt /resources
 
 ##mkdir helper_scripts
-##cp ./postinstall 
+##cp ./postinstall
 
 ##cp $(SRC)/*.plist .
 ##cp $(SRC)/Distribution.xml
