@@ -27,7 +27,7 @@ void Purity::GameMap::processLayers()
     for (auto it = tmxLayers.begin(); it != tmxLayers.end(); ++it)
     {
         std::unique_ptr<Layer> layer(
-            new Layer(mTmxMap, *it, mWorld, mTextureManager.get(), mSceneDir, mEntityManager));
+            new Layer(mTmxMap, *it, mWorld, mTextureManager.get(), mSceneDir));
 
         mLayersList.push_back(std::move(layer));
     }

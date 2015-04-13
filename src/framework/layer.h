@@ -20,7 +20,6 @@ class Layer;
 namespace Purity
 {
 class TextureManager;
-class EntityManager;
 
 class Layer : public Drawable
 {
@@ -29,8 +28,7 @@ public:
           const Tmx::Layer* tmxLayer,
           b2World* world,
           TextureManager* textureManager,
-          std::string sceneDir,
-          EntityManager* entityManager);
+          std::string sceneDir);
 
     void createTile(int x, int y, std::string tileTexturePath, int id);
 
@@ -44,7 +42,6 @@ private:
     b2World* mWorld;
     TextureManager* mTextureManager;
     std::string mSceneDir;
-    EntityManager* mEntityManager;
 
     void processTiles();
 

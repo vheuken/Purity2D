@@ -8,14 +8,12 @@ Purity::Layer::Layer(const Tmx::Map* tmxMap,
                      const Tmx::Layer* tmxLayer,
                      b2World* world,
                      TextureManager* textureManager,
-                     std::string sceneDir,
-                     EntityManager* entityManager)
+                     std::string sceneDir)
     : mTmxMap(tmxMap)
     , mTmxLayer(tmxLayer)
     , mWorld(world)
     , mTextureManager(textureManager)
     , mSceneDir(sceneDir)
-    , mEntityManager(entityManager)
 {
     processTiles();
 }
