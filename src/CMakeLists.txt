@@ -4,7 +4,7 @@ set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 
 include_directories( 
     ${LIBS_INCLUDE_DIR}
-    ${LIBS_INCLUDE_DIR}/lua-5.2.2/src
+    ${LIBS_INCLUDE_DIR}/lua-5.1.5/src
     ${LIBS_INCLUDE_DIR}/enet/include
     ${LIBS_INCLUDE_DIR}/SDL2-2.0.3/include
     ${LIBS_INCLUDE_DIR}/stb_image/
