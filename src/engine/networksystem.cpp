@@ -3,8 +3,7 @@
 #include <iostream>
 #include <LuaBridge.h>
 
-Purity::NetworkSystem::NetworkSystem(
-    std::queue<NetworkAction>* serverActionQueue)
+Purity::NetworkSystem::NetworkSystem(std::queue<NetworkAction>* serverActionQueue)
     : SubSystemable()
     , mIsServer(false)
     , mServerActionQueue(serverActionQueue)
@@ -14,15 +13,16 @@ Purity::NetworkSystem::NetworkSystem(
         std::cerr << "Error initializing enet!" << std::endl;
     }
 
-    mClientReceievdStates
-        = std::unique_ptr<std::map<unsigned int, EntityState>>(
-            new std::map<unsigned int, EntityState>);
+    mClientReceievdStates = std::unique_ptr<std::map<unsigned int, EntityState>>(
+        new std::map<unsigned int, EntityState>);
 
-    luabridge::setGlobal(LuaManager::getManager()->getState(), this,
-                         "GPurityNetwork");
+    luabridge::setGlobal(LuaManager::getManager()->getState(), this, "GPurityNetwork");
 }
 
-Purity::NetworkSystem::~NetworkSystem() { enet_deinitialize(); }
+Purity::NetworkSystem::~NetworkSystem()
+{
+    enet_deinitialize();
+}
 
 void Purity::NetworkSystem::update(Scene* scene)
 {
@@ -47,8 +47,7 @@ void Purity::NetworkSystem::update(Scene* scene)
             mClientActionQueue.pop();
         }
 
-        for (auto it = mClientReceievdStates->begin();
-             it != mClientReceievdStates->end(); ++it)
+        for (auto it = mClientReceievdStates->begin(); it != mClientReceievdStates->end(); ++it)
         {
             mCurrentScene->setEntityState(it->second);
         }
@@ -67,10 +66,12 @@ void Purity::NetworkSystem::initializeClient()
     mClient = std::unique_ptr<Client>(new Client(mClientReceievdStates.get()));
 }
 
-void Purity::NetworkSystem::setPort(unsigned short port) { mPort = port; }
+void Purity::NetworkSystem::setPort(unsigned short port)
+{
+    mPort = port;
+}
 
-void Purity::NetworkSystem::sendAction(std::string objectName,
-                                       std::string actionName)
+void Purity::NetworkSystem::sendAction(std::string objectName, std::string actionName)
 {
     NetworkAction action;
 
@@ -88,7 +89,10 @@ void Purity::NetworkSystem::setServer(bool isServer)
     this->mIsServer = isServer;
 }
 
-bool Purity::NetworkSystem::isServer() const { return mIsServer; }
+bool Purity::NetworkSystem::isServer() const
+{
+    return mIsServer;
+}
 
 void Purity::NetworkSystem::connectToServer(std::string serverAddressStr)
 {

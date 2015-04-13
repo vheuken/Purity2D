@@ -26,7 +26,10 @@ class EntityManager;
 class GameMap : public Drawable
 {
 public:
-    GameMap(const Tmx::Map* tmxMap, b2World* world, const std::string& sceneDir, EntityManager* entityManager);
+    GameMap(const Tmx::Map* tmxMap,
+            b2World* world,
+            const std::string& sceneDir,
+            EntityManager* entityManager);
 
     Layer* getLayer(int layerNum) const;
 

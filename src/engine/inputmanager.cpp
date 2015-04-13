@@ -12,8 +12,7 @@
 #include "../framework/input/mouse.h"
 #include "../framework/system/event.h"
 
-Purity::InputSystem::InputSystem(Purity::Window* window,
-                                 std::queue<Event>* inputQueue)
+Purity::InputSystem::InputSystem(Purity::Window* window, std::queue<Event>* inputQueue)
     : mModeLock(false)
 {
     mWindow = window;

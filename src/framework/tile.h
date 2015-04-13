@@ -8,7 +8,9 @@ namespace Purity
 class Tile : public Entity
 {
 public:
-    Tile() {}
+    Tile()
+    {
+    }
     Tile(int x, int y, int width, int height, Texture* texture, int id);
 
     void initializePhysics(b2World* world);

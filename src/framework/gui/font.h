@@ -16,6 +16,7 @@ public:
     Font(const std::string& fontFileName);
 
     SDL_Surface* getSurface() const;
+
 private:
     std::string mFontFileName;
 

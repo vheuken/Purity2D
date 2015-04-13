@@ -50,7 +50,8 @@ void Purity::Layer::createTile(int x, int y, std::string tileTexturePath, int id
     int tileWidth = mTmxMap->GetTileWidth();
     int tileHeight = mTmxMap->GetTileHeight();
 
-    std::unique_ptr<Tile> tile(new Tile(x, y, tileWidth, tileHeight, mTextureManager->getTexture(tileTexturePath), id));
+    std::unique_ptr<Tile> tile(
+        new Tile(x, y, tileWidth, tileHeight, mTextureManager->getTexture(tileTexturePath), id));
 
     std::pair<int, int> tileCoordinates(tile->getPosition().x, tile->getPosition().y);
 

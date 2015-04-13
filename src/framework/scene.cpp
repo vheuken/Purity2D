@@ -24,7 +24,8 @@ Purity::Scene::Scene(const std::string& sceneDir, b2World* world)
 
     mTmxMap->ParseText(mapData);
 
-    mMap = std::unique_ptr<GameMap>(new GameMap(mTmxMap.get(), mWorld, sceneDir, mEntityManager.get()));
+    mMap = std::unique_ptr<GameMap>(
+        new GameMap(mTmxMap.get(), mWorld, sceneDir, mEntityManager.get()));
 }
 
 Purity::GameMap* Purity::Scene::getMap() const
@@ -32,7 +33,7 @@ Purity::GameMap* Purity::Scene::getMap() const
     return mMap.get();
 }
 
-void Purity::Scene::changeMap(const std::string &mapFile)
+void Purity::Scene::changeMap(const std::string& mapFile)
 {
     mTmxMap.reset(new Tmx::Map);
 

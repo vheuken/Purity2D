@@ -30,8 +30,7 @@ Purity::Entity* Purity::EntityManager::getEntityByName(const std::string& object
     return nullptr;
 }
 
-Purity::MovableEntity*
-Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
+Purity::MovableEntity* Purity::EntityManager::getMovableEntityByName(const std::string& objectName)
 {
     for (auto it = mMovableEntityList.begin(); it != mMovableEntityList.end(); ++it)
     {
@@ -60,7 +59,6 @@ void Purity::EntityManager::destroyEntity(unsigned int id)
     {
         mEntityList.erase(deletionIt);
     }
-
 
     auto movableDeletionIt = mMovableEntityList.end();
 
@@ -116,12 +114,14 @@ void Purity::EntityManager::initializeObjects()
                 {
                     std::string p = currentObject->GetProperties().GetStringProperty("Texture");
                     Texture* t = mTextureManager.getTexture("scenes/init/" + p);
-                    std::unique_ptr<MovableEntity> object(new MovableEntity(currentObject, mWorld, t));
+                    std::unique_ptr<MovableEntity> object(
+                        new MovableEntity(currentObject, mWorld, t));
                     mMovableEntityList.push_back(std::move(object));
                 }
                 else
                 {
-                    std::unique_ptr<MovableEntity> object(new MovableEntity(currentObject, mWorld, nullptr));
+                    std::unique_ptr<MovableEntity> object(
+                        new MovableEntity(currentObject, mWorld, nullptr));
                     mMovableEntityList.push_back(std::move(object));
                 }
             }

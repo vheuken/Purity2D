@@ -15,8 +15,7 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     std::cout << "Initializing some stuff..." << std::endl;
 
     mInputQueue = std::unique_ptr<std::queue<Event>>(new std::queue<Event>);
-    mServerActionQueue = std::unique_ptr<std::queue<NetworkAction>>(
-        new std::queue<NetworkAction>);
+    mServerActionQueue = std::unique_ptr<std::queue<NetworkAction>>(new std::queue<NetworkAction>);
 
     if (mProgramOptions.headless == false)
     {
@@ -37,12 +36,11 @@ Purity::Engine::Engine(const CommandLineArguments& commandLineArguments)
     initializeSceneManager();
 
     // TODO: move somewhere else?
-    luabridge::setGlobal(LuaManager::getManager()->getState(),
-                         LuaManager::getManager(), "GPurityLuaManager");
-    luabridge::setGlobal(LuaManager::getManager()->getState(),
-                         mSceneManager.get(), "GPuritySceneManager");
-    luabridge::setGlobal(LuaManager::getManager()->getState(),
-                         mWindow.get(), "GPurityWindow");
+    luabridge::setGlobal(LuaManager::getManager()->getState(), LuaManager::getManager(),
+                         "GPurityLuaManager");
+    luabridge::setGlobal(LuaManager::getManager()->getState(), mSceneManager.get(),
+                         "GPuritySceneManager");
+    luabridge::setGlobal(LuaManager::getManager()->getState(), mWindow.get(), "GPurityWindow");
 }
 
 Purity::Engine::~Engine()
@@ -81,10 +79,8 @@ void Purity::Engine::run()
 
 void Purity::Engine::initializeWindow()
 {
-    Vector2i windowSize(Configuration::getInstance()->getInteger(
-                            "window", "window_size_x", 800),
-                        Configuration::getInstance()->getInteger(
-                            "window", "window_size_y", 400));
+    Vector2i windowSize(Configuration::getInstance()->getInteger("window", "window_size_x", 800),
+                        Configuration::getInstance()->getInteger("window", "window_size_y", 400));
 
 #ifdef _WIN32
     mWindow = std::unique_ptr<Purity::Window>(
@@ -97,8 +93,7 @@ void Purity::Engine::initializeWindow()
 
 void Purity::Engine::initializeRenderSystem()
 {
-    mRenderSystem
-        = std::unique_ptr<RenderSystem>(new RenderSystem(mWindow.get()));
+    mRenderSystem = std::unique_ptr<RenderSystem>(new RenderSystem(mWindow.get()));
 }
 
 void Purity::Engine::initializeSceneManager()
@@ -114,12 +109,10 @@ void Purity::Engine::initializePhysicsSystem()
 
 void Purity::Engine::initializeInputManager()
 {
-    mInputSystem = std::unique_ptr<InputSystem>(
-        new InputSystem(mWindow.get(), mInputQueue.get()));
+    mInputSystem = std::unique_ptr<InputSystem>(new InputSystem(mWindow.get(), mInputQueue.get()));
 }
 
 void Purity::Engine::initializeNetworkSystem()
 {
-    mNetworkSystem = std::unique_ptr<NetworkSystem>(
-        new NetworkSystem(mServerActionQueue.get()));
+    mNetworkSystem = std::unique_ptr<NetworkSystem>(new NetworkSystem(mServerActionQueue.get()));
 }

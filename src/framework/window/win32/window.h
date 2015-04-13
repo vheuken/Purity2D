@@ -9,10 +9,10 @@ class Win32Window : public Window
 {
 public:
     Win32Window(int width,
-        int height,
-        const std::string& title,
-        ViewportType viewportType = ViewportType::CENTER);
-        
+                int height,
+                const std::string& title,
+                ViewportType viewportType = ViewportType::CENTER);
+
     void Maximize();
 };
 }

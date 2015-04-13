@@ -57,11 +57,11 @@ Purity::Window::Window(int width, int height, const std::string& title, Viewport
         std::cerr << "SDL_GetDesktopDisplayMode failed: " << SDL_GetError() << std::endl;
     }
 
-    mInternalWindow = SDL_CreateWindow(
-        title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mode.w, mode.h, flags);
+    mInternalWindow = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
+                                       SDL_WINDOWPOS_CENTERED, mode.w, mode.h, flags);
 #else
-    mInternalWindow = SDL_CreateWindow(
-        title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
+    mInternalWindow = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
+                                       SDL_WINDOWPOS_CENTERED, width, height, flags);
 #endif
     SDL_SetWindowMinimumSize(mInternalWindow, minimumSize.x, minimumSize.y);
 

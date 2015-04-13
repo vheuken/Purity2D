@@ -1,12 +1,11 @@
 #include "window.h"
 
 Purity::Win32Window::Win32Window(int width,
-    int height,
-    const std::string& title,
-    ViewportType viewportType)
+                                 int height,
+                                 const std::string& title,
+                                 ViewportType viewportType)
     : Window(width, height, title, viewportType)
 {
-
 }
 
 void Purity::Win32Window::maximize()
@@ -26,7 +25,7 @@ void Purity::Win32Window::maximize()
     {
         setPosition(Vector2i(0, 0));
     }
-    //left
+    // left
     else if (appBarData.rc.top == appBarData.rc.left && appBarData.rc.bottom > appBarData.rc.right)
     {
         setPosition(Vector2i(appBarData.rc.right, 0));

@@ -21,8 +21,7 @@ const b2Vec2 GRAVITY(0.0, 15);
 class PhysicsSystem : public SubSystemable
 {
 public:
-    PhysicsSystem(std::queue<Event>* inputQueue,
-                  std::queue<NetworkAction>* serverActionQueue);
+    PhysicsSystem(std::queue<Event>* inputQueue, std::queue<NetworkAction>* serverActionQueue);
 
     void update(Scene* scene);
 
