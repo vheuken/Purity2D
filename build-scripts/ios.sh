@@ -1,3 +1,5 @@
+set -e
+
 #Formatting
 clearFormat="\e[0m"
 black="\e[1;30m"
@@ -31,7 +33,7 @@ mkdir -p release \
 
 printf "${headerFormat}" "Building binaries"
 mkdir build
-cd build 
+cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/iOS.cmake -DIOS_PLATFORM=SIMULATOR -G Xcode ..
 
 printf "${headerFormat}" "Building debug binary"
