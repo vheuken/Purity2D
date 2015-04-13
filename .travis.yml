@@ -26,19 +26,21 @@ matrix:
     env: BUILD_OS=osx
   - os: osx
     env: BUILD_OS=ios
-before_install: 
+before_install:
 install:
 - printf "install"
 - printf "BUILD_OS set to \"${BUILD_OS}\"\n"
 - chmod a+x ./build-scripts/ci/travis/ci-translator.sh
 - source ./build-scripts/ci/travis/ci-translator.sh
-before_script: 
+before_script:
 script:
 - bash "${CI_BUILD_DIRECTORY}/build-scripts/${CI_BUILD_OS}.sh"
-after_success:
-- chmod a+x "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
-- bash "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
-after_failure: 
-after_script: 
-before_deploy: 
-after_deploy: 
+
+# commenting this out for now
+#after_success:
+#- chmod a+x "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
+#- bash "${CI_BUILD_DIRECTORY}/build-scripts/ci/general/update-gh-pages.sh"
+after_failure:
+after_script:
+before_deploy:
+after_deploy:
