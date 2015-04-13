@@ -52,25 +52,25 @@ cmake ..
 make -j4
 
 
-printf "${headerFormat}" "Building packages"
-cd ${BUILD_BIN}
-mkdir purity2d-build
-cp * purity2d-build
-cp -r ${BUILD_ASSETS}/* purity2d-build
-tar -czf purity2d-build.tgz purity2d-build \
-         && printf "${messageFormat}" "Done"
+#printf "${headerFormat}" "Building packages"
+#cd ${BUILD_BIN}
+#mkdir purity2d-build
+#cp * purity2d-build
+#cp -r ${BUILD_ASSETS}/* purity2d-build
+#tar -czf purity2d-build.tgz purity2d-build \
+#         && printf "${messageFormat}" "Done"
 
 
-printf "${headerFormat}" "Gathering final release files"
-cd ${BUILD_BIN}
-printf "${messageFormat}" "Contents of ${BUILD_BIN}"
-ls -a
-printf "${messageFormat}" "Exporting release (TGZ) files"
-cp *.tgz ${BUILD_RELEASE} \
-         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
+#printf "${headerFormat}" "Gathering final release files"
+#cd ${BUILD_BIN}
+#printf "${messageFormat}" "Contents of ${BUILD_BIN}"
+#ls -a
+#printf "${messageFormat}" "Exporting release (TGZ) files"
+#cp *.tgz ${BUILD_RELEASE} \
+#         && printf "${messageFormat}" "Copied release files to ${BUILD_RELEASE}"
 
 
-printf "${headerFormat}" "Available releases:"
-cd ${BUILD_RELEASE}
-ls -1
+#printf "${headerFormat}" "Available releases:"
+#cd ${BUILD_RELEASE}
+#ls -1
 #ls | cat
