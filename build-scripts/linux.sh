@@ -1,3 +1,5 @@
+set -e
+
 #Formatting
 clearFormat="\e[0m"
 black="\e[1;30m"
@@ -45,14 +47,14 @@ sudo apt-get install -qqy libpthread-stubs0-dev libgl1-mesa-dev libglu1-mesa-dev
 printf "${headerFormat}" "Building binaries"
 mkdir build && cd build
 
-cmake .. 
+cmake ..
 
 make -j4
 
 
 printf "${headerFormat}" "Building packages"
 cd ${BUILD_BIN}
-mkdir purity2d-build 
+mkdir purity2d-build
 cp * purity2d-build
 cp -r ${BUILD_ASSETS}/* purity2d-build
 tar -czf purity2d-build.tgz purity2d-build \

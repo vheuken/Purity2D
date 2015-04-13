@@ -1,3 +1,5 @@
+set -e
+
 #Formatting
 clearFormat="\e[0m"
 black="\e[1;30m"
@@ -58,7 +60,7 @@ curl --location http://dl.google.com/android/ndk/android-ndk32-r10-linux-x86_64.
          && rmdir android-ndk-r10 \
          && printf "${messageFormat}" "Extracted Android NDK to ${ANDROID_NDK}"
 
-#Workaround to allow Android SDK update automation, hardcoded for Android  API 20 (4.4W). 
+#Workaround to allow Android SDK update automation, hardcoded for Android  API 20 (4.4W).
 printf "${headerFormat}" "Updating Android SDK"
 ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui \
          --filter "platform-tools, build-tools-20.0.0, android-20"
@@ -72,7 +74,7 @@ mkdir build && cd build
 
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake \
          -DANDROID_NATIVE_API_LEVEL=android-19
-		
+
 cmake --build . -- -j4 && cd ${BUILD_HOME}
 
 
