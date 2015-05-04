@@ -1,5 +1,8 @@
 #include "window.h"
 
+#include <windows.h>
+#include <SDL_syswm.h>
+
 Purity::Win32Window::Win32Window(int width,
                                  int height,
                                  const std::string& title,
